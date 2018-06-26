@@ -1,10 +1,12 @@
 package cn.lastlysly.controller;
 
+import cn.lastlysly.myutils.MyResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -36,4 +38,10 @@ public class HelloController {
         logger.info("测试占位符:{}测试logback的整合<>",getStr);
        return getStr;
     }
+
+    @RequestMapping("/nologin")
+    public MyResult nologin(){
+        return new MyResult(0,"没有登录，请先登录",null);
+    }
+
 }
