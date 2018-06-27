@@ -80,6 +80,8 @@ public class ShiroConfiguration {
         //定义过滤器
         LinkedHashMap<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
         filterChainDefinitionMap.put("/**/hello","anon");
+        filterChainDefinitionMap.put("/**/userregister","anon");
+        filterChainDefinitionMap.put("/**/userlogin","anon");
         filterChainDefinitionMap.put("/**/logout","logout");
         //需要登录访问的资源 , 一般将/**放在最下边
         filterChainDefinitionMap.put("/**", "authc");

@@ -7,6 +7,8 @@ import cn.lastlysly.pojo.*;
 import cn.lastlysly.service.UserinfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -98,4 +100,28 @@ public class UserinfoServiceImpl implements UserinfoService {
 
         return null;
     }
+
+    /**
+     * 用户注册
+     * @param userinfoSheet
+     * @return
+     */
+    @Transactional(propagation = Propagation.REQUIRED)
+    @Override
+    public boolean saveUserinfo(UserinfoSheet userinfoSheet) {
+
+        int insertUserRow = userinfoSheetMapper.insert(userinfoSheet);
+        if (insertUserRow > 0){
+            //为注册的用户添加角色身份
+            RolesSheet rolesSheet = new RolesSheet();
+            rolesSheet.setRolesUsername(userinfoSheet.getUserLoginId());
+            rolesSheet.setRolesName("user");
+            int insertRolesRow = rolesSheetMapper.insert(rolesSheet);
+            if (insertRolesRow > 0){
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

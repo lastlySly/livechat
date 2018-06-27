@@ -17,4 +17,12 @@ public interface UserinfoService {
     List<String> listRolesByLoginId(String loginId);
 
     List<String> listPermissionsByLoginId(String loginId);
+
+    /**
+     * 用户注册
+     * @param userinfoSheet
+     * @return
+     */
+    boolean saveUserinfo(UserinfoSheet userinfoSheet);
+
 }
