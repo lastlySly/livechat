@@ -1,6 +1,9 @@
 package cn.lastlysly.config.websocket;
 
+import cn.lastlysly.myutils.interceptor.CustomHttpHandShakeInterceptor;
+import cn.lastlysly.myutils.interceptor.CustomSocketChannelInterceptor;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.messaging.simp.config.ChannelRegistration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
@@ -22,7 +25,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
      */
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/endpoint-websocket").setAllowedOrigins("*").withSockJS();
+        registry.addEndpoint("/endpoint-websocket").addInterceptors(new CustomHttpHandShakeInterceptor()).setAllowedOrigins("*").withSockJS();
     }
 
     /**
@@ -36,5 +39,23 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
         registry.setApplicationDestinationPrefixes("/app");
         // 点对点使用的订阅前缀（客户端订阅路径上会体现出来），不设置的话，默认也是/user/
 //        registry.setUserDestinationPrefix("/user/");
+    }
+
+    /**
+     * 绑定Channel拦截器
+     * @param registration
+     */
+    @Override
+    public void configureClientInboundChannel(ChannelRegistration registration) {
+        registration.interceptors(new CustomSocketChannelInterceptor());
+    }
+
+    /**
+     *
+     * @param registration
+     */
+    @Override
+    public void configureClientOutboundChannel(ChannelRegistration registration) {
+        registration.interceptors(new CustomSocketChannelInterceptor());
     }
 }
