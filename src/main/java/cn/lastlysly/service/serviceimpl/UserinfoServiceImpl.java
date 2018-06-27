@@ -124,4 +124,22 @@ public class UserinfoServiceImpl implements UserinfoService {
         return false;
     }
 
+    /**
+     * 根据用户登录账号查询用户信息
+     * @param loginId
+     * @return
+     */
+    @Override
+    public UserinfoSheet getUserinfo(String loginId) {
+        UserinfoSheetExample userinfoSheetExample = new UserinfoSheetExample();
+        UserinfoSheetExample.Criteria criteria = userinfoSheetExample.createCriteria();
+        criteria.andUserLoginIdEqualTo(loginId);
+        List<UserinfoSheet> userinfoSheetList = userinfoSheetMapper.selectByExample(userinfoSheetExample);
+        if (userinfoSheetList.size() > 0){
+            UserinfoSheet resUser = userinfoSheetList.get(0);
+            return resUser;
+        }
+        return null;
+    }
+
 }

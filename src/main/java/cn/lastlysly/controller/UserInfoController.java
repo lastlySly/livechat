@@ -44,6 +44,8 @@ public class UserInfoController {
 
         //设置用户主键id
         userinfoSheet.setUserId(UUID.randomUUID().toString());
+        //设置用户默认头像（存于html项目中）
+        userinfoSheet.setUserHeadportrait("img/default_head.png");
         /*设置盐值为用户登录账号*/
         userinfoSheet.setUserPasswordSalt(userinfoSheet.getUserLoginId());
         String credentialsSalt = userinfoSheet.getUserPasswordSalt();
@@ -65,4 +67,27 @@ public class UserInfoController {
         return new MyResult(0,"注册失败",userinfoSheet);
 
     }
+
+
+    /**
+     * 判断登录账号是否已被注册
+     * @param userLoginId
+     * @param request
+     * @return
+     */
+    @CrossOrigin
+    @RequestMapping(value = "/loginidisuse")
+    @ResponseBody
+    public MyResult loginIdIsUse(String userLoginId,HttpServletRequest request){
+        if (userLoginId != null || userLoginId != ""){
+            UserinfoSheet userinfoSheet = userinfoService.getUserinfoByLoginId(userLoginId);
+
+            if (userinfoSheet != null){
+                return new MyResult(0,"该账号已被注册",null);
+            }
+            return new MyResult(1,"该账号可用",null);
+        }
+        return new MyResult(0,"账号不能为空",null);
+    }
+
 }

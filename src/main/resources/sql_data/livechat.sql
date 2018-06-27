@@ -11,7 +11,7 @@
  Target Server Version : 50717
  File Encoding         : 65001
 
- Date: 25/06/2018 15:46:36
+ Date: 27/06/2018 17:25:49
 */
 
 SET NAMES utf8mb4;
@@ -78,9 +78,9 @@ CREATE TABLE `messages_sheet`  (
   INDEX `fk_usersheet_messagessheet_from`(`messages_from_userid`) USING BTREE,
   INDEX `fk_usersheet_messagessheet_to`(`messages_to_userid`) USING BTREE,
   INDEX `fk_messagestypesheet_messagessheet`(`messages_typeid`) USING BTREE,
+  CONSTRAINT `fk_messagestypesheet_messagessheet` FOREIGN KEY (`messages_typeid`) REFERENCES `messagestype_sheet` (`messagestype_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fk_usersheet_messagessheet_from` FOREIGN KEY (`messages_from_userid`) REFERENCES `userinfo_sheet` (`user_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `fk_usersheet_messagessheet_to` FOREIGN KEY (`messages_to_userid`) REFERENCES `userinfo_sheet` (`user_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `fk_messagestypesheet_messagessheet` FOREIGN KEY (`messages_typeid`) REFERENCES `messagestype_sheet` (`messagestype_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  CONSTRAINT `fk_usersheet_messagessheet_to` FOREIGN KEY (`messages_to_userid`) REFERENCES `userinfo_sheet` (`user_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -102,6 +102,11 @@ CREATE TABLE `nation_sheet`  (
   `nation_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '国家名',
   PRIMARY KEY (`nation_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of nation_sheet
+-- ----------------------------
+INSERT INTO `nation_sheet` VALUES (1, '中国');
 
 -- ----------------------------
 -- Table structure for permission_sheet
@@ -128,6 +133,44 @@ CREATE TABLE `province_sheet`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Records of province_sheet
+-- ----------------------------
+INSERT INTO `province_sheet` VALUES (1, '北京市', 1);
+INSERT INTO `province_sheet` VALUES (2, '天津市', 1);
+INSERT INTO `province_sheet` VALUES (3, '上海市', 1);
+INSERT INTO `province_sheet` VALUES (4, '重庆市', 1);
+INSERT INTO `province_sheet` VALUES (5, '河北省', 1);
+INSERT INTO `province_sheet` VALUES (6, '山西省', 1);
+INSERT INTO `province_sheet` VALUES (7, '台湾省', 1);
+INSERT INTO `province_sheet` VALUES (8, '辽宁省', 1);
+INSERT INTO `province_sheet` VALUES (9, '吉林省', 1);
+INSERT INTO `province_sheet` VALUES (10, '黑龙江省', 1);
+INSERT INTO `province_sheet` VALUES (11, '江苏省', 1);
+INSERT INTO `province_sheet` VALUES (12, '浙江省', 1);
+INSERT INTO `province_sheet` VALUES (13, '安徽省', 1);
+INSERT INTO `province_sheet` VALUES (14, '福建省', 1);
+INSERT INTO `province_sheet` VALUES (15, '江西省', 1);
+INSERT INTO `province_sheet` VALUES (16, '山东省', 1);
+INSERT INTO `province_sheet` VALUES (17, '河南省', 1);
+INSERT INTO `province_sheet` VALUES (18, '湖北省', 1);
+INSERT INTO `province_sheet` VALUES (19, '湖南省', 1);
+INSERT INTO `province_sheet` VALUES (20, '广东省', 1);
+INSERT INTO `province_sheet` VALUES (21, '甘肃省', 1);
+INSERT INTO `province_sheet` VALUES (22, '四川省', 1);
+INSERT INTO `province_sheet` VALUES (23, '贵州省', 1);
+INSERT INTO `province_sheet` VALUES (24, '海南省', 1);
+INSERT INTO `province_sheet` VALUES (25, '云南省', 1);
+INSERT INTO `province_sheet` VALUES (26, '青海省', 1);
+INSERT INTO `province_sheet` VALUES (27, '陕西省', 1);
+INSERT INTO `province_sheet` VALUES (28, '广西壮族自治区', 1);
+INSERT INTO `province_sheet` VALUES (29, '西藏自治区', 1);
+INSERT INTO `province_sheet` VALUES (30, '宁夏回族自治区', 1);
+INSERT INTO `province_sheet` VALUES (31, '新疆维吾尔自治区', 1);
+INSERT INTO `province_sheet` VALUES (32, '内蒙古自治区', 1);
+INSERT INTO `province_sheet` VALUES (33, '澳门特别行政区', 1);
+INSERT INTO `province_sheet` VALUES (34, '香港特别行政区', 1);
+
+-- ----------------------------
 -- Table structure for roles_sheet
 -- ----------------------------
 DROP TABLE IF EXISTS `roles_sheet`;
@@ -136,7 +179,14 @@ CREATE TABLE `roles_sheet`  (
   `roles_username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `roles_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`roles_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of roles_sheet
+-- ----------------------------
+INSERT INTO `roles_sheet` VALUES (1, 'admin', 'user');
+INSERT INTO `roles_sheet` VALUES (2, 'admin', 'user');
+INSERT INTO `roles_sheet` VALUES (3, 'admin2', 'user');
 
 -- ----------------------------
 -- Table structure for userinfo_sheet
@@ -163,16 +213,22 @@ CREATE TABLE `userinfo_sheet`  (
   `user_headportrait` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '头像',
   `user_password_salt` varchar(16) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '密码加盐',
   PRIMARY KEY (`user_id`) USING BTREE,
-  INDEX `user_login_id_unique`(`user_login_id`) USING BTREE COMMENT '用户登录账号唯一',
+  UNIQUE INDEX `user_login_id_unique`(`user_login_id`) USING BTREE COMMENT '用户登录账号唯一',
   INDEX `fk_nationsheet_usersheet`(`user_nation_id`) USING BTREE,
-  INDEX `fk_provincesheet_usersheet`(`user_province_id`) USING BTREE,
   INDEX `fk_citysheet_usersheet`(`user_city_id`) USING BTREE,
+  INDEX `fk_provincesheet_usersheet`(`user_province_id`) USING BTREE,
   INDEX `fk_userstatesheet_usersheet`(`user_userstate_id`) USING BTREE,
   CONSTRAINT `fk_citysheet_usersheet` FOREIGN KEY (`user_city_id`) REFERENCES `city_sheet` (`city_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fk_nationsheet_usersheet` FOREIGN KEY (`user_nation_id`) REFERENCES `nation_sheet` (`nation_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fk_provincesheet_usersheet` FOREIGN KEY (`user_province_id`) REFERENCES `province_sheet` (`province_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fk_userstatesheet_usersheet` FOREIGN KEY (`user_userstate_id`) REFERENCES `userstate_sheet` (`userstate_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of userinfo_sheet
+-- ----------------------------
+INSERT INTO `userinfo_sheet` VALUES ('369fe261-ade4-4fc5-a4ca-42775a1e0376', 'admin', 'lastly', '038bdaf98f2037b31f1e75b5b4c9b26e', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'img/default_head.png', 'admin');
+INSERT INTO `userinfo_sheet` VALUES ('e14d3b09-bb5a-4df1-bcaf-1339c729f697', 'admin2', 'lastly', 'c3270271f36e5e795e54c2721896102e', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'img/default_head.png', 'admin2');
 
 -- ----------------------------
 -- Table structure for userstate_sheet

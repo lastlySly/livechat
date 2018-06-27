@@ -25,4 +25,11 @@ public interface UserinfoService {
      */
     boolean saveUserinfo(UserinfoSheet userinfoSheet);
 
+    /**
+     * 根据用户登录账号查询用户信息
+     * @param loginId
+     * @return
+     */
+    UserinfoSheet getUserinfo(String loginId);
+
 }
