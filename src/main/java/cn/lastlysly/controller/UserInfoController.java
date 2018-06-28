@@ -4,7 +4,11 @@ import cn.lastlysly.handler.MyCustomLoginException;
 import cn.lastlysly.myutils.MyResult;
 import cn.lastlysly.pojo.UserinfoSheet;
 import cn.lastlysly.service.UserinfoService;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.crypto.hash.SimpleHash;
+import org.apache.shiro.session.Session;
+import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.UUID;
 
 /**
@@ -76,7 +81,7 @@ public class UserInfoController {
      * @return
      */
     @CrossOrigin
-    @RequestMapping(value = "/loginidisuse")
+    @RequestMapping(value = "/loginidisuse",method = RequestMethod.POST)
     @ResponseBody
     public MyResult loginIdIsUse(String userLoginId,HttpServletRequest request){
         if (userLoginId != null || userLoginId != ""){
@@ -88,6 +93,27 @@ public class UserInfoController {
             return new MyResult(1,"该账号可用",null);
         }
         return new MyResult(0,"账号不能为空",null);
+    }
+
+
+    @CrossOrigin
+    @RequestMapping(value = "/login",method = RequestMethod.POST)
+    @ResponseBody
+    public MyResult userLogin(UserinfoSheet userinfoSheet,HttpServletRequest request) throws MyCustomLoginException {
+        Subject subject = SecurityUtils.getSubject();
+        UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(userinfoSheet.getUserLoginId(),userinfoSheet.getUserPassword());
+        try{
+            subject.login(usernamePasswordToken);
+            UserinfoSheet resUser = userinfoService.getUserinfo(userinfoSheet.getUserLoginId());
+            Session session = subject.getSession();
+            logger.info("session获取主机号：{}",session.getHost());
+            session.setAttribute("userInfo",resUser);
+            session.setTimeout(1500000);
+            return new MyResult(1,"登录成功",resUser);
+
+        }catch (Exception e){
+            throw new MyCustomLoginException("登陆失败，用户名或密码错误");
+        }
     }
 
 }

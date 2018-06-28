@@ -35,7 +35,7 @@ public class CustomWebSocketServiceImpl implements CustomWebSocketService {
         Long maxMem = Runtime.getRuntime().maxMemory();
 
         String systemInfo = String.format("服务器可用处理器:%s; 虚拟机空闲内容大小: %s; 最大内存大小: %s",processors,freeMem,maxMem);
-        logger.info("系统JVM负载：{}",systemInfo);
+//        logger.info("系统JVM负载：{}",systemInfo);
         MessagesSheet messagesSheet = new MessagesSheet();
         messagesSheet.setMessagesPostmessages(systemInfo);
         simpMessagingTemplate.convertAndSend("/mysystem/server_info",messagesSheet);
