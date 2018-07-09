@@ -8,6 +8,9 @@ $(function () {
     change_meau();
     //登陆成功渲染用户信息
     getUserInfo();
+    //获取分组并渲染
+    getGroupFun()
+
     $('#edit').froalaEditor({
         toolbarButtons: [
             'insertImage','insertFile','emoticons','insertVideo','fontSize', 'html', 'specialCharacters', 'undo', 'redo'
@@ -22,6 +25,43 @@ $(function () {
 
 
 })
+
+/*获取分组并渲染*/
+function getGroupFun() {
+    $.ajax({
+        url:"http://localhost:8080/demo/userdeal/listgroup",
+        type:"POST",
+        data:{},
+        async:true,
+        // cache: false,缓存，get请求有效，true缓存
+        contentType: false,
+        processData: false,
+        success:function (data) {
+            if (data.code == 1){
+                console.log(data);
+                $(".custom-friends-group-list").empty();
+                for (var i=0;i<data.data.length;i++){
+                    $(".custom-friends-group-list").append('<li class="custom-group-item">\n' +
+                        '                                    <h5 class="custom-group">\n' +
+                        '                                        <span class="glyphicon glyphicon-play"></span>\n' +
+                        '                                        '+data.data[i].friendgroupsName+'&nbsp;0/4\n' +
+                        '                                    </h5>\n' +
+                        '                                    <!--该组下的好友列表-->\n' +
+                        '                                    <ul class="custom-friends-list">\n' +
+                        '                                    </ul>\n' +
+                        '                                </li>');
+
+                }
+
+            }
+            grouplist();
+        },
+        error:function (err) {
+            alert("访问错误："+err);
+        }
+
+    });
+}
 
 //分组下拉
 function grouplist() {
@@ -145,9 +185,7 @@ function getUserInfo(){
         type:"POST",
         data:{},
         async:true,
-        // cache: false,缓存，get请求有效，true缓存
-        contentType: false,
-        processData: false,
+
         // xhrFields: {
         //     withCredentials: true
         // },
