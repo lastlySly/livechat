@@ -1,0 +1,79 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+body{
+    background: url("../img/Starry.jpg");
+}
+html{
+    font-size: 62.5%;
+
+}
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre,
+code, form, fieldset, legend, input, button, textarea, p, blockquote, th, td {
+    margin: 0;
+    padding: 0;
+    font-family: "微软雅黑";
+}
+
+fieldset, img {
+    border: 0;
+}
+
+ul, ol, li {
+    list-style: none;
+    font-family:'Microsoft YaHei';
+}
+/*指向小三角,朝左*/
+.custom-triangle{
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-right: 20px solid #EEEEEE;
+    /*margin-left: -40px;*/
+    /*margin-top: 15px;*/
+    border-bottom: 10px solid transparent;
+    display: inline-block;
+    position: absolute;
+    top: 18px;
+    left: -10px;
+}
+/*指向小三角，朝右*/
+.custom-triangle-right{
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-left: 20px solid #108DEE;
+    /*margin-left: -40px;*/
+    /*margin-top: 15px;*/
+    border-bottom: 10px solid transparent;
+    display: inline-block;
+    position: absolute;
+    top: 18px;
+    right: -10px;
+}
+
+
+/*修改滚动条样式*/
+*::-webkit-scrollbar {/*滚动条整体样式*/
+    width: 5px;     /*高宽分别对应横竖滚动条的尺寸*/
+    height: 10px;
+}
+*::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+    border-radius: 10px;
+    background-color: #F90;
+    background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, .2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .2) 50%,
+    rgba(255, 255, 255, .2) 75%, transparent 75%, transparent);
+}
+*::-webkit-scrollbar-track {/*滚动条里面轨道*/
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    /*border-radius: 10px;*/
+    background: #EDEDED;
+}
+
+/*.fr-emoticon,.fr-deletable,.fr-emoticon-img{*/
+    /*width: 20px;*/
+    /*height: 20px;*/
+    /*font-size: 2rem;*/
+    /*background-size: 20px;*/
+/*}*/

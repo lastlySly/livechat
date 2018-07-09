@@ -1,0 +1,87 @@
+.fr-box .fr-counter {
+    position: absolute;
+    bottom: 0px;
+    padding: 4px;
+    right: 0px;
+    color: #0C98B6;
+    content: attr(data-chars);
+    font-size: 15px;
+    font-family: "Times New Roman", Georgia, Serif;
+    z-index: 1;
+    background: #ffffff;
+    border-top: solid 1px #0C98B6;
+    border-left: solid 1px #0C98B6;
+    border-radius: 2px 0 0 0;
+    -moz-border-radius: 2px 0 0 0;
+    -webkit-border-radius: 2px 0 0 0;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+}
+/*修改表情弹出框 start*/
+/*.fr-popup .fr-emoticon img{*/
+    /*height: 20px;*/
+
+    /*transform: rotateX(180deg);!*旋转180度*!*/
+/*}*/
+/*.fr-popup {*/
+    /*position: absolute;*/
+    /*display: none;*/
+    /*color: #222222;*/
+    /*background: #ffffff;*/
+    /*-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 1px 1px rgba(0, 0, 0, 0.16);*/
+    /*-moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 1px 1px rgba(0, 0, 0, 0.16);*/
+    /*box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 1px 1px rgba(0, 0, 0, 0.16);*/
+    /*border-radius: 2px;*/
+    /*-moz-border-radius: 2px;*/
+    /*-webkit-border-radius: 2px;*/
+    /*-moz-background-clip: padding;*/
+    /*-webkit-background-clip: padding-box;*/
+    /*background-clip: padding-box;*/
+    /*font-family: Arial, Helvetica, sans-serif;*/
+    /*-webkit-box-sizing: border-box;*/
+    /*-moz-box-sizing: border-box;*/
+    /*box-sizing: border-box;*/
+    /*user-select: none;*/
+    /*-o-user-select: none;*/
+    /*-moz-user-select: none;*/
+    /*-khtml-user-select: none;*/
+    /*-webkit-user-select: none;*/
+    /*-ms-user-select: none;*/
+    /*margin-top: 10px;*/
+    /*z-index: 9995;*/
+    /*text-align: left;*/
+    /*border: 0px;*/
+    /*border-top: 5px solid #222222;*/
+    /*text-rendering: optimizelegibility;*/
+    /*-webkit-font-smoothing: antialiased;*/
+    /*-moz-osx-font-smoothing: grayscale;*/
+    /*line-height: 1.2;*/
+
+
+    /*transform: rotateX(180deg);!*旋转180度*!*/
+    /*margin-top: -310px;*/
+/*}*/
+/*.fr-popup p{*/
+    /*transform: rotateX(180deg);!*旋转180度*!*/
+/*}*/
+/*修改表情弹出框 end*/
+
+/*表情  fr-popup fr-desktop fr-ltr*/
+/*图片  fr-popup fr-desktop fr-ltr fr-active
+fr-buttons按钮
+fr-image-upload-layer fr-layer fr-active
+fr-image-by-url-layer fr-layer
+fr-image-progress-bar-layer fr-layer
+
+*/
+
+/*.fr-element{*/
+    /*border-bottom-right-radius: 10px;*/
+/*}*/
+/*.fr-view{*/
+    /*border-bottom-right-radius: 10px;*/
+/*}*/
+/*#edit{*/
+    /*border-bottom-right-radius: 10px;*/
+/*}*/

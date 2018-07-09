@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+    <title>Title</title>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/mymodal.css">
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/home.js"></script>
+    <script src="js/homesec.js"></script>
+    <script src="js/mymodal.js"></script>
+
+
+
+</head>
+<body>
+    <div class="all_container">
+        <div class="container">
+            <div class="custom-content">
+                <!--顶部头像，导航栏 start-->
+                <div class="row custom-content-top">
+                    <!--顶部导航栏头像与搜索按钮 start-->
+                    <div class="col-md-3 custom-top-left">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="head-portrait">
+                                    <div id="head-nav" class="custom-nav-click"></div>
+                                    <img id="head-img" class="img-responsive img-circle" src="img/headportrait.jpg" alt="">
+
+                                    <ul class="custom-head-meau">
+                                        <li>个人信息</li>
+                                        <li>注销登陆</li>
+                                    </ul>
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-9">
+                                <button type="button" class="custom-search-btn glyphicon glyphicon-search"></button>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <!--顶部导航栏头像与搜索按钮 End-->
+
+                    <div class="col-md-7 col-md-offset-2 custom-top-right">
+                        <div class="btn-group custom-nav-btn-group" role="group" aria-label="...">
+
+                            <button type="button" id="custom-chat-btn" class="custom-chat-btn glyphicon glyphicon-comment"></button>
+                            <button type="button" id="custom-linkman-btn" class="custom-linkman-btn glyphicon glyphicon-user"></button>
+                            <button type="button" id="custom-papers-btn" class="custom-papers-btn glyphicon glyphicon-duplicate"></button>
+                        </div>
+                    </div>
+
+
+
+                </div>
+                <!--顶部头像，导航栏 end-->
+
+                <!--底部主内容 start-->
+                <!--好友列表底部主内容框 start-->
+                <div id="custom-linkman-list-id" class="row custom-main-container">
+
+                    <!--左部-->
+                    <div class="col-md-3 custom-main-left-container">
+
+                        <!--添加好友按钮-->
+                        <div class="custom-add-item">
+                            +
+                            <!--<button class="glyphicon glyphicon-plus"></button>-->
+                            <div id="custom-add-btn" class="custom-add-click"></div>
+                            <ul class="custom-add-meau">
+                                <li id="add-friends-btn">添加好友</li>
+                                <li>添加群聊</li>
+                            </ul>
+                        </div>
+
+                        <!--列表-->
+                        <div class="row custom-main-left-top">
+                            <a class="col-md-5 col-lg-offset-1 custom-friend-list-btn">好友</a>
+                            <a class="col-md-4 custom-group-chat-list-btn">群聊</a>
+                        </div>
+                        <!--好友列表分组管理start-->
+
+                        <div class="friends-group-list">
+                            <ul class="custom-friends-group-list">
+
+                                <!--分组项-->
+                                <li class="custom-group-item">
+                                    <h5 class="custom-group">
+                                        <span class="glyphicon glyphicon-play"></span>
+                                        未闻花名&nbsp;0/4
+                                    </h5>
+                                    <!--该组下的好友列表-->
+                                    <ul class="custom-friends-list">
+                                        <li socketaddress="123" class="row custom-friend-item">
+                                            <img class="col-md-3 img-responsive img-circle list-headportrait" src="img/headportrait.jpg">
+
+                                            <dl class="col-md-9 custom-friend-item-info">
+                                                <dt class="list-remarks">水银灯</dt>
+                                                <dd class="list-motto">没有人会相信未来，谁都无法接受未来..</dd>
+                                                <!--<span class="badge custom-num-tip">2</span>-->
+                                                <span class="badge custom-online-tip">在线</span>
+                                            </dl>
+                                        </li>
+                                        <li socketaddress="456" class="row custom-friend-item">
+                                            <img class="col-md-3 img-responsive img-circle list-headportrait" src="img/headportrait.jpg">
+
+                                            <dl class="col-md-9 custom-friend-item-info">
+                                                <dt class="list-remarks">汐</dt>
+                                                <dd class="list-motto">没有人会相信未来，谁都无法接受未来..</dd>
+                                                <!--<span class="badge custom-num-tip">2</span>-->
+                                                <span class="badge custom-online-tip">在线</span>
+                                            </dl>
+                                        </li>
+
+                                    </ul>
+                                </li>
+                                <!--分组项-->
+                                <li class="custom-group-item">
+                                    <h5 class="custom-group">
+                                        <span class="glyphicon glyphicon-play"></span>
+                                        空&nbsp;0/4
+                                    </h5>
+                                    <!--该组下的好友列表-->
+                                    <ul class="custom-friends-list">
+                                        <li socketaddress="abc" class="row custom-friend-item">
+                                            <img class="col-md-3 img-responsive img-circle list-headportrait" src="img/default_head.png">
+
+                                            <dl class="col-md-9 custom-friend-item-info">
+                                                <dt class="list-remarks">白</dt>
+                                                <dd class="list-motto">这个世界上没有奇迹，有的只是偶然和必然，还有谁做了什么，仅此而已..</dd>
+                                                <!--<span class="badge custom-num-tip">5</span>-->
+                                                <span class="badge custom-online-tip">离线</span>
+                                            </dl>
+                                        </li>
+                                        <li socketaddress="789" class="row custom-friend-item">
+                                            <img class="col-md-3 img-responsive img-circle list-headportrait" src="img/default_head.png">
+
+                                            <dl class="col-md-9 custom-friend-item-info">
+                                                <dt class="list-remarks">无妄</dt>
+                                                <dd class="list-motto">这个世界上没有奇迹，有的只是偶然和必然，还有谁做了什么，仅此而已..</dd>
+                                                <!--<span class="badge custom-num-tip">5</span>-->
+                                                <span class="badge custom-online-tip">离线</span>
+                                            </dl>
+                                        </li>
+
+                                    </ul>
+                                </li>
+                                <!--分组项-->
+                                <li class="custom-group-item">
+                                    <h5 class="custom-group">
+                                        <span class="glyphicon glyphicon-play"></span>
+                                        未闻花名&nbsp;0/4
+                                    </h5>
+                                    <!--该组下的好友列表-->
+                                    <ul class="custom-friends-list">
+                                        <li socketaddress="123" class="row custom-friend-item">
+                                            <img class="col-md-3 img-responsive img-circle list-headportrait" src="img/headportrait.jpg">
+
+                                            <dl class="col-md-9 custom-friend-item-info">
+                                                <dt class="list-remarks">水银灯</dt>
+                                                <dd class="list-motto">没有人会相信未来，谁都无法接受未来..</dd>
+                                                <!--<span class="badge custom-num-tip">2</span>-->
+                                                <span class="badge custom-online-tip">在线</span>
+                                            </dl>
+                                        </li>
+                                        <li socketaddress="456" class="row custom-friend-item">
+                                            <img class="col-md-3 img-responsive img-circle list-headportrait" src="img/headportrait.jpg">
+
+                                            <dl class="col-md-9 custom-friend-item-info">
+                                                <dt class="list-remarks">汐</dt>
+                                                <dd class="list-motto">没有人会相信未来，谁都无法接受未来..</dd>
+                                                <!--<span class="badge custom-num-tip">2</span>-->
+                                                <span class="badge custom-online-tip">在线</span>
+                                            </dl>
+                                        </li>
+
+                                    </ul>
+                                </li>
+                                <!--分组项-->
+                                <li class="custom-group-item">
+                                    <h5 class="custom-group">
+                                        <span class="glyphicon glyphicon-play"></span>
+                                        空&nbsp;0/4
+                                    </h5>
+                                    <!--该组下的好友列表-->
+                                    <ul class="custom-friends-list">
+                                        <li socketaddress="abc" class="row custom-friend-item">
+                                            <img class="col-md-3 img-responsive img-circle list-headportrait" src="img/default_head.png">
+
+                                            <dl class="col-md-9 custom-friend-item-info">
+                                                <dt class="list-remarks">白</dt>
+                                                <dd class="list-motto">这个世界上没有奇迹，有的只是偶然和必然，还有谁做了什么，仅此而已..</dd>
+                                                <!--<span class="badge custom-num-tip">5</span>-->
+                                                <span class="badge custom-online-tip">离线</span>
+                                            </dl>
+                                        </li>
+                                        <li socketaddress="789" class="row custom-friend-item">
+                                            <img class="col-md-3 img-responsive img-circle list-headportrait" src="img/default_head.png">
+
+                                            <dl class="col-md-9 custom-friend-item-info">
+                                                <dt class="list-remarks">无妄</dt>
+                                                <dd class="list-motto">这个世界上没有奇迹，有的只是偶然和必然，还有谁做了什么，仅此而已..</dd>
+                                                <!--<span class="badge custom-num-tip">5</span>-->
+                                                <span class="badge custom-online-tip">离线</span>
+                                            </dl>
+                                        </li>
+
+                                    </ul>
+                                </li>
+                                <!--分组项-->
+                                <li class="custom-group-item">
+                                    <h5 class="custom-group">
+                                        <span class="glyphicon glyphicon-play"></span>
+                                        未闻花名&nbsp;0/4
+                                    </h5>
+                                    <!--该组下的好友列表-->
+                                    <ul class="custom-friends-list">
+                                        <li socketaddress="123" class="row custom-friend-item">
+                                            <img class="col-md-3 img-responsive img-circle list-headportrait" src="img/headportrait.jpg">
+
+                                            <dl class="col-md-9 custom-friend-item-info">
+                                                <dt class="list-remarks">水银灯</dt>
+                                                <dd class="list-motto">没有人会相信未来，谁都无法接受未来..</dd>
+                                                <!--<span class="badge custom-num-tip">2</span>-->
+                                                <span class="badge custom-online-tip">在线</span>
+                                            </dl>
+                                        </li>
+                                        <li socketaddress="456" class="row custom-friend-item">
+                                            <img class="col-md-3 img-responsive img-circle list-headportrait" src="img/headportrait.jpg">
+
+                                            <dl class="col-md-9 custom-friend-item-info">
+                                                <dt class="list-remarks">汐</dt>
+                                                <dd class="list-motto">没有人会相信未来，谁都无法接受未来..</dd>
+                                                <!--<span class="badge custom-num-tip">2</span>-->
+                                                <span class="badge custom-online-tip">在线</span>
+                                            </dl>
+                                        </li>
+
+                                    </ul>
+                                </li>
+                                <!--分组项-->
+                                <li class="custom-group-item">
+                                    <h5 class="custom-group">
+                                        <span class="glyphicon glyphicon-play"></span>
+                                        空&nbsp;0/4
+                                    </h5>
+                                    <!--该组下的好友列表-->
+                                    <ul class="custom-friends-list">
+                                        <li socketaddress="abc" class="row custom-friend-item">
+                                            <img class="col-md-3 img-responsive img-circle list-headportrait" src="img/default_head.png">
+
+                                            <dl class="col-md-9 custom-friend-item-info">
+                                                <dt class="list-remarks">白</dt>
+                                                <dd class="list-motto">这个世界上没有奇迹，有的只是偶然和必然，还有谁做了什么，仅此而已..</dd>
+                                                <!--<span class="badge custom-num-tip">5</span>-->
+                                                <span class="badge custom-online-tip">离线</span>
+                                            </dl>
+                                        </li>
+                                        <li socketaddress="789" class="row custom-friend-item">
+                                            <img class="col-md-3 img-responsive img-circle list-headportrait" src="img/default_head.png">
+
+                                            <dl class="col-md-9 custom-friend-item-info">
+                                                <dt class="list-remarks">无妄</dt>
+                                                <dd class="list-motto">这个世界上没有奇迹，有的只是偶然和必然，还有谁做了什么，仅此而已..</dd>
+                                                <!--<span class="badge custom-num-tip">5</span>-->
+                                                <span class="badge custom-online-tip">离线</span>
+                                            </dl>
+                                        </li>
+
+                                    </ul>
+                                </li>
+
+                            </ul>
+                        </div>
+
+                        <!--好友列表分组管理End-->
+                    </div>
+
+                    <!--右部-->
+                    <div class="col-md-9 custom-main-right-container">
+
+                        <!--弹出框-->
+                        <div class="right-main-container">
+                            <div class="row">
+                                <div class="col-md-6 col-md-offset-3 friend-info-card">
+                                    <img class="img-responsive"  id="headportrait" src="img/headportrait.jpg">
+                                    <div class="row friend-info-card-div">
+
+                                        <button socketaddress="123" type="button" title="发消息" id="custom-send-message-btn" class="btn btn-default custom-send-message-btn">
+                                            <span class="glyphicon glyphicon-comment"></span>
+                                        </button>
+
+                                        <div class="col-md-8 col-md-offset-2">
+                                            <dl class="friend-info-card-dl">
+
+                                                <dt class="friend-info-card-remake-top" id="remarks-top">水银灯</dt>
+                                                <dd class="friend-info-card-motto" id="motto">没有人会相信未来，谁都无法接受未来...</dd>
+                                                <dd class="friend-info-card-item">
+                                                    <span class="friend-info-card-item-key">账号&nbsp;&nbsp;&nbsp;</span><span id="username">2194610467</span>
+                                                </dd>
+                                                <dd class="friend-info-card-item">
+                                                    <span class="friend-info-card-item-key">昵称&nbsp;&nbsp;&nbsp;</span><span id="nickname">汐</span>
+                                                </dd>
+                                                <dd class="friend-info-card-item">
+                                                    <span class="friend-info-card-item-key">备注&nbsp;&nbsp;&nbsp;</span><span id="remarks">水银灯</span>
+                                                </dd>
+                                                <dd class="friend-info-card-item">
+                                                    <span class="friend-info-card-item-key">分组&nbsp;&nbsp;&nbsp;</span><span id="group">未闻花名</span>
+                                                </dd>
+                                                <dd class="friend-info-card-item">
+                                                    <span class="friend-info-card-item-key">邮箱&nbsp;&nbsp;&nbsp;</span><span id="e-mail">2194610467@qq.com</span>
+                                                </dd>
+
+                                            </dl>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--好友列表底部主内容框 end-->
+
+                <!--====================================================================================================================================-->
+                <!--====================================================================================================================================-->
+                <!--====================================================================================================================================-->
+
+                <!--聊天页面主内容框 start-->
+                <div id="custom-chat-list-id" class="row custom-chat-container">
+
+                    <!--左部-->
+                    <div class="col-md-3 custom-chat-left-container">
+
+                        <!--正在聊天列表start-->
+
+                        <div class="chat-list">
+                            <ul id="chatting-list" class="custom-chat-list">
+
+                                <li data-id="123" class="row custom-chat-friend-item">
+                                    <img class="col-md-3 img-responsive img-circle list-headportrait" src="img/headportrait.jpg">
+                                    <dl class="col-md-9 custom-friend-item-info">
+                                        <dt class="list-remarks">水银灯</dt>
+                                        <dd class="list-motto">没有人会相信未来，谁都无法接受未来..</dd>
+                                        <span class="badge custom-num-tip">3</span>
+                                        <span class="badge custom-time">3:15</span>
+                                        <button class="custom-del glyphicon glyphicon-remove-sign"></button>
+                                    </dl>
+                                </li>
+                                <li data-id="456" class="row custom-chat-friend-item">
+                                    <img class="col-md-3 img-responsive img-circle list-headportrait" src="img/headportrait.jpg">
+                                    <dl class="col-md-9 custom-friend-item-info">
+                                        <dt class="list-remarks">汐</dt>
+                                        <dd class="list-motto">没有人会相信未来，谁都无法接受未来..</dd>
+                                        <span class="badge custom-num-tip">3</span>
+                                        <span class="badge custom-time">3:15</span>
+                                        <button class="custom-del glyphicon glyphicon-remove-sign"></button>
+                                    </dl>
+                                </li>
+                                <li data-id="789" class="row custom-chat-friend-item">
+                                    <img class="col-md-3 img-responsive img-circle list-headportrait" src="img/headportrait.jpg">
+                                    <dl class="col-md-9 custom-friend-item-info">
+                                        <dt class="list-remarks">无妄</dt>
+                                        <dd class="list-motto">没有人会相信未来，谁都无法接受未来..</dd>
+                                        <span class="badge custom-num-tip">3</span>
+                                        <span class="badge custom-time">3:15</span>
+                                        <button class="custom-del glyphicon glyphicon-remove-sign"></button>
+                                    </dl>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!--正在聊天列表end-->
+                    </div>
+
+                    <!--右部-->
+                    <div class="col-md-9 custom-chat-right-container">
+
+                        <!--弹出框-->
+                        <div id="right-chat-friend-container-id" class="right-chat-container">
+
+                            <div class="chat-custom-content">
+                                <!--顶部-->
+                                <div class="row chat-friend-name-top">
+                                    <div class="col-md-3">
+                                        <span id="chatting-friend-remarks">水银灯</span>
+                                    </div>
+                                    <!--<div class="col-md-3 col-md-offset-6">-->
+                                    <!--<button type="button " class="btn btn-default glyphicon glyphicon-blackboard"></button>-->
+                                    <!--<button type="button" class="btn btn-default glyphicon glyphicon-earphone"></button>-->
+                                    <!--<button type="button " class="btn btn-default glyphicon glyphicon-cog"></button>-->
+                                    <!--<button type="button " class="btn btn-default glyphicon glyphicon-comment"></button>-->
+                                    <!--</div>-->
+                                </div>
+
+                                <!--聊天内容框-->
+                                <div class="row chat-content-div">
+                                    <!--<div style="background-color: red;height: 500px;"></div>-->
+
+                                    <div class="col-md-12" id="custom-messages-ul">
+                                        <!--对方对话框-->
+                                        <dl class="row message-contain-item">
+                                            <div class="message-contain-item-time">2018-06-24 14:01:08</div>
+                                            <dt class="col-md-1">
+                                                <img class="img-responsive img-circle message-headportrait" src="img/headportrait.jpg">
+                                            </dt>
+                                            <dd class="col-md-8">
+                                                <div class="custom-triangle"></div>
+                                                <span class="message-text-contain-friends">ssssssssssssssss
+                                            ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss</span>
+                                            </dd>
+                                        </dl>
+                                        <!--自己对话框-->
+                                        <dl class="row message-contain-item">
+                                            <div class="message-contain-item-time">2018-06-24 14:01:08</div>
+                                            <dt class="col-md-1 col-md-push-11">
+                                                <img class="img-responsive img-circle message-headportrait" src="img/headportrait.jpg">
+                                            </dt>
+                                            <dd class="col-md-8 col-md-push-2">
+                                                <div class="custom-triangle-right"></div>
+                                                <span class="message-text-contain-me pull-right">ssssssssssssssss
+                                            ssssssssssssssssssssssssssssssssss
+                                                ssssssssssssssssssssssssssssssssssssssssssssssssssssss</span>
+                                            </dd>
+                                        </dl>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                            <script src="js/jquery1.11.0.min.js"></script>
+                            <link rel="stylesheet" href="froala_editor_2.7.0/css/font-awesome.min.css">
+                            <link rel="stylesheet" href="froala_editor_2.7.0/css/froala_editor.css">
+                            <link rel="stylesheet" href="froala_editor_2.7.0/css/froala_style.css">
+                            <link rel="stylesheet" href="froala_editor_2.7.0/css/plugins/code_view.css">
+                            <link rel="stylesheet" href="froala_editor_2.7.0/css/plugins/draggable.css">
+                            <link rel="stylesheet" href="froala_editor_2.7.0/css/plugins/colors.css">
+                            <link rel="stylesheet" href="froala_editor_2.7.0/css/plugins/emoticons.css">
+                            <link rel="stylesheet" href="froala_editor_2.7.0/css/plugins/image_manager.css">
+                            <link rel="stylesheet" href="froala_editor_2.7.0/css/plugins/image.css">
+                            <link rel="stylesheet" href="froala_editor_2.7.0/css/plugins/line_breaker.css">
+                            <link rel="stylesheet" href="froala_editor_2.7.0/css/plugins/table.css">
+                            <link rel="stylesheet" href="froala_editor_2.7.0/css/plugins/char_counter.css">
+                            <link rel="stylesheet" href="froala_editor_2.7.0/css/plugins/video.css">
+                            <link rel="stylesheet" href="froala_editor_2.7.0/css/plugins/fullscreen.css">
+                            <link rel="stylesheet" href="froala_editor_2.7.0/css/plugins/file.css">
+                            <link rel="stylesheet" href="froala_editor_2.7.0/css/plugins/quick_insert.css">
+                            <link rel="stylesheet" href="froala_editor_2.7.0/css/plugins/help.css">
+                            <link rel="stylesheet" href="froala_editor_2.7.0/css/third_party/spell_checker.css">
+                            <link rel="stylesheet" href="froala_editor_2.7.0/css/plugins/special_characters.css">
+                            <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.css">-->
+                            <link rel="stylesheet" href="froala_editor_2.7.0/codemirror.min.css">
+                            <!--自定义修改froala样式的css-->
+                            <link rel="stylesheet" href="css/custom-froala.css">
+
+                            <!--输入框-->
+                            <div class="row custom-textarea">
+                                <button socketaddress="" id="send-to-btn" type="button" class="btn btn-default send-to-friend-btn">发送</button>
+                                <div id="editor">
+                                    <div id='edit'>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <!--聊天页面主内容框 end-->
+
+
+                <!--底部主内容 end-->
+
+            </div>
+        </div>
+    </div>
+
+
+    <!--添加好友模态框-->
+    <div class="add-friends-modal-div">
+
+        <div class="add-friends-modal">
+            <button type="button" class="btn btn-default remove-add-friends-modal-btn"><span class="glyphicon glyphicon-remove"></span> </button>
+            <h4>找好友</h4>
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="请输入账号/昵称">
+                <span class="input-group-btn">
+                <button class="btn btn-default" type="button">查找</button>
+                </span>
+            </div><!-- /input-group -->
+
+            <div class="find-friends-result-div">
+                <dl class="find-friends-item">
+                    <dt class="find-friends-head"><img class="img-responsive img-circle" src="img/headportrait.jpg"></dt>
+                    <dd class="friends-nickname-and-username">那时雨(2194610467)</dd>
+                    <dd class="friends-address">男 浙江 杭州</dd>
+                    <dd class="friends-add-btn-send"><button type="button" class="btn btn-default">加好友</button></dd>
+                </dl>
+                <dl class="find-friends-item">
+                    <dt class="find-friends-head"><img class="img-responsive img-circle" src="img/headportrait.jpg"></dt>
+                    <dd class="friends-nickname-and-username">那时雨(2194610467)</dd>
+                    <dd class="friends-address">男 浙江 杭州</dd>
+                    <dd class="friends-add-btn-send"><button type="button" class="btn btn-default">加好友</button></dd>
+                </dl>
+                <dl class="find-friends-item">
+                    <dt class="find-friends-head"><img class="img-responsive img-circle" src="img/headportrait.jpg"></dt>
+                    <dd class="friends-nickname-and-username">那时雨(2194610467)</dd>
+                    <dd class="friends-address">男 浙江 杭州</dd>
+                    <dd class="friends-add-btn-send"><button type="button" class="btn btn-default">加好友</button></dd>
+                </dl>
+                <dl class="find-friends-item">
+                    <dt class="find-friends-head"><img class="img-responsive img-circle" src="img/headportrait.jpg"></dt>
+                    <dd class="friends-nickname-and-username">那时雨(2194610467)</dd>
+                    <dd class="friends-address">男 浙江 杭州</dd>
+                    <dd class="friends-add-btn-send"><button type="button" class="btn btn-default">加好友</button></dd>
+                </dl>
+                <dl class="find-friends-item">
+                    <dt class="find-friends-head"><img class="img-responsive img-circle" src="img/headportrait.jpg"></dt>
+                    <dd class="friends-nickname-and-username">那时雨(2194610467)</dd>
+                    <dd class="friends-address">男 浙江 杭州</dd>
+                    <dd class="friends-add-btn-send"><button type="button" class="btn btn-default addfriends-btn">加好友</button></dd>
+                </dl>
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+    <!--<script src="js/jquery1.11.0.min.js"></script>-->
+    <script src="froala_editor_2.7.0/codemirror.min.js"></script>
+    <script src="froala_editor_2.7.0/xml.min.js"></script>
+    <!--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>-->
+    <!--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.js"></script>-->
+    <!--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/mode/xml/xml.min.js"></script>-->
+    <script src="froala_editor_2.7.0/js/froala_editor.min.js"></script>
+    <script src="froala_editor_2.7.0/js/plugins/align.min.js"></script>
+    <script src="froala_editor_2.7.0/js/plugins/char_counter.min.js"></script>
+    <script src="froala_editor_2.7.0/js/plugins/code_beautifier.min.js"></script>
+    <script src="froala_editor_2.7.0/js/plugins/code_view.min.js"></script>
+    <script src="froala_editor_2.7.0/js/plugins/colors.min.js"></script>
+    <script src="froala_editor_2.7.0/js/plugins/draggable.min.js"></script>
+    <script src="froala_editor_2.7.0/js/plugins/emoticons.min.js"></script>
+    <script src="froala_editor_2.7.0/js/plugins/entities.min.js"></script>
+    <script src="froala_editor_2.7.0/js/plugins/file.min.js"></script>
+    <script src="froala_editor_2.7.0/js/plugins/font_family.min.js"></script>
+    <script src="froala_editor_2.7.0/js/plugins/font_size.min.js"></script>
+    <script src="froala_editor_2.7.0/js/plugins/fullscreen.min.js"></script>
+    <script src="froala_editor_2.7.0/js/plugins/forms.min.js"></script>
+    <script src="froala_editor_2.7.0/js/plugins/help.min.js"></script>
+    <script src="froala_editor_2.7.0/js/plugins/image.min.js"></script>
+    <script src="froala_editor_2.7.0/js/plugins/image_manager.min.js"></script>
+    <script src="froala_editor_2.7.0/js/plugins/inline_style.min.js"></script>
+    <script src="froala_editor_2.7.0/js/plugins/line_breaker.min.js"></script>
+    <script src="froala_editor_2.7.0/js/plugins/link.min.js"></script>
+    <script src="froala_editor_2.7.0/js/plugins/lists.min.js"></script>
+    <script src="froala_editor_2.7.0/js/plugins/paragraph_format.min.js"></script>
+    <script src="froala_editor_2.7.0/js/plugins/paragraph_style.min.js"></script>
+    <script src="froala_editor_2.7.0/js/plugins/print.min.js"></script>
+    <script src="froala_editor_2.7.0/js/plugins/quick_insert.min.js"></script>
+    <script src="froala_editor_2.7.0/js/plugins/quote.min.js"></script>
+    <script src="froala_editor_2.7.0/js/plugins/save.min.js"></script>
+    <script src="froala_editor_2.7.0/js/plugins/special_characters.min.js"></script>
+    <script src="froala_editor_2.7.0/js/plugins/table.min.js"></script>
+    <script src="froala_editor_2.7.0/js/plugins/url.min.js"></script>
+    <script src="froala_editor_2.7.0/js/plugins/video.min.js"></script>
+    <script src="froala_editor_2.7.0/js/plugins/word_paste.min.js"></script>
+    <script src="froala_editor_2.7.0/js/third_party/spell_checker.min.js"></script>
+    <script src="froala_editor_2.7.0/js/languages/zh_cn.js"></script>
+
+
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/Particleground.js"></script>
+    <script type="text/javascript">
+
+        //粒子背景特效
+        $('body').particleground({
+            dotColor: '#E8DFE8',
+            lineColor: '#133b88'
+        });
+    </script>
+
+</body>
+</html>

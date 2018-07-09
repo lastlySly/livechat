@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--<link rel="stylesheet" href="css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="css/login.css">
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/jquery.cookie.js"></script>
+    <script src="js/login.js"></script>
+    <!--<script src="js/bootstrap.min.js"></script>-->
+</head>
+<body>
+    <!--登陆界面start-->
+    <div class="login-container">
+        <h3>欢迎登陆livechat</h3>
+        <!--账号-->
+        <div class="login_input">
+            <div class='icon'>
+                <img alt="" src='img/user_icon_copy.png'>
+            </div>
+            <input class="custom_input" id="login_id_input" type="text" placeholder="用户账号" />
+            <div class='validation'>
+                <img alt="" src='img/tick.png'>
+            </div>
+        </div>
+
+        <!--密码-->
+        <div class="login_input">
+            <div class='icon'>
+                <img alt="" src='img/lock_icon_copy.png'>
+            </div>
+            <input class="custom_input" id="password_input" type="password" placeholder="用户密码" />
+            <div class='validation'>
+                <img alt="" src='img/tick.png'>
+            </div>
+        </div>
+
+        <!--验证码-->
+        <div class="login_input">
+            <div class='icon'>
+                <img alt="" src='img/key.png'>
+            </div>
+            <input class="custom_input" type="text" placeholder="验证码" />
+            <div class='validation'>
+                <img alt="" src='img/tick.png'>
+            </div>
+        </div>
+
+
+        <!--登陆按钮-->
+        <div class="login_submit">
+            <input type='button' id="login_btn" value='登录'>
+        </div>
+
+
+        <div class="to_register_btn">
+            <h5>前往注册</h5>
+        </div>
+        <div class="find_password_btn">
+            <h5>忘记密码</h5>
+        </div>
+
+
+    </div>
+    <!--登陆界面end-->
+
+    <!-- 注册界面 start -->
+
+    <div class="register-container">
+        <h3>欢迎注册livechat</h3>
+        <!--账号-->
+        <div class="register_input">
+            <div class='icon'>
+                <img alt="" src='img/user_icon_copy.png'>
+            </div>
+            <input class="custom_input" id="reg_loginid_input" type="text" placeholder="用户账号" />
+            <div class='validation'>
+                <img alt="" src='img/tick.png'>
+            </div>
+            <div class="tip_div">
+                <h5>账号已被注册</h5>
+            </div>
+        </div>
+
+        <!--密码-->
+        <div class="register_input">
+            <div class='icon'>
+                <img alt="" src='img/lock_icon_copy.png'>
+            </div>
+            <input class="custom_input" id="reg_password_input" type="password" placeholder="用户密码" />
+            <div class='validation'>
+                <img alt="" src='img/tick.png'>
+            </div>
+
+            <div class="tip_div">
+                <h5>密码不规范</h5>
+            </div>
+
+        </div>
+        <!--确认密码-->
+        <div class="register_input">
+            <div class='icon'>
+                <img alt="" src='img/lock_icon_copy.png'>
+            </div>
+            <input class="custom_input" id="reg_repeat_password_input" type="password" placeholder="确认密码" />
+            <div class='validation'>
+                <img alt="" src='img/tick.png'>
+            </div>
+
+            <div class="tip_div">
+                <h5>两次密码不一致</h5>
+            </div>
+
+        </div>
+
+        <!--用户昵称-->
+        <div class="register_input">
+            <div class='icon'>
+                <img alt="" src='img/key.png'>
+            </div>
+            <input class="custom_input" id="reg_nickname" type="text" placeholder="用户昵称" />
+            <div class='validation'>
+                <img alt="" src='img/tick.png'>
+            </div>
+
+            <div class="tip_div">
+                <h5>请输入用户昵称</h5>
+            </div>
+        </div>
+
+
+        <!--注册按钮-->
+        <div class="register_submit">
+            <input type='button' id="register_btn" value='注册'>
+        </div>
+
+
+        <div class="to_login_btn">
+            <h5>前往登陆</h5>
+        </div>
+        <div class="find_password_btn">
+            <h5>忘记密码</h5>
+        </div>
+
+
+    </div>
+
+    <!-- 注册界面 end -->
+
+    <!--找回密码界面 start-->
+    <div class="find_password-container">
+        <h3>施工中，敬请期待</h3>
+
+        <div class="to_login_btn">
+            <h5>前往登陆</h5>
+        </div>
+        <div class="to_register_btn">
+            <h5>前往注册</h5>
+        </div>
+
+
+    </div>
+    <!--找回密码界面 end-->
+
+
+
+<script src="js/jquery-2.1.1.min.js"></script>
+<script src="js/jquery-ui.min.js"></script>
+<script src="js/Particleground.js"></script>
+<script type="text/javascript">
+
+    //粒子背景特效
+    $('body').particleground({
+        dotColor: '#E8DFE8',
+        lineColor: '#133b88'
+    });
+</script>
+
+</body>
+</html>

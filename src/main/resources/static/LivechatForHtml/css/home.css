@@ -1,0 +1,617 @@
+
+
+@media (min-width: 1200px) {
+    .container{
+        width: 992px;
+    }
+}
+
+html, body {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    background-size: 100%;
+    background-image: url(../img/Starry.jpg);
+    overflow: hidden;
+}
+
+.all_container{
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+}
+
+.custom-content{
+    height: 660px;
+    /*background-color: #5e5e5e;*/
+    width: 100%;
+    margin-top: 2%;
+    border-radius: 10px;
+    position: relative;
+
+}
+
+/*顶部头像，导航栏 start*/
+.custom-content-top{
+    /*background-color: #108DEE;*/
+    background: url("../img/Starry.jpg") bottom;
+    height: 60px;
+    width: 100%;
+    margin: 0;
+    padding: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+/*顶部左部导航栏*/
+.custom-top-left{
+    padding: 0;
+    /*background-color: red;*/
+
+}
+
+/*头像*/
+.head-portrait{
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    background-color: #4cae4c;
+    position: relative;
+    cursor: pointer;
+
+}
+.custom-nav-click{
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    /*background-color: #4cae4c;*/
+    position: absolute;
+}
+.custom-head-meau{
+    width: 120px;
+    position: absolute;
+    border-radius: 10px;
+    display: none;
+    z-index: 100;
+    background-color: white;
+    border: 1px solid black;
+    padding: 5px;
+}
+.custom-head-meau > li{
+    padding: 5px;
+}
+.custom-head-meau > li:hover{
+    background-color: #C1C1C1;
+}
+/*搜索按钮*/
+.custom-search-btn{
+    width: 120px;
+    background-color: rgba(0,0,0,0);
+    border: 1px solid #C3C3C3;
+    height: 30px;
+    margin-top: 5px;
+    line-height: 30px;
+    border-radius: 20px;
+    padding-left: 20px;
+    text-align: left;
+    color: #C3C3C3;
+    font-size: 1.4rem;
+
+}
+/*搜索按钮 hover响应*/
+.custom-search-btn:hover{
+    border: 2px solid white;
+    color: white;
+}
+
+
+/*顶部右部导航栏*/
+.custom-top-right{
+    /*background-color: #4cae4c;*/
+    height: 30px;
+}
+.custom-nav-btn-group{
+    margin: 10px;
+}
+.custom-linkman-btn, .custom-chat-btn, .custom-papers-btn{
+    border: none;
+    background-color: rgba(0,0,0,0);
+    color: #C3C3C3;
+    font-size: 2.4rem;
+    padding-left: 20px;
+}
+.custom-chat-btn{
+    color: #FFFFFF;
+}
+.custom-linkman-btn:hover, .custom-chat-btn:hover, .custom-papers-btn:hover{
+    color: white;
+}
+
+/*顶部头像，导航栏 end*/
+
+/*好友列表底部主内容 start*/
+.custom-main-container{
+    height: 100%;
+    /*max-height: 645px;*/
+    max-height: 605px;
+    width: 100%;
+    margin: 0;
+    background-color: #FFFFFF;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    position: relative;
+    /*background-color: #EBEBEC;*/
+    display: none;
+}
+
+/*左部列表 start */
+.custom-main-left-container{
+    background-color: #FAFAFA;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    border-bottom-left-radius: 10px;
+    /*overflow-y: auto;*/
+    position: relative;
+    border-right: 1px solid #7F7F7F;
+    /*border-bottom-right-radius: 10px;*/
+}
+/*添加好友按钮*/
+.custom-add-item{
+    position: absolute;
+    height: 40px;
+    width: 40px;
+    bottom: 20px;
+    right: 20px;
+    background-color: #0181EF;
+    border: none;
+    border-radius: 50%;
+    font-size: 3.0rem;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    line-height: 40px;
+    z-index: 100;
+}
+.custom-add-click{
+    height: 40px;
+    width: 40px;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    /*background-color: #4cae4c;*/
+}
+.custom-add-meau{
+    width: 120px;
+    padding: 5px;
+    font-size: 1.4rem;
+    border: 1px solid black;
+    border-radius: 10px;
+    color: black;
+    font-weight:100;
+    background-color: white;
+    margin-left: -120px;
+    margin-top: -100px;
+    display: none;
+}
+.custom-add-meau > li:hover{
+    background-color: #C1C1C1;
+}
+
+.custom-main-left-top{
+    /*position: fixed;*/
+    height: 40px;
+    border-bottom: 1px solid #7F7F7F;
+    width: 100%;
+    margin: 0;
+    line-height: 40px;
+    text-align: center;
+    font-size: 1.6rem;
+    /*padding-left: 25px;*/
+}
+.custom-friend-list-btn .custom-group-chat-list-btn{
+    text-align: center;
+    margin: 0;
+}
+
+/*好友列表分组管理 start*/
+.custom-friends-group-list{
+    padding-top: 15px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.friends-group-list{
+    /*height: 88%;*/
+    /*height: 585px;*/
+    height: 545px;
+    overflow-y: auto;
+}
+/*头像处理*/
+.list-headportrait{
+    margin-top: 2px;
+    height: 45px;
+    width: 45px;
+    border-radius: 50%;
+}
+.custom-friends-group-list>.custom-group-item{
+    /*height: 30px;*/
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.custom-friends-group-list>li>.custom-group{
+    /*width: 100%;*/
+    font-size: 1.4rem;
+    padding: 5px;
+    margin: 0;
+}
+
+.custom-group:hover{
+    background-color: #E5E7EC;
+    cursor: pointer;
+}
+.custom-friends-list{
+
+    display: none;
+}
+.custom-friends-list{
+    height: 50px;
+    padding: 5px;
+}
+.custom-friends-list>.row>.col-md-9,
+.custom-friends-list>.row>.col-md-3{
+    padding: 5px;
+}
+.custom-friend-item{
+    margin-left: 0px;
+}
+.custom-friend-item:hover{
+    background-color: #E5E7EC;
+    cursor: pointer;
+}
+
+.custom-friend-item-info{
+    height: 50px;
+    position: relative;
+}
+.custom-num-tip{
+    position: absolute;
+    /*top: 27px;*/
+    top: 20px;
+    right: 15px;
+    background-color: #96D7F0;
+    /*background-color: red;*/
+}
+.custom-time{
+    position: absolute;
+    /*top: 27px;*/
+    top: 10px;
+    right: 15px;
+    background: rgba(0,0,0,0);
+    color: #7D7D7D;
+    font-size: 1rem;
+}
+.custom-online-tip{
+    position: absolute;
+    /*top: 27px;*/
+    top: 10px;
+    right: 15px;
+    background: rgba(0,0,0,0);
+    color: #7D7D7D;
+    font-size: 1rem;
+}
+
+.custom-friend-item-info>dt{
+    padding-top: 5px;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+    font-size: 1.2rem;
+}
+.custom-friend-item-info>dd{
+    max-width: 140px;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+    font-size: 1.2rem;
+}
+
+/*好友列表分组管理 end*/
+
+/*左部列表 end*/
+
+/*右部 start*/
+.custom-main-right-container{
+    height: 100%;
+    background: url("../img/tim233.png") no-repeat center center;
+    padding: 0;
+    /*background-position: ;*/
+    border-bottom-right-radius: 10px;
+}
+.right-main-container{
+    background-color: #E5E7EC;
+    height: 100%;
+    width: 100%;
+    border-bottom-right-radius: 10px;
+    position: relative;
+    display: none;
+}
+/*好友信息卡*/
+.friend-info-card{
+    margin-top: 50px;
+    background-color: white;
+    /*height: 34vw;*/
+    /*height: 510px;*/
+    height: 465px;
+    /*max-height: 580px;*/
+    border-radius: 10px;
+    overflow-y: auto;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+.friend-info-card-dl{
+    /*padding-bottom: 20px;*/
+    /*max-height: 150px;*/
+    /*overflow-y: auto;*/
+
+}
+
+.friend-info-card-div{
+    /*padding-bottom: 20px;*/
+    position: relative;
+}
+/*好友卡发消息按钮*/
+.custom-send-message-btn{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    color: #0F74D3;
+}
+.friend-info-card-item{
+    font-size: 1.3rem;
+}
+.friend-info-card-item-key{
+    color: #AEAEAE;
+    font-weight: bold;
+    font-size: 1.4rem;
+}
+.friend-info-card-remake-top{
+    text-align: center;
+    font-size: 1.4rem;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+.friend-info-card-motto{
+    text-align: center;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+    color: #AEAEAE;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+}
+/*右部 end*/
+
+/*好友列表底部主内容 end*/
+
+
+/*===================================================================================================================================*/
+
+
+/*聊天页面底部主内容框Start*/
+
+.custom-chat-container{
+    height: 100%;
+    /*max-height: 645px;*/
+    max-height: 605px;
+    width: 100%;
+    margin: 0;
+    background-color: #FFFFFF;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    position: relative;
+    /*background-color: #EBEBEC;*/
+    display: block;
+}
+.custom-chat-left-container{
+    background-color: #FAFAFA;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    border-bottom-left-radius: 10px;
+    /*overflow-y: auto;*/
+    position: relative;
+    border-right: 1px solid #7F7F7F;
+    /*border-bottom-right-radius: 10px;*/
+}
+.chat-list{
+    height: 95%;
+    /*max-height: 645px;*/
+    max-height: 605px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+
+.custom-chat-friend-item{
+    height: 50px;
+    padding: 5px;
+    position: relative;
+}
+.custom-chat-list>.row>.col-md-9,
+.custom-chat-list>.row>.col-md-3{
+    padding: 5px;
+}
+.custom-chat-friend-item{
+    margin-left: 0px;
+}
+
+/*从正在聊天列表移除的按键*/
+.custom-del{
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    /*background-color: red;*/
+    top: 15px;
+    right: 20px;
+    border-radius: 50%;
+    border: none;
+    padding: 0;
+    font-size: 1.5rem;
+    display: none;
+}
+
+.custom-chat-friend-item:hover{
+    background-color: #E5E7EC;
+    cursor: pointer;
+}
+.custom-chat-friend-item:hover .custom-del{
+    display: block;
+}
+.custom-chat-friend-item:hover .custom-num-tip{
+    display: none;
+}
+
+/*右部 start*/
+.custom-chat-right-container{
+    height: 100%;
+    background: url("../img/tim233.png") no-repeat center center;
+    padding: 0;
+    /*background-position: ;*/
+    border-bottom-right-radius: 10px;
+}
+
+.right-chat-container{
+    background-color: #FFFFFF;
+    height: 100%;
+    width: 100%;
+    border-bottom-right-radius: 10px;
+    position: relative;
+    /*overflow: hidden;*/
+    display: none;
+}
+
+.chat-friend-name-top{
+    height: 45px;
+    border-bottom: 1px solid #7F7F7F;
+    width: 100%;
+    margin: 0;
+    line-height: 45px;
+    /*padding-left: 20px;*/
+    /*padding-right: 20px;*/
+    /*text-align: center;*/
+    font-size: 1.4rem;
+    /*background-color: red;*/
+}
+
+.chat-custom-content{
+    height: 445px;
+    /*max-height: 515px;*/
+    width: 100%;
+    margin: 0;
+    position: relative;
+}
+
+/*聊天内容框*/
+.chat-content-div{
+    /*height: 100%;*/
+    height: 400px;
+    width: 100%;
+    margin: 0;
+    /*background-color: #FFFFFF;*/
+    background-color: white;
+    /*background: url("../img/Starry.jpg") center;*/
+    overflow-y: auto;
+    position: relative;
+}
+.chat-content-div > .col-md-12{
+    position: relative;
+}
+.message-headportrait{
+    /*margin-top: 2px;*/
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+}
+.message-contain-item{
+    /*padding-left: 20px;*/
+    /*padding-right: 20px;*/
+}
+.message-contain-item .col-md-1,
+.message-contain-item .col-md-8{
+    padding: 10px;
+    position: relative;
+}
+
+/*对方发送对话框*/
+.message-text-contain-friends{
+    padding: 10px;
+    /*width: 100%;*/
+    min-height: 40px;
+    background-color: #EEEEEE;
+    display: inline-block;
+    /*display: block;*/
+    border-radius: 10px;
+    /*max-width: 300px;*/
+    height: auto;
+    word-wrap:break-word;
+    word-break:break-all;
+    overflow: hidden;
+}
+/*自己的对话框*/
+.message-text-contain-me{
+    padding: 10px;
+    /*width: 100%;*/
+    min-height: 40px;
+    background-color: #108DEE;
+    display: inline-block;
+    /*display: block;*/
+    border-radius: 10px;
+    /*max-width: 300px;*/
+    height: auto;
+    word-wrap:break-word;
+    word-break:break-all;
+    overflow: hidden;
+    color: #ffffff;
+    text-align: right;
+}
+.message-contain-item-time{
+    padding-top: 10px;
+    /*position: absolute;*/
+    width: 100%;
+    text-align: center;
+    font-size: 1.1rem;
+    color: #5e5e5e;
+}
+
+
+.send-to-friend-btn{
+    position: absolute;
+    bottom: 10px;
+    right: 30px;
+    width: 100px;
+    float: right;
+    margin-right: 60px;
+    background-color: #108DEE;
+    z-index: 100;
+}
+
+/*输入框*/
+.custom-textarea{
+    /*height: 191px;*/
+    height: 146px;
+    width: 100%;
+    position: absolute;
+    bottom: 15px;
+    /*background-color: red;*/
+    margin: 0;
+    border-top: 1px solid #7F7F7F;
+    border-bottom-right-radius: 10px;
+    /*overflow-y: auto;*/
+}
+
+/*聊天页面底部主内容框End*/

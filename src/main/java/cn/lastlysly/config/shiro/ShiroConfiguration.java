@@ -83,8 +83,10 @@ public class ShiroConfiguration {
         filterChainDefinitionMap.put("/**/userregister","anon");
         filterChainDefinitionMap.put("/**/loginidisuse","anon");
         filterChainDefinitionMap.put("/**/login","anon");
+        filterChainDefinitionMap.put("/**//LivechatForHtml/login/**","anon");
         filterChainDefinitionMap.put("/**/logout","logout");
         //需要登录访问的资源 , 一般将/**放在最下边
+//        filterChainDefinitionMap.put("/**", "anon");
         filterChainDefinitionMap.put("/**", "authc");
         bean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return bean;

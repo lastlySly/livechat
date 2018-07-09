@@ -1,0 +1,179 @@
+html, body {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    font-size: 16px;
+    /*background-repeat: no-repeat;*/
+    /*background-position: left top;*/
+    /*background-color: #242645;*/
+    color: #fff;
+    font-family: 'Source Sans Pro';
+    background-size: 100%;
+    background-image: url(../img/Starry.jpg);
+    overflow: hidden;
+}
+body ::-webkit-input-placeholder {
+    color: #4E546D;
+}
+input:-ms-input-placeholder{
+    color: #CECFD2;opacity:1;
+}
+
+input::-webkit-input-placeholder{
+    color: #CECFD2;opacity:1;
+}
+
+.find_password-container,
+.login-container,
+.register-container{
+    position: absolute;
+    /*top: 100px;*/
+    left: 0;
+    right: 0;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+
+    box-shadow: -15px 15px 15px rgba(6, 17, 47, 0.7);
+    background: #35394a;
+    background: linear-gradient(230deg, rgba(53, 57, 74, 0) 0%, rgb(0, 0, 0) 100%);
+    /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='rgba(53, 57, 74, 0)', endColorstr='rgb(0, 0, 0)',GradientType=1 );
+    width: 240px;
+    height: 350px;
+    padding: 50px 40px 40px 40px;
+
+    /*transition: all 2s;*/
+    /*-webkit-transition: all 2s;*/
+}
+
+.register-container,
+.find_password-container{
+    display: none;
+}
+
+.login_input,
+.register_input{
+    width: 100%;
+    height: 40px;
+    position: relative;
+    /*margin-top: 15px;*/
+}
+
+.custom_input{
+    color: #afb1be;
+    width: 170px;
+    margin-top: -2px;
+    background: rgba(57, 61, 82, 0);
+    left: 0;
+    padding: 10px 35px;
+    border-top: 2px solid rgba(57, 61, 82, 0);
+    border-bottom: 2px solid rgba(57, 61, 82, 0);
+    border-right: none;
+    border-left: none;
+    outline: none;
+    font-family: 'Gudea', sans-serif;
+    box-shadow: none;
+}
+
+/*左部图标*/
+.icon{
+    position: absolute;
+    z-index: 1;
+    left: 10px;
+    top: 9px;
+    opacity: .5;
+}
+/*右部打钩小图标*/
+.validation{
+    position: absolute;
+    z-index: 1;
+    right: 10px;
+    top: 8px;
+    opacity: 0;
+}
+
+/*登陆按钮 start*/
+.login_submit,
+.register_submit{
+    position: relative;
+    top: 17px;
+    left: 0;
+    width: 80%;
+    right: 0;
+    margin: auto;
+}
+.login_submit input,
+.register_submit input{
+    border-radius: 50px;
+    background: transparent;
+    padding: 10px 50px;
+    border: 2px solid #4FA1D9;
+    color: #4FA1D9;
+    text-transform: uppercase;
+    font-size: 11px;
+    -webkit-transition-property: background,color;
+    transition-property: background,color;
+    -webkit-transition-duration: .2s;
+    transition-duration: .2s;
+}
+.login_submit input:focus,
+.register_submit input:focus{
+    box-shadow: none;
+    outline: none;
+}
+.login_submit input:hover,
+.register_submit input:hover {
+    color: white;
+    background: #4FA1D9;
+    cursor: pointer;
+    -webkit-transition-property: background,color;
+    transition-property: background,color;
+    -webkit-transition-duration: .2s;
+    transition-duration: .2s;
+}
+/*登陆按钮 end*/
+
+.find_password-container > .to_login_btn,
+.register-container > .to_login_btn,
+.login-container > .to_register_btn{
+    position: absolute;
+    bottom: 0px;
+    right: 20px;
+    cursor: pointer;
+    color: #CECFD2;
+    opacity:1;
+}
+
+.find_password-container > .to_register_btn,
+.register-container > .find_password_btn,
+.login-container > .find_password_btn{
+    position: absolute;
+    bottom: 0px;
+    left: 20px;
+    cursor: pointer;
+    color: #CECFD2;
+    opacity:1;
+}
+
+.to_login_btn:hover,
+.to_register_btn:hover,
+.find_password_btn:hover{
+    color: #FFFFFF;
+    text-decoration: underline;
+}
+.tip_div{
+    position: absolute;
+    /*width: 100%;*/
+    width: 150px;
+    top: 9px;
+    right: -200px;
+    text-align: left;
+    /*margin-left: -40px;*/
+    /*opacity: 0;*/
+    display: none;
+}
+.tip_div h5{
+    margin: 0;
+    /*text-align: center;*/
+}

@@ -1,0 +1,85 @@
+
+.add-friends-modal-div{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    position: fixed;
+    z-index: 100;
+    top: 0px;
+    display: none;
+}
+.add-friends-modal{
+    position: relative;
+    width: 550px;
+    /*height: 250px;*/
+    background-color: white;
+    top: 15vw;
+    border-radius: 20px;
+    text-align: center;
+    padding: 20px 20px;
+    margin: 0 auto;
+}
+.add-friends-modal > h4{
+    padding-bottom: 10px;
+}
+.find-friends-result-div{
+    margin-top: 20px;
+    width: 100%;
+    height: 200px;
+    max-height: 200px;
+    overflow-y: auto;
+    background-color: #F7F7F7;
+    padding: 10px;
+}
+.find-friends-item{
+    background-color: #4cae4c;
+    width: 220px;
+    height: 70px;
+    position: relative;
+    margin: 10px;
+    float: left;
+
+}
+.find-friends-head{
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+}
+.friends-nickname-and-username{
+    position: absolute;
+    top: 0px;
+    left: 80px;
+    max-width: 130px;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+    font-size: 1.4rem;
+
+}
+.friends-address{
+    position: absolute;
+    top: 20px;
+    left: 80px;
+    max-width: 130px;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+    font-size: 1.4rem;
+}
+.friends-add-btn-send{
+    position: absolute;
+    top: 40px;
+    left: 80px;
+}
+.friends-add-btn-send > button{
+    font-size: 1.2rem;
+    padding: 5px;
+    background-color: #0188FB;
+    color: #FFFFFF;
+    border: none;
+}
+.remove-add-friends-modal-btn{
+    position: absolute;
+    top: 10px;
+    right: 20px;
+ }
