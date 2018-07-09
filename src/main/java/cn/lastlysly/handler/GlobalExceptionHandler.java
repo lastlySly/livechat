@@ -22,4 +22,10 @@ public class GlobalExceptionHandler {
     public MyResult loginExceptionHandler(HttpServletRequest request, HttpServletResponse response, Exception e){
         return new MyResult(0,e.getMessage(),null);
     }
+
+    @ExceptionHandler(value = MyCustomException.class)
+    @ResponseBody
+    public MyResult customExceptionHandler(HttpServletRequest request,HttpServletResponse response,Exception e){
+        return new MyResult(0,e.getMessage(),null);
+    }
 }
