@@ -39,9 +39,5 @@ public class HelloController {
        return getStr;
     }
 
-    @RequestMapping("/nologin")
-    public MyResult nologin(){
-        return new MyResult(0,"没有登录，请先登录",null);
-    }
 
 }

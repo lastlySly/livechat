@@ -72,11 +72,11 @@ public class ShiroConfiguration {
         bean.setSecurityManager( manager);
         //设置登录页面
 //        //可以写路由也可以写jsp页面的访问路径
-        bean.setLoginUrl("/nologin");
+        bean.setLoginUrl("/userdeal/nologin");
 //        //设置登录成功跳转的页面
 //        bean.setSuccessUrl("/pages/index.jsp");
 //        //设置未授权跳转的页面
-        bean.setUnauthorizedUrl("/nologin");
+        bean.setUnauthorizedUrl("/userdeal/nologin");
         //定义过滤器
         LinkedHashMap<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
         filterChainDefinitionMap.put("/**/hello","anon");

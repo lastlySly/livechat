@@ -1,9 +1,7 @@
 package cn.lastlysly.service.serviceimpl;
 
-import cn.lastlysly.mapper.FriendgroupsSheetMapper;
-import cn.lastlysly.mapper.PermissionSheetMapper;
-import cn.lastlysly.mapper.RolesSheetMapper;
-import cn.lastlysly.mapper.UserinfoSheetMapper;
+import cn.lastlysly.mapper.*;
+import cn.lastlysly.myutils.MyResult;
 import cn.lastlysly.pojo.*;
 import cn.lastlysly.service.UserinfoService;
 import org.slf4j.Logger;
@@ -12,9 +10,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author lastlySly
@@ -39,6 +43,12 @@ public class UserinfoServiceImpl implements UserinfoService {
 
     @Autowired
     private FriendgroupsSheetMapper friendgroupsSheetMapper;
+
+    @Autowired
+    private FriendsSheetMapper friendsSheetMapper;
+
+    @Autowired
+    private CustomMapper customMapper;
 
     /**
      * 通过 账号（用户名） 获取用户信息
@@ -198,11 +208,11 @@ public class UserinfoServiceImpl implements UserinfoService {
         UserinfoSheetExample userinfoSheetExample = new UserinfoSheetExample();
         UserinfoSheetExample.Criteria criteria = userinfoSheetExample.createCriteria();
         if (userinfoSheet.getUserId() != null){
-            logger.info("这里判断用户ID不为空{}",userinfoSheet.getUserId());
+//            logger.info("这里判断用户ID不为空{}",userinfoSheet.getUserId());
             criteria.andUserIdEqualTo(userinfoSheet.getUserId());
         }
         if (userinfoSheet.getUserLoginId() != null){
-            logger.info("这里判断用户账号不为空{}",userinfoSheet.getUserLoginId());
+//            logger.info("这里判断用户账号不为空{}",userinfoSheet.getUserLoginId());
             criteria.andUserLoginIdEqualTo(userinfoSheet.getUserLoginId());
         }
         List<UserinfoSheet> resUserList = userinfoSheetMapper.selectByExample(userinfoSheetExample);
@@ -212,5 +222,22 @@ public class UserinfoServiceImpl implements UserinfoService {
         }
         return null;
     }
+
+    /**
+     * 通过当前登录用户ID查询其好友列表
+     * @param userinfoSheet
+     * @return
+     */
+    @Override
+    public List<CustomFriendsInfo> listFriends(UserinfoSheet userinfoSheet) {
+        Map<String,String> map = new HashMap<String,String>(16);
+        map.put("userId",userinfoSheet.getUserId());
+        List<CustomFriendsInfo> customFriendsInfoList = customMapper.selectCustomFriendsInfoByUserId(map);
+        if (customFriendsInfoList.size() > 0){
+            return customFriendsInfoList;
+        }
+        return null;
+    }
+
 
 }

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.lastlysly.mapper.CustomMapper">
+
+    <resultMap id="CustomFriendsResultMap" type="cn.lastlysly.pojo.CustomFriendsInfo">
+       <result column="friends_userid" property="customFriendsUserId" /><!--好友归属用户ID-->
+       <result column="user_id" property="customFriendsFriendsId" /><!--好友的ID-->
+       <result column="user_login_id" property="customFriendsLoginId" /><!--好友的登陆账号-->
+
+       <result column="user_nickname" property="customFriendsNickName" /><!--好友昵称-->
+       <result column="friends_remarks" property="customFriendsRemark" /><!--给好友的备注-->
+       <result column="friendgroups_name" property="customFriendsGroupName" /><!--好友所在分组的组名-->
+       <result column="user_email" property="customFriendsEmail" /><!--好友的邮箱-->
+       <result column="user_telephone" property="customFriendsTel" /><!--好友电话号码-->
+       <result column="user_motto" property="customFriendsMotto" /><!--好友座右铭-->
+       <result column="user_headportrait" property="customFriendsHeadportrait" /><!--好友头像-->
+       <result column="user_gender" property="customFriendsGender" /><!--好友性别-->
+       <result column="user_age" property="customFriendsAge" /><!--好友年龄-->
+    </resultMap>
+
+    <!---->
+    <select id="selectCustomFriendsInfoByUserId" parameterType="java.util.Map" resultMap="CustomFriendsResultMap">
+        select userinfo_sheet.*,friends_sheet.*,friendgroups_sheet.friendgroups_name from
+         friends_sheet join userinfo_sheet on friends_sheet.friends_friendid = userinfo_sheet.user_id
+          join friendgroups_sheet on friends_sheet.friends_friendgroupsid = friendgroups_sheet.friendgroups_id
+           where friends_sheet.friends_userid = #{userId};
+    </select>
+</mapper>

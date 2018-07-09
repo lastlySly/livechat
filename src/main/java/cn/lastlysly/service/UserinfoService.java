@@ -1,6 +1,8 @@
 package cn.lastlysly.service;
 
+import cn.lastlysly.pojo.CustomFriendsInfo;
 import cn.lastlysly.pojo.FriendgroupsSheet;
+import cn.lastlysly.pojo.FriendsSheet;
 import cn.lastlysly.pojo.UserinfoSheet;
 
 import java.util.List;
@@ -53,5 +55,12 @@ public interface UserinfoService {
      * @return
      */
     UserinfoSheet getUserInfoByUserIdOrLoginId(UserinfoSheet userinfoSheet);
+
+    /**
+     *通过用户id查询其好友列表（包含详细信息）
+     * @param userinfoSheet
+     * @return
+     */
+    List<CustomFriendsInfo> listFriends(UserinfoSheet userinfoSheet);
 
 }

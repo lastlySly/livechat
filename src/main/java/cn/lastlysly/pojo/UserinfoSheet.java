@@ -1,5 +1,7 @@
 package cn.lastlysly.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.Date;
 
 public class UserinfoSheet {
@@ -9,6 +11,7 @@ public class UserinfoSheet {
 
     private String userNickname;
 
+//    @JsonIgnore
     private String userPassword;
 
     private Boolean userGender;
@@ -38,7 +41,7 @@ public class UserinfoSheet {
     private String userVocation;
 
     private String userHeadportrait;
-
+//    @JsonIgnore
     private String userPasswordSalt;
 
     public String getUserId() {

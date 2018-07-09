@@ -4,7 +4,9 @@ import cn.lastlysly.handler.MyCustomException;
 import cn.lastlysly.handler.MyCustomLoginException;
 import cn.lastlysly.myutils.CustomRedisTemplate;
 import cn.lastlysly.myutils.MyResult;
+import cn.lastlysly.pojo.CustomFriendsInfo;
 import cn.lastlysly.pojo.FriendgroupsSheet;
+import cn.lastlysly.pojo.FriendsSheet;
 import cn.lastlysly.pojo.UserinfoSheet;
 import cn.lastlysly.service.UserinfoService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -47,6 +49,14 @@ public class UserInfoController {
 
     @Autowired
     private CustomRedisTemplate customRedisTemplate;
+
+
+    @CrossOrigin
+    @RequestMapping("/nologin")
+    @ResponseBody
+    public MyResult nologin(){
+        return new MyResult(0,"没有登录，请先登录",null);
+    }
 
     /**
      * 用户注册
@@ -135,6 +145,7 @@ public class UserInfoController {
             resUser.setUserPasswordSalt("");
             //获取用户session(如果当前用户没有常见session的话,true则创建一个并返回,false为返回null)
             Session session = subject.getSession();
+
             session.setAttribute("userInfo",resUser);
             //设置session超时时间
             session.setTimeout(1500000);
@@ -168,8 +179,11 @@ public class UserInfoController {
     @RequestMapping(value = "/myuserinfo",method = RequestMethod.POST)
     @ResponseBody
     public MyResult getUserInfo() throws MyCustomException {
+        logger.info("测试{}",3333);
         Subject subject = SecurityUtils.getSubject();
         String redisKey = "userinfo:"+subject.getPrincipal().toString();
+
+
         String val = customRedisTemplate.redisGet(redisKey);
         try {
             UserinfoSheet userinfoSheet = objectMapper.readValue(val,UserinfoSheet.class);
@@ -215,5 +229,28 @@ public class UserInfoController {
             throw new MyCustomException("用户分组序列化失败");
         }
     }
+
+    /**
+     * 通过用户ID获取其好友列表(带详细信息)
+     * @return
+     */
+    @CrossOrigin
+    @RequestMapping(value = "/listfriends",method = RequestMethod.POST)
+    @ResponseBody
+    public MyResult listFriends() throws MyCustomException {
+        Subject subject = SecurityUtils.getSubject();
+        String redisKey = "userinfo:"+subject.getPrincipal().toString();
+        String val = customRedisTemplate.redisGet(redisKey);
+        try {
+            UserinfoSheet userinfoSheet = objectMapper.readValue(val,UserinfoSheet.class);
+            List<CustomFriendsInfo> customFriendsInfoList = userinfoService.listFriends(userinfoSheet);
+            return new MyResult(1,"获取好友列表成功",customFriendsInfoList);
+
+        } catch (IOException e) {
+            throw new MyCustomException("用户分组序列化失败");
+        }
+    }
+
+
 
 }
