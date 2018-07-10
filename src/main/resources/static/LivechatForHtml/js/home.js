@@ -38,7 +38,7 @@ function getGroupFun() {
         processData: false,
         success:function (data) {
             if (data.code == 1){
-                console.log(data);
+                // console.log(data);
                 $(".custom-friends-group-list").empty();
                 for (var i=0;i<data.data.length;i++){
                     $(".custom-friends-group-list").append('<li class="custom-group-item">\n' +
@@ -80,7 +80,7 @@ function listFriend() {
         success:function (data) {
             if(data.code == 1){
                 var grouplist_count =  $(".group_name").length;
-                console.log("好友数量:"+grouplist_count);
+                // console.log("好友数量:"+grouplist_count);
                 for(var i=0;i<data.data.length;i++){
                     for (var j=0;j<grouplist_count;j++){
                         if (data.data[i].customFriendsGroupName == $(".group_name").eq(j).text()){
@@ -139,14 +139,47 @@ function friend_card() {
         }
 
         var socketaddress = $(this).attr("socketaddress");
-        var remarks = $(this).find(".list-remarks").text();
-        var motto = $(this).find(".list-motto").text();
-        var headportrait = $(this).find(".list-headportrait").attr("src");
-        $("#headportrait").attr("src",headportrait);
-        $("#remarks-top").text(remarks);
-        $("#remarks").text(remarks);
-        $("#motto").text(motto);
-        $("#custom-send-message-btn").attr("socketaddress",socketaddress);
+        // var remarks = $(this).find(".list-remarks").text();
+        // var motto = $(this).find(".list-motto").text();
+        // var headportrait = $(this).find(".list-headportrait").attr("src");
+        // $("#headportrait").attr("src",headportrait);
+        // $("#remarks-top").text(remarks);
+        // $("#remarks").text(remarks);
+        // $("#motto").text(motto);
+        // $("#custom-send-message-btn").attr("socketaddress",socketaddress);
+
+        var formData = new FormData();
+        formData.append("friendUserId",socketaddress);
+        $.ajax({
+            url:"http://localhost:8080/demo/userdeal/infofriend",
+            type:"POST",
+            data:formData,
+            async:true,
+            // cache: false,缓存，get请求有效，true缓存
+            contentType: false,
+            processData: false,
+            success:function (data) {
+                if (data.code == 1){
+                    console.log(data);
+                    $("#headportrait").attr("src",data.data.customFriendsHeadportrait);
+                    $("#remarks-top").text(data.data.customFriendsRemark);
+                    $("#remarks").text(data.data.customFriendsRemark);
+                    $("#motto").text(data.data.customFriendsMotto);
+                    $("#custom-send-message-btn").attr("socketaddress",socketaddress);
+                    $("#nickname").text(data.data.customFriendsNickName);
+                    $("#group").text(data.data.customFriendsGroupName);
+                    $("#e-mail").text(data.data.customFriendsEmail);
+                    $("#username").text(data.data.customFriendsLoginId);
+                }else{
+                    alert(data.tip);
+                }
+            },
+            error:function (err) {
+                alert("连接错误："+err);
+            }
+
+        });
+
 
     })
 }

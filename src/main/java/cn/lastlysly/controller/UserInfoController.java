@@ -179,7 +179,6 @@ public class UserInfoController {
     @RequestMapping(value = "/myuserinfo",method = RequestMethod.POST)
     @ResponseBody
     public MyResult getUserInfo() throws MyCustomException {
-        logger.info("测试{}",3333);
         Subject subject = SecurityUtils.getSubject();
         String redisKey = "userinfo:"+subject.getPrincipal().toString();
 
@@ -246,6 +245,34 @@ public class UserInfoController {
             List<CustomFriendsInfo> customFriendsInfoList = userinfoService.listFriends(userinfoSheet);
             return new MyResult(1,"获取好友列表成功",customFriendsInfoList);
 
+        } catch (IOException e) {
+            throw new MyCustomException("用户分组序列化失败");
+        }
+    }
+
+    /**
+     * 通过当前登陆用户ID和其好友ID查询该好友信息（由于其在不同好友下的不同备注）
+     * @param request
+     * @return
+     * @throws MyCustomException
+     */
+    @CrossOrigin
+    @RequestMapping(value = "/infofriend",method = RequestMethod.POST)
+    @ResponseBody
+    public MyResult infoFriend(HttpServletRequest request) throws MyCustomException {
+        String friendUserId = request.getParameter("friendUserId");
+        logger.info("controller,friendUserId:{}",friendUserId);
+
+        Subject subject = SecurityUtils.getSubject();
+        String redisKey = "userinfo:"+subject.getPrincipal().toString();
+        String val = customRedisTemplate.redisGet(redisKey);
+        try {
+            UserinfoSheet userinfoSheet = objectMapper.readValue(val,UserinfoSheet.class);
+            CustomFriendsInfo customFriendsInfo = new CustomFriendsInfo();
+            customFriendsInfo.setCustomFriendsFriendsId(friendUserId);
+            customFriendsInfo.setCustomFriendsUserId(userinfoSheet.getUserId());
+            CustomFriendsInfo resFriendsInfo = userinfoService.getFriendsInfo(customFriendsInfo);
+            return new MyResult(1,"查询好友信息成功",resFriendsInfo);
         } catch (IOException e) {
             throw new MyCustomException("用户分组序列化失败");
         }

@@ -18,11 +18,20 @@
        <result column="user_age" property="customFriendsAge" /><!--好友年龄-->
     </resultMap>
 
-    <!---->
+    <!--通过用户ID获取好友列表-->
     <select id="selectCustomFriendsInfoByUserId" parameterType="java.util.Map" resultMap="CustomFriendsResultMap">
         select userinfo_sheet.*,friends_sheet.*,friendgroups_sheet.friendgroups_name from
          friends_sheet join userinfo_sheet on friends_sheet.friends_friendid = userinfo_sheet.user_id
           join friendgroups_sheet on friends_sheet.friends_friendgroupsid = friendgroups_sheet.friendgroups_id
            where friends_sheet.friends_userid = #{userId};
     </select>
+
+    <!--通过用户ID和朋友ID获取该好友详细信息-->
+    <select id="selectFriendsInfoByUserIdandFriendId" parameterType="java.util.Map" resultMap="CustomFriendsResultMap">
+        select userinfo_sheet.*,friends_sheet.*,friendgroups_sheet.friendgroups_name from
+         friends_sheet join userinfo_sheet on friends_sheet.friends_friendid = userinfo_sheet.user_id
+          join friendgroups_sheet on friends_sheet.friends_friendgroupsid = friendgroups_sheet.friendgroups_id
+           where friends_sheet.friends_userid = #{userId} and friends_sheet.friends_friendid=#{friendId};
+    </select>
+
 </mapper>

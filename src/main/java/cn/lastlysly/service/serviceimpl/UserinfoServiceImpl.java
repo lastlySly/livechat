@@ -239,5 +239,23 @@ public class UserinfoServiceImpl implements UserinfoService {
         return null;
     }
 
+    /**
+     * 通过当前登陆用户ID和其好友ID查询该好友信息（由于其在不同好友下的不同备注）
+     * @param customFriendsInfo
+     * @return
+     */
+    @Override
+    public CustomFriendsInfo getFriendsInfo(CustomFriendsInfo customFriendsInfo) {
+        Map<String,String> map = new HashMap<>(16);
+        logger.info("serviceImpl...userId:{},friendId:{}",customFriendsInfo.getCustomFriendsUserId(),customFriendsInfo.getCustomFriendsFriendsId());
+        map.put("userId",customFriendsInfo.getCustomFriendsUserId());
+        map.put("friendId",customFriendsInfo.getCustomFriendsFriendsId());
+        List<CustomFriendsInfo> customFriendsInfoList = customMapper.selectFriendsInfoByUserIdandFriendId(map);
+        if (customFriendsInfoList.size() > 0){
+            return customFriendsInfoList.get(0);
+        }
+        return null;
+    }
+
 
 }

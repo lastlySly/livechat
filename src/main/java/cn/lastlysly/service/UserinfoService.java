@@ -63,4 +63,11 @@ public interface UserinfoService {
      */
     List<CustomFriendsInfo> listFriends(UserinfoSheet userinfoSheet);
 
+    /**
+     * 过用户ID和朋友ID获取该好友详细信息
+     * @param customFriendsInfo
+     * @return
+     */
+    CustomFriendsInfo getFriendsInfo(CustomFriendsInfo customFriendsInfo);
+
 }

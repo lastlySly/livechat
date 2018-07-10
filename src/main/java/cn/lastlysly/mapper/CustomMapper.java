@@ -18,4 +18,11 @@ public interface CustomMapper {
      * @return
      */
     List<CustomFriendsInfo> selectCustomFriendsInfoByUserId(Map<String,String> map);
+
+    /**
+     * 通过用户ID和朋友ID获取该好友详细信息
+     * @param map
+     * @return
+     */
+    List<CustomFriendsInfo> selectFriendsInfoByUserIdandFriendId(Map<String,String> map);
 }
