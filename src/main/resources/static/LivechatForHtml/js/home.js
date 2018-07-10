@@ -44,7 +44,7 @@ function getGroupFun() {
                     $(".custom-friends-group-list").append('<li class="custom-group-item">\n' +
                         '                                    <h5 class="custom-group">\n' +
                         '                                        <span class="glyphicon glyphicon-play"></span>\n' +
-                        '                                        '+data.data[i].friendgroupsName+'&nbsp;0/4\n' +
+                        '                                        <span class="group_name">'+data.data[i].friendgroupsName+'</span>&nbsp;0/4\n' +
                         '                                    </h5>\n' +
                         '                                    <!--该组下的好友列表-->\n' +
                         '                                    <ul class="custom-friends-list">\n' +
@@ -54,7 +54,11 @@ function getGroupFun() {
                 }
 
             }
+            // 调用分组列表
             grouplist();
+            //调用好友
+            listFriend();
+
         },
         error:function (err) {
             alert("访问错误："+err);
@@ -62,6 +66,48 @@ function getGroupFun() {
 
     });
 }
+
+//获取好友列表
+function listFriend() {
+    $.ajax({
+        url:"http://localhost:8080/demo/userdeal/listfriends",
+        type:"POST",
+        data:{},
+        async:true,
+        // cache: false,缓存，get请求有效，true缓存
+        contentType: false,
+        processData: false,
+        success:function (data) {
+            if(data.code == 1){
+                var grouplist_count =  $(".group_name").length;
+                console.log("好友数量:"+grouplist_count);
+                for(var i=0;i<data.data.length;i++){
+                    for (var j=0;j<grouplist_count;j++){
+                        if (data.data[i].customFriendsGroupName == $(".group_name").eq(j).text()){
+                            $(".group_name").eq(j).parent().parent().find(".custom-friends-list").append('<li socketaddress="'+data.data[i].customFriendsFriendsId+'" class="row custom-friend-item">\n' +
+                                '                                            <img class="col-md-3 img-responsive img-circle list-headportrait" src="'+data.data[i].customFriendsHeadportrait+'">\n' +
+                                '\n' +
+                                '                                            <dl class="col-md-9 custom-friend-item-info">\n' +
+                                '                                                <dt class="list-remarks">'+data.data[i].customFriendsRemark+'</dt>\n' +
+                                '                                                <dd class="list-motto">'+data.data[i].customFriendsMotto+'</dd>\n' +
+                                '                                                <!--<span class="badge custom-num-tip">5</span>-->\n' +
+                                '                                                <span class="badge custom-online-tip">在线</span>\n' +
+                                '                                            </dl>\n' +
+                                '                                        </li>');
+                        }
+                    }
+
+                }
+            }
+            //调用好友名片卡
+            friend_card();
+        },
+        error:function (err) {
+            alert("访问错误："+err);
+        }
+    });
+}
+
 
 //分组下拉
 function grouplist() {
@@ -73,7 +119,7 @@ function grouplist() {
         $(this).parent().find(".custom-friends-list").slideToggle("fast");
         // var group_name = $(this).find(".custom-group > span").attr("class");
         // console.log(group_name)
-        var group_name = $(this).find(" span ");
+        var group_name = $(this).find(" span ").eq(0);
         if (group_name.is(".glyphicon-play")) {
            group_name.removeClass("glyphicon-play");
            group_name.addClass("glyphicon-triangle-bottom");
@@ -91,6 +137,7 @@ function friend_card() {
         if ( flag == "none" ) {
             $(".right-main-container").slideToggle("fast");
         }
+
         var socketaddress = $(this).attr("socketaddress");
         var remarks = $(this).find(".list-remarks").text();
         var motto = $(this).find(".list-motto").text();
