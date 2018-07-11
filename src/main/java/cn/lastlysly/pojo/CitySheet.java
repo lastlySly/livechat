@@ -1,6 +1,7 @@
 package cn.lastlysly.pojo;
 
 public class CitySheet {
+
     private Integer cityId;
 
     private String cityName;

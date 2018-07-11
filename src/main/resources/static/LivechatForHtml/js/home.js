@@ -269,6 +269,9 @@ function getUserInfo(){
         // xhrFields: {
         //     withCredentials: true
         // },
+        // cache: false,缓存，get请求有效，true缓存
+        contentType: false,
+        processData: false,
         success:function (data) {
             if (data.code == 1){
                 console.log(data);

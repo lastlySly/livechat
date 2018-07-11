@@ -70,4 +70,11 @@ public interface UserinfoService {
      */
     CustomFriendsInfo getFriendsInfo(CustomFriendsInfo customFriendsInfo);
 
+    /**
+     * 查找新好友（通过用户登录账号或者用户昵称查询用户信息）
+     * @param loginIdOrNickname
+     * @return
+     */
+    List<UserinfoSheet> selectUserInfoByLoginIdOrNickname(String loginIdOrNickname);
+
 }

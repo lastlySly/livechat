@@ -1,6 +1,7 @@
 package cn.lastlysly.mapper;
 
 import cn.lastlysly.pojo.CustomFriendsInfo;
+import cn.lastlysly.pojo.UserinfoSheet;
 
 import java.util.List;
 import java.util.Map;
@@ -25,4 +26,11 @@ public interface CustomMapper {
      * @return
      */
     List<CustomFriendsInfo> selectFriendsInfoByUserIdandFriendId(Map<String,String> map);
+
+    /**
+     * 通过用户登录账户或用户昵称获取详细信息
+     * @param map
+     * @return
+     */
+    List<UserinfoSheet> selectNewFriendsByLoginIdOrNickname(Map<String,String> map);
 }

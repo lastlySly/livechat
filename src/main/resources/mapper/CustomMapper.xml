@@ -2,6 +2,28 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.lastlysly.mapper.CustomMapper">
 
+    <resultMap id="MyBaseResultMap" type="cn.lastlysly.pojo.UserinfoSheet">
+        <result column="user_id" jdbcType="VARCHAR" property="userId" />
+        <result column="user_login_id" jdbcType="VARCHAR" property="userLoginId" />
+        <result column="user_nickname" jdbcType="VARCHAR" property="userNickname" />
+        <result column="user_password" jdbcType="VARCHAR" property="userPassword" />
+        <result column="user_gender" jdbcType="BIT" property="userGender" />
+        <result column="user_birthday" jdbcType="TIMESTAMP" property="userBirthday" />
+        <result column="user_telephone" jdbcType="VARCHAR" property="userTelephone" />
+        <result column="user_email" jdbcType="VARCHAR" property="userEmail" />
+        <result column="user_motto" jdbcType="VARCHAR" property="userMotto" />
+        <result column="user_synopsis" jdbcType="VARCHAR" property="userSynopsis" />
+        <result column="user_nation_id" jdbcType="INTEGER" property="userNationId" />
+        <result column="user_province_id" jdbcType="INTEGER" property="userProvinceId" />
+        <result column="user_city_id" jdbcType="INTEGER" property="userCityId" />
+        <result column="user_userstate_id" jdbcType="INTEGER" property="userUserstateId" />
+        <result column="user_realname" jdbcType="VARCHAR" property="userRealname" />
+        <result column="user_age" jdbcType="INTEGER" property="userAge" />
+        <result column="user_vocation" jdbcType="VARCHAR" property="userVocation" />
+        <result column="user_headportrait" jdbcType="VARCHAR" property="userHeadportrait" />
+        <result column="user_password_salt" jdbcType="VARCHAR" property="userPasswordSalt" />
+    </resultMap>
+
     <resultMap id="CustomFriendsResultMap" type="cn.lastlysly.pojo.CustomFriendsInfo">
        <result column="friends_userid" property="customFriendsUserId" /><!--好友归属用户ID-->
        <result column="user_id" property="customFriendsFriendsId" /><!--好友的ID-->
@@ -32,6 +54,13 @@
          friends_sheet join userinfo_sheet on friends_sheet.friends_friendid = userinfo_sheet.user_id
           join friendgroups_sheet on friends_sheet.friends_friendgroupsid = friendgroups_sheet.friendgroups_id
            where friends_sheet.friends_userid = #{userId} and friends_sheet.friends_friendid=#{friendId};
+    </select>
+
+    <!--通过用户登录账号或用户昵称查询-->
+    <select id="selectNewFriendsByLoginIdOrNickname" parameterType="java.util.Map" resultMap="MyBaseResultMap">
+        select * from userinfo_sheet where
+        user_nickname = #{loginIdOrNickname}
+        or user_login_id = #{loginIdOrNickname}
     </select>
 
 </mapper>

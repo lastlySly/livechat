@@ -257,5 +257,20 @@ public class UserinfoServiceImpl implements UserinfoService {
         return null;
     }
 
+    @Override
+    public List<UserinfoSheet> selectUserInfoByLoginIdOrNickname(String loginIdOrNickname) {
+
+        if (loginIdOrNickname != null && loginIdOrNickname != ""){
+            Map<String,String> map = new HashMap<>(16);
+            map.put("loginIdOrNickname",loginIdOrNickname);
+            List<UserinfoSheet> resUserList = customMapper.selectNewFriendsByLoginIdOrNickname(map);
+            if(resUserList.size() > 0){
+                return resUserList;
+            }
+        }
+
+        return null;
+    }
+
 
 }

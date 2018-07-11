@@ -11,7 +11,7 @@ public class UserinfoSheet {
 
     private String userNickname;
 
-//    @JsonIgnore
+    @JsonIgnore
     private String userPassword;
 
     private Boolean userGender;
@@ -41,7 +41,7 @@ public class UserinfoSheet {
     private String userVocation;
 
     private String userHeadportrait;
-//    @JsonIgnore
+    @JsonIgnore
     private String userPasswordSalt;
 
     public String getUserId() {

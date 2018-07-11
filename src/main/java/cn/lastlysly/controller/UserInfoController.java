@@ -278,6 +278,18 @@ public class UserInfoController {
         }
     }
 
+    /**
+     * 寻找新好友
+     * @return
+     */
+    @CrossOrigin
+    @RequestMapping(value = "/selectnewfriends",method = RequestMethod.POST)
+    @ResponseBody
+    public MyResult selectNewFriends(HttpServletRequest request){
+        String loginIdOrNickname = request.getParameter("loginIdOrNickname");
+        List<UserinfoSheet> userinfoSheetList = userinfoService.selectUserInfoByLoginIdOrNickname(loginIdOrNickname);
+        return new MyResult(1,"查找成功",userinfoSheetList);
+    }
 
 
 }
