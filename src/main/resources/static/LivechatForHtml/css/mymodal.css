@@ -102,12 +102,12 @@
     position: fixed;
     z-index: 100;
     top: 0px;
-    display: none;
+    display: block;
     overflow-y: auto;
 }
 .userinfo-modal{
     position: relative;
-    width: 800px;
+    width: 700px;
     height: 480px;
     background-color: RGB(240,236,236);
     top: 10vh;
@@ -144,17 +144,20 @@
     word-wrap: break-word
 }
 .right_div_custom{
-    width: 430px;
+    width: 330px;
     height: 420px;
     background-color: #0C98B6;
     position: absolute;
     right: 20px;
     top: 40px;
+    padding: 20px;
+    text-align: left;
 }
 
 .nickname_motto_div{
-    padding: 20px;
+    padding: 10px;
     color: #0C98B6;
+
 }
 .nickname_motto_div>h5{
     padding-top: 5px;
@@ -163,8 +166,18 @@
     font-size: 2.2rem;
 }
 .userinfo_div_input{
-
     background: rgba(255,255,255,0);
     border: 1px solid rgba(0,0,0,0);
+
+}
+.userinfo_center{
     text-align: center;
+}
+
+.right_div_custom > h5{
+    padding-bottom: 15px;
+}
+.right_div_custom .gender_select{
+    /*border: 1px solid black;*/
+    border-radius: 5px;
 }
