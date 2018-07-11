@@ -9,15 +9,24 @@
     display: none;
 }
 .add-friends-modal{
-    position: relative;
+    /*position: relative;*/
     width: 550px;
-    /*height: 250px;*/
+    max-height: 330px;
     background-color: white;
-    top: 15vw;
+    /*top: 15vw;*/
     border-radius: 20px;
     text-align: center;
     padding: 20px 20px;
-    margin: 0 auto;
+    /*margin: 0 auto;*/
+
+    position: absolute;
+    /*top: 100px;*/
+    left: 0;
+    right: 0;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+
 }
 .add-friends-modal > h4{
     padding-bottom: 10px;
@@ -93,5 +102,24 @@
     position: fixed;
     z-index: 100;
     top: 0px;
-    display: none;
+    display: block;
+}
+.userinfo-modal{
+    /*position: relative;*/
+    width: 800px;
+    max-height: 500px;
+    background-color: white;
+    /*top: 15vw;*/
+    border-radius: 20px;
+    text-align: center;
+    padding: 20px 20px;
+    /*margin: 0 auto;*/
+
+    position: absolute;
+    /*top: 100px;*/
+    left: 0;
+    right: 0;
+    margin: auto;
+    top: 0;
+    bottom: 0;
 }
