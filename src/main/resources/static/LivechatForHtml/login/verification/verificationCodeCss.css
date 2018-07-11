@@ -1,0 +1,36 @@
+#nowlogin{
+    position: relative;
+    font-size: 11px;
+    width: 240px;
+    color: white !important;
+}
+.geetest_holder.geetest_wind{
+    position: relative !important;
+    width: 240px !important;
+    min-width: 200px !important;
+    height: 40px !important;
+    /*background-color: black !important;*/
+    background: #35394a;
+    background: linear-gradient(230deg, rgba(53, 57, 74, 0) 0%, rgb(0, 0, 0) 100%) !important;
+}
+.geetest_holder.geetest_wind .geetest_btn{
+    /*background: #000 !important;*/
+    background: #35394a;
+    background: linear-gradient(230deg, rgba(53, 57, 74, 0) 0%, rgb(0, 0, 0) 100%) !important;
+}
+.geetest_holder.geetest_wind .geetest_radar_btn,
+.geetest_holder.geetest_wind .geetest_success_btn{
+    border: none !important;
+    background: #000;
+    background: linear-gradient(230deg, rgba(53, 57, 74, 0) 0%, rgb(0, 0, 0) 100%) !important;
+    /*opacity: 1 !important;*/
+}
+
+.geetest_holder.geetest_wind .geetest_radar_tip, .geetest_holder.geetest_wind .geetest_success_radar_tip{
+    font-size: 12px !important;
+    color: white !important;
+}
+.geetest_holder.geetest_mobile.geetest_ant.geetest_embed{
+    background: #35394a;
+    background: linear-gradient(230deg, rgba(53, 57, 74, 0) 0%, rgb(0, 0, 0) 100%) !important;
+}

@@ -1,12 +1,12 @@
 
 var animateTime = 1000;
 var loginId = "";
+// console.log("1:"+validate);
 $(function () {
-
     specialEffect();
     commit_register();
-    login();
-
+    // login();
+    initVerification();
 });
 
 
@@ -181,37 +181,42 @@ function commit_register() {
 }
 
 /*登陆*/
-function login() {
-
+function login(captchaObj) {
     $("#login_btn").on("click",function () {
+        //验证码判断
+        var validate = captchaObj.getValidate();
+        if (!validate){
+            alert("请先点击完成验证")
+        }else{
+            var login_login_id = $("#login_id_input").val();
+            var login_password = $("#password_input").val();
+            var formData = new FormData();
+            formData.append("userLoginId",login_login_id);
+            formData.append("userPassword",login_password);
 
-        var login_login_id = $("#login_id_input").val();
-        var login_password = $("#password_input").val();
-        var formData = new FormData();
-        formData.append("userLoginId",login_login_id);
-        formData.append("userPassword",login_password);
-
-        $.ajax({
-            url:"http://localhost:8080/demo/userdeal/login",
-            type:"POST",
-            data:formData,
-            async:true,
-            // cache: false,缓存，get请求有效，true缓存
-            contentType: false,
-            processData: false,
-            success:function (data) {
-                if (data.code == 1){
-                    alert(data.tip);
-                    console.log(data);
-                    window.location.href = "../home.html";
-                }else{
-                    alert(data.tip)
+            $.ajax({
+                url:"http://localhost:8080/demo/userdeal/login",
+                type:"POST",
+                data:formData,
+                async:true,
+                // cache: false,缓存，get请求有效，true缓存
+                contentType: false,
+                processData: false,
+                success:function (data) {
+                    if (data.code == 1){
+                        alert(data.tip);
+                        console.log(data);
+                        window.location.href = "../home.html";
+                    }else{
+                        alert(data.tip)
+                    }
+                },
+                error: function (err) {
+                    alert(err);
                 }
-            },
-            error: function (err) {
-                alert(err);
-            }
 
-        });
+            });
+        }
+
     });
 }

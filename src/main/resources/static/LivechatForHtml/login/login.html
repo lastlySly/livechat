@@ -7,7 +7,12 @@
     <link rel="stylesheet" href="css/login.css">
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/jquery.cookie.js"></script>
+    <script src="verification/gt.js"></script>
+    <script src="verification/VerificationCodeJS.js"></script>
     <script src="js/login.js"></script>
+    <link rel="stylesheet" href="verification/verificationCodeCss.css">
+
+
     <!--<script src="js/bootstrap.min.js"></script>-->
 </head>
 <body>
@@ -37,15 +42,16 @@
         </div>
 
         <!--验证码-->
-        <div class="login_input">
-            <div class='icon'>
-                <img alt="" src='img/key.png'>
-            </div>
-            <input class="custom_input" type="text" placeholder="验证码" />
-            <div class='validation'>
-                <img alt="" src='img/tick.png'>
-            </div>
-        </div>
+        <p id="nowlogin">正在加载验证码......</p>
+        <!--<div class="login_input">-->
+            <!--<div class='icon'>-->
+                <!--<img alt="" src='img/key.png'>-->
+            <!--</div>-->
+            <!--<input class="custom_input" type="text" placeholder="验证码" />-->
+            <!--<div class='validation'>-->
+                <!--<img alt="" src='img/tick.png'>-->
+            <!--</div>-->
+        <!--</div>-->
 
 
         <!--登陆按钮-->
