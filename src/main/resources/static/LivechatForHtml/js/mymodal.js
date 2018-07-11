@@ -1,6 +1,7 @@
 
 $(function () {
     pop_modal();
+    userinfo_modal();
 })
 
 function pop_modal() {
@@ -56,4 +57,31 @@ function pop_modal() {
     })
 
 
+}
+
+
+function userinfo_modal() {
+
+    $("#userinfo_btn").on("click",function () {
+        /*关闭头像按钮组*/
+        $(".custom-head-meau").slideToggle("fast");
+        /*打开模态框*/
+        $(".userinfo-modal-div").slideToggle("fast");
+
+    });
+
+    $(".remove-userinfo-modal-btn").on("click",function () {
+        /*关闭个人信息模态框*/
+        $(".userinfo-modal-div").slideToggle("fast");
+    })
+
+    //双击可修改
+    $(".userinfo_div_input").on("dblclick",function () {
+        $(this).css({"background":"rgba(255,255,255,1)","border":"1px solid rgba(0,0,0,1)"});
+        $(this).removeAttr("readonly");
+    });
+    $(".userinfo_div_input").on("blur",function () {
+        $(this).css({"background":"rgba(255,255,255,0)","border":"1px solid rgba(0,0,0,0)"});
+        $(this).attr("readonly","readonly");
+    })
 }

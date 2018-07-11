@@ -103,18 +103,19 @@
     z-index: 100;
     top: 0px;
     display: none;
+    overflow-y: auto;
 }
 .userinfo-modal{
     position: relative;
     width: 800px;
-    height: 500px;
-    background-color: white;
-    top: 5vw;
+    height: 480px;
+    background-color: RGB(240,236,236);
+    top: 10vh;
     border-radius: 20px;
     text-align: center;
     padding: 20px 20px;
     margin: 0 auto;
-
+    cursor: pointer;
     /*position: absolute;*/
     /*!*top: 100px;*!*/
     /*left: 0;*/
@@ -123,8 +124,47 @@
     /*top: 0;*/
     /*bottom: 0;*/
 }
+.deal_tip{
+    color: red;
+    font-weight: bold;
+}
 .remove-userinfo-modal-btn{
     position: absolute;
-    top: 10px;
+    top: 5px;
     right: 20px;
+    z-index: 100;
+}
+.left_div_custom{
+    width: 330px;
+    height: 420px;
+    /*background-color: red;*/
+    position: absolute;
+    left: 20px;
+    top: 40px;
+    word-wrap: break-word
+}
+.right_div_custom{
+    width: 430px;
+    height: 420px;
+    background-color: #0C98B6;
+    position: absolute;
+    right: 20px;
+    top: 40px;
+}
+
+.nickname_motto_div{
+    padding: 20px;
+    color: #0C98B6;
+}
+.nickname_motto_div>h5{
+    padding-top: 5px;
+}
+.userinfo_nickname_div{
+    font-size: 2.2rem;
+}
+.userinfo_div_input{
+
+    background: rgba(255,255,255,0);
+    border: 1px solid rgba(0,0,0,0);
+    text-align: center;
 }
