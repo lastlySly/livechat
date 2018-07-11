@@ -102,7 +102,7 @@
     position: fixed;
     z-index: 100;
     top: 0px;
-    display: block;
+    display: none;
     overflow-y: auto;
 }
 .userinfo-modal{
@@ -180,4 +180,7 @@
 .right_div_custom .gender_select{
     /*border: 1px solid black;*/
     border-radius: 5px;
+}
+.userinfo_age_input{
+    width: 60px;
 }
