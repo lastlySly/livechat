@@ -272,5 +272,23 @@ public class UserinfoServiceImpl implements UserinfoService {
         return null;
     }
 
+    /**
+     * 修改用户信息
+     * @param userinfoSheet
+     * @return
+     */
+    @Override
+    public boolean updateUserinfo(UserinfoSheet userinfoSheet) {
+        UserinfoSheetExample userinfoSheetExample = new UserinfoSheetExample();
+        UserinfoSheetExample.Criteria criteria = userinfoSheetExample.createCriteria();
+        criteria.andUserIdEqualTo(userinfoSheet.getUserId());
+        int row = userinfoSheetMapper.updateByExampleSelective(userinfoSheet,userinfoSheetExample);
+        if (row > 0){
+
+            return true;
+        }
+        return false;
+    }
+
 
 }

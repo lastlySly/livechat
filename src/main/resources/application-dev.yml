@@ -40,6 +40,11 @@ spring:
         min-idle: 2
     timeout: 5000
 
+# 开启热部署
+  devtools:
+    restart:
+      enabled: true
+      additional-paths: src/main/java
 # 配置thymeleaf模板
   thymeleaf:
   # 关闭缓存，即使刷新，上线生产环境需要改为true

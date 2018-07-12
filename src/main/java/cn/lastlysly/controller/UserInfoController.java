@@ -172,7 +172,7 @@ public class UserInfoController {
     }
 
     /**
-     * 获取登陆用户的信息
+     * 获取登陆用户的信息(从redis缓存中)
      * @return
      */
     @CrossOrigin

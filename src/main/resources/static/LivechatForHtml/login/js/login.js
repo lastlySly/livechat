@@ -7,6 +7,7 @@ $(function () {
     commit_register();
     // login();
     initVerification();
+    // alert(2222);
 });
 
 

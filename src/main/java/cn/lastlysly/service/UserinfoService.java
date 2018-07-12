@@ -77,4 +77,11 @@ public interface UserinfoService {
      */
     List<UserinfoSheet> selectUserInfoByLoginIdOrNickname(String loginIdOrNickname);
 
+    /**
+     * 修改用户信息
+     * @param userinfoSheet
+     * @return
+     */
+    boolean updateUserinfo(UserinfoSheet userinfoSheet);
+
 }

@@ -81,7 +81,10 @@ function listFriend() {
             if(data.code == 1){
                 var grouplist_count =  $(".group_name").length;
                 // console.log("好友数量:"+grouplist_count);
-                for(var i=0;i<data.data.length;i++){
+                if (data.data == null){
+                    return;
+                }
+                for(var i=0;i<dataLength;i++){
                     for (var j=0;j<grouplist_count;j++){
                         if (data.data[i].customFriendsGroupName == $(".group_name").eq(j).text()){
                             $(".group_name").eq(j).parent().parent().find(".custom-friends-list").append('<li socketaddress="'+data.data[i].customFriendsFriendsId+'" class="row custom-friend-item">\n' +
@@ -139,14 +142,7 @@ function friend_card() {
         }
 
         var socketaddress = $(this).attr("socketaddress");
-        // var remarks = $(this).find(".list-remarks").text();
-        // var motto = $(this).find(".list-motto").text();
-        // var headportrait = $(this).find(".list-headportrait").attr("src");
-        // $("#headportrait").attr("src",headportrait);
-        // $("#remarks-top").text(remarks);
-        // $("#remarks").text(remarks);
-        // $("#motto").text(motto);
-        // $("#custom-send-message-btn").attr("socketaddress",socketaddress);
+
 
         var formData = new FormData();
         formData.append("friendUserId",socketaddress);
