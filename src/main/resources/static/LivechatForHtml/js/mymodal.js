@@ -2,8 +2,10 @@
 $(function () {
     pop_modal();
     userinfo_modal();
+    address_deal();
 })
 
+//添加好友，添加修改分组模态
 function pop_modal() {
     $("#add-friends-btn").on("click",function () {
         /*关闭添加按钮组*/
@@ -59,7 +61,7 @@ function pop_modal() {
 
 }
 
-
+//个人信息模态
 function userinfo_modal() {
 
     $("#userinfo_btn").on("click",function () {
@@ -84,4 +86,25 @@ function userinfo_modal() {
         $(this).css({"background":"rgba(255,255,255,0)","border":"1px solid rgba(0,0,0,0)"});
         $(this).attr("readonly","readonly");
     })
+
+}
+
+//地址操作（填充个人信息模态框）
+function address_deal() {
+    $("#province_select").empty();
+    $("#province_select").append("<option value=''></option>");
+    $.each(province,function (index,item) {
+        $("#province_select").append("<option value='"+ item.ProID +"'>"+item.name+"</option>");
+    });
+    $("#province_select").change(function () {
+        var shi=$("#province_select").val();
+        $("#city_select").empty();
+        $("#city_select").append("<option value=''></option>");
+        $.each(citys,function (index,item) {
+            if(item.ProID==shi){
+                $("#city_select").append("<option value='"+ item.CityID +"'>"+item.name+"</option>");
+            }
+        });
+    })
+
 }

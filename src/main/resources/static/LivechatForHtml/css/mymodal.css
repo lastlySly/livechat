@@ -146,7 +146,7 @@
 .right_div_custom{
     width: 330px;
     height: 420px;
-    background-color: #0C98B6;
+    /*background-color: #0C98B6;*/
     position: absolute;
     right: 20px;
     top: 40px;
@@ -156,7 +156,7 @@
 
 .nickname_motto_div{
     padding: 10px;
-    color: #0C98B6;
+    /*color: #0C98B6;*/
 
 }
 .nickname_motto_div>h5{

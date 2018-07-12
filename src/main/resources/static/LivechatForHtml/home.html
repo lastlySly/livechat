@@ -14,6 +14,7 @@
     <script src="js/home.js"></script>
     <script src="js/homesec.js"></script>
     <script src="js/mymodal.js"></script>
+    <script src="js/china_area_data.js"></script>
 
 </head>
 <body>
@@ -398,66 +399,56 @@
             <button type="button" class="btn btn-default remove-userinfo-modal-btn"><span class="glyphicon glyphicon-remove"></span></button>
             <h6 class="deal_tip">双击可修改除账号以外的信息</h6>
             <div class="left_div_custom">
-                <img class="img-responsive" title="点击修改头像"  id="" src="img/headportrait.jpg">
+                <img class="img-responsive" title="点击修改头像"  id="userinfo_head_img" src="img/headportrait.jpg">
                 <div class="nickname_motto_div">
-                    <input type="text" class="userinfo_nickname_div userinfo_div_input userinfo_center" readonly="readonly" value="汐"/>
+                    <input type="text" id="userinfo_nickname" class="userinfo_nickname_div userinfo_div_input userinfo_center" readonly="readonly" value="汐"/>
 
-                    <textarea readonly="readonly" class="userinfo_div_input userinfo_center" cols="33" rows="2" warp="virtual">没有人会相信未来，谁都无法接受未来...</textarea>
+                    <textarea readonly="readonly" id="userinfo_motto" placeholder="双击进入编辑" class="userinfo_div_input userinfo_center" cols="33" rows="2" warp="virtual">没有人会相信未来，谁都无法接受未来...</textarea>
                 </div>
 
             </div>
             <div class="right_div_custom">
-                <h5>账号：<span>lastly</span></h5>
+                <h5>账号：<span id="userinfo_loginId">lastly</span></h5>
 
                 <h5>性别：
                     <select id="gender_select" class="gender_select">
-                        <option value="1">男</option>
-                        <option value="0">女</option>
+                        <option value="true">男</option>
+                        <option value="false">女</option>
                     </select>
-                    &nbsp&nbsp&nbsp&nbsp年龄：<input type="text" class="userinfo_div_input userinfo_age_input" readonly="readonly" value="13"/>
+                    &nbsp&nbsp&nbsp&nbsp年龄：<input type="text" id="userinfo_age" placeholder="双击编辑" class="userinfo_div_input userinfo_age_input" readonly="readonly" value="13"/>
                 </h5>
 
                 <h5>
-                    所在地：
-                    <select id="nation_select" class="gender_select">
-                        <option value="0">中国</option>
-                    </select>
-
-                    &nbsp;&nbsp;
+                    地址：
                     <select id="province_select" class="gender_select">
-                        <option value="0">浙江</option>
-                        <option value="1">福建</option>
+
                     </select>
-                    &nbsp;&nbsp;
 
                     <select id="city_select" class="gender_select">
-                        <option value="1">丽水</option>
-                        <option value="0">杭州</option>
+
                     </select>
                 </h5>
+                <h5>
+                    出生日期：<input type="text" id="userinfo_birthday" class="userinfo_div_input" placeholder="双击进入编辑" readonly="readonly" value="2018-11-12"/>
+                </h5>
+                <h5>
+                    电话号码：<input type="text" id="userinfo_tel" class="userinfo_div_input" placeholder="双击进入编辑" readonly="readonly" value="12345678901"/>
+                </h5>
 
                 <h5>
-                    出生日期：<input type="text" class="userinfo_div_input" readonly="readonly" value="2018-11-12"/>
+                    电子邮箱：<input type="text" id="userinfo_email" class="userinfo_div_input" placeholder="双击进入编辑" readonly="readonly" value="lastly@163.com"/>
                 </h5>
                 <h5>
-                    电话号码：<input type="text" class="userinfo_div_input" readonly="readonly" value="12345678901"/>
-                </h5>
-
-                <h5>
-                    电子邮箱：<input type="text" class="userinfo_div_input" readonly="readonly" value="lastly@163.com"/>
-                </h5>
-                <h5>
-                    职业：<input type="text" class="userinfo_div_input" readonly="readonly" value="java开发工程师"/>
+                    职业：<input type="text" id="userinfo_vocation" class="userinfo_div_input" placeholder="双击进入编辑" readonly="readonly" value="java开发工程师"/>
                 </h5>
 
                 <div class="form-group">
                     <span class="input-group-addon" id="basic-addon1">个人简介</span>
-                    <textarea class="form-control userinfo_div_input" readonly="readonly" cols="33" rows="2" warp="virtual">没有人会相信未来，谁都无法接受未来...</textarea>
+                    <textarea class="form-control userinfo_div_input" id="userinfo_synopsis" readonly="readonly" placeholder="双击进入编辑" cols="33" rows="2" warp="virtual">没有人会相信未来，谁都无法接受未来...</textarea>
                 </div>
 
+                <button type="button" dataId="" id="userinfo_revise_btn" class="btn btn-success">提交修改</button>
             </div>
-
-
         </div>
     </div>
 

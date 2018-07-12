@@ -274,8 +274,25 @@ function getUserInfo(){
         processData: false,
         success:function (data) {
             if (data.code == 1){
-                console.log(data);
-                $("#head-img").attr("src",data.data.userHeadportrait)
+                // console.log(data);
+                $("#head-img").attr("src",data.data.userHeadportrait);
+
+                //将个人信息填充个人模态框
+                $("#userinfo_head_img").attr("src",data.data.userHeadportrait);
+                $("#userinfo_nickname").val(data.data.userNickname);
+                $("#userinfo_motto").text(data.data.userMotto);
+                $("#userinfo_loginId").text(data.data.userLoginId);
+                $("#userinfo_age").val(data.data.userAge);
+                $("#userinfo_birthday").val(data.data.userBirthday);
+                $("#userinfo_tel").val(data.data.userTelephone);
+                $("#userinfo_email").val(data.data.userEmail);
+                $("#userinfo_vocation").val(data.data.userVocation);
+                $("#userinfo_synopsis").text(data.data.userSynopsis);
+                $("#userinfo_revise_btn").attr("dataId",data.data.userId);
+                $("#gender_select").find("option[value="+data.data.userGender+"]").attr("selected",true);
+                $("#province_select").find("option[value="+data.data.userProvinceId+"]").attr("selected",true);
+                $("#city_select").find("option[value="+data.data.userCityId+"]").attr("selected",true);
+
             } else{
                 alert(data.tip);
             }
