@@ -1,5 +1,6 @@
-
+var stompClient = null;
 $(function () {
+
     grouplist();
     friend_card();
     del_chat_item_btn();
@@ -243,6 +244,7 @@ function change_friend_chatting_fun(socketaddress,remarks,chatHeadportrait) {
     // alert($("#chatting-friend-remarks").text())
     $("#chatting-friend-remarks").text(remarks);
     $("#chatting-friend-remarks").attr("data-img",chatHeadportrait);
+    
 
 }
 
@@ -265,7 +267,7 @@ function getUserInfo(){
         url:"http://localhost:8080/demo/userdeal/myuserinfo",
         type:"POST",
         data:{},
-        async:false,//同步请求
+        async:true,//同步请求
 
         // xhrFields: {
         //     withCredentials: true
@@ -300,6 +302,8 @@ function getUserInfo(){
                 });
                 $("#city_select").find("option[value="+data.data.userCityId+"]").attr("selected",true);
 
+                // websocket连接
+                websocket_connect(stompClient);
             } else{
                 alert(data.tip);
             }
@@ -308,7 +312,7 @@ function getUserInfo(){
             alert("请求错误："+err)
         }
     });
-    websocket_connect();
+
 
 
 }

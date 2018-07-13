@@ -46,7 +46,7 @@ function friends_card_sendbtn() {
             '                            </li>'
         );
         del_chat_item_btn();
-        change_friend_chatting_fun(socketaddress,remarks);
+        change_friend_chatting_fun(socketaddress,remarks,headportrait);
         change_chatting_friend();
 
     });

@@ -1,15 +1,15 @@
 
 
-function websocket_connect() {
+function websocket_connect(tompClient) {
 
-    var stompClient = null;
     var mysocket_address = $("#userinfo_revise_btn").attr("dataId");
     var socket = new SockJS('http://localhost:8080/demo/endpoint-websocket');
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function (frame) {
         console.log('Connected: ' + frame);
         stompClient.subscribe('/chat/single/' + mysocket_address, function (result) {
-            console.log(JSON.parse(result.body));
+            // console.log(JSON.parse(result.body));
+            showMessage(JSON.parse(result.body));
         });
     });
 
@@ -60,19 +60,19 @@ function sendMessageBtn() {
 }
 
 //显示接收的消息
-function showMessage(body) {
+function showMessage(result) {
 
     var friendsHeadImg =  $("#chatting-friend-remarks").attr("data-img");
     $("#custom-messages-ul").append('<dl class="row message-contain-item">\n' +
-        '                                        <div class="message-contain-item-time">2018-06-24 14:01:08</div>\n' +
+        '                                        <div class="message-contain-item-time">'+ result.messagesTime +'</div>\n' +
         '                                        <dt class="col-md-1">\n' +
         '                                            <img class="img-responsive img-circle message-headportrait" src="'+friendsHeadImg+'">\n' +
         '                                        </dt>\n' +
         '                                        <dd class="col-md-8">\n' +
         '                                            <div class="custom-triangle"></div>\n' +
-        '                                            <span class="message-text-contain-friends">ssssssssssssssss\n' +
-        '                                            ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss</span>\n' +
+        '                                            <span class="message-text-contain-friends">'+ result.messagesPostmessages +'</span>\n' +
         '                                        </dd>\n' +
         '                                    </dl>');
+    $(".chat-content-div").animate({scrollTop:$(".chat-content-div")[0].scrollHeight},50)
     
 }
