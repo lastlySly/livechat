@@ -9,7 +9,8 @@ $(function () {
     //登陆成功渲染用户信息
     getUserInfo();
     //获取分组并渲染
-    getGroupFun()
+    getGroupFun();
+
 
     $('#edit').froalaEditor({
         toolbarButtons: [
@@ -220,13 +221,14 @@ function change_chatting_friend() {
     $(".custom-chat-friend-item").on("click",function () {
         var remarks = $(this).find(".list-remarks").text();
         var socketaddress = $(this).attr("data-id");
-        change_friend_chatting_fun(socketaddress,remarks);
+        var chatHeadportrait = $(this).find(".list-headportrait").attr("src");
+        change_friend_chatting_fun(socketaddress,remarks,chatHeadportrait);
 
     })
 }
 
 //封装正在聊天页的切换
-function change_friend_chatting_fun(socketaddress,remarks) {
+function change_friend_chatting_fun(socketaddress,remarks,chatHeadportrait) {
     var flag =  $("#right-chat-friend-container-id").css('display');
     if ( flag == "none" ) {
         $("#right-chat-friend-container-id").slideToggle("fast");
@@ -240,6 +242,7 @@ function change_friend_chatting_fun(socketaddress,remarks) {
     $("#send-to-btn").attr("socketaddress",socketaddress);
     // alert($("#chatting-friend-remarks").text())
     $("#chatting-friend-remarks").text(remarks);
+    $("#chatting-friend-remarks").attr("data-img",chatHeadportrait);
 
 }
 
@@ -262,7 +265,7 @@ function getUserInfo(){
         url:"http://localhost:8080/demo/userdeal/myuserinfo",
         type:"POST",
         data:{},
-        async:true,
+        async:false,//同步请求
 
         // xhrFields: {
         //     withCredentials: true
@@ -297,9 +300,6 @@ function getUserInfo(){
                 });
                 $("#city_select").find("option[value="+data.data.userCityId+"]").attr("selected",true);
 
-                /*socket连接*/
-                websocket_connect(data.data.userId);
-
             } else{
                 alert(data.tip);
             }
@@ -308,4 +308,7 @@ function getUserInfo(){
             alert("请求错误："+err)
         }
     });
+    websocket_connect();
+
+
 }

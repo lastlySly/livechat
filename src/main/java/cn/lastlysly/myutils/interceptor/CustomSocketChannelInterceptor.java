@@ -7,15 +7,16 @@ import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
 import org.springframework.messaging.support.ChannelInterceptor;
+import org.springframework.messaging.support.ChannelInterceptorAdapter;
 
 /**
  * @author lastlySly
  * @GitHub https://github.com/lastlySly
  * @create 2018-06-27 13:32
  * ChannelInterceptorAdapter过时
+ * ChannelInterceptor
  **/
 public class CustomSocketChannelInterceptor implements ChannelInterceptor {
-
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
     /**
@@ -27,7 +28,7 @@ public class CustomSocketChannelInterceptor implements ChannelInterceptor {
     @Nullable
     @Override
     public Message<?> preSend(Message<?> message, MessageChannel channel) {
-        return null;
+        return message;
     }
 
     /**

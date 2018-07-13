@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/sockjs.js"></script>
+    <script src="js/stomp.js"></script>
+</head>
+<body>
+
+<script type="text/javascript">
+    var stompClient = null;
+    var socket = new SockJS('http://localhost:8080/demo/endpoint-websocket');
+    stompClient = Stomp.over(socket);
+    console.log(11122);
+    stompClient.connect({}, function (frame) {
+        alert(111);
+        console.log('Connected: ' + frame);
+        stompClient.subscribe('/mysystem/server_info', function (result) {
+            console.log(JSON.parse(result.body));
+        });
+    });
+</script>
+
+</body>
+</html>

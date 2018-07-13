@@ -13,6 +13,8 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
  * @author lastlySly
  * @GitHub https://github.com/lastlySly
  * @create 2018-06-27 10:24
+ * WebSocketMessageBrokerConfigurer
+ *
  **/
 @Configuration
 @EnableWebSocketMessageBroker
