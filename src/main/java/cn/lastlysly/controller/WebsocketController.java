@@ -1,7 +1,9 @@
 package cn.lastlysly.controller;
 
+import cn.lastlysly.pojo.MessagesSheet;
 import cn.lastlysly.service.CustomWebSocketService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 
@@ -18,9 +20,17 @@ public class WebsocketController {
     @Autowired
     private CustomWebSocketService customWebSocketService;
 
+    /**
+     * 定时传输系统JVM使用情况
+     */
     @Scheduled(fixedRate = 2000)
     public void sendServerJVM(){
         customWebSocketService.sendServerInfo();
+    }
+
+    @MessageMapping("/singlechat")
+    public void singleChat(MessagesSheet messagesSheet){
+        customWebSocketService.singleChat(messagesSheet);
     }
 
 }

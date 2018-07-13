@@ -84,6 +84,7 @@ function listFriend() {
                 if (data.data == null){
                     return;
                 }
+                var dataLength = data.data.length;
                 for(var i=0;i<dataLength;i++){
                     for (var j=0;j<grouplist_count;j++){
                         if (data.data[i].customFriendsGroupName == $(".group_name").eq(j).text()){
@@ -104,6 +105,7 @@ function listFriend() {
             }
             //调用好友名片卡
             friend_card();
+
         },
         error:function (err) {
             alert("访问错误："+err);
@@ -287,7 +289,16 @@ function getUserInfo(){
                 $("#userinfo_revise_btn").attr("dataId",data.data.userId);
                 $("#gender_select").find("option[value="+data.data.userGender+"]").attr("selected",true);
                 $("#province_select").find("option[value="+data.data.userProvinceId+"]").attr("selected",true);
+                var shi=$("#province_select").val();
+                $.each(citys,function (index,item) {
+                    if(item.ProID==shi){
+                        $("#city_select").append("<option value='"+ item.CityID +"'>"+item.name+"</option>");
+                    }
+                });
                 $("#city_select").find("option[value="+data.data.userCityId+"]").attr("selected",true);
+
+                /*socket连接*/
+                websocket_connect(data.data.userId);
 
             } else{
                 alert(data.tip);

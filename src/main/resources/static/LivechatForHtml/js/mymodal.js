@@ -40,11 +40,32 @@ function pop_modal() {
                     var friendSize = data.data.length;
                     $(".find-friends-result-div").empty();
                     for (var i =0; i<friendSize; i++){
+                        var userGender = "保密";
+                        var userProvince = "保密";
+                        var userCity = "保密";
+                        if(data.data[i].userGender){
+                            userGender = "男";
+                        }else{
+                            userGender = "女";
+                        }
+                        $.each(province,function (index,item) {
+                            if (item.ProID == data.data[i].userProvinceId){
+                                userProvince = item.name;
+                                return;
+                            }
+                        });
+                        $.each(citys,function (index,item) {
+                            if(item.CityID==data.data[i].userCityId){
+                                userCity = item.name;
+                            }
+                        });
+
+
                         $(".find-friends-result-div").append(' <dl class="find-friends-item">\n' +
                             '                    <dt class="find-friends-head"><img class="img-responsive img-circle" src="'+ data.data[i].userHeadportrait +'"></dt>\n' +
                             '                    <dd class="friends-nickname-and-username">'+ data.data[i].userNickname + '(' + data.data[i].userLoginId + ')</dd>\n' +
-                            '                    <dd class="friends-address">'+ data.data[i].userGender +' '+ data.data[i].userProvinceId + ' ' + data.data[i].userCityId + '</dd>\n' +
-                            '                    <dd class="friends-add-btn-send"><button type="button" class="btn btn-default">加好友</button></dd>\n' +
+                            '                    <dd class="friends-address">'+ userGender +' '+ userProvince + ' ' + userCity + '</dd>\n' +
+                            '                    <dd class="friends-add-btn-send"><button type="button" dataId="'+ data.data[i].userId +'"  class="btn btn-default">加好友</button></dd>\n' +
                             '                </dl>');
                     }
 
@@ -117,8 +138,12 @@ function userinfo_modal() {
         formData.append("userVocation",userinfo_vocation);
         formData.append("userSynopsis",userinfo_synopsis);
         formData.append("userGender",gender_select);
-        formData.append("userProvinceId",province_select);
-        formData.append("userCityId",city_select);
+        if (province_select != null && province_select != ""){
+            formData.append("userProvinceId",province_select);
+        }
+        if (city_select !=null && city_select !=""){
+            formData.append("userCityId",city_select);
+        }
         $.ajax({
             url:"http://localhost:8080/demo/userinforevise/updateuserinfo",
             type:"POST",
@@ -141,26 +166,23 @@ function userinfo_modal() {
 
     });
 
-
-
 }
 
 //地址操作（填充个人信息模态框）
 function address_deal() {
 
-    // $("#province_select").empty();
-    $("#province_select").append("<option value=''></option>");
+    $("#province_select").empty();
+    // $("#province_select").append("<option value=''></option>");
     $.each(province,function (index,item) {
         $("#province_select").append("<option value='"+ item.ProID +"'>"+item.name+"</option>");
     });
     $("#province_select").change(function () {
         initCity();
     });
-    initCity();
     function initCity() {
         var shi=$("#province_select").val();
         $("#city_select").empty();
-        $("#city_select").append("<option value=''></option>");
+        // $("#city_select").append("<option value=''></option>");
         $.each(citys,function (index,item) {
             if(item.ProID==shi){
                 $("#city_select").append("<option value='"+ item.CityID +"'>"+item.name+"</option>");

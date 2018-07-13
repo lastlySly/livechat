@@ -40,4 +40,13 @@ public class CustomWebSocketServiceImpl implements CustomWebSocketService {
         messagesSheet.setMessagesPostmessages(systemInfo);
         simpMessagingTemplate.convertAndSend("/mysystem/server_info",messagesSheet);
     }
+
+    /**
+     * 单聊
+     * @param messagesSheet
+     */
+    @Override
+    public void singleChat(MessagesSheet messagesSheet) {
+        simpMessagingTemplate.convertAndSend("/chat/single/" + messagesSheet.getMessagesToUserid(),messagesSheet);
+    }
 }
