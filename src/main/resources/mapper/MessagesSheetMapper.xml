@@ -6,8 +6,8 @@
     <result column="messages_status" jdbcType="BIT" property="messagesStatus" />
     <result column="messages_time" jdbcType="TIMESTAMP" property="messagesTime" />
     <result column="messages_typeid" jdbcType="INTEGER" property="messagesTypeid" />
-    <result column="messages_from_userid" jdbcType="VARCHAR" property="messagesFromUserid" />
-    <result column="messages_to_userid" jdbcType="VARCHAR" property="messagesToUserid" />
+    <result column="messages_from_loginid" jdbcType="VARCHAR" property="messagesFromLoginid" />
+    <result column="messages_to_loginid" jdbcType="VARCHAR" property="messagesToLoginid" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="cn.lastlysly.pojo.MessagesSheet">
     <result column="messages_postmessages" jdbcType="LONGVARCHAR" property="messagesPostmessages" />
@@ -71,8 +71,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    messages_id, messages_status, messages_time, messages_typeid, messages_from_userid, 
-    messages_to_userid
+    messages_id, messages_status, messages_time, messages_typeid, messages_from_loginid, 
+    messages_to_loginid
   </sql>
   <sql id="Blob_Column_List">
     messages_postmessages
@@ -115,10 +115,10 @@
   </delete>
   <insert id="insert" parameterType="cn.lastlysly.pojo.MessagesSheet">
     insert into messages_sheet (messages_id, messages_status, messages_time, 
-      messages_typeid, messages_from_userid, messages_to_userid, 
+      messages_typeid, messages_from_loginid, messages_to_loginid, 
       messages_postmessages)
     values (#{messagesId,jdbcType=INTEGER}, #{messagesStatus,jdbcType=BIT}, #{messagesTime,jdbcType=TIMESTAMP}, 
-      #{messagesTypeid,jdbcType=INTEGER}, #{messagesFromUserid,jdbcType=VARCHAR}, #{messagesToUserid,jdbcType=VARCHAR}, 
+      #{messagesTypeid,jdbcType=INTEGER}, #{messagesFromLoginid,jdbcType=VARCHAR}, #{messagesToLoginid,jdbcType=VARCHAR}, 
       #{messagesPostmessages,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.lastlysly.pojo.MessagesSheet">
@@ -136,11 +136,11 @@
       <if test="messagesTypeid != null">
         messages_typeid,
       </if>
-      <if test="messagesFromUserid != null">
-        messages_from_userid,
+      <if test="messagesFromLoginid != null">
+        messages_from_loginid,
       </if>
-      <if test="messagesToUserid != null">
-        messages_to_userid,
+      <if test="messagesToLoginid != null">
+        messages_to_loginid,
       </if>
       <if test="messagesPostmessages != null">
         messages_postmessages,
@@ -159,11 +159,11 @@
       <if test="messagesTypeid != null">
         #{messagesTypeid,jdbcType=INTEGER},
       </if>
-      <if test="messagesFromUserid != null">
-        #{messagesFromUserid,jdbcType=VARCHAR},
+      <if test="messagesFromLoginid != null">
+        #{messagesFromLoginid,jdbcType=VARCHAR},
       </if>
-      <if test="messagesToUserid != null">
-        #{messagesToUserid,jdbcType=VARCHAR},
+      <if test="messagesToLoginid != null">
+        #{messagesToLoginid,jdbcType=VARCHAR},
       </if>
       <if test="messagesPostmessages != null">
         #{messagesPostmessages,jdbcType=LONGVARCHAR},
@@ -191,11 +191,11 @@
       <if test="record.messagesTypeid != null">
         messages_typeid = #{record.messagesTypeid,jdbcType=INTEGER},
       </if>
-      <if test="record.messagesFromUserid != null">
-        messages_from_userid = #{record.messagesFromUserid,jdbcType=VARCHAR},
+      <if test="record.messagesFromLoginid != null">
+        messages_from_loginid = #{record.messagesFromLoginid,jdbcType=VARCHAR},
       </if>
-      <if test="record.messagesToUserid != null">
-        messages_to_userid = #{record.messagesToUserid,jdbcType=VARCHAR},
+      <if test="record.messagesToLoginid != null">
+        messages_to_loginid = #{record.messagesToLoginid,jdbcType=VARCHAR},
       </if>
       <if test="record.messagesPostmessages != null">
         messages_postmessages = #{record.messagesPostmessages,jdbcType=LONGVARCHAR},
@@ -211,8 +211,8 @@
       messages_status = #{record.messagesStatus,jdbcType=BIT},
       messages_time = #{record.messagesTime,jdbcType=TIMESTAMP},
       messages_typeid = #{record.messagesTypeid,jdbcType=INTEGER},
-      messages_from_userid = #{record.messagesFromUserid,jdbcType=VARCHAR},
-      messages_to_userid = #{record.messagesToUserid,jdbcType=VARCHAR},
+      messages_from_loginid = #{record.messagesFromLoginid,jdbcType=VARCHAR},
+      messages_to_loginid = #{record.messagesToLoginid,jdbcType=VARCHAR},
       messages_postmessages = #{record.messagesPostmessages,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -224,8 +224,8 @@
       messages_status = #{record.messagesStatus,jdbcType=BIT},
       messages_time = #{record.messagesTime,jdbcType=TIMESTAMP},
       messages_typeid = #{record.messagesTypeid,jdbcType=INTEGER},
-      messages_from_userid = #{record.messagesFromUserid,jdbcType=VARCHAR},
-      messages_to_userid = #{record.messagesToUserid,jdbcType=VARCHAR}
+      messages_from_loginid = #{record.messagesFromLoginid,jdbcType=VARCHAR},
+      messages_to_loginid = #{record.messagesToLoginid,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>

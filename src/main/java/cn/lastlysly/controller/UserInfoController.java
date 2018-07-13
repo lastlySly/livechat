@@ -6,7 +6,6 @@ import cn.lastlysly.myutils.CustomRedisTemplate;
 import cn.lastlysly.myutils.MyResult;
 import cn.lastlysly.pojo.CustomFriendsInfo;
 import cn.lastlysly.pojo.FriendgroupsSheet;
-import cn.lastlysly.pojo.FriendsSheet;
 import cn.lastlysly.pojo.UserinfoSheet;
 import cn.lastlysly.service.UserinfoService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -25,10 +24,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
-import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -208,7 +205,7 @@ public class UserInfoController {
     }
 
     /**
-     * 获取好友分组
+     * 获取好友分组()
      * @return
      */
     @CrossOrigin
@@ -216,21 +213,13 @@ public class UserInfoController {
     @ResponseBody
     public MyResult listGroup() throws MyCustomException {
         Subject subject = SecurityUtils.getSubject();
-        String redisKey = "userinfo:"+subject.getPrincipal().toString();
-        String val = customRedisTemplate.redisGet(redisKey);
-        try {
-            UserinfoSheet userinfoSheet = objectMapper.readValue(val,UserinfoSheet.class);
+        List<FriendgroupsSheet> friendgroupsSheetList =  userinfoService.listFriendsGroup(subject.getPrincipal().toString());
+        return new MyResult(1,"获取用户列表成功",friendgroupsSheetList);
 
-            List<FriendgroupsSheet> friendgroupsSheetList =  userinfoService.listFriendsGroup(userinfoSheet.getUserId());
-            return new MyResult(1,"获取用户列表成功",friendgroupsSheetList);
-
-        } catch (IOException e) {
-            throw new MyCustomException("用户分组序列化失败");
-        }
     }
 
     /**
-     * 通过用户ID获取其好友列表(带详细信息)
+     * 通过用户登陆ID获取其好友列表(带详细信息)
      * @return
      */
     @CrossOrigin
@@ -238,20 +227,14 @@ public class UserInfoController {
     @ResponseBody
     public MyResult listFriends() throws MyCustomException {
         Subject subject = SecurityUtils.getSubject();
-        String redisKey = "userinfo:"+subject.getPrincipal().toString();
-        String val = customRedisTemplate.redisGet(redisKey);
-        try {
-            UserinfoSheet userinfoSheet = objectMapper.readValue(val,UserinfoSheet.class);
-            List<CustomFriendsInfo> customFriendsInfoList = userinfoService.listFriends(userinfoSheet);
-            return new MyResult(1,"获取好友列表成功",customFriendsInfoList);
-
-        } catch (IOException e) {
-            throw new MyCustomException("用户分组序列化失败");
-        }
+        UserinfoSheet userinfoSheet = new UserinfoSheet();
+        userinfoSheet.setUserLoginId(subject.getPrincipal().toString());
+        List<CustomFriendsInfo> customFriendsInfoList = userinfoService.listFriends(userinfoSheet);
+        return new MyResult(1,"获取好友列表成功",customFriendsInfoList);
     }
 
     /**
-     * 通过当前登陆用户ID和其好友ID查询该好友信息（由于其在不同好友下的不同备注）
+     * 通过当前登陆用户登陆ID和其好友登陆ID查询该好友信息（由于其在不同好友下的不同备注）
      * @param request
      * @return
      * @throws MyCustomException
@@ -264,18 +247,12 @@ public class UserInfoController {
         logger.info("controller,friendUserId:{}",friendUserId);
 
         Subject subject = SecurityUtils.getSubject();
-        String redisKey = "userinfo:"+subject.getPrincipal().toString();
-        String val = customRedisTemplate.redisGet(redisKey);
-        try {
-            UserinfoSheet userinfoSheet = objectMapper.readValue(val,UserinfoSheet.class);
-            CustomFriendsInfo customFriendsInfo = new CustomFriendsInfo();
-            customFriendsInfo.setCustomFriendsFriendsId(friendUserId);
-            customFriendsInfo.setCustomFriendsUserId(userinfoSheet.getUserId());
-            CustomFriendsInfo resFriendsInfo = userinfoService.getFriendsInfo(customFriendsInfo);
-            return new MyResult(1,"查询好友信息成功",resFriendsInfo);
-        } catch (IOException e) {
-            throw new MyCustomException("用户分组序列化失败");
-        }
+        String userLoginId = subject.getPrincipal().toString();
+        CustomFriendsInfo customFriendsInfo = new CustomFriendsInfo();
+        customFriendsInfo.setCustomFriendsFriendsId(friendUserId);
+        customFriendsInfo.setCustomFriendsUserId(userLoginId);
+        CustomFriendsInfo resFriendsInfo = userinfoService.getFriendsInfo(customFriendsInfo);
+        return new MyResult(1,"查询好友信息成功",resFriendsInfo);
     }
 
     /**

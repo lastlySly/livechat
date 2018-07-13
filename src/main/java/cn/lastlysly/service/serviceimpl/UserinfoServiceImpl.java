@@ -138,7 +138,7 @@ public class UserinfoServiceImpl implements UserinfoService {
                 //创建用户默认好友分组
                 FriendgroupsSheet friendgroupsSheet = new FriendgroupsSheet();
                 friendgroupsSheet.setFriendgroupsName("好友");
-                friendgroupsSheet.setFriendgroupsUserid(userinfoSheet.getUserId());
+                friendgroupsSheet.setFriendgroupsUserLoginid(userinfoSheet.getUserLoginId());
                 friendgroupsSheetMapper.insert(friendgroupsSheet);
                 friendgroupsSheet.setFriendgroupsName("家人");
                 friendgroupsSheetMapper.insert(friendgroupsSheet);
@@ -185,14 +185,14 @@ public class UserinfoServiceImpl implements UserinfoService {
 
     /**
      * 获取用户的分组
-     * @param userId 用户ID
+     * @param userLoginId 用户登陆ID
      * @return
      */
     @Override
-    public List<FriendgroupsSheet> listFriendsGroup(String userId) {
+    public List<FriendgroupsSheet> listFriendsGroup(String userLoginId) {
         FriendgroupsSheetExample friendgroupsSheetExample = new FriendgroupsSheetExample();
         FriendgroupsSheetExample.Criteria criteria = friendgroupsSheetExample.createCriteria();
-        criteria.andFriendgroupsUseridEqualTo(userId);
+        criteria.andFriendgroupsUserLoginidEqualTo(userLoginId);
         List<FriendgroupsSheet> friendgroupsSheetList = friendgroupsSheetMapper.selectByExample(friendgroupsSheetExample);
         return friendgroupsSheetList;
     }
@@ -224,14 +224,15 @@ public class UserinfoServiceImpl implements UserinfoService {
     }
 
     /**
-     * 通过当前登录用户ID查询其好友列表
+     * 通过当前登录用户登陆ID查询其好友列表
      * @param userinfoSheet
      * @return
      */
     @Override
     public List<CustomFriendsInfo> listFriends(UserinfoSheet userinfoSheet) {
         Map<String,String> map = new HashMap<String,String>(16);
-        map.put("userId",userinfoSheet.getUserId());
+        map.put("userId",userinfoSheet.getUserLoginId());
+        System.out.println(userinfoSheet.getUserLoginId());
         List<CustomFriendsInfo> customFriendsInfoList = customMapper.selectCustomFriendsInfoByUserId(map);
         if (customFriendsInfoList.size() > 0){
             return customFriendsInfoList;
@@ -240,14 +241,14 @@ public class UserinfoServiceImpl implements UserinfoService {
     }
 
     /**
-     * 通过当前登陆用户ID和其好友ID查询该好友信息（由于其在不同好友下的不同备注）
+     * 通过当前登陆用户登陆ID和其好友登陆ID查询该好友信息（由于其在不同好友下的不同备注）
      * @param customFriendsInfo
      * @return
      */
     @Override
     public CustomFriendsInfo getFriendsInfo(CustomFriendsInfo customFriendsInfo) {
         Map<String,String> map = new HashMap<>(16);
-        logger.info("serviceImpl...userId:{},friendId:{}",customFriendsInfo.getCustomFriendsUserId(),customFriendsInfo.getCustomFriendsFriendsId());
+//        logger.info("serviceImpl...userId:{},friendId:{}",customFriendsInfo.getCustomFriendsUserId(),customFriendsInfo.getCustomFriendsFriendsId());
         map.put("userId",customFriendsInfo.getCustomFriendsUserId());
         map.put("friendId",customFriendsInfo.getCustomFriendsFriendsId());
         List<CustomFriendsInfo> customFriendsInfoList = customMapper.selectFriendsInfoByUserIdandFriendId(map);
@@ -257,6 +258,11 @@ public class UserinfoServiceImpl implements UserinfoService {
         return null;
     }
 
+    /**
+     * 查找新好友
+     * @param loginIdOrNickname
+     * @return
+     */
     @Override
     public List<UserinfoSheet> selectUserInfoByLoginIdOrNickname(String loginIdOrNickname) {
 

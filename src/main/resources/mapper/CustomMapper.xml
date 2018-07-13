@@ -25,7 +25,7 @@
     </resultMap>
 
     <resultMap id="CustomFriendsResultMap" type="cn.lastlysly.pojo.CustomFriendsInfo">
-       <result column="friends_userid" property="customFriendsUserId" /><!--好友归属用户ID-->
+       <result column="friends_user_login_id" property="customFriendsUserId" /><!--好友归属用户ID-->
        <result column="user_id" property="customFriendsFriendsId" /><!--好友的ID-->
        <result column="user_login_id" property="customFriendsLoginId" /><!--好友的登陆账号-->
 
@@ -42,18 +42,20 @@
 
     <!--通过用户ID获取好友列表-->
     <select id="selectCustomFriendsInfoByUserId" parameterType="java.util.Map" resultMap="CustomFriendsResultMap">
+
         select userinfo_sheet.*,friends_sheet.*,friendgroups_sheet.friendgroups_name from
-         friends_sheet join userinfo_sheet on friends_sheet.friends_friendid = userinfo_sheet.user_id
+         friends_sheet join userinfo_sheet on friends_sheet.friends_friend_loginid = userinfo_sheet.user_login_id
           join friendgroups_sheet on friends_sheet.friends_friendgroupsid = friendgroups_sheet.friendgroups_id
-           where friends_sheet.friends_userid = #{userId};
+           where friends_sheet.friends_user_loginid = #{userId};
+
     </select>
 
     <!--通过用户ID和朋友ID获取该好友详细信息-->
     <select id="selectFriendsInfoByUserIdandFriendId" parameterType="java.util.Map" resultMap="CustomFriendsResultMap">
         select userinfo_sheet.*,friends_sheet.*,friendgroups_sheet.friendgroups_name from
-         friends_sheet join userinfo_sheet on friends_sheet.friends_friendid = userinfo_sheet.user_id
+         friends_sheet join userinfo_sheet on friends_sheet.friends_friend_loginid = userinfo_sheet.user_login_id
           join friendgroups_sheet on friends_sheet.friends_friendgroupsid = friendgroups_sheet.friendgroups_id
-           where friends_sheet.friends_userid = #{userId} and friends_sheet.friends_friendid=#{friendId};
+           where friends_sheet.friends_user_loginid = #{userId} and friends_sheet.friends_friend_loginid=#{friendId};
     </select>
 
     <!--通过用户登录账号或用户昵称查询-->

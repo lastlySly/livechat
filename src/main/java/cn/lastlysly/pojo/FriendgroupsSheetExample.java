@@ -234,73 +234,73 @@ public class FriendgroupsSheetExample {
             return (Criteria) this;
         }
 
-        public Criteria andFriendgroupsUseridIsNull() {
-            addCriterion("friendgroups_userid is null");
+        public Criteria andFriendgroupsUserLoginidIsNull() {
+            addCriterion("friendgroups_user_loginid is null");
             return (Criteria) this;
         }
 
-        public Criteria andFriendgroupsUseridIsNotNull() {
-            addCriterion("friendgroups_userid is not null");
+        public Criteria andFriendgroupsUserLoginidIsNotNull() {
+            addCriterion("friendgroups_user_loginid is not null");
             return (Criteria) this;
         }
 
-        public Criteria andFriendgroupsUseridEqualTo(String value) {
-            addCriterion("friendgroups_userid =", value, "friendgroupsUserid");
+        public Criteria andFriendgroupsUserLoginidEqualTo(String value) {
+            addCriterion("friendgroups_user_loginid =", value, "friendgroupsUserLoginid");
             return (Criteria) this;
         }
 
-        public Criteria andFriendgroupsUseridNotEqualTo(String value) {
-            addCriterion("friendgroups_userid <>", value, "friendgroupsUserid");
+        public Criteria andFriendgroupsUserLoginidNotEqualTo(String value) {
+            addCriterion("friendgroups_user_loginid <>", value, "friendgroupsUserLoginid");
             return (Criteria) this;
         }
 
-        public Criteria andFriendgroupsUseridGreaterThan(String value) {
-            addCriterion("friendgroups_userid >", value, "friendgroupsUserid");
+        public Criteria andFriendgroupsUserLoginidGreaterThan(String value) {
+            addCriterion("friendgroups_user_loginid >", value, "friendgroupsUserLoginid");
             return (Criteria) this;
         }
 
-        public Criteria andFriendgroupsUseridGreaterThanOrEqualTo(String value) {
-            addCriterion("friendgroups_userid >=", value, "friendgroupsUserid");
+        public Criteria andFriendgroupsUserLoginidGreaterThanOrEqualTo(String value) {
+            addCriterion("friendgroups_user_loginid >=", value, "friendgroupsUserLoginid");
             return (Criteria) this;
         }
 
-        public Criteria andFriendgroupsUseridLessThan(String value) {
-            addCriterion("friendgroups_userid <", value, "friendgroupsUserid");
+        public Criteria andFriendgroupsUserLoginidLessThan(String value) {
+            addCriterion("friendgroups_user_loginid <", value, "friendgroupsUserLoginid");
             return (Criteria) this;
         }
 
-        public Criteria andFriendgroupsUseridLessThanOrEqualTo(String value) {
-            addCriterion("friendgroups_userid <=", value, "friendgroupsUserid");
+        public Criteria andFriendgroupsUserLoginidLessThanOrEqualTo(String value) {
+            addCriterion("friendgroups_user_loginid <=", value, "friendgroupsUserLoginid");
             return (Criteria) this;
         }
 
-        public Criteria andFriendgroupsUseridLike(String value) {
-            addCriterion("friendgroups_userid like", value, "friendgroupsUserid");
+        public Criteria andFriendgroupsUserLoginidLike(String value) {
+            addCriterion("friendgroups_user_loginid like", value, "friendgroupsUserLoginid");
             return (Criteria) this;
         }
 
-        public Criteria andFriendgroupsUseridNotLike(String value) {
-            addCriterion("friendgroups_userid not like", value, "friendgroupsUserid");
+        public Criteria andFriendgroupsUserLoginidNotLike(String value) {
+            addCriterion("friendgroups_user_loginid not like", value, "friendgroupsUserLoginid");
             return (Criteria) this;
         }
 
-        public Criteria andFriendgroupsUseridIn(List<String> values) {
-            addCriterion("friendgroups_userid in", values, "friendgroupsUserid");
+        public Criteria andFriendgroupsUserLoginidIn(List<String> values) {
+            addCriterion("friendgroups_user_loginid in", values, "friendgroupsUserLoginid");
             return (Criteria) this;
         }
 
-        public Criteria andFriendgroupsUseridNotIn(List<String> values) {
-            addCriterion("friendgroups_userid not in", values, "friendgroupsUserid");
+        public Criteria andFriendgroupsUserLoginidNotIn(List<String> values) {
+            addCriterion("friendgroups_user_loginid not in", values, "friendgroupsUserLoginid");
             return (Criteria) this;
         }
 
-        public Criteria andFriendgroupsUseridBetween(String value1, String value2) {
-            addCriterion("friendgroups_userid between", value1, value2, "friendgroupsUserid");
+        public Criteria andFriendgroupsUserLoginidBetween(String value1, String value2) {
+            addCriterion("friendgroups_user_loginid between", value1, value2, "friendgroupsUserLoginid");
             return (Criteria) this;
         }
 
-        public Criteria andFriendgroupsUseridNotBetween(String value1, String value2) {
-            addCriterion("friendgroups_userid not between", value1, value2, "friendgroupsUserid");
+        public Criteria andFriendgroupsUserLoginidNotBetween(String value1, String value2) {
+            addCriterion("friendgroups_user_loginid not between", value1, value2, "friendgroupsUserLoginid");
             return (Criteria) this;
         }
     }

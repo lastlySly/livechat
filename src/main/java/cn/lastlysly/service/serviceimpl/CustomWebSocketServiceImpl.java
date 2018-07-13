@@ -47,6 +47,6 @@ public class CustomWebSocketServiceImpl implements CustomWebSocketService {
      */
     @Override
     public void singleChat(MessagesSheet messagesSheet) {
-        simpMessagingTemplate.convertAndSend("/chat/single/" + messagesSheet.getMessagesToUserid(),messagesSheet);
+        simpMessagingTemplate.convertAndSend("/chat/single/" + messagesSheet.getMessagesToLoginid(),messagesSheet);
     }
 }

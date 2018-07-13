@@ -2,7 +2,6 @@ package cn.lastlysly.service;
 
 import cn.lastlysly.pojo.CustomFriendsInfo;
 import cn.lastlysly.pojo.FriendgroupsSheet;
-import cn.lastlysly.pojo.FriendsSheet;
 import cn.lastlysly.pojo.UserinfoSheet;
 
 import java.util.List;

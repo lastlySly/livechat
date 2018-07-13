@@ -3,9 +3,9 @@ package cn.lastlysly.pojo;
 public class FriendsSheet {
     private Integer friendsId;
 
-    private String friendsFriendid;
+    private String friendsFriendLoginid;
 
-    private String friendsUserid;
+    private String friendsUserLoginid;
 
     private String friendsRemarks;
 
@@ -19,20 +19,20 @@ public class FriendsSheet {
         this.friendsId = friendsId;
     }
 
-    public String getFriendsFriendid() {
-        return friendsFriendid;
+    public String getFriendsFriendLoginid() {
+        return friendsFriendLoginid;
     }
 
-    public void setFriendsFriendid(String friendsFriendid) {
-        this.friendsFriendid = friendsFriendid == null ? null : friendsFriendid.trim();
+    public void setFriendsFriendLoginid(String friendsFriendLoginid) {
+        this.friendsFriendLoginid = friendsFriendLoginid == null ? null : friendsFriendLoginid.trim();
     }
 
-    public String getFriendsUserid() {
-        return friendsUserid;
+    public String getFriendsUserLoginid() {
+        return friendsUserLoginid;
     }
 
-    public void setFriendsUserid(String friendsUserid) {
-        this.friendsUserid = friendsUserid == null ? null : friendsUserid.trim();
+    public void setFriendsUserLoginid(String friendsUserLoginid) {
+        this.friendsUserLoginid = friendsUserLoginid == null ? null : friendsUserLoginid.trim();
     }
 
     public String getFriendsRemarks() {

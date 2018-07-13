@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * @author lastlySly
@@ -31,7 +30,7 @@ public class WebsocketController {
 
     @MessageMapping("/singlechat")
     public void singleChat(MessagesSheet messagesSheet){
-        System.out.println(messagesSheet.getMessagesFromUserid()+":"+messagesSheet.getMessagesToUserid()+":"+messagesSheet.getMessagesPostmessages());
+//        System.out.println(messagesSheet.getMessagesFromLoginid()+":"+messagesSheet.getMessagesToLoginid()+":"+messagesSheet.getMessagesPostmessages());
         customWebSocketService.singleChat(messagesSheet);
     }
 

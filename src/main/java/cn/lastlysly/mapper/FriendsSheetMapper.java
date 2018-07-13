@@ -2,8 +2,9 @@ package cn.lastlysly.mapper;
 
 import cn.lastlysly.pojo.FriendsSheet;
 import cn.lastlysly.pojo.FriendsSheetExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface FriendsSheetMapper {
     long countByExample(FriendsSheetExample example);

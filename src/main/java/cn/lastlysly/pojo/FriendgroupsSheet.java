@@ -5,7 +5,7 @@ public class FriendgroupsSheet {
 
     private String friendgroupsName;
 
-    private String friendgroupsUserid;
+    private String friendgroupsUserLoginid;
 
     public Integer getFriendgroupsId() {
         return friendgroupsId;
@@ -23,11 +23,11 @@ public class FriendgroupsSheet {
         this.friendgroupsName = friendgroupsName == null ? null : friendgroupsName.trim();
     }
 
-    public String getFriendgroupsUserid() {
-        return friendgroupsUserid;
+    public String getFriendgroupsUserLoginid() {
+        return friendgroupsUserLoginid;
     }
 
-    public void setFriendgroupsUserid(String friendgroupsUserid) {
-        this.friendgroupsUserid = friendgroupsUserid == null ? null : friendgroupsUserid.trim();
+    public void setFriendgroupsUserLoginid(String friendgroupsUserLoginid) {
+        this.friendgroupsUserLoginid = friendgroupsUserLoginid == null ? null : friendgroupsUserLoginid.trim();
     }
 }

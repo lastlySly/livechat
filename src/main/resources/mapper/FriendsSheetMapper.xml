@@ -3,8 +3,8 @@
 <mapper namespace="cn.lastlysly.mapper.FriendsSheetMapper">
   <resultMap id="BaseResultMap" type="cn.lastlysly.pojo.FriendsSheet">
     <result column="friends_id" jdbcType="INTEGER" property="friendsId" />
-    <result column="friends_friendid" jdbcType="VARCHAR" property="friendsFriendid" />
-    <result column="friends_userid" jdbcType="VARCHAR" property="friendsUserid" />
+    <result column="friends_friend_loginid" jdbcType="VARCHAR" property="friendsFriendLoginid" />
+    <result column="friends_user_loginid" jdbcType="VARCHAR" property="friendsUserLoginid" />
     <result column="friends_remarks" jdbcType="VARCHAR" property="friendsRemarks" />
     <result column="friends_friendgroupsid" jdbcType="INTEGER" property="friendsFriendgroupsid" />
   </resultMap>
@@ -67,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    friends_id, friends_friendid, friends_userid, friends_remarks, friends_friendgroupsid
+    friends_id, friends_friend_loginid, friends_user_loginid, friends_remarks, friends_friendgroupsid
   </sql>
   <select id="selectByExample" parameterType="cn.lastlysly.pojo.FriendsSheetExample" resultMap="BaseResultMap">
     select
@@ -90,10 +90,12 @@
     </if>
   </delete>
   <insert id="insert" parameterType="cn.lastlysly.pojo.FriendsSheet">
-    insert into friends_sheet (friends_id, friends_friendid, friends_userid, 
-      friends_remarks, friends_friendgroupsid)
-    values (#{friendsId,jdbcType=INTEGER}, #{friendsFriendid,jdbcType=VARCHAR}, #{friendsUserid,jdbcType=VARCHAR}, 
-      #{friendsRemarks,jdbcType=VARCHAR}, #{friendsFriendgroupsid,jdbcType=INTEGER})
+    insert into friends_sheet (friends_id, friends_friend_loginid, 
+      friends_user_loginid, friends_remarks, friends_friendgroupsid
+      )
+    values (#{friendsId,jdbcType=INTEGER}, #{friendsFriendLoginid,jdbcType=VARCHAR}, 
+      #{friendsUserLoginid,jdbcType=VARCHAR}, #{friendsRemarks,jdbcType=VARCHAR}, #{friendsFriendgroupsid,jdbcType=INTEGER}
+      )
   </insert>
   <insert id="insertSelective" parameterType="cn.lastlysly.pojo.FriendsSheet">
     insert into friends_sheet
@@ -101,11 +103,11 @@
       <if test="friendsId != null">
         friends_id,
       </if>
-      <if test="friendsFriendid != null">
-        friends_friendid,
+      <if test="friendsFriendLoginid != null">
+        friends_friend_loginid,
       </if>
-      <if test="friendsUserid != null">
-        friends_userid,
+      <if test="friendsUserLoginid != null">
+        friends_user_loginid,
       </if>
       <if test="friendsRemarks != null">
         friends_remarks,
@@ -118,11 +120,11 @@
       <if test="friendsId != null">
         #{friendsId,jdbcType=INTEGER},
       </if>
-      <if test="friendsFriendid != null">
-        #{friendsFriendid,jdbcType=VARCHAR},
+      <if test="friendsFriendLoginid != null">
+        #{friendsFriendLoginid,jdbcType=VARCHAR},
       </if>
-      <if test="friendsUserid != null">
-        #{friendsUserid,jdbcType=VARCHAR},
+      <if test="friendsUserLoginid != null">
+        #{friendsUserLoginid,jdbcType=VARCHAR},
       </if>
       <if test="friendsRemarks != null">
         #{friendsRemarks,jdbcType=VARCHAR},
@@ -144,11 +146,11 @@
       <if test="record.friendsId != null">
         friends_id = #{record.friendsId,jdbcType=INTEGER},
       </if>
-      <if test="record.friendsFriendid != null">
-        friends_friendid = #{record.friendsFriendid,jdbcType=VARCHAR},
+      <if test="record.friendsFriendLoginid != null">
+        friends_friend_loginid = #{record.friendsFriendLoginid,jdbcType=VARCHAR},
       </if>
-      <if test="record.friendsUserid != null">
-        friends_userid = #{record.friendsUserid,jdbcType=VARCHAR},
+      <if test="record.friendsUserLoginid != null">
+        friends_user_loginid = #{record.friendsUserLoginid,jdbcType=VARCHAR},
       </if>
       <if test="record.friendsRemarks != null">
         friends_remarks = #{record.friendsRemarks,jdbcType=VARCHAR},
@@ -164,8 +166,8 @@
   <update id="updateByExample" parameterType="map">
     update friends_sheet
     set friends_id = #{record.friendsId,jdbcType=INTEGER},
-      friends_friendid = #{record.friendsFriendid,jdbcType=VARCHAR},
-      friends_userid = #{record.friendsUserid,jdbcType=VARCHAR},
+      friends_friend_loginid = #{record.friendsFriendLoginid,jdbcType=VARCHAR},
+      friends_user_loginid = #{record.friendsUserLoginid,jdbcType=VARCHAR},
       friends_remarks = #{record.friendsRemarks,jdbcType=VARCHAR},
       friends_friendgroupsid = #{record.friendsFriendgroupsid,jdbcType=INTEGER}
     <if test="_parameter != null">

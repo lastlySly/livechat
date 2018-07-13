@@ -345,143 +345,143 @@ public class MessagesSheetExample {
             return (Criteria) this;
         }
 
-        public Criteria andMessagesFromUseridIsNull() {
-            addCriterion("messages_from_userid is null");
+        public Criteria andMessagesFromLoginidIsNull() {
+            addCriterion("messages_from_loginid is null");
             return (Criteria) this;
         }
 
-        public Criteria andMessagesFromUseridIsNotNull() {
-            addCriterion("messages_from_userid is not null");
+        public Criteria andMessagesFromLoginidIsNotNull() {
+            addCriterion("messages_from_loginid is not null");
             return (Criteria) this;
         }
 
-        public Criteria andMessagesFromUseridEqualTo(String value) {
-            addCriterion("messages_from_userid =", value, "messagesFromUserid");
+        public Criteria andMessagesFromLoginidEqualTo(String value) {
+            addCriterion("messages_from_loginid =", value, "messagesFromLoginid");
             return (Criteria) this;
         }
 
-        public Criteria andMessagesFromUseridNotEqualTo(String value) {
-            addCriterion("messages_from_userid <>", value, "messagesFromUserid");
+        public Criteria andMessagesFromLoginidNotEqualTo(String value) {
+            addCriterion("messages_from_loginid <>", value, "messagesFromLoginid");
             return (Criteria) this;
         }
 
-        public Criteria andMessagesFromUseridGreaterThan(String value) {
-            addCriterion("messages_from_userid >", value, "messagesFromUserid");
+        public Criteria andMessagesFromLoginidGreaterThan(String value) {
+            addCriterion("messages_from_loginid >", value, "messagesFromLoginid");
             return (Criteria) this;
         }
 
-        public Criteria andMessagesFromUseridGreaterThanOrEqualTo(String value) {
-            addCriterion("messages_from_userid >=", value, "messagesFromUserid");
+        public Criteria andMessagesFromLoginidGreaterThanOrEqualTo(String value) {
+            addCriterion("messages_from_loginid >=", value, "messagesFromLoginid");
             return (Criteria) this;
         }
 
-        public Criteria andMessagesFromUseridLessThan(String value) {
-            addCriterion("messages_from_userid <", value, "messagesFromUserid");
+        public Criteria andMessagesFromLoginidLessThan(String value) {
+            addCriterion("messages_from_loginid <", value, "messagesFromLoginid");
             return (Criteria) this;
         }
 
-        public Criteria andMessagesFromUseridLessThanOrEqualTo(String value) {
-            addCriterion("messages_from_userid <=", value, "messagesFromUserid");
+        public Criteria andMessagesFromLoginidLessThanOrEqualTo(String value) {
+            addCriterion("messages_from_loginid <=", value, "messagesFromLoginid");
             return (Criteria) this;
         }
 
-        public Criteria andMessagesFromUseridLike(String value) {
-            addCriterion("messages_from_userid like", value, "messagesFromUserid");
+        public Criteria andMessagesFromLoginidLike(String value) {
+            addCriterion("messages_from_loginid like", value, "messagesFromLoginid");
             return (Criteria) this;
         }
 
-        public Criteria andMessagesFromUseridNotLike(String value) {
-            addCriterion("messages_from_userid not like", value, "messagesFromUserid");
+        public Criteria andMessagesFromLoginidNotLike(String value) {
+            addCriterion("messages_from_loginid not like", value, "messagesFromLoginid");
             return (Criteria) this;
         }
 
-        public Criteria andMessagesFromUseridIn(List<String> values) {
-            addCriterion("messages_from_userid in", values, "messagesFromUserid");
+        public Criteria andMessagesFromLoginidIn(List<String> values) {
+            addCriterion("messages_from_loginid in", values, "messagesFromLoginid");
             return (Criteria) this;
         }
 
-        public Criteria andMessagesFromUseridNotIn(List<String> values) {
-            addCriterion("messages_from_userid not in", values, "messagesFromUserid");
+        public Criteria andMessagesFromLoginidNotIn(List<String> values) {
+            addCriterion("messages_from_loginid not in", values, "messagesFromLoginid");
             return (Criteria) this;
         }
 
-        public Criteria andMessagesFromUseridBetween(String value1, String value2) {
-            addCriterion("messages_from_userid between", value1, value2, "messagesFromUserid");
+        public Criteria andMessagesFromLoginidBetween(String value1, String value2) {
+            addCriterion("messages_from_loginid between", value1, value2, "messagesFromLoginid");
             return (Criteria) this;
         }
 
-        public Criteria andMessagesFromUseridNotBetween(String value1, String value2) {
-            addCriterion("messages_from_userid not between", value1, value2, "messagesFromUserid");
+        public Criteria andMessagesFromLoginidNotBetween(String value1, String value2) {
+            addCriterion("messages_from_loginid not between", value1, value2, "messagesFromLoginid");
             return (Criteria) this;
         }
 
-        public Criteria andMessagesToUseridIsNull() {
-            addCriterion("messages_to_userid is null");
+        public Criteria andMessagesToLoginidIsNull() {
+            addCriterion("messages_to_loginid is null");
             return (Criteria) this;
         }
 
-        public Criteria andMessagesToUseridIsNotNull() {
-            addCriterion("messages_to_userid is not null");
+        public Criteria andMessagesToLoginidIsNotNull() {
+            addCriterion("messages_to_loginid is not null");
             return (Criteria) this;
         }
 
-        public Criteria andMessagesToUseridEqualTo(String value) {
-            addCriterion("messages_to_userid =", value, "messagesToUserid");
+        public Criteria andMessagesToLoginidEqualTo(String value) {
+            addCriterion("messages_to_loginid =", value, "messagesToLoginid");
             return (Criteria) this;
         }
 
-        public Criteria andMessagesToUseridNotEqualTo(String value) {
-            addCriterion("messages_to_userid <>", value, "messagesToUserid");
+        public Criteria andMessagesToLoginidNotEqualTo(String value) {
+            addCriterion("messages_to_loginid <>", value, "messagesToLoginid");
             return (Criteria) this;
         }
 
-        public Criteria andMessagesToUseridGreaterThan(String value) {
-            addCriterion("messages_to_userid >", value, "messagesToUserid");
+        public Criteria andMessagesToLoginidGreaterThan(String value) {
+            addCriterion("messages_to_loginid >", value, "messagesToLoginid");
             return (Criteria) this;
         }
 
-        public Criteria andMessagesToUseridGreaterThanOrEqualTo(String value) {
-            addCriterion("messages_to_userid >=", value, "messagesToUserid");
+        public Criteria andMessagesToLoginidGreaterThanOrEqualTo(String value) {
+            addCriterion("messages_to_loginid >=", value, "messagesToLoginid");
             return (Criteria) this;
         }
 
-        public Criteria andMessagesToUseridLessThan(String value) {
-            addCriterion("messages_to_userid <", value, "messagesToUserid");
+        public Criteria andMessagesToLoginidLessThan(String value) {
+            addCriterion("messages_to_loginid <", value, "messagesToLoginid");
             return (Criteria) this;
         }
 
-        public Criteria andMessagesToUseridLessThanOrEqualTo(String value) {
-            addCriterion("messages_to_userid <=", value, "messagesToUserid");
+        public Criteria andMessagesToLoginidLessThanOrEqualTo(String value) {
+            addCriterion("messages_to_loginid <=", value, "messagesToLoginid");
             return (Criteria) this;
         }
 
-        public Criteria andMessagesToUseridLike(String value) {
-            addCriterion("messages_to_userid like", value, "messagesToUserid");
+        public Criteria andMessagesToLoginidLike(String value) {
+            addCriterion("messages_to_loginid like", value, "messagesToLoginid");
             return (Criteria) this;
         }
 
-        public Criteria andMessagesToUseridNotLike(String value) {
-            addCriterion("messages_to_userid not like", value, "messagesToUserid");
+        public Criteria andMessagesToLoginidNotLike(String value) {
+            addCriterion("messages_to_loginid not like", value, "messagesToLoginid");
             return (Criteria) this;
         }
 
-        public Criteria andMessagesToUseridIn(List<String> values) {
-            addCriterion("messages_to_userid in", values, "messagesToUserid");
+        public Criteria andMessagesToLoginidIn(List<String> values) {
+            addCriterion("messages_to_loginid in", values, "messagesToLoginid");
             return (Criteria) this;
         }
 
-        public Criteria andMessagesToUseridNotIn(List<String> values) {
-            addCriterion("messages_to_userid not in", values, "messagesToUserid");
+        public Criteria andMessagesToLoginidNotIn(List<String> values) {
+            addCriterion("messages_to_loginid not in", values, "messagesToLoginid");
             return (Criteria) this;
         }
 
-        public Criteria andMessagesToUseridBetween(String value1, String value2) {
-            addCriterion("messages_to_userid between", value1, value2, "messagesToUserid");
+        public Criteria andMessagesToLoginidBetween(String value1, String value2) {
+            addCriterion("messages_to_loginid between", value1, value2, "messagesToLoginid");
             return (Criteria) this;
         }
 
-        public Criteria andMessagesToUseridNotBetween(String value1, String value2) {
-            addCriterion("messages_to_userid not between", value1, value2, "messagesToUserid");
+        public Criteria andMessagesToLoginidNotBetween(String value1, String value2) {
+            addCriterion("messages_to_loginid not between", value1, value2, "messagesToLoginid");
             return (Criteria) this;
         }
     }

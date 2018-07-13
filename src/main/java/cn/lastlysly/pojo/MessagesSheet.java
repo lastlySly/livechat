@@ -1,8 +1,5 @@
 package cn.lastlysly.pojo;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import org.springframework.format.annotation.DateTimeFormat;
-
 import java.util.Date;
 
 public class MessagesSheet {
@@ -10,15 +7,13 @@ public class MessagesSheet {
 
     private Boolean messagesStatus;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date messagesTime;
 
     private Integer messagesTypeid;
 
-    private String messagesFromUserid;
+    private String messagesFromLoginid;
 
-    private String messagesToUserid;
+    private String messagesToLoginid;
 
     private String messagesPostmessages;
 
@@ -54,20 +49,20 @@ public class MessagesSheet {
         this.messagesTypeid = messagesTypeid;
     }
 
-    public String getMessagesFromUserid() {
-        return messagesFromUserid;
+    public String getMessagesFromLoginid() {
+        return messagesFromLoginid;
     }
 
-    public void setMessagesFromUserid(String messagesFromUserid) {
-        this.messagesFromUserid = messagesFromUserid == null ? null : messagesFromUserid.trim();
+    public void setMessagesFromLoginid(String messagesFromLoginid) {
+        this.messagesFromLoginid = messagesFromLoginid == null ? null : messagesFromLoginid.trim();
     }
 
-    public String getMessagesToUserid() {
-        return messagesToUserid;
+    public String getMessagesToLoginid() {
+        return messagesToLoginid;
     }
 
-    public void setMessagesToUserid(String messagesToUserid) {
-        this.messagesToUserid = messagesToUserid == null ? null : messagesToUserid.trim();
+    public void setMessagesToLoginid(String messagesToLoginid) {
+        this.messagesToLoginid = messagesToLoginid == null ? null : messagesToLoginid.trim();
     }
 
     public String getMessagesPostmessages() {
