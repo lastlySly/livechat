@@ -90,7 +90,7 @@ function listFriend() {
                 for(var i=0;i<dataLength;i++){
                     for (var j=0;j<grouplist_count;j++){
                         if (data.data[i].customFriendsGroupName == $(".group_name").eq(j).text()){
-                            $(".group_name").eq(j).parent().parent().find(".custom-friends-list").append('<li socketaddress="'+data.data[i].customFriendsFriendsId+'" class="row custom-friend-item">\n' +
+                            $(".group_name").eq(j).parent().parent().find(".custom-friends-list").append('<li socketaddress="'+data.data[i].customFriendsLoginId+'" class="row custom-friend-item">\n' +
                                 '                                            <img class="col-md-3 img-responsive img-circle list-headportrait" src="'+data.data[i].customFriendsHeadportrait+'">\n' +
                                 '\n' +
                                 '                                            <dl class="col-md-9 custom-friend-item-info">\n' +
@@ -285,13 +285,14 @@ function getUserInfo(){
                 $("#userinfo_nickname").val(data.data.userNickname);
                 $("#userinfo_motto").text(data.data.userMotto);
                 $("#userinfo_loginId").text(data.data.userLoginId);
+                $("#userinfo_loginId").attr("userId",data.data.userId);
                 $("#userinfo_age").val(data.data.userAge);
                 $("#userinfo_birthday").val(data.data.userBirthday);
                 $("#userinfo_tel").val(data.data.userTelephone);
                 $("#userinfo_email").val(data.data.userEmail);
                 $("#userinfo_vocation").val(data.data.userVocation);
                 $("#userinfo_synopsis").text(data.data.userSynopsis);
-                $("#userinfo_revise_btn").attr("dataId",data.data.userId);
+                $("#userinfo_revise_btn").attr("dataId",data.data.userLoginId);//通信地址为登陆名
                 $("#gender_select").find("option[value="+data.data.userGender+"]").attr("selected",true);
                 $("#province_select").find("option[value="+data.data.userProvinceId+"]").attr("selected",true);
                 var shi=$("#province_select").val();

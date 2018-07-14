@@ -22,8 +22,8 @@ function websocket_connect(tompClient) {
 function sendMessage(socketaddress,myMessage,sendTime) {
     //自己的ID
     var mysocketaddress = $("#userinfo_revise_btn").attr("dataId");
-    stompClient.send("/app/singlechat", {}, JSON.stringify({'messagesFromUserid': mysocketaddress,
-        'messagesToUserid':socketaddress, 'messagesPostmessages':myMessage,'messagesTime':sendTime,'messagesTypeid':3}));
+    stompClient.send("/app/singlechat", {}, JSON.stringify({'messagesFromLoginid': mysocketaddress,
+        'messagesToLoginid':socketaddress, 'messagesPostmessages':myMessage,'messagesTime':sendTime,'messagesTypeid':3}));
 }
 
 

@@ -65,7 +65,7 @@ function pop_modal() {
                             '                    <dt class="find-friends-head"><img class="img-responsive img-circle" src="'+ data.data[i].userHeadportrait +'"></dt>\n' +
                             '                    <dd class="friends-nickname-and-username">'+ data.data[i].userNickname + '(' + data.data[i].userLoginId + ')</dd>\n' +
                             '                    <dd class="friends-address">'+ userGender +' '+ userProvince + ' ' + userCity + '</dd>\n' +
-                            '                    <dd class="friends-add-btn-send"><button type="button" dataId="'+ data.data[i].userId +'"  class="btn btn-default">加好友</button></dd>\n' +
+                            '                    <dd class="friends-add-btn-send"><button type="button" dataId="'+ data.data[i].userLoginId +'"  class="btn btn-default">加好友</button></dd>\n' +
                             '                </dl>');
                     }
 
@@ -124,12 +124,12 @@ function userinfo_modal() {
         var gender_select = $("#gender_select").val();
         var province_select = $("#province_select").val();
         var city_select = $("#city_select").val();
-        var userinfo_userId = $("#userinfo_revise_btn").attr("dataId");
-
+        // var userinfo_userLoginId = $("#userinfo_revise_btn").attr("dataId");
+        var userId = $("#userinfo_loginId").attr("userId");
         var formData = new FormData();
         formData.append("userNickname",userinfo_nickname);
-        // formData.append("userLoginId",userinfo_loginId);
-        formData.append("userId",userinfo_userId);
+        // formData.append("userLoginId",userinfo_userLoginId);
+        formData.append("userId",userId);
         formData.append("userMotto",userinfo_motto);
         formData.append("userAge",userinfo_age);
         formData.append("userBirthday",userinfo_birthday);
