@@ -94,7 +94,7 @@ function listFriend() {
                                 '                                            <img class="col-md-3 img-responsive img-circle list-headportrait" src="'+data.data[i].customFriendsHeadportrait+'">\n' +
                                 '\n' +
                                 '                                            <dl class="col-md-9 custom-friend-item-info">\n' +
-                                '                                                <dt class="list-remarks">'+data.data[i].customFriendsRemark+'</dt>\n' +
+                                '                                                <dt class="list-remarks">'+data.data[i].customFriendsRemark+'<span>('+data.data[i].customFriendsLoginId+')</span></dt>\n' +
                                 '                                                <dd class="list-motto">'+data.data[i].customFriendsMotto+'</dd>\n' +
                                 '                                                <!--<span class="badge custom-num-tip">5</span>-->\n' +
                                 '                                                <span class="badge custom-online-tip">在线</span>\n' +

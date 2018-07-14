@@ -256,7 +256,7 @@ public class UserInfoController {
     }
 
     /**
-     * 寻找新好友
+     * 寻找新好友(根据用户登陆ID或者查询用户信息)
      * @return
      */
     @CrossOrigin
@@ -267,6 +267,7 @@ public class UserInfoController {
         List<UserinfoSheet> userinfoSheetList = userinfoService.selectUserInfoByLoginIdOrNickname(loginIdOrNickname);
         return new MyResult(1,"查找成功",userinfoSheetList);
     }
+
 
 
 }
