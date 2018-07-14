@@ -2,6 +2,7 @@
 $(function () {
     friends_card_sendbtn();
     sendMessageBtn();
+    system_message_div();
 });
 
 
@@ -83,3 +84,27 @@ function custom_getdate() {
 }
 /*获取系统当前时间End*/
 
+//系统消息框
+function system_message_div() {
+    $("#btn_system_message").on("click",function () {
+        var flag =  $("#system_message_div").css('display');
+        if ( flag == "none" ) {
+            $("#system_message_div").slideToggle("fast");
+            $("#right-chat-friend-container-id").css({'display':"none"});
+        }
+        $("#system_message_top_name").text("系统消息");
+
+    })
+
+    $("#btn_system_friend_apply").on("click",function () {
+        var flag =  $("#system_message_div").css('display');
+        if ( flag == "none" ) {
+            $("#system_message_div").slideToggle("fast");
+            $("#right-chat-friend-container-id").css({'display':"none"});
+        }
+        $("#system_message_top_name").text("好友请求");
+
+    })
+
+
+}

@@ -233,6 +233,7 @@ function change_friend_chatting_fun(socketaddress,remarks,chatHeadportrait) {
     var flag =  $("#right-chat-friend-container-id").css('display');
     if ( flag == "none" ) {
         $("#right-chat-friend-container-id").slideToggle("fast");
+        $("#system_message_div").css({'display':"none"});
     }
 
     //清空聊天框

@@ -65,9 +65,10 @@ function pop_modal() {
                             '                    <dt class="find-friends-head"><img class="img-responsive img-circle" src="'+ data.data[i].userHeadportrait +'"></dt>\n' +
                             '                    <dd class="friends-nickname-and-username">'+ data.data[i].userNickname + '(' + data.data[i].userLoginId + ')</dd>\n' +
                             '                    <dd class="friends-address">'+ userGender +' '+ userProvince + ' ' + userCity + '</dd>\n' +
-                            '                    <dd class="friends-add-btn-send"><button type="button" dataId="'+ data.data[i].userLoginId +'"  class="btn btn-default">加好友</button></dd>\n' +
+                            '                    <dd class="friends-add-btn-send"><button type="button" dataId="'+ data.data[i].userLoginId +'"  class="apply_btn_custom btn btn-default">加好友</button></dd>\n' +
                             '                </dl>');
                     }
+                    apply_friend();
 
                 }else{
                     alert(data.tip)
@@ -189,5 +190,30 @@ function address_deal() {
             }
         });
     }
+
+}
+
+//申请好友操作
+function apply_friend() {
+
+    $(".apply_btn_custom").on("click",function () {
+        var someoneloginId = $(this).attr("dataId");
+        var someoneNickname = ($(this).parent().parent().find(".friends-nickname-and-username")).text();
+        console.log(someoneNickname+"sss");
+        $(".apply_div").slideToggle("fast");
+        $("#apply_title").text("申请 【"+ someoneNickname +"】为好友");
+        $("#send_apply_btn").attr("fromData",someoneloginId);
+
+    });
+
+    $("#back_btn").on("click",function () {
+        $(".apply_div").slideToggle("fast");
+    });
+
+    $("#send_apply_btn").on("click",function () {
+        var tologinId =  $(this).attr("fromData");
+        alert("向"+tologinId+"发出申请");
+        $(".apply_div").slideToggle("fast");
+    })
 
 }

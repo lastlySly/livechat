@@ -429,10 +429,20 @@ body,html {
     border-right: 1px solid #7F7F7F;
     /*border-bottom-right-radius: 10px;*/
 }
+
+/*系统消息按钮框*/
+.system_message_btn{
+    height: 50px;
+    /*background-color: grey;*/
+    padding-top: 7px;
+    padding-left: 7px;
+}
+
 .chat-list{
-    height: 95%;
-    /*max-height: 645px;*/
-    max-height: 605px;
+    /*height: 95%;*/
+    height: 88%;
+    /*max-height: 605px;*/
+    max-height: 555px;
     overflow-y: auto;
     overflow-x: hidden;
 }
@@ -494,6 +504,67 @@ body,html {
     position: relative;
     /*overflow: hidden;*/
     display: none;
+}
+.system_message_div{
+    background-color: #F7F7F7;
+    height: 100%;
+    width: 100%;
+    border-bottom-right-radius: 10px;
+    /*padding: 20px;*/
+    position: relative;
+    /*overflow: hidden;*/
+    display: none;
+}
+.custom_system_message_div{
+    height: 510px;
+    width: 100%;
+    margin: 0;
+    /*background-color: #FFFFFF;*/
+    background-color: white;
+    /*background: url("../img/Starry.jpg") center;*/
+    border-radius: 20px;
+    overflow-y: auto;
+    position: relative;
+    padding: 30px;
+    text-align: center;
+}
+.system_message_top{
+    height: 50px;
+    border-bottom: 1px solid #7F7F7F;
+    width: 100%;
+    margin: 0;
+    line-height: 50px;
+    /*padding-left: 20px;*/
+    /*padding-right: 20px;*/
+    /*text-align: center;*/
+    font-size: 1.4rem;
+    text-align: center;
+    font-weight: bold;
+    color: red;
+    /*padding-left: 30px;*/
+}
+.system_message_text{
+    /*width: 95%;*/
+    background-color: greenyellow;
+    padding: 10px;
+    min-height: 40px;
+    display: inline-block;
+    /*display: block;*/
+    border-radius: 10px;
+    /*max-width: 300px;*/
+    height: auto;
+    word-wrap:break-word;
+    word-break:break-all;
+    overflow: hidden;
+
+}
+.system_message_ite_time{
+    padding-top: 10px;
+    /*position: absolute;*/
+    width: 100%;
+    text-align: center;
+    font-size: 1.1rem;
+    color: #5e5e5e;
 }
 
 .chat-friend-name-top{

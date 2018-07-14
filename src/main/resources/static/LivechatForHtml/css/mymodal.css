@@ -184,3 +184,24 @@
 .userinfo_age_input{
     width: 60px;
 }
+.apply_div{
+    position: absolute;
+    width: 93%;
+    height: 200px;
+    /*background-color: red;*/
+    bottom:20px;
+    left: 20px;
+    padding: 10px 20px 10px 20px;
+    text-align: center;
+    display: none;
+    background-color: #F7F7F7;
+}
+.apply_div_rela{
+    position: relative;
+}
+.apply_message{
+    position: absolute;
+    right: 20px;
+    top: 30px;
+    width: 225px;
+}

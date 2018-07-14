@@ -210,8 +210,16 @@
                     <div class="col-md-3 custom-chat-left-container">
 
                         <!--正在聊天列表start-->
-
+                        <div class="system_message_btn">
+                            <button class="btn btn-primary" id="btn_system_message" type="button">
+                                系统消息 <span class="badge">4</span>
+                            </button>
+                            <button class="btn btn-primary" id="btn_system_friend_apply" type="button">
+                                好友请求 <span class="badge">4</span>
+                            </button>
+                        </div>
                         <div class="chat-list">
+
                             <ul id="chatting-list" class="custom-chat-list">
 
                                 <!--<li data-id="123" class="row custom-chat-friend-item">-->
@@ -224,6 +232,7 @@
                                         <!--<button class="custom-del glyphicon glyphicon-remove-sign"></button>-->
                                     <!--</dl>-->
                                 <!--</li>-->
+
                             </ul>
                         </div>
 
@@ -232,6 +241,28 @@
 
                     <!--右部-->
                     <div class="col-md-9 custom-chat-right-container">
+
+                        <!--系统消息总框 start-->
+                        <div id="system_message_div" class="system_message_div">
+                            <div class="row system_message_top">
+                                <span id="system_message_top_name">好友请求</span>
+                            </div>
+                            <div class="custom_system_message_div">
+                                <!--消息项-->
+                                <div class="system_message_item">
+                                    <div class="system_message_ite_time">2018-06-24 14:01:08</div>
+                                    <span class="system_message_text">
+                                        账号lastly向你发起了好友请求，消息为
+                                        <span>我是你大哥快加我，来聊天</span><br>
+                                        <a href="#">同意</a>
+                                        <a href="#">拒绝</a>
+                                        <a href="#">忽略</a>
+                                    </span>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!--系统消息总框 end-->
 
                         <!--弹出框-->
                         <div id="right-chat-friend-container-id" class="right-chat-container">
@@ -242,12 +273,6 @@
                                     <div class="col-md-3">
                                         <span data-img="" id="chatting-friend-remarks">水银灯</span>
                                     </div>
-                                    <!--<div class="col-md-3 col-md-offset-6">-->
-                                    <!--<button type="button " class="btn btn-default glyphicon glyphicon-blackboard"></button>-->
-                                    <!--<button type="button" class="btn btn-default glyphicon glyphicon-earphone"></button>-->
-                                    <!--<button type="button " class="btn btn-default glyphicon glyphicon-cog"></button>-->
-                                    <!--<button type="button " class="btn btn-default glyphicon glyphicon-comment"></button>-->
-                                    <!--</div>-->
                                 </div>
 
                                 <!--聊天内容框-->
@@ -350,7 +375,7 @@
                 <button class="btn btn-default" id="findNewFriendBtn" type="button">查找</button>
                 </span>
             </div><!-- /input-group -->
-
+            <!--找到的好友列表-->
             <div class="find-friends-result-div">
                 <!--<dl class="find-friends-item">-->
                     <!--<dt class="find-friends-head"><img class="img-responsive img-circle" src="img/headportrait.jpg"></dt>-->
@@ -358,30 +383,39 @@
                     <!--<dd class="friends-address">男 浙江 杭州</dd>-->
                     <!--<dd class="friends-add-btn-send"><button type="button" class="btn btn-default">加好友</button></dd>-->
                 <!--</dl>-->
-                <!--<dl class="find-friends-item">-->
-                    <!--<dt class="find-friends-head"><img class="img-responsive img-circle" src="img/headportrait.jpg"></dt>-->
-                    <!--<dd class="friends-nickname-and-username">那时雨(2194610467)</dd>-->
-                    <!--<dd class="friends-address">男 浙江 杭州</dd>-->
-                    <!--<dd class="friends-add-btn-send"><button type="button" class="btn btn-default">加好友</button></dd>-->
-                <!--</dl>-->
-                <!--<dl class="find-friends-item">-->
-                    <!--<dt class="find-friends-head"><img class="img-responsive img-circle" src="img/headportrait.jpg"></dt>-->
-                    <!--<dd class="friends-nickname-and-username">那时雨(2194610467)</dd>-->
-                    <!--<dd class="friends-address">男 浙江 杭州</dd>-->
-                    <!--<dd class="friends-add-btn-send"><button type="button" class="btn btn-default">加好友</button></dd>-->
-                <!--</dl>-->
-                <!--<dl class="find-friends-item">-->
-                    <!--<dt class="find-friends-head"><img class="img-responsive img-circle" src="img/headportrait.jpg"></dt>-->
-                    <!--<dd class="friends-nickname-and-username">那时雨(2194610467)</dd>-->
-                    <!--<dd class="friends-address">男 浙江 杭州</dd>-->
-                    <!--<dd class="friends-add-btn-send"><button type="button" class="btn btn-default">加好友</button></dd>-->
-                <!--</dl>-->
-                <!--<dl class="find-friends-item">-->
-                    <!--<dt class="find-friends-head"><img class="img-responsive img-circle" src="img/headportrait.jpg"></dt>-->
-                    <!--<dd class="friends-nickname-and-username">那时雨(2194610467)</dd>-->
-                    <!--<dd class="friends-address">男 浙江 杭州</dd>-->
-                    <!--<dd class="friends-add-btn-send"><button type="button" class="btn btn-default addfriends-btn">加好友</button></dd>-->
-                <!--</dl>-->
+            </div>
+
+            <!--申请好友框-->
+            <div class="apply_div">
+                <div class="apply_div_rela">
+                    <h5 id="apply_title">申请 【那时雨(2194610467)】为好友</h5>
+                    <h6 style="text-align: center;padding-top: 10px">
+                        <div class="input-group" style="width: 200px">
+                            <span class="input-group-addon" id="sizing-addon2">备注</span>
+                            <input type="text" class="form-control" aria-describedby="sizing-addon3">
+                        </div>
+                    </h6>
+                    <h5 style="text-align: center;padding-top: 10px">
+                        <div class="input-group" style="width: 200px">
+                            <span class="input-group-addon">分组</span>
+                            <select style="height: 40px;width: 140px">
+                                <option value="1">家人</option>
+                                <option value="2">好友</option>
+                            </select>
+                        </div>
+                    </h5>
+
+                    <div class="form-group apply_message">
+                        <span class="input-group-addon">申请消息</span>
+                        <textarea class="form-control" id="apply_message" placeholder="随便说一句" rows="2"></textarea>
+                    </div>
+
+
+                    <h5 style="text-align: center;padding-top:20px">
+                        <button type="button" fromData="" id="send_apply_btn" class="btn btn-default">发出申请</button>
+                        <button type="button" id="back_btn" class="btn btn-default">返回</button>
+                    </h5>
+                </div>
 
             </div>
 

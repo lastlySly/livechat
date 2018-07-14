@@ -127,13 +127,13 @@ function showMessage(result) {
                         '                            </li>'
                     );
                     del_chat_item_btn();
-                    var flag =  $("#right-chat-friend-container-id").css('display');
-                    if ( flag == "none" ) {
-                        $("#right-chat-friend-container-id").slideToggle("fast");
-                    }
-                    $("#send-to-btn").attr("socketaddress",data.data.customFriendsLoginId);
-                    $("#chatting-friend-remarks").text(data.data.customFriendsRemark);
-                    $("#chatting-friend-remarks").attr("data-img",data.data.customFriendsHeadportrait);
+                    // var flag =  $("#right-chat-friend-container-id").css('display');
+                    // if ( flag == "none" ) {
+                    //     $("#right-chat-friend-container-id").slideToggle("fast");
+                    // }
+                    // $("#send-to-btn").attr("socketaddress",data.data.customFriendsLoginId);
+                    // $("#chatting-friend-remarks").text(data.data.customFriendsRemark);
+                    // $("#chatting-friend-remarks").attr("data-img",data.data.customFriendsHeadportrait);
 
                     change_chatting_friend();
 
