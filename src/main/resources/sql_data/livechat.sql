@@ -11,7 +11,7 @@
  Target Server Version : 50717
  File Encoding         : 65001
 
- Date: 14/07/2018 10:18:49
+ Date: 16/07/2018 10:08:52
 */
 
 SET NAMES utf8mb4;
@@ -30,6 +30,22 @@ CREATE TABLE `city_sheet`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Table structure for friend_application_sheet
+-- ----------------------------
+DROP TABLE IF EXISTS `friend_application_sheet`;
+CREATE TABLE `friend_application_sheet`  (
+  `friend_application_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '好友申请表ID',
+  `friend_application_from` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '申请人',
+  `friend_application_to` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '发送位置',
+  `friend_application_remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '申请成功后的备注',
+  `friend_application_group` int(11) NULL DEFAULT NULL COMMENT '分组',
+  `friend_application_time` datetime(0) NULL DEFAULT NULL COMMENT '申请时间',
+  `friend_application_message` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '申请时的消息',
+  `friend_application_status` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '申请状态(通过，拒绝，未处理)',
+  PRIMARY KEY (`friend_application_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
 -- Table structure for friendgroups_sheet
 -- ----------------------------
 DROP TABLE IF EXISTS `friendgroups_sheet`;
@@ -38,7 +54,7 @@ CREATE TABLE `friendgroups_sheet`  (
   `friendgroups_name` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '分组名称',
   `friendgroups_user_loginid` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '用户登陆ID，分组所属（外键）',
   PRIMARY KEY (`friendgroups_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 23 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 25 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of friendgroups_sheet
@@ -49,6 +65,8 @@ INSERT INTO `friendgroups_sheet` VALUES (19, '好友', 'lastly');
 INSERT INTO `friendgroups_sheet` VALUES (20, '家人', 'lastly');
 INSERT INTO `friendgroups_sheet` VALUES (21, '好友', 'admin22');
 INSERT INTO `friendgroups_sheet` VALUES (22, '家人', 'admin22');
+INSERT INTO `friendgroups_sheet` VALUES (23, '好友', 'admin11');
+INSERT INTO `friendgroups_sheet` VALUES (24, '家人', 'admin11');
 
 -- ----------------------------
 -- Table structure for friends_sheet
@@ -61,7 +79,7 @@ CREATE TABLE `friends_sheet`  (
   `friends_remarks` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备注昵称',
   `friends_friendgroupsid` int(11) NULL DEFAULT NULL COMMENT '所属分组（外键）',
   PRIMARY KEY (`friends_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of friends_sheet
@@ -70,6 +88,7 @@ INSERT INTO `friends_sheet` VALUES (9, 'lastly', 'lastlysly', '大哥', 18);
 INSERT INTO `friends_sheet` VALUES (10, 'lastlysly', 'lastly', '小弟', 20);
 INSERT INTO `friends_sheet` VALUES (11, 'admin22', 'lastlysly', '朋友', 17);
 INSERT INTO `friends_sheet` VALUES (12, 'lastlysly', 'admin22', '我的朋友', 21);
+INSERT INTO `friends_sheet` VALUES (13, 'lastlysly', 'admin11', '陌生人', 23);
 
 -- ----------------------------
 -- Table structure for messages_sheet
@@ -84,7 +103,7 @@ CREATE TABLE `messages_sheet`  (
   `messages_from_loginid` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '发送者登陆ID（指向用户表user_sheet，外键）',
   `messages_to_loginid` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '接收者登陆ID（指向用户表user_sheet，外键）',
   PRIMARY KEY (`messages_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for messagestype_sheet
@@ -188,7 +207,7 @@ CREATE TABLE `roles_sheet`  (
   `roles_username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `roles_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`roles_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 22 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 23 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of roles_sheet
@@ -204,6 +223,7 @@ INSERT INTO `roles_sheet` VALUES (18, 'lastly', 'user');
 INSERT INTO `roles_sheet` VALUES (19, 'lastlysly', 'user');
 INSERT INTO `roles_sheet` VALUES (20, 'lastly', 'user');
 INSERT INTO `roles_sheet` VALUES (21, 'admin22', 'user');
+INSERT INTO `roles_sheet` VALUES (22, 'admin11', 'user');
 
 -- ----------------------------
 -- Table structure for userinfo_sheet
@@ -242,9 +262,10 @@ CREATE TABLE `userinfo_sheet`  (
 -- ----------------------------
 -- Records of userinfo_sheet
 -- ----------------------------
-INSERT INTO `userinfo_sheet` VALUES ('2061671f-9214-4b31-bf5a-85916773dabe', 'admin22', '那时', '88505542abcf4ab991bfb33bd43dc575', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'img/default_head.png', 'admin22');
+INSERT INTO `userinfo_sheet` VALUES ('2061671f-9214-4b31-bf5a-85916773dabe', 'admin22', '篝', '88505542abcf4ab991bfb33bd43dc575', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'img/default_head.png', 'admin22');
 INSERT INTO `userinfo_sheet` VALUES ('2402a646-ab15-4243-b723-06522a44dfd3', 'lastly', '汐', 'f8b5b7a90d38a1162b5b00e4ce1b4704', b'1', NULL, '', '', '谁都无法接受未来...', '', NULL, 6, 30, NULL, NULL, 24, '', 'img/default_head.png', 'lastly');
 INSERT INTO `userinfo_sheet` VALUES ('60b0fc52-41ef-4df4-b368-ebdd628ae192', 'lastlysly', '篝', 'd6352e24e6dcf695ae1ba6d15c6244f0', b'1', '2018-07-07 19:12:56', '', '', '没有人会相信未来', '', NULL, 1, 1, NULL, NULL, 13, '', 'img/default_head.png', 'lastlysly');
+INSERT INTO `userinfo_sheet` VALUES ('d7e33f0b-ea81-4860-89c0-f284b547fbea', 'admin11', '那', '854cc025d7cbbd4c8ae5106aac0986ae', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'img/default_head.png', 'admin11');
 
 -- ----------------------------
 -- Table structure for userstate_sheet

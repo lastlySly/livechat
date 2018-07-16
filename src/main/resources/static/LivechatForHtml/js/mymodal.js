@@ -4,7 +4,7 @@ $(function () {
     userinfo_modal();
     address_deal();
 
-})
+});
 
 //添加好友，添加修改分组模态
 function pop_modal() {
@@ -36,7 +36,10 @@ function pop_modal() {
             processData:false,
             success:function (data) {
                 if (data.code == 1){
-                    console.log(data + "这里是查找新好友");
+                    // console.log(data + "这里是查找新好友");
+                    if(data.data == null){
+                        return;
+                    }
                     var friendSize = data.data.length;
                     $(".find-friends-result-div").empty();
                     for (var i =0; i<friendSize; i++){
@@ -68,11 +71,14 @@ function pop_modal() {
                             '                    <dd class="friends-add-btn-send"><button type="button" dataId="'+ data.data[i].userLoginId +'"  class="apply_btn_custom btn btn-default">加好友</button></dd>\n' +
                             '                </dl>');
                     }
-                    apply_friend();
 
+                    apply_friend();
                 }else{
                     alert(data.tip)
                 }
+
+
+
             },
             error:function (err) {
                 alert("请求错误" + err);
@@ -195,25 +201,30 @@ function address_deal() {
 
 //申请好友操作
 function apply_friend() {
-
+    $(".apply_btn_custom").off("click");
+    $("#back_btn").off("click");
+    $("#send_apply_btn").off("click");
     $(".apply_btn_custom").on("click",function () {
         var someoneloginId = $(this).attr("dataId");
         var someoneNickname = ($(this).parent().parent().find(".friends-nickname-and-username")).text();
-        console.log(someoneNickname+"sss");
         $(".apply_div").slideToggle("fast");
         $("#apply_title").text("申请 【"+ someoneNickname +"】为好友");
         $("#send_apply_btn").attr("fromData",someoneloginId);
-
+        $("#findNewFriendBtn").attr("disabled","true");
+        // $(".apply_btn_custom").off("click");
     });
 
     $("#back_btn").on("click",function () {
+        $("#findNewFriendBtn").removeAttr("disabled");
         $(".apply_div").slideToggle("fast");
+        // $("#back_btn").off("click");
     });
 
     $("#send_apply_btn").on("click",function () {
         var tologinId =  $(this).attr("fromData");
         alert("向"+tologinId+"发出申请");
         $(".apply_div").slideToggle("fast");
+        // $("#send_apply_btn").off("click");
     })
 
 }
