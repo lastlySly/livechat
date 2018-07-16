@@ -1,5 +1,6 @@
 package cn.lastlysly.service.serviceimpl;
 
+import cn.lastlysly.pojo.FriendApplicationSheet;
 import cn.lastlysly.pojo.MessagesSheet;
 import cn.lastlysly.service.CustomWebSocketService;
 import org.slf4j.Logger;
@@ -48,5 +49,14 @@ public class CustomWebSocketServiceImpl implements CustomWebSocketService {
     @Override
     public void singleChat(MessagesSheet messagesSheet) {
         simpMessagingTemplate.convertAndSend("/chat/single/" + messagesSheet.getMessagesToLoginid(),messagesSheet);
+    }
+
+    /**
+     * 好友申请
+     * @param friendApplicationSheet
+     */
+    @Override
+    public void applyFriend(FriendApplicationSheet friendApplicationSheet) {
+        simpMessagingTemplate.convertAndSend("/mysystem/applyfriend/" + friendApplicationSheet.getFriendApplicationTo(),friendApplicationSheet);
     }
 }

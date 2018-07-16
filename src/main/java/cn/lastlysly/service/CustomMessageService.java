@@ -1,0 +1,26 @@
+package cn.lastlysly.service;
+
+import cn.lastlysly.pojo.FriendApplicationSheet;
+
+/**
+ * @author lastlySly
+ * @GitHub https://github.com/lastlySly
+ * @create 2018-07-16 13:56
+ * 处理消息
+ **/
+
+public interface CustomMessageService {
+    /**
+     * 好友申请消息保存
+     * @param friendApplicationSheet
+     * @return
+     */
+    boolean saveFriendApplication(FriendApplicationSheet friendApplicationSheet);
+
+    /**
+     * 好友申请的处理（同意，拒绝等）
+     * @param friendApplicationSheet
+     * @return
+     */
+    boolean dealFriendApplication(FriendApplicationSheet friendApplicationSheet);
+}

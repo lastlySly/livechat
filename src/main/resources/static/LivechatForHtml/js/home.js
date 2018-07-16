@@ -46,7 +46,7 @@ function getGroupFun() {
                     $(".custom-friends-group-list").append('<li class="custom-group-item">\n' +
                         '                                    <h5 class="custom-group">\n' +
                         '                                        <span class="glyphicon glyphicon-play"></span>\n' +
-                        '                                        <span class="group_name">'+data.data[i].friendgroupsName+'</span>&nbsp;0/4\n' +
+                        '                                        <span groupId="'+data.data[i].friendgroupsId+'" class="group_name">'+data.data[i].friendgroupsName+'</span>&nbsp;0/4\n' +
                         '                                    </h5>\n' +
                         '                                    <!--该组下的好友列表-->\n' +
                         '                                    <ul class="custom-friends-list">\n' +
@@ -268,7 +268,7 @@ function getUserInfo(){
         url:"http://localhost:8080/demo/userdeal/myuserinfo",
         type:"POST",
         data:{},
-        async:true,//同步请求
+        async:true,
 
         // xhrFields: {
         //     withCredentials: true

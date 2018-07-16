@@ -212,10 +212,10 @@
                         <!--正在聊天列表start-->
                         <div class="system_message_btn">
                             <button class="btn btn-primary" id="btn_system_message" type="button">
-                                系统消息 <span class="badge">4</span>
+                                系统消息 <span class="badge">0</span>
                             </button>
                             <button class="btn btn-primary" id="btn_system_friend_apply" type="button">
-                                好友请求 <span class="badge">4</span>
+                                好友请求 <span id="friend_application_num" class="badge">0</span>
                             </button>
                         </div>
                         <div class="chat-list">
@@ -247,16 +247,43 @@
                             <div class="row system_message_top">
                                 <span id="system_message_top_name">好友请求</span>
                             </div>
-                            <div class="custom_system_message_div">
+                            <!--回复好友申请模态框 start-->
+                            <div id="friend_application_reply_div" class="friend_application_reply_div">
+                                <h4 id="apply_reply_title" class="apply_reply_title" style="padding-top: 15px">同意添加lastlysly为好友</h4>
+                                <h6 style="text-align: center;padding-top: 10px;padding-left: 77px">
+                                    <div class="input-group" style="width: 200px">
+                                        <span class="input-group-addon">备注</span>
+                                        <input type="text" class="form-control" id="apply_remark_reply" aria-describedby="sizing-addon3">
+                                    </div>
+                                </h6>
+                                <h5 style="text-align: center;padding-top: 10px;padding-left: 77px">
+                                    <div class="input-group" style="width: 200px">
+                                        <span class="input-group-addon">分组</span>
+                                        <select id="apply_group_reply" style="height: 40px;width: 140px">
+                                            <option value="1">家人</option>
+                                            <option value="2">好友</option>
+                                        </select>
+                                    </div>
+                                </h5>
+
+                                <h5 style="text-align: center;padding-top:20px">
+                                    <button type="button" applyId="" id="send_apply_btn_reply" class="btn btn-default">加为好友</button>
+                                    <button type="button" id="back_btn_reply" class="btn btn-default">返回</button>
+                                </h5>
+
+                            </div>
+                            <!--回复好友申请模态框 end-->
+
+                            <div id="custom_system_message_div" class="custom_system_message_div">
                                 <!--消息项-->
                                 <div class="system_message_item">
                                     <div class="system_message_ite_time">2018-06-24 14:01:08</div>
                                     <span class="system_message_text">
                                         账号lastly向你发起了好友请求，消息为
                                         <span class="message_friend_apply">我是你大哥快加我，来聊天</span><br>
-                                        <a class="agree_friend_apply" href="#">同意</a>
-                                        <a class="refuse_friend_apply" href="#">拒绝</a>
-                                        <a class="ignore_friend_apply" href="#">忽略</a>
+                                        <a applyId="" class="agree_friend_apply" href="javascript:void(0);">同意</a>
+                                        <a applyId="" class="refuse_friend_apply" href="javascript:void(0);">拒绝</a>
+                                        <a applyId="" class="ignore_friend_apply" href="javascript:void(0);">忽略</a>
                                     </span>
                                 </div>
 
@@ -392,13 +419,13 @@
                     <h6 style="text-align: center;padding-top: 10px">
                         <div class="input-group" style="width: 200px">
                             <span class="input-group-addon" id="sizing-addon2">备注</span>
-                            <input type="text" class="form-control" aria-describedby="sizing-addon3">
+                            <input type="text" class="form-control" id="apply_remark" aria-describedby="sizing-addon3">
                         </div>
                     </h6>
                     <h5 style="text-align: center;padding-top: 10px">
                         <div class="input-group" style="width: 200px">
                             <span class="input-group-addon">分组</span>
-                            <select style="height: 40px;width: 140px">
+                            <select id="apply_group" style="height: 40px;width: 140px">
                                 <option value="1">家人</option>
                                 <option value="2">好友</option>
                             </select>

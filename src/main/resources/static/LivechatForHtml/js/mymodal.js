@@ -211,20 +211,71 @@ function apply_friend() {
         $("#apply_title").text("申请 【"+ someoneNickname +"】为好友");
         $("#send_apply_btn").attr("fromData",someoneloginId);
         $("#findNewFriendBtn").attr("disabled","true");
-        // $(".apply_btn_custom").off("click");
+        //填充分组信息
+        $("#apply_group").empty();
+        var groupLength = $(".custom-group-item").length;
+        for(var i = 0; i<groupLength; i++){
+            var groupName = $(".custom-group-item").eq(i).find(".group_name").text();
+            var groupId = $(".custom-group-item").eq(i).find(".group_name").attr("groupId");
+            $("#apply_group").append("<option value='"+ groupId +"'>"+groupName+"</option>");
+        }
+
     });
 
     $("#back_btn").on("click",function () {
         $("#findNewFriendBtn").removeAttr("disabled");
         $(".apply_div").slideToggle("fast");
-        // $("#back_btn").off("click");
     });
 
     $("#send_apply_btn").on("click",function () {
+        //获取对方的登陆ID
         var tologinId =  $(this).attr("fromData");
-        alert("向"+tologinId+"发出申请");
+        //获取申请备注
+        var applyRemark = $("#apply_remark").val();
+        console.log(applyRemark+"这是applyRemark")
+        //获取要发送的申请信息
+        var applyMessage = $("#apply_message").val();
+        //获取分组ID
+        var applyGroupId = $("#apply_group").val();
+        //获取时间
+        var sendTime = custom_getdate();
+
+        var fromLoginId = $("#userinfo_loginId").text();
+
+        var someoneNickname = ($(this).parent().parent().find(".friends-nickname-and-username")).text();
+
+
+        stompClient.send("/app/applyfriend", {}, JSON.stringify({'friendApplicationTo': tologinId,
+            'friendApplicationRemark':applyRemark, 'friendApplicationGroup':applyGroupId,
+            'friendApplicationMessage':applyMessage,'friendApplicationTime':sendTime,'friendApplicationFrom':fromLoginId}));
+        alert("向【" + someoneNickname + "】发送好友申请成功");
+        // var formData = new FormData();
+        // formData.append("friendApplicationTo",tologinId);
+        // formData.append("friendApplicationRemark",applyRemark);
+        // formData.append("friendApplicationGroup",applyGroupId);
+        // formData.append("friendApplicationMessage",applyMessage);
+        // formData.append("friendApplicationTime",sendTime);
+        //
+        // $.ajax({
+        //     url:"http://localhost:8080/demo/userinforevise/sendfriendapplication",
+        //     type:"POST",
+        //     data:formData,
+        //     async:true,
+        //     contentType: false,
+        //     processData: false,
+        //     success:function (data) {
+        //         if(data.code == 1){
+        //             alert("向【" + someoneNickname + "】发送好友申请成功");
+        //         }else{
+        //             alert(data.tip);
+        //         }
+        //     },
+        //     error:function (err) {
+        //         alert("连接失败："+err);
+        //     }
+        // });
+
         $(".apply_div").slideToggle("fast");
-        // $("#send_apply_btn").off("click");
     })
 
 }

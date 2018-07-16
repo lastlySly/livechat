@@ -8,8 +8,10 @@ function websocket_connect(tompClient) {
     stompClient.connect({}, function (frame) {
         console.log('Connected: ' + frame);
         stompClient.subscribe('/chat/single/' + mysocket_address, function (result) {
-            // console.log(JSON.parse(result.body));
             showMessage(JSON.parse(result.body));
+        });
+        stompClient.subscribe('/mysystem/applyfriend/' + mysocket_address, function (result) {
+            showFriendApplication(JSON.parse(result.body));
         });
     });
 
@@ -150,4 +152,26 @@ function showMessage(result) {
     }
 
     
+}
+
+//显示接收到的好友申请
+function showFriendApplication(result) {
+
+    var num = $("#friend_application_num").text();
+    $("#friend_application_num").text(parseInt(num)+1);
+    // $("#custom_system_message_div").empty();
+    $("#custom_system_message_div").append('<div class="system_message_item">\n' +
+        '                                    <div class="system_message_ite_time">'+ result.friendApplicationTime +'</div>\n' +
+        '                                    <span class="system_message_text">\n' +
+        '                                        账号'+ result.friendApplicationFrom +'向你发起了好友请求，消息为：\n' +
+        '                                        <span class="message_friend_apply">'+ result.friendApplicationMessage +'</span><br>\n' +
+        '                                        <a applyId="'+ result.friendApplicationFrom +'" class="agree_friend_apply" href="javascript:void(0);">同意</a>\n' +
+        '                                        <a applyId="'+ result.friendApplicationFrom +'" class="refuse_friend_apply" href="javascript:void(0);">拒绝</a>\n' +
+        '                                        <a applyId="'+ result.friendApplicationFrom +'" class="ignore_friend_apply" href="javascript:void(0);">忽略</a>\n' +
+        '                                    </span>\n' +
+        '                                </div>');
+
+    //添加 同意 拒绝 忽略 按钮的点击事件
+    reply_friend_application();
+
 }

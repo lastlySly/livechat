@@ -1,5 +1,6 @@
 package cn.lastlysly.service;
 
+import cn.lastlysly.pojo.FriendApplicationSheet;
 import cn.lastlysly.pojo.MessagesSheet;
 
 /**
@@ -20,4 +21,10 @@ public interface CustomWebSocketService {
      * @param messagesSheet
      */
     void singleChat(MessagesSheet messagesSheet);
+
+    /**
+     * 好友申请
+     * @param friendApplicationSheet
+     */
+    void applyFriend(FriendApplicationSheet friendApplicationSheet);
 }

@@ -9,18 +9,29 @@
 </head>
 <body>
 
+    <button class="btt">测试按钮</button>
+    <div class="sss">
+        <button class="btt2">测试按钮2</button>
+    </div>
+
+
 <script type="text/javascript">
-    var stompClient = null;
-    var socket = new SockJS('http://localhost:8080/demo/endpoint-websocket');
-    stompClient = Stomp.over(socket);
-    console.log(11122);
-    stompClient.connect({}, function (frame) {
-        alert(111);
-        console.log('Connected: ' + frame);
-        stompClient.subscribe('/mysystem/server_info', function (result) {
-            console.log(JSON.parse(result.body));
-        });
+
+    $(".btt").on("click",function () {
+        $(".sss").append('<button class="btt2">测试按钮2</button>')
     });
+
+//    var stompClient = null;
+//    var socket = new SockJS('http://localhost:8080/demo/endpoint-websocket');
+//    stompClient = Stomp.over(socket);
+//    console.log(11122);
+//    stompClient.connect({}, function (frame) {
+//        alert(111);
+//        console.log('Connected: ' + frame);
+//        stompClient.subscribe('/mysystem/server_info', function (result) {
+//            console.log(JSON.parse(result.body));
+//        });
+//    });
 </script>
 
 </body>

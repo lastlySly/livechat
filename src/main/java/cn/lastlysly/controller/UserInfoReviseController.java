@@ -3,11 +3,10 @@ package cn.lastlysly.controller;
 import cn.lastlysly.handler.MyCustomException;
 import cn.lastlysly.myutils.CustomRedisTemplate;
 import cn.lastlysly.myutils.MyResult;
-import cn.lastlysly.pojo.CitySheet;
-import cn.lastlysly.pojo.NationSheet;
-import cn.lastlysly.pojo.ProvinceSheet;
-import cn.lastlysly.pojo.UserinfoSheet;
+import cn.lastlysly.pojo.*;
 import cn.lastlysly.service.AddressService;
+import cn.lastlysly.service.CustomMessageService;
+import cn.lastlysly.service.CustomWebSocketService;
 import cn.lastlysly.service.UserinfoService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -36,6 +35,12 @@ public class UserInfoReviseController {
 
     @Autowired
     private CustomRedisTemplate customRedisTemplate;
+
+    @Autowired
+    private CustomWebSocketService customWebSocketService;
+
+    @Autowired
+    private CustomMessageService customMessageService;
 
     /**
      * 修改用户信息功能
@@ -66,6 +71,42 @@ public class UserInfoReviseController {
         }
         return new MyResult(0,"修改失败",null);
     }
+
+
+    /**
+     * 发送好友申请
+     * @param friendApplicationSheet
+     * @return
+     */
+    @CrossOrigin
+    @RequestMapping(value = "/sendfriendapplication",method = RequestMethod.POST)
+    @ResponseBody
+    public MyResult sendFriendApplication(FriendApplicationSheet friendApplicationSheet){
+        Subject subject = SecurityUtils.getSubject();
+        friendApplicationSheet.setFriendApplicationFrom(subject.getPrincipal().toString());
+        System.out.println(friendApplicationSheet.getFriendApplicationTo()+"11111");
+        customWebSocketService.applyFriend(friendApplicationSheet);
+        System.out.println(friendApplicationSheet+"22222");
+        return new MyResult(1,"发送请求成功",null);
+    }
+
+    /**
+     * 处理好友请求
+     * @param friendApplicationSheet
+     * @return
+     */
+    @CrossOrigin
+    @RequestMapping(value = "/dealfriendapplication",method = RequestMethod.POST)
+    @ResponseBody
+    public MyResult dealFriendApplication(FriendApplicationSheet friendApplicationSheet){
+        boolean isDeal = customMessageService.dealFriendApplication(friendApplicationSheet);
+        if (isDeal){
+            return new MyResult(1,"操作成功",null);
+        }
+        return new MyResult(0,"操作失败",null);
+
+    }
+
 
 
     /**

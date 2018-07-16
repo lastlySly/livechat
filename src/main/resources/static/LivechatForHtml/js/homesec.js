@@ -94,7 +94,7 @@ function system_message_div() {
         }
         $("#system_message_top_name").text("系统消息");
 
-    })
+    });
 
     $("#btn_system_friend_apply").on("click",function () {
         var flag =  $("#system_message_div").css('display');
@@ -104,7 +104,91 @@ function system_message_div() {
         }
         $("#system_message_top_name").text("好友请求");
 
-    })
+    });
 
+
+}
+
+//好友申请回复模态框
+function reply_friend_application() {
+    $(".agree_friend_apply").off("click");
+    $(".refuse_friend_apply").off("click");
+    $(".ignore_friend_apply").off("click");
+    $("#back_btn_reply").off("click");
+    $("#send_apply_btn_reply").off("click");
+
+    //同意
+    $(".agree_friend_apply").on("click",function () {
+        //获取请求人的登陆ID
+        var applyLoginId =  $(this).attr("applyId");
+        $("#send_apply_btn_reply").attr("applyId",applyLoginId);
+        $("#apply_reply_title").text("同意添加"+ applyLoginId +"为好友");
+        //填充分组信息
+        $("#apply_group_reply").empty();
+        var groupLength = $(".custom-group-item").length;
+        for(var i = 0; i<groupLength; i++){
+            var groupName = $(".custom-group-item").eq(i).find(".group_name").text();
+            var groupId = $(".custom-group-item").eq(i).find(".group_name").attr("groupId");
+            $("#apply_group_reply").append("<option value='"+ groupId +"'>"+groupName+"</option>");
+        }
+        $("#friend_application_reply_div").slideToggle("fast");
+
+    });
+    //忽略
+    $(".ignore_friend_apply").on("click",function () {
+        alert("忽略了（正在施工）")
+    });
+    //拒绝
+    $(".refuse_friend_apply").on("click",function () {
+        alert("拒绝了（正在施工）")
+    });
+
+    //同意弹出模态框的返回按钮
+    $("#back_btn_reply").on("click",function () {
+        $("#friend_application_reply_div").slideToggle("fast");
+    });
+    //同意弹出模态框的加为好友按钮
+    $("#send_apply_btn_reply").on("click",function () {
+
+        //获取分组ID
+        var applyGroupIdReply = $("#apply_group_reply").val();
+        //获取对方登陆ID
+        var applyLoginIdReply = $(this).attr("applyId");
+        //获取备注
+        var applyNickNameReply = $("#apply_remark_reply").val();
+        //获取自己的登陆ID
+        var myLoginIdReply =  $("#userinfo_loginId").text();
+        //设置状态
+        var applyStatus = "同意";
+
+        var formData = new FormData();
+        formData.append("friendApplicationGroup",applyGroupIdReply);
+        formData.append("friendApplicationFrom",applyLoginIdReply);
+        formData.append("friendApplicationTo",myLoginIdReply);
+        formData.append("friendApplicationRemark",applyNickNameReply);
+        formData.append("friendApplicationStatus",applyStatus);
+        $.ajax({
+            url:"http://localhost:8080/demo/userinforevise/dealfriendapplication",
+            type:"POST",
+            data:formData,
+            async:true,
+            contentType: false,
+            processData: false,
+            success:function (data) {
+                if(data.code == 1){
+                    alert("操作成功");
+                }else{
+                    alert(data.tip);
+                }
+            },
+            error:function (err) {
+                alert("连接失败："+err);
+            }
+                
+        });
+
+
+        $("#friend_application_reply_div").slideToggle("fast");
+    });
 
 }

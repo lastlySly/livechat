@@ -205,3 +205,18 @@
     top: 30px;
     width: 225px;
 }
+
+/*好友申请回复*/
+.friend_application_reply_div{
+    width: 350px;
+    height:200px;
+    /*background-color: #F7F7F7;*/
+    background: url("../img/Starry.jpg") center;
+    position: absolute;
+    top: 200px;
+    left: 190px;
+    border-radius: 20px;
+    text-align: center;
+    z-index: 100;
+    display: none;
+}
