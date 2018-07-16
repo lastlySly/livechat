@@ -84,9 +84,10 @@ public class UserInfoReviseController {
     public MyResult sendFriendApplication(FriendApplicationSheet friendApplicationSheet){
         Subject subject = SecurityUtils.getSubject();
         friendApplicationSheet.setFriendApplicationFrom(subject.getPrincipal().toString());
-        System.out.println(friendApplicationSheet.getFriendApplicationTo()+"11111");
-        customWebSocketService.applyFriend(friendApplicationSheet);
-        System.out.println(friendApplicationSheet+"22222");
+        boolean isSave =  customMessageService.saveFriendApplication(friendApplicationSheet);
+        if (isSave){
+            customWebSocketService.applyFriend(friendApplicationSheet);
+        }
         return new MyResult(1,"发送请求成功",null);
     }
 

@@ -232,48 +232,54 @@ function apply_friend() {
         var tologinId =  $(this).attr("fromData");
         //获取申请备注
         var applyRemark = $("#apply_remark").val();
-        console.log(applyRemark+"这是applyRemark")
+
         //获取要发送的申请信息
         var applyMessage = $("#apply_message").val();
         //获取分组ID
         var applyGroupId = $("#apply_group").val();
         //获取时间
         var sendTime = custom_getdate();
-
+        //获取自己的登陆ID
         var fromLoginId = $("#userinfo_loginId").text();
 
-        var someoneNickname = ($(this).parent().parent().find(".friends-nickname-and-username")).text();
+        var someoneNickname = ($(".apply_btn_custom").parent().parent().find(".friends-nickname-and-username")).text();
 
+        // stompClient.send("/app/applyfriend", {}, JSON.stringify({'friendApplicationTo': tologinId,
+        //     'friendApplicationRemark':applyRemark, 'friendApplicationGroup':applyGroupId,
+        //     'friendApplicationMessage':applyMessage,'friendApplicationTime':sendTime,'friendApplicationFrom':fromLoginId}));
+        // alert("向【" + someoneNickname + "】发送好友申请成功");
+        var formData = new FormData();
+        formData.append("friendApplicationTo",tologinId);
+        formData.append("friendApplicationRemark",applyRemark);
+        formData.append("friendApplicationGroup",applyGroupId);
+        formData.append("friendApplicationMessage",applyMessage);
+        formData.append("friendApplicationTime",sendTime);
 
-        stompClient.send("/app/applyfriend", {}, JSON.stringify({'friendApplicationTo': tologinId,
-            'friendApplicationRemark':applyRemark, 'friendApplicationGroup':applyGroupId,
-            'friendApplicationMessage':applyMessage,'friendApplicationTime':sendTime,'friendApplicationFrom':fromLoginId}));
-        alert("向【" + someoneNickname + "】发送好友申请成功");
-        // var formData = new FormData();
-        // formData.append("friendApplicationTo",tologinId);
-        // formData.append("friendApplicationRemark",applyRemark);
-        // formData.append("friendApplicationGroup",applyGroupId);
-        // formData.append("friendApplicationMessage",applyMessage);
-        // formData.append("friendApplicationTime",sendTime);
-        //
-        // $.ajax({
-        //     url:"http://localhost:8080/demo/userinforevise/sendfriendapplication",
-        //     type:"POST",
-        //     data:formData,
-        //     async:true,
-        //     contentType: false,
-        //     processData: false,
-        //     success:function (data) {
-        //         if(data.code == 1){
-        //             alert("向【" + someoneNickname + "】发送好友申请成功");
-        //         }else{
-        //             alert(data.tip);
-        //         }
-        //     },
-        //     error:function (err) {
-        //         alert("连接失败："+err);
-        //     }
-        // });
+        $.ajax({
+            url:"http://localhost:8080/demo/userinforevise/sendfriendapplication",
+            type:"POST",
+            data:formData,
+            async:true,
+            contentType: false,
+            processData: false,
+            success:function (data) {
+                if(data.code == 1){
+                    $("#custom_system_message_div").append('<div class="system_message_item">\n' +
+                        '                                    <div class="system_message_ite_time">' +sendTime+ '</div>\n' +
+                        '                                    <span class="system_message_text">\n' +
+                        '<a class="" href="javascript:void(0);">等待验证</a>' +
+                        '                                        向lastly发起了好友请求<br>\n' +
+                        '                                    </span>\n' +
+                        '                                </div>');
+                    alert("向【" + someoneNickname + "】发送好友申请成功");
+                }else{
+                    alert(data.tip);
+                }
+            },
+            error:function (err) {
+                alert("连接失败："+err);
+            }
+        });
 
         $(".apply_div").slideToggle("fast");
     })

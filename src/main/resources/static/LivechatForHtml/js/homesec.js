@@ -131,7 +131,8 @@ function reply_friend_application() {
             var groupId = $(".custom-group-item").eq(i).find(".group_name").attr("groupId");
             $("#apply_group_reply").append("<option value='"+ groupId +"'>"+groupName+"</option>");
         }
-        $("#friend_application_reply_div").slideToggle("fast");
+        $(".friend_application_reply_div_modal").slideToggle("fast");
+        // $("#friend_application_reply_div").slideToggle("fast");
 
     });
     //忽略
@@ -140,12 +141,13 @@ function reply_friend_application() {
     });
     //拒绝
     $(".refuse_friend_apply").on("click",function () {
-        alert("拒绝了（正在施工）")
+        alert("（正在施工）")
     });
 
     //同意弹出模态框的返回按钮
     $("#back_btn_reply").on("click",function () {
-        $("#friend_application_reply_div").slideToggle("fast");
+        // $("#friend_application_reply_div").slideToggle("fast");
+        $(".friend_application_reply_div_modal").slideToggle("fast");
     });
     //同意弹出模态框的加为好友按钮
     $("#send_apply_btn_reply").on("click",function () {
@@ -160,7 +162,7 @@ function reply_friend_application() {
         var myLoginIdReply =  $("#userinfo_loginId").text();
         //设置状态
         var applyStatus = "同意";
-
+        var sendTime = custom_getdate();
         var formData = new FormData();
         formData.append("friendApplicationGroup",applyGroupIdReply);
         formData.append("friendApplicationFrom",applyLoginIdReply);
@@ -177,6 +179,9 @@ function reply_friend_application() {
             success:function (data) {
                 if(data.code == 1){
                     alert("操作成功");
+                    sendMessage(applyLoginIdReply,"我们已经是好友了，快来一起聊天吧",sendTime,2);
+                    //刷新分组列表和好友列表
+                    getGroupFun();
                 }else{
                     alert(data.tip);
                 }

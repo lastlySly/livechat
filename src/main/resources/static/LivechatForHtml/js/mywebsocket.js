@@ -21,11 +21,11 @@ function websocket_connect(tompClient) {
  * 发送信息
  */
 
-function sendMessage(socketaddress,myMessage,sendTime) {
+function sendMessage(socketaddress,myMessage,sendTime,typeId) {
     //自己的ID
     var mysocketaddress = $("#userinfo_revise_btn").attr("dataId");
     stompClient.send("/app/singlechat", {}, JSON.stringify({'messagesFromLoginid': mysocketaddress,
-        'messagesToLoginid':socketaddress, 'messagesPostmessages':myMessage,'messagesTime':sendTime,'messagesTypeid':3}));
+        'messagesToLoginid':socketaddress, 'messagesPostmessages':myMessage,'messagesTime':sendTime,'messagesTypeid':typeId}));
 }
 
 
@@ -38,7 +38,7 @@ function sendMessageBtn() {
         var head_img = $("#head-img").attr("src");
         var myMessage = $("#edit").froalaEditor('html.get');
         var sendTime = custom_getdate();
-        sendMessage(socketaddress,myMessage,sendTime);
+        sendMessage(socketaddress,myMessage,sendTime,3);
         $("#custom-messages-ul").append('<dl class="row message-contain-item">\n' +
             '                                        <div class="message-contain-item-time">' + sendTime + '</div>\n' +
             '                                        <dt class="col-md-1 col-md-push-11">\n' +
@@ -63,6 +63,11 @@ function sendMessageBtn() {
 
 //显示接收的消息
 function showMessage(result) {
+    //如果消息为刚申请成为好友的好友发来的消息（消息状态为2）则先刷新分组列表和好友列表
+    if(result.messagesTypeid == 2){
+        //刷新分组列表和好友列表
+        getGroupFun();
+    }
 
     if(result.messagesFromLoginid ==$("#send-to-btn").attr("socketaddress") ){
         var friendsHeadImg =  $("#chatting-friend-remarks").attr("data-img");
@@ -92,17 +97,24 @@ function showMessage(result) {
                 if (data.code == 1){
 
                     var remark = null;
-                    var friendsNum = $("#custom-friend-item").length;
+                    var friendsNum = $(".custom-friend-item").length;
+                    console.log(friendsNum+"====")
                     for(var i=0; i< friendsNum ;i++){
-                        var loginId = $("#custom-friend-item").eq(i).attr("socketaddress");
-                        if(loginId = result.messagesFromLoginid){
-                            remark = $("#custom-friend-item").eq(i).find(".list-remarks").text();
+                        var loginId = $(".custom-friend-item").eq(i).attr("socketaddress");
+                        if(loginId == result.messagesFromLoginid){
+                            remark = $(".custom-friend-item").eq(i).find(".list-remarks").text();
+                            console.log("===="+remark);
                             break;
                         }
+                        console.log("===="+remark);
                     }
                     if(remark == null){
                         remark = data.data[0].userNickname + "(陌生人)";
                     }
+
+
+
+
 
                     /*删除已存在的该项*/
                     var chatting_num = $(".custom-chat-friend-item").length;
@@ -110,7 +122,6 @@ function showMessage(result) {
                         var data_id = $(".custom-chat-friend-item").eq(i).attr("data-id");
 
                         if(data_id == data.data[0].userLoginId){
-                            console.log("存在，删除")
                             $(".custom-chat-friend-item").eq(i).remove();
                             break;
                         }
@@ -123,7 +134,7 @@ function showMessage(result) {
                         '                                    <dt class="list-remarks">'+ remark +'</dt>\n' +
                         '                                    <dd class="list-motto">'+ data.data[0].userMotto +'</dd>\n' +
                         '                                    <span class="badge custom-num-tip">1</span>\n' +
-                        '                                    <span class="badge custom-time">10:45</span>\n' +
+                        '                                    <span class="badge custom-time">'+ result.messagesTime +'</span>\n' +
                         '                                    <button class="custom-del glyphicon glyphicon-remove-sign"></button>\n' +
                         '                                </dl>\n' +
                         '                            </li>'
