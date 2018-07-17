@@ -108,6 +108,25 @@ public class UserInfoReviseController {
 
     }
 
+    /**
+     * 根据登陆ID获取与其相关的好友请求
+     * @param
+     * @param page
+     * @return
+     */
+    @CrossOrigin
+    @RequestMapping(value = "/listfriendapplication",method = RequestMethod.POST)
+    @ResponseBody
+    public MyResult listApplicationByLoginId(@RequestParam(value = "page",required = false) Integer page){
+
+        String loginId = SecurityUtils.getSubject().getPrincipal().toString();
+        if(page == null){
+            page = 1;
+        }
+        List<FriendApplicationSheet> friendApplicationSheetList = customMessageService.listApplicationByLoginId(page,loginId);
+        return new MyResult(1,"查询好友申请信息成功",friendApplicationSheetList);
+    }
+
 
 
     /**

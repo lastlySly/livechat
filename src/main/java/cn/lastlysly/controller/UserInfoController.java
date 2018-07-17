@@ -145,7 +145,7 @@ public class UserInfoController {
 
             session.setAttribute("userInfo",resUser);
             //设置session超时时间
-            session.setTimeout(1500000);
+            session.setTimeout(3000000);
             //访问时间(创建session的时间和最后访问session的时间)
             logger.info("session获取主机号：{}，session获取sessionID：{}，创建session时间,最后访问session的时间：{}，更新会话时间：{}",
                     session.getHost(),session.getId(),session.getLastAccessTime(),session.getStartTimestamp());

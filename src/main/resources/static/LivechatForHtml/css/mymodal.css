@@ -232,3 +232,34 @@
     z-index: 100;
     /*display: none;*/
 }
+
+.refuse_friend_application_reply_modal{
+    width: 100%;
+    height: 555px;
+    background-color: rgba(0,0,0,0.3);
+    display: none;
+    z-index: 100;
+    border-radius: 20px;
+    position: absolute;
+    top:50px;
+    left: 0px;
+}
+
+.refuse_friend_application_reply_div{
+    width: 350px;
+    height:200px;
+    /*background-color: #F7F7F7;*/
+    background: url("../img/Starry.jpg") center;
+    position: absolute;
+    top: 150px;
+    left: 190px;
+    border-radius: 20px;
+    text-align: center;
+    z-index: 100;
+    /*display: none;*/
+}
+.refuse_apply_message{
+    width: 225px;
+    margin: 20px auto 0px;
+
+}

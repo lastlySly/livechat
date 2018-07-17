@@ -40,6 +40,18 @@
        <result column="user_age" property="customFriendsAge" /><!--好友年龄-->
     </resultMap>
 
+    <resultMap id="MyFriendApplicationBaseResultMap" type="cn.lastlysly.pojo.FriendApplicationSheet">
+        <result column="friend_application_id" jdbcType="INTEGER" property="friendApplicationId" />
+        <result column="friend_application_from" jdbcType="VARCHAR" property="friendApplicationFrom" />
+        <result column="friend_application_to" jdbcType="VARCHAR" property="friendApplicationTo" />
+        <result column="friend_application_remark" jdbcType="VARCHAR" property="friendApplicationRemark" />
+        <result column="friend_application_group" jdbcType="INTEGER" property="friendApplicationGroup" />
+        <result column="friend_application_time" jdbcType="TIMESTAMP" property="friendApplicationTime" />
+        <result column="friend_application_message" jdbcType="VARCHAR" property="friendApplicationMessage" />
+        <result column="friend_application_status" jdbcType="VARCHAR" property="friendApplicationStatus" />
+        <result column="friend_application_refuse_message" jdbcType="VARCHAR" property="friendApplicationRefuseMessage" />
+    </resultMap>
+
     <!--通过用户ID获取好友列表-->
     <select id="selectCustomFriendsInfoByUserId" parameterType="java.util.Map" resultMap="CustomFriendsResultMap">
 
@@ -63,6 +75,13 @@
         select * from userinfo_sheet where
         user_nickname = #{loginIdOrNickname}
         or user_login_id = #{loginIdOrNickname}
+    </select>
+
+    <!--据登陆ID获取与其相关的好友申请-->
+    <select id="listApplicationByLoginId" parameterType="java.util.Map" resultMap="MyFriendApplicationBaseResultMap">
+        select * from friend_application_sheet where friend_application_from = #{loginId} or
+        friend_application_to=#{loginId} order by friend_application_time desc
+
     </select>
 
 </mapper>

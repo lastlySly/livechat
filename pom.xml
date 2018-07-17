@@ -140,6 +140,13 @@
 			<optional>true</optional>
 		</dependency>
 
+		<!-- springboot分页插件 -->
+		<dependency>
+			<groupId>com.github.pagehelper</groupId>
+			<artifactId>pagehelper-spring-boot-starter</artifactId>
+			<version>1.2.3</version>
+		</dependency>
+
 
 
 		<!--验证码插件需要依赖这个Json-->

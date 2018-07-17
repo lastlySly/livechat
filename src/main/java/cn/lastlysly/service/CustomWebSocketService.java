@@ -27,4 +27,10 @@ public interface CustomWebSocketService {
      * @param friendApplicationSheet
      */
     void applyFriend(FriendApplicationSheet friendApplicationSheet);
+
+    /**
+     * 回复好友申请
+     * @param friendApplicationSheet
+     */
+    void replyFriendApplication(FriendApplicationSheet friendApplicationSheet);
 }

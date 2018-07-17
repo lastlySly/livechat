@@ -634,6 +634,76 @@ public class FriendApplicationSheetExample {
             addCriterion("friend_application_status not between", value1, value2, "friendApplicationStatus");
             return (Criteria) this;
         }
+
+        public Criteria andFriendApplicationRefuseMessageIsNull() {
+            addCriterion("friend_application_refuse_message is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFriendApplicationRefuseMessageIsNotNull() {
+            addCriterion("friend_application_refuse_message is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFriendApplicationRefuseMessageEqualTo(String value) {
+            addCriterion("friend_application_refuse_message =", value, "friendApplicationRefuseMessage");
+            return (Criteria) this;
+        }
+
+        public Criteria andFriendApplicationRefuseMessageNotEqualTo(String value) {
+            addCriterion("friend_application_refuse_message <>", value, "friendApplicationRefuseMessage");
+            return (Criteria) this;
+        }
+
+        public Criteria andFriendApplicationRefuseMessageGreaterThan(String value) {
+            addCriterion("friend_application_refuse_message >", value, "friendApplicationRefuseMessage");
+            return (Criteria) this;
+        }
+
+        public Criteria andFriendApplicationRefuseMessageGreaterThanOrEqualTo(String value) {
+            addCriterion("friend_application_refuse_message >=", value, "friendApplicationRefuseMessage");
+            return (Criteria) this;
+        }
+
+        public Criteria andFriendApplicationRefuseMessageLessThan(String value) {
+            addCriterion("friend_application_refuse_message <", value, "friendApplicationRefuseMessage");
+            return (Criteria) this;
+        }
+
+        public Criteria andFriendApplicationRefuseMessageLessThanOrEqualTo(String value) {
+            addCriterion("friend_application_refuse_message <=", value, "friendApplicationRefuseMessage");
+            return (Criteria) this;
+        }
+
+        public Criteria andFriendApplicationRefuseMessageLike(String value) {
+            addCriterion("friend_application_refuse_message like", value, "friendApplicationRefuseMessage");
+            return (Criteria) this;
+        }
+
+        public Criteria andFriendApplicationRefuseMessageNotLike(String value) {
+            addCriterion("friend_application_refuse_message not like", value, "friendApplicationRefuseMessage");
+            return (Criteria) this;
+        }
+
+        public Criteria andFriendApplicationRefuseMessageIn(List<String> values) {
+            addCriterion("friend_application_refuse_message in", values, "friendApplicationRefuseMessage");
+            return (Criteria) this;
+        }
+
+        public Criteria andFriendApplicationRefuseMessageNotIn(List<String> values) {
+            addCriterion("friend_application_refuse_message not in", values, "friendApplicationRefuseMessage");
+            return (Criteria) this;
+        }
+
+        public Criteria andFriendApplicationRefuseMessageBetween(String value1, String value2) {
+            addCriterion("friend_application_refuse_message between", value1, value2, "friendApplicationRefuseMessage");
+            return (Criteria) this;
+        }
+
+        public Criteria andFriendApplicationRefuseMessageNotBetween(String value1, String value2) {
+            addCriterion("friend_application_refuse_message not between", value1, value2, "friendApplicationRefuseMessage");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

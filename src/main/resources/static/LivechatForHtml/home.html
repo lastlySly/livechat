@@ -250,30 +250,46 @@
                             <!--回复好友申请模态框 start-->
                             <div class="friend_application_reply_div_modal">
                                 <div id="friend_application_reply_div" class="friend_application_reply_div">
-                                <h4 id="apply_reply_title" class="apply_reply_title" style="padding-top: 15px">同意添加lastlysly为好友</h4>
-                                <h6 style="text-align: center;padding-top: 10px;padding-left: 77px">
-                                    <div class="input-group" style="width: 200px">
-                                        <span class="input-group-addon">备注</span>
-                                        <input type="text" class="form-control" id="apply_remark_reply" aria-describedby="sizing-addon3">
-                                    </div>
-                                </h6>
-                                <h5 style="text-align: center;padding-top: 10px;padding-left: 77px">
-                                    <div class="input-group" style="width: 200px">
-                                        <span class="input-group-addon">分组</span>
-                                        <select id="apply_group_reply" style="height: 40px;width: 140px">
-                                            <option value="1">家人</option>
-                                            <option value="2">好友</option>
-                                        </select>
-                                    </div>
-                                </h5>
+                                    <h4 id="apply_reply_title" class="apply_reply_title" style="padding-top: 15px">同意添加lastlysly为好友</h4>
+                                    <h6 style="text-align: center;padding-top: 10px;padding-left: 77px">
+                                        <div class="input-group" style="width: 200px">
+                                            <span class="input-group-addon">备注</span>
+                                            <input type="text" class="form-control" id="apply_remark_reply" aria-describedby="sizing-addon3">
+                                        </div>
+                                    </h6>
+                                    <h5 style="text-align: center;padding-top: 10px;padding-left: 77px">
+                                        <div class="input-group" style="width: 200px">
+                                            <span class="input-group-addon">分组</span>
+                                            <select id="apply_group_reply" style="height: 40px;width: 140px">
+                                                <option value="1">家人</option>
+                                                <option value="2">好友</option>
+                                            </select>
+                                        </div>
+                                    </h5>
 
-                                <h5 style="text-align: center;padding-top:20px">
-                                    <button type="button" applyId="" id="send_apply_btn_reply" class="btn btn-default">加为好友</button>
-                                    <button type="button" id="back_btn_reply" class="btn btn-default">返回</button>
-                                </h5>
+                                    <h5 style="text-align: center;padding-top:20px">
+                                        <button type="button" applyId="" id="send_apply_btn_reply" class="btn btn-default">加为好友</button>
+                                        <button type="button" id="back_btn_reply" class="btn btn-default">返回</button>
+                                    </h5>
+                                </div>
+                            </div>
 
+                            <div class="refuse_friend_application_reply_modal">
+                                <div id="refuse_friend_application_reply_div" class="refuse_friend_application_reply_div">
+                                    <h4 id="refuse_apply_reply_title" class="apply_reply_title" style="padding-top: 15px">拒绝lastlysly的好友请求</h4>
+                                    <div class="form-group refuse_apply_message">
+                                        <span class="input-group-addon">拒绝原因</span>
+                                        <textarea class="form-control" id="resufe_message" placeholder="随便说一句" rows="2"></textarea>
+                                    </div>
+                                    <h5 style="text-align: center;padding-top:15px">
+                                        <button type="button" applyId="" id="refuse_btn" class="btn btn-default">拒绝</button>
+                                        <button type="button" id="refuse_back_btn" class="btn btn-default">返回</button>
+                                    </h5>
+
+                                </div>
                             </div>
-                            </div>
+
+
                             <!--回复好友申请模态框 end-->
 
                             <div id="custom_system_message_div" class="custom_system_message_div">
@@ -513,6 +529,7 @@
 
 
     <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/jquery.cookie.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/sockjs.js"></script>
     <script src="js/stomp.js"></script>
@@ -521,6 +538,7 @@
     <script src="js/mymodal.js"></script>
     <script src="js/china_area_data.js"></script>
     <script src="js/mywebsocket.js"></script>
+    <script src="js/initialloading.js"></script>
     <!--<script src="js/jquery1.11.0.min.js"></script>-->
     <script src="froala_editor_2.7.0/codemirror.min.js"></script>
     <script src="froala_editor_2.7.0/xml.min.js"></script>

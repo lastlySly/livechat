@@ -10,6 +10,7 @@
     <result column="friend_application_time" jdbcType="TIMESTAMP" property="friendApplicationTime" />
     <result column="friend_application_message" jdbcType="VARCHAR" property="friendApplicationMessage" />
     <result column="friend_application_status" jdbcType="VARCHAR" property="friendApplicationStatus" />
+    <result column="friend_application_refuse_message" jdbcType="VARCHAR" property="friendApplicationRefuseMessage" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -71,7 +72,8 @@
   </sql>
   <sql id="Base_Column_List">
     friend_application_id, friend_application_from, friend_application_to, friend_application_remark, 
-    friend_application_group, friend_application_time, friend_application_message, friend_application_status
+    friend_application_group, friend_application_time, friend_application_message, friend_application_status, 
+    friend_application_refuse_message
   </sql>
   <select id="selectByExample" parameterType="cn.lastlysly.pojo.FriendApplicationSheetExample" resultMap="BaseResultMap">
     select
@@ -97,13 +99,13 @@
     insert into friend_application_sheet (friend_application_id, friend_application_from, 
       friend_application_to, friend_application_remark, 
       friend_application_group, friend_application_time, 
-      friend_application_message, friend_application_status
-      )
+      friend_application_message, friend_application_status, 
+      friend_application_refuse_message)
     values (#{friendApplicationId,jdbcType=INTEGER}, #{friendApplicationFrom,jdbcType=VARCHAR}, 
       #{friendApplicationTo,jdbcType=VARCHAR}, #{friendApplicationRemark,jdbcType=VARCHAR}, 
       #{friendApplicationGroup,jdbcType=INTEGER}, #{friendApplicationTime,jdbcType=TIMESTAMP}, 
-      #{friendApplicationMessage,jdbcType=VARCHAR}, #{friendApplicationStatus,jdbcType=VARCHAR}
-      )
+      #{friendApplicationMessage,jdbcType=VARCHAR}, #{friendApplicationStatus,jdbcType=VARCHAR}, 
+      #{friendApplicationRefuseMessage,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.lastlysly.pojo.FriendApplicationSheet">
     insert into friend_application_sheet
@@ -132,6 +134,9 @@
       <if test="friendApplicationStatus != null">
         friend_application_status,
       </if>
+      <if test="friendApplicationRefuseMessage != null">
+        friend_application_refuse_message,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="friendApplicationId != null">
@@ -157,6 +162,9 @@
       </if>
       <if test="friendApplicationStatus != null">
         #{friendApplicationStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="friendApplicationRefuseMessage != null">
+        #{friendApplicationRefuseMessage,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -193,6 +201,9 @@
       <if test="record.friendApplicationStatus != null">
         friend_application_status = #{record.friendApplicationStatus,jdbcType=VARCHAR},
       </if>
+      <if test="record.friendApplicationRefuseMessage != null">
+        friend_application_refuse_message = #{record.friendApplicationRefuseMessage,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -207,7 +218,8 @@
       friend_application_group = #{record.friendApplicationGroup,jdbcType=INTEGER},
       friend_application_time = #{record.friendApplicationTime,jdbcType=TIMESTAMP},
       friend_application_message = #{record.friendApplicationMessage,jdbcType=VARCHAR},
-      friend_application_status = #{record.friendApplicationStatus,jdbcType=VARCHAR}
+      friend_application_status = #{record.friendApplicationStatus,jdbcType=VARCHAR},
+      friend_application_refuse_message = #{record.friendApplicationRefuseMessage,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>

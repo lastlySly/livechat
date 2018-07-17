@@ -58,8 +58,18 @@ spring:
     servlet:
       content-type: text/html
 
+
+# 分页配置
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql
+
+
 # 自定义目录路径
 cn:
   lastlysly:
     windows-path: f:/myproject
     linux-path: /myproject
+

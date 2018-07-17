@@ -206,7 +206,9 @@ function login(captchaObj) {
                 success:function (data) {
                     if (data.code == 1){
                         alert(data.tip);
-                        console.log(data);
+                        // console.log(data);
+                        $.cookie('_userLoginId', login_login_id, {path: '/' });
+                        alert($.cookie('_userLoginId'));
                         window.location.href = "../home.html";
                     }else{
                         alert(data.tip)

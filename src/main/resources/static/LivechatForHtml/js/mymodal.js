@@ -268,7 +268,7 @@ function apply_friend() {
                         '                                    <div class="system_message_ite_time">' +sendTime+ '</div>\n' +
                         '                                    <span class="system_message_text">\n' +
                         '<a class="" href="javascript:void(0);">等待验证</a>' +
-                        '                                        向lastly发起了好友请求<br>\n' +
+                        '                                        向'+someoneNickname+'发起了好友请求<br>\n' +
                         '                                    </span>\n' +
                         '                                </div>');
                     alert("向【" + someoneNickname + "】发送好友申请成功");

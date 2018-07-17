@@ -24,6 +24,8 @@ public class FriendApplicationSheet {
 
     private String friendApplicationStatus;
 
+    private String friendApplicationRefuseMessage;
+
     public Integer getFriendApplicationId() {
         return friendApplicationId;
     }
@@ -86,5 +88,13 @@ public class FriendApplicationSheet {
 
     public void setFriendApplicationStatus(String friendApplicationStatus) {
         this.friendApplicationStatus = friendApplicationStatus == null ? null : friendApplicationStatus.trim();
+    }
+
+    public String getFriendApplicationRefuseMessage() {
+        return friendApplicationRefuseMessage;
+    }
+
+    public void setFriendApplicationRefuseMessage(String friendApplicationRefuseMessage) {
+        this.friendApplicationRefuseMessage = friendApplicationRefuseMessage == null ? null : friendApplicationRefuseMessage.trim();
     }
 }

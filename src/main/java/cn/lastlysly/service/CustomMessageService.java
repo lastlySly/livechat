@@ -2,6 +2,8 @@ package cn.lastlysly.service;
 
 import cn.lastlysly.pojo.FriendApplicationSheet;
 
+import java.util.List;
+
 /**
  * @author lastlySly
  * @GitHub https://github.com/lastlySly
@@ -23,4 +25,10 @@ public interface CustomMessageService {
      * @return
      */
     boolean dealFriendApplication(FriendApplicationSheet friendApplicationSheet);
+
+    /**
+     * 根据登陆ID获取与其相关的好友申请
+     * @return
+     */
+    List<FriendApplicationSheet> listApplicationByLoginId(int page,String loginId);
 }

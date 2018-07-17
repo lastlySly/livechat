@@ -59,4 +59,15 @@ public class CustomWebSocketServiceImpl implements CustomWebSocketService {
     public void applyFriend(FriendApplicationSheet friendApplicationSheet) {
         simpMessagingTemplate.convertAndSend("/mysystem/applyfriend/" + friendApplicationSheet.getFriendApplicationTo(),friendApplicationSheet);
     }
+
+    /**
+     * 回复好友申请
+     * @param friendApplicationSheet
+     */
+    @Override
+    public void replyFriendApplication(FriendApplicationSheet friendApplicationSheet) {
+        simpMessagingTemplate.convertAndSend("/mysystem/applyfriend/" + friendApplicationSheet.getFriendApplicationFrom(),friendApplicationSheet);
+    }
+
+
 }

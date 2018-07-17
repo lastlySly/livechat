@@ -1,6 +1,7 @@
 package cn.lastlysly.mapper;
 
 import cn.lastlysly.pojo.CustomFriendsInfo;
+import cn.lastlysly.pojo.FriendApplicationSheet;
 import cn.lastlysly.pojo.UserinfoSheet;
 
 import java.util.List;
@@ -33,4 +34,12 @@ public interface CustomMapper {
      * @return
      */
     List<UserinfoSheet> selectNewFriendsByLoginIdOrNickname(Map<String,String> map);
+
+    /**
+     * 根据登陆ID获取与其相关的好友申请
+     * @return
+     */
+    List<FriendApplicationSheet> listApplicationByLoginId(Map<String,String> map);
+
+
 }
