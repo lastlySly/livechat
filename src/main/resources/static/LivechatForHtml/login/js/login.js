@@ -78,7 +78,7 @@ function commit_register() {
         var reg_loginid = $(this).val();
         var parent_div = $(this).parent();
         if (reg_loginid != "" && loginid_regexp.test(reg_loginid)){
-            $.post("http://localhost:8080/demo/userdeal/loginidisuse",{"userLoginId":reg_loginid},function (data) {
+            $.post(serverUrl+"/userdeal/loginidisuse",{"userLoginId":reg_loginid},function (data) {
                 if(data.code == "1"){
                     tip_change(true,parent_div,null);
                 }else{
@@ -152,7 +152,7 @@ function commit_register() {
         formData.append("userNickname",reg_nickname);
 
         $.ajax({
-            url:"http://localhost:8080/demo/userdeal/userregister",
+            url:serverUrl+"/userdeal/userregister",
             type: 'POST',
             data:formData,
             async:true,//异步请求
@@ -196,7 +196,7 @@ function login(captchaObj) {
             formData.append("userPassword",login_password);
 
             $.ajax({
-                url:"http://localhost:8080/demo/userdeal/login",
+                url:serverUrl+"/userdeal/login",
                 type:"POST",
                 data:formData,
                 async:true,
@@ -208,7 +208,6 @@ function login(captchaObj) {
                         alert(data.tip);
                         // console.log(data);
                         $.cookie('_userLoginId', login_login_id, {path: '/' });
-                        alert($.cookie('_userLoginId'));
                         window.location.href = "../home.html";
                     }else{
                         alert(data.tip)

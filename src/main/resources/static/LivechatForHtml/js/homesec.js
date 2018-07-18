@@ -175,7 +175,7 @@ function reply_friend_application() {
         formData.append("friendApplicationRemark",applyNickNameReply);
         formData.append("friendApplicationStatus",applyStatus);
         $.ajax({
-            url:"http://localhost:8080/demo/userinforevise/dealfriendapplication",
+            url:serverUrl+"/userinforevise/dealfriendapplication",
             type:"POST",
             data:formData,
             async:true,
@@ -226,7 +226,7 @@ function reply_friend_application() {
         formData.append("friendApplicationStatus",applyStatus);
         formData.append("friendApplicationTime",sendTime);
         $.ajax({
-            url:"http://localhost:8080/demo/userinforevise/dealfriendapplication",
+            url:serverUrl+"/userinforevise/dealfriendapplication",
             type:"POST",
             data:formData,
             async:true,

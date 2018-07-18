@@ -3,9 +3,11 @@ package cn.lastlysly.service.serviceimpl;
 import cn.lastlysly.mapper.CustomMapper;
 import cn.lastlysly.mapper.FriendApplicationSheetMapper;
 import cn.lastlysly.mapper.FriendsSheetMapper;
+import cn.lastlysly.mapper.MessagesSheetMapper;
 import cn.lastlysly.pojo.FriendApplicationSheet;
 import cn.lastlysly.pojo.FriendApplicationSheetExample;
 import cn.lastlysly.pojo.FriendsSheet;
+import cn.lastlysly.pojo.MessagesSheet;
 import cn.lastlysly.service.CustomMessageService;
 import cn.lastlysly.service.CustomWebSocketService;
 import com.github.pagehelper.PageHelper;
@@ -38,6 +40,9 @@ public class CustomMessageServiceImpl implements CustomMessageService {
 
     @Autowired
     private CustomMapper customMapper;
+
+    @Autowired
+    private MessagesSheetMapper messagesSheetMapper;
 
     /**
      * 保存好友申请消息( 查询数据库有没有该用户向该好友发送的好友申请，如果有则仅修改这条申请记录)
@@ -146,5 +151,20 @@ public class CustomMessageServiceImpl implements CustomMessageService {
             return friendApplicationSheetList;
         }
         return null;
+    }
+
+    /**
+     * 保存聊天记录
+     * @param messagesSheet
+     * @return
+     */
+    @Override
+    public boolean saveChatMessage(MessagesSheet messagesSheet) {
+
+        int row = messagesSheetMapper.insert(messagesSheet);
+        if(row > 0){
+            return true;
+        }
+        return false;
     }
 }

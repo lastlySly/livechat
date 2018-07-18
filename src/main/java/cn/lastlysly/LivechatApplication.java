@@ -1,9 +1,11 @@
 package cn.lastlysly;
 
+import cn.lastlysly.myutils.interceptor.CustomSocketChannelInterceptor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
@@ -22,4 +24,6 @@ public class LivechatApplication extends SpringBootServletInitializer {
 		//		springApplication.setBannerMode(Banner.Mode.OFF); 关闭banner
 		springApplication.run(args);
 	}
+
+
 }

@@ -56,6 +56,8 @@ public class CustomRedisTemplate {
     public Set<String> redisGetValueByKeys(String key){
         //stringRedisTemplate.keys模糊查询
         Set<String> valSet = stringRedisTemplate.keys(key);
+
         return valSet;
     }
+
 }

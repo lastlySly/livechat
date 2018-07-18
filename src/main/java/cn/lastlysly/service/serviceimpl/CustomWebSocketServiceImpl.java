@@ -1,13 +1,19 @@
 package cn.lastlysly.service.serviceimpl;
 
+import cn.lastlysly.myutils.CustomRedisTemplate;
 import cn.lastlysly.pojo.FriendApplicationSheet;
 import cn.lastlysly.pojo.MessagesSheet;
+import cn.lastlysly.service.CustomMessageService;
 import cn.lastlysly.service.CustomWebSocketService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
+
+import java.util.UUID;
 
 /**
  * @author lastlySly
@@ -20,8 +26,16 @@ public class CustomWebSocketServiceImpl implements CustomWebSocketService {
 
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
+    ObjectMapper objectMapper = new ObjectMapper();
+
     @Autowired
     private SimpMessagingTemplate simpMessagingTemplate;
+
+    @Autowired
+    private CustomMessageService customMessageService;
+
+    @Autowired
+    private CustomRedisTemplate customRedisTemplate;
 
     /**
      * 推送服务器的JVM负载，已用内存等消息
@@ -47,7 +61,12 @@ public class CustomWebSocketServiceImpl implements CustomWebSocketService {
      * @param messagesSheet
      */
     @Override
-    public void singleChat(MessagesSheet messagesSheet) {
+    public void singleChat(MessagesSheet messagesSheet) throws JsonProcessingException {
+        String redisKey = "unread:" + messagesSheet.getMessagesToLoginid()+":"+ UUID.randomUUID().toString();
+        String redisVal = objectMapper.writeValueAsString(messagesSheet);
+        customRedisTemplate.redisSave(redisKey,redisVal);
+        boolean isSave = customMessageService.saveChatMessage(messagesSheet);
+
         simpMessagingTemplate.convertAndSend("/chat/single/" + messagesSheet.getMessagesToLoginid(),messagesSheet);
     }
 
@@ -67,6 +86,15 @@ public class CustomWebSocketServiceImpl implements CustomWebSocketService {
     @Override
     public void replyFriendApplication(FriendApplicationSheet friendApplicationSheet) {
         simpMessagingTemplate.convertAndSend("/mysystem/applyfriend/" + friendApplicationSheet.getFriendApplicationFrom(),friendApplicationSheet);
+    }
+
+    /**
+     * 系统推送给指定用户的消息（好友上下线通知等）
+     * @param messagesSheet
+     */
+    @Override
+    public void adminPushTo(MessagesSheet messagesSheet) {
+        simpMessagingTemplate.convertAndSend("/mysystem/adminpushto/"+messagesSheet.getMessagesToLoginid(),messagesSheet);
     }
 
 

@@ -1,9 +1,11 @@
 package cn.lastlysly.controller;
 
+import cn.lastlysly.handler.MyCustomException;
 import cn.lastlysly.pojo.FriendApplicationSheet;
 import cn.lastlysly.pojo.MessagesSheet;
 import cn.lastlysly.service.CustomMessageService;
 import cn.lastlysly.service.CustomWebSocketService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -38,12 +40,16 @@ public class WebsocketController {
      * @param messagesSheet
      */
     @MessageMapping("/singlechat")
-    public void singleChat(MessagesSheet messagesSheet){
-//        System.out.println(messagesSheet.getMessagesFromLoginid()+":"+messagesSheet.getMessagesToLoginid()+":"+messagesSheet.getMessagesPostmessages());
-        customWebSocketService.singleChat(messagesSheet);
+    public void singleChat(MessagesSheet messagesSheet) throws MyCustomException {
+        try {
+            customWebSocketService.singleChat(messagesSheet);
+        } catch (JsonProcessingException e) {
+            throw new MyCustomException("用户信息序列化失败");
+        }
     }
 
     /**
+     * (此处未启用，实现于UserInfoReviseController.sendFriendApplication)
      * 好友申请( 业务层操作查询数据库有没有该用户向该好友发送的好友申请，如果有则仅修改这条申请记录)
      * @param friendApplicationSheet
      */

@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
 import org.springframework.stereotype.Component;
-import org.springframework.web.socket.messaging.SessionConnectEvent;
+import org.springframework.web.socket.messaging.SessionDisconnectEvent;
 
 import java.security.Principal;
 import java.sql.Timestamp;
@@ -24,12 +24,10 @@ import java.util.List;
 /**
  * @author lastlySly
  * @GitHub https://github.com/lastlySly
- * @create 2018-06-27 13:56
- * 功能描述：springboot使用，连接监听器
+ * @create 2018-07-18 19:19
  **/
 @Component
-public class CustomConnectEventListener implements ApplicationListener<SessionConnectEvent> {
-
+public class CustomDisconnectEventListener implements ApplicationListener<SessionDisconnectEvent> {
     @Autowired
     private FriendsSheetMapper friendsSheetMapper;
 
@@ -39,19 +37,16 @@ public class CustomConnectEventListener implements ApplicationListener<SessionCo
     @Autowired
     private UserinfoService userinfoService;
 
+
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Override
-    public void onApplicationEvent(SessionConnectEvent sessionConnectEvent) {
-        StompHeaderAccessor stompHeaderAccessor = StompHeaderAccessor.wrap(sessionConnectEvent.getMessage());
-//        logger.info("CustomConnectEventListener监听器事件 类型={},StompHeaderAccessor={}",
-//                stompHeaderAccessor.getCommand().getMessageType(),stompHeaderAccessor.toString());
+    public void onApplicationEvent(SessionDisconnectEvent sessionDisconnectEvent) {
+        StompHeaderAccessor stompHeaderAccessor = StompHeaderAccessor.wrap(sessionDisconnectEvent.getMessage());
         Principal principal = stompHeaderAccessor.getUser();
         String loginId = principal.toString();
-
         //推送上线通知
-        pushOnlineOrOffline(loginId,"上线");
-
+        pushOnlineOrOffline(loginId,"下线");
     }
 
     /**
@@ -63,19 +58,16 @@ public class CustomConnectEventListener implements ApplicationListener<SessionCo
         FriendsSheetExample friendsSheetExample = new FriendsSheetExample();
         FriendsSheetExample.Criteria criteria = friendsSheetExample.createCriteria();
         criteria.andFriendsFriendLoginidEqualTo(loginId);
-        logger.info("测试{}",loginId);
-        logger.info("测试{}",friendsSheetMapper);
         List<FriendsSheet> friendsSheetList = friendsSheetMapper.selectByExample(friendsSheetExample);
 
         if(friendsSheetList.size() > 0){
-            for (FriendsSheet friendsSheet : friendsSheetList){
 
+            for (FriendsSheet friendsSheet : friendsSheetList){
                 CustomFriendsInfo customFriendsInfo = new CustomFriendsInfo();
                 customFriendsInfo.setCustomFriendsUserId(friendsSheet.getFriendsUserLoginid());
                 customFriendsInfo.setCustomFriendsFriendsId(loginId);
                 //获取自己在其好友那边的信息（备注之类的）
                 CustomFriendsInfo getCustomFriendsInfo = userinfoService.getFriendsInfo(customFriendsInfo);
-
                 if(getCustomFriendsInfo != null){
                     MessagesSheet messagesSheet = new MessagesSheet();
                     messagesSheet.setMessagesToLoginid(friendsSheet.getFriendsUserLoginid());
@@ -88,10 +80,8 @@ public class CustomConnectEventListener implements ApplicationListener<SessionCo
                     String nowTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);//将时间格式转换成符合Timestamp要求的格式.
                     Timestamp cTime =Timestamp.valueOf(nowTime);
                     messagesSheet.setMessagesTime(cTime);
-
                     //推送
                     customWebSocketService.adminPushTo(messagesSheet);
-
                 }
 
             }

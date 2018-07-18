@@ -3,7 +3,7 @@ friend_application_init();
 function friend_application_init(){
     $("#custom_system_message_div").empty();
     $.ajax({
-        url:"http://localhost:8080/demo/userinforevise/listfriendapplication",
+        url:serverUrl+"/userinforevise/listfriendapplication",
         type:"POST",
         data:'{"page":1}',
         async:true,
@@ -15,6 +15,7 @@ function friend_application_init(){
                     var myLoginId = $.cookie('_userLoginId');
                     console.log("测试cookie:"+myLoginId);
                     var dataLength = data.data.length;
+                    var unDealFriendApplicationMessage = 0;
                     for(var i=0; i<dataLength; i++){
 
                         //如果发送方是自己
@@ -69,6 +70,7 @@ function friend_application_init(){
                                     '                                    </span>\n' +
                                     '                                </div>');
                             }else{
+
                                 $("#custom_system_message_div").prepend('<div class="system_message_item">\n' +
                                     '                                    <div class="system_message_ite_time">'+ data.data[i].friendApplicationTime +'</div>\n' +
                                     '                                    <span class="system_message_text">\n' +
@@ -79,13 +81,18 @@ function friend_application_init(){
                                     '                                        <a applyId="'+ data.data[i].friendApplicationFrom +'" class="ignore_friend_apply" href="javascript:void(0);">忽略</a>\n' +
                                     '                                    </span>\n' +
                                     '                                </div>');
-                                //添加 同意 拒绝 忽略 按钮的点击事件
-                                reply_friend_application();
+                                unDealFriendApplicationMessage++;
+                                // //添加 同意 拒绝 忽略 按钮的点击事件
+                                // reply_friend_application();
                             }
                         }
 
                     }
-
+                    $("#custom_system_message_div").animate({scrollTop:$("#custom_system_message_div")[0].scrollHeight},50);
+                    //设置未处理的好友请求条数
+                    $("#friend_application_num").text(unDealFriendApplicationMessage);
+                    //添加 同意 拒绝 忽略 按钮的点击事件
+                    reply_friend_application();
 
                 }
             }

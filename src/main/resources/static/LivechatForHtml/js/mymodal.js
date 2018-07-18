@@ -28,7 +28,7 @@ function pop_modal() {
         var formData = new FormData();
         formData.append("loginIdOrNickname",loginIdOrNickname);
         $.ajax({
-            url:"http://localhost:8080/demo/userdeal/selectnewfriends",
+            url:serverUrl+"/userdeal/selectnewfriends",
             type:"POST",
             data:formData,
             async:true,
@@ -152,7 +152,7 @@ function userinfo_modal() {
             formData.append("userCityId",city_select);
         }
         $.ajax({
-            url:"http://localhost:8080/demo/userinforevise/updateuserinfo",
+            url:serverUrl+"/userinforevise/updateuserinfo",
             type:"POST",
             data:formData,
             async:true,
@@ -256,7 +256,7 @@ function apply_friend() {
         formData.append("friendApplicationTime",sendTime);
 
         $.ajax({
-            url:"http://localhost:8080/demo/userinforevise/sendfriendapplication",
+            url:serverUrl+"/userinforevise/sendfriendapplication",
             type:"POST",
             data:formData,
             async:true,

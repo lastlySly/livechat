@@ -74,7 +74,7 @@ public class UserInfoReviseController {
 
 
     /**
-     * 发送好友申请
+     * 好友申请( 业务层操作查询数据库有没有该用户向该好友发送的好友申请，如果有则仅修改这条申请记录)
      * @param friendApplicationSheet
      * @return
      */

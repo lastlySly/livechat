@@ -2,9 +2,11 @@ package cn.lastlysly.config.websocket;
 
 import cn.lastlysly.myutils.interceptor.CustomHttpHandShakeInterceptor;
 import cn.lastlysly.myutils.interceptor.CustomSocketChannelInterceptor;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.ChannelRegistration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
+import org.springframework.messaging.support.ChannelInterceptor;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
@@ -60,4 +62,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     public void configureClientOutboundChannel(ChannelRegistration registration) {
         registration.interceptors(new CustomSocketChannelInterceptor());
     }
+
+
+
 }

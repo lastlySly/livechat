@@ -31,7 +31,7 @@ $(function () {
 /*获取分组并渲染*/
 function getGroupFun() {
     $.ajax({
-        url:"http://localhost:8080/demo/userdeal/listgroup",
+        url:serverUrl+"/userdeal/listgroup",
         type:"POST",
         data:{},
         async:true,
@@ -72,7 +72,7 @@ function getGroupFun() {
 //获取好友列表
 function listFriend() {
     $.ajax({
-        url:"http://localhost:8080/demo/userdeal/listfriends",
+        url:serverUrl+"/userdeal/listfriends",
         type:"POST",
         data:{},
         async:true,
@@ -151,7 +151,7 @@ function friend_card() {
         var formData = new FormData();
         formData.append("friendUserId",socketaddress);
         $.ajax({
-            url:"http://localhost:8080/demo/userdeal/infofriend",
+            url:serverUrl+"/userdeal/infofriend",
             type:"POST",
             data:formData,
             async:true,
@@ -265,7 +265,7 @@ function change_meau() {
 /*获取用户信息*/
 function getUserInfo(){
     $.ajax({
-        url:"http://localhost:8080/demo/userdeal/myuserinfo",
+        url:serverUrl+"/userdeal/myuserinfo",
         type:"POST",
         data:{},
         async:true,

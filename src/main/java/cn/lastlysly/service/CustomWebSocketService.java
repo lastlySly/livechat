@@ -2,6 +2,7 @@ package cn.lastlysly.service;
 
 import cn.lastlysly.pojo.FriendApplicationSheet;
 import cn.lastlysly.pojo.MessagesSheet;
+import com.fasterxml.jackson.core.JsonProcessingException;
 
 /**
  * @author lastlySly
@@ -20,7 +21,7 @@ public interface CustomWebSocketService {
      * 单聊
      * @param messagesSheet
      */
-    void singleChat(MessagesSheet messagesSheet);
+    void singleChat(MessagesSheet messagesSheet) throws JsonProcessingException;
 
     /**
      * 好友申请
@@ -33,4 +34,13 @@ public interface CustomWebSocketService {
      * @param friendApplicationSheet
      */
     void replyFriendApplication(FriendApplicationSheet friendApplicationSheet);
+
+    /**
+     * 系统推送给指定用户的消息（好友上下线通知等）
+     * @param messagesSheet
+     */
+    void adminPushTo(MessagesSheet messagesSheet);
+
+
+
 }

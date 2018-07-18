@@ -3,15 +3,21 @@
 function websocket_connect() {
 
     var mysocket_address = $("#userinfo_revise_btn").attr("dataId");
-    var socket = new SockJS('http://localhost:8080/demo/endpoint-websocket');
+    var socket = new SockJS(serverUrl+'/endpoint-websocket');
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function (frame) {
         console.log('Connected: ' + frame);
+        //订阅单聊地址
         stompClient.subscribe('/chat/single/' + mysocket_address, function (result) {
             showMessage(JSON.parse(result.body));
         });
+        //订阅好友申请地址
         stompClient.subscribe('/mysystem/applyfriend/' + mysocket_address, function (result) {
             showFriendApplication(JSON.parse(result.body));
+        });
+        //订阅系统发来的个人消息地址(好友上下线通知等)
+        stompClient.subscribe('/mysystem/adminpushto/' + mysocket_address, function (result) {
+            console.log(JSON.parse(result.body));
         });
     });
 
@@ -63,8 +69,17 @@ function sendMessageBtn() {
 
 //显示接收的消息
 function showMessage(result) {
+    
+    // function refreshFun() {
+    //     const p = new Promise();
+    //
+    //     return p
+    // }
+    
     //如果消息为刚申请成为好友的好友发来的消息（消息状态为2）则先刷新分组列表和好友列表
     if(result.messagesTypeid == 2){
+
+
         //刷新分组列表和好友列表
         getGroupFun();
         //刷新好友申请信息
@@ -88,7 +103,7 @@ function showMessage(result) {
         var formData = new FormData();
         formData.append("loginIdOrNickname",result.messagesFromLoginid);
         $.ajax({
-            url:"http://localhost:8080/demo/userdeal/selectnewfriends",
+            url:serverUrl+"/userdeal/selectnewfriends",
             type:"POST",
             data:formData,
             async:true,
@@ -210,7 +225,7 @@ function showFriendApplication(result) {
                 break;
         }
     }
-
+    $("#custom_system_message_div").animate({scrollTop:$("#custom_system_message_div")[0].scrollHeight},50);
 
 
 }

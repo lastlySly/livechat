@@ -1,6 +1,7 @@
 package cn.lastlysly.service;
 
 import cn.lastlysly.pojo.FriendApplicationSheet;
+import cn.lastlysly.pojo.MessagesSheet;
 
 import java.util.List;
 
@@ -31,4 +32,11 @@ public interface CustomMessageService {
      * @return
      */
     List<FriendApplicationSheet> listApplicationByLoginId(int page,String loginId);
+
+    /**
+     * 保存聊天记录
+     * @param messagesSheet
+     * @return
+     */
+    boolean saveChatMessage(MessagesSheet messagesSheet);
 }
