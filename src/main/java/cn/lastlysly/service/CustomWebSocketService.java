@@ -1,5 +1,6 @@
 package cn.lastlysly.service;
 
+import cn.lastlysly.pojo.CustomMessageSheetExtend;
 import cn.lastlysly.pojo.FriendApplicationSheet;
 import cn.lastlysly.pojo.MessagesSheet;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -40,6 +41,12 @@ public interface CustomWebSocketService {
      * @param messagesSheet
      */
     void adminPushTo(MessagesSheet messagesSheet);
+
+    /**
+     * 推送未读消息
+     * @param customMessageSheetExtend
+     */
+    void pushUnreadMessage(CustomMessageSheetExtend customMessageSheetExtend);
 
 
 

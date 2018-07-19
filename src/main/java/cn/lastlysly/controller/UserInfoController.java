@@ -55,6 +55,13 @@ public class UserInfoController {
         return new MyResult(0,"没有登录，请先登录",null);
     }
 
+//    @CrossOrigin
+//    @RequestMapping("/defeatedSerialization")
+//    @ResponseBody
+//    public MyResult defeatedSerialization(){
+//        return new MyResult(0,"用户信息序列化失败",null);
+//    }
+
     /**
      * 用户注册
      * @return
@@ -147,8 +154,8 @@ public class UserInfoController {
             //设置session超时时间
             session.setTimeout(3000000);
             //访问时间(创建session的时间和最后访问session的时间)
-            logger.info("session获取主机号：{}，session获取sessionID：{}，创建session时间,最后访问session的时间：{}，更新会话时间：{}",
-                    session.getHost(),session.getId(),session.getLastAccessTime(),session.getStartTimestamp());
+//            logger.info("session获取主机号：{}，session获取sessionID：{}，创建session时间,最后访问session的时间：{}，更新会话时间：{}",
+//                    session.getHost(),session.getId(),session.getLastAccessTime(),session.getStartTimestamp());
 
             String redisKey = "online:"+subject.getPrincipal().toString();
             String redisVal = session.getId() + "";

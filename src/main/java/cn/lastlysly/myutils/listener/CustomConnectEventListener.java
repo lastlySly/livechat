@@ -63,8 +63,6 @@ public class CustomConnectEventListener implements ApplicationListener<SessionCo
         FriendsSheetExample friendsSheetExample = new FriendsSheetExample();
         FriendsSheetExample.Criteria criteria = friendsSheetExample.createCriteria();
         criteria.andFriendsFriendLoginidEqualTo(loginId);
-        logger.info("测试{}",loginId);
-        logger.info("测试{}",friendsSheetMapper);
         List<FriendsSheet> friendsSheetList = friendsSheetMapper.selectByExample(friendsSheetExample);
 
         if(friendsSheetList.size() > 0){

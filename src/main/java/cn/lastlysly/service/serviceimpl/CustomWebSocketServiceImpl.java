@@ -1,6 +1,7 @@
 package cn.lastlysly.service.serviceimpl;
 
 import cn.lastlysly.myutils.CustomRedisTemplate;
+import cn.lastlysly.pojo.CustomMessageSheetExtend;
 import cn.lastlysly.pojo.FriendApplicationSheet;
 import cn.lastlysly.pojo.MessagesSheet;
 import cn.lastlysly.service.CustomMessageService;
@@ -62,9 +63,13 @@ public class CustomWebSocketServiceImpl implements CustomWebSocketService {
      */
     @Override
     public void singleChat(MessagesSheet messagesSheet) throws JsonProcessingException {
-        String redisKey = "unread:" + messagesSheet.getMessagesToLoginid()+":"+ UUID.randomUUID().toString();
-        String redisVal = objectMapper.writeValueAsString(messagesSheet);
-        customRedisTemplate.redisSave(redisKey,redisVal);
+        String redisKey = "unreadnumber:" + messagesSheet.getMessagesToLoginid()+":"+ messagesSheet.getMessagesFromLoginid();
+//        保存未读消息
+//        String redisVal = objectMapper.writeValueAsString(messagesSheet);
+//        customRedisTemplate.redisSave(redisKey,redisVal);
+
+        //未读消息数量自增长
+        customRedisTemplate.redisIncrValByKey(redisKey);
         boolean isSave = customMessageService.saveChatMessage(messagesSheet);
 
         simpMessagingTemplate.convertAndSend("/chat/single/" + messagesSheet.getMessagesToLoginid(),messagesSheet);
@@ -95,6 +100,15 @@ public class CustomWebSocketServiceImpl implements CustomWebSocketService {
     @Override
     public void adminPushTo(MessagesSheet messagesSheet) {
         simpMessagingTemplate.convertAndSend("/mysystem/adminpushto/"+messagesSheet.getMessagesToLoginid(),messagesSheet);
+    }
+
+    /**
+     * 推送未读消息
+     * @param customMessageSheetExtend
+     */
+    @Override
+    public void pushUnreadMessage(CustomMessageSheetExtend customMessageSheetExtend) {
+        simpMessagingTemplate.convertAndSend("/mysystem/unread/"+customMessageSheetExtend.getMessagesSheet().getMessagesToLoginid(),customMessageSheetExtend);
     }
 
 

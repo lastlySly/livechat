@@ -52,6 +52,19 @@
         <result column="friend_application_refuse_message" jdbcType="VARCHAR" property="friendApplicationRefuseMessage" />
     </resultMap>
 
+    <resultMap id="MyMessageBaseResultMap" type="cn.lastlysly.pojo.MessagesSheet">
+        <result column="messages_id" jdbcType="INTEGER" property="messagesId" />
+        <result column="messages_status" jdbcType="BIT" property="messagesStatus" />
+        <result column="messages_time" jdbcType="TIMESTAMP" property="messagesTime" />
+        <result column="messages_typeid" jdbcType="INTEGER" property="messagesTypeid" />
+        <result column="messages_from_loginid" jdbcType="VARCHAR" property="messagesFromLoginid" />
+        <result column="messages_to_loginid" jdbcType="VARCHAR" property="messagesToLoginid" />
+    </resultMap>
+    <resultMap extends="MyMessageBaseResultMap" id="MyMessageResultMapWithBLOBs" type="cn.lastlysly.pojo.MessagesSheet">
+        <result column="messages_postmessages" jdbcType="LONGVARCHAR" property="messagesPostmessages" />
+    </resultMap>
+
+
     <!--通过用户ID获取好友列表-->
     <select id="selectCustomFriendsInfoByUserId" parameterType="java.util.Map" resultMap="CustomFriendsResultMap">
 
@@ -82,6 +95,14 @@
         select * from friend_application_sheet where friend_application_from = #{loginId} or
         friend_application_to=#{loginId} order by friend_application_time desc
 
+    </select>
+
+    <!--根据发送方和接收方获取消息-->
+    <select id="selectLastMessageByFromAndTo" parameterType="java.util.Map" resultMap="MyMessageResultMapWithBLOBs">
+        select *  from messages_sheet WHERE messages_from_loginid = #{fromLoginId} and
+         messages_to_loginid = #{toLoginId} and messages_time = (select MAX(messages_time) from messages_sheet
+          where messages_from_loginid = #{fromLoginId} and messages_to_loginid = #{toLoginId})
+        order by messages_time desc
     </select>
 
 </mapper>

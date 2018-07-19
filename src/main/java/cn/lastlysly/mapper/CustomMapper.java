@@ -2,6 +2,7 @@ package cn.lastlysly.mapper;
 
 import cn.lastlysly.pojo.CustomFriendsInfo;
 import cn.lastlysly.pojo.FriendApplicationSheet;
+import cn.lastlysly.pojo.MessagesSheet;
 import cn.lastlysly.pojo.UserinfoSheet;
 
 import java.util.List;
@@ -41,5 +42,11 @@ public interface CustomMapper {
      */
     List<FriendApplicationSheet> listApplicationByLoginId(Map<String,String> map);
 
+    /**
+     * 根据发送方和接收方获取消息
+     * @param map
+     * @return
+     */
+    List<MessagesSheet> selectLastMessageByFromAndTo(Map<String,String> map);
 
 }

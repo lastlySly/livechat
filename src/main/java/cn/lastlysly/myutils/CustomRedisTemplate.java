@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -48,16 +49,38 @@ public class CustomRedisTemplate {
         return val;
     }
 
+
+    /**
+     * 模糊查询key
+     * @param key
+     * @return
+     */
+    public Set<String> redisFuzzyQueryKeys(String key){
+        //stringRedisTemplate.keys模糊查询
+        Set<String> valSet = stringRedisTemplate.keys(key);
+
+        return valSet;
+    }
+
     /**
      * 根据key模糊查询
      * @param key
      * @return
      */
-    public Set<String> redisGetValueByKeys(String key){
+    public List<String> redisGetValueByKeys(String key){
         //stringRedisTemplate.keys模糊查询
-        Set<String> valSet = stringRedisTemplate.keys(key);
-
+        Set<String> keySet = stringRedisTemplate.keys(key);
+        List<String> valSet = stringRedisTemplate.opsForValue().multiGet(keySet);
         return valSet;
+    }
+
+
+    /**
+     * 自增长
+     * @param key
+     */
+    public void redisIncrValByKey(String key){
+        stringRedisTemplate.boundValueOps(key).increment(1);
     }
 
 }
