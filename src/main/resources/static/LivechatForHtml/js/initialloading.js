@@ -88,7 +88,9 @@ function friend_application_init(){
                         }
 
                     }
-                    $("#custom_system_message_div").animate({scrollTop:$("#custom_system_message_div")[0].scrollHeight},50);
+                    $(".custom_system_message_div").animate({scrollTop:$(".custom_system_message_div")[0].scrollHeight},50);
+                    // alert($(".custom_system_message_div")[0].scrollHeight+"===")
+
                     //设置未处理的好友请求条数
                     $("#friend_application_num").text(unDealFriendApplicationMessage);
                     //添加 同意 拒绝 忽略 按钮的点击事件
