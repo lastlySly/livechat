@@ -263,3 +263,13 @@
     margin: 20px auto 0px;
 
 }
+
+.friend_online_offline_advice{
+    position: absolute;
+    right: 0px;
+    top: 5px;
+    padding: 5px;
+    border-radius: 10px;
+    background-color: white;
+    display: none;
+}

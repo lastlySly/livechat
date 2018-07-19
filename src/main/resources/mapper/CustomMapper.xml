@@ -105,4 +105,9 @@
         order by messages_time desc
     </select>
 
+    <select id="listMessageByUserloginidOrFriendLoginid" parameterType="java.util.Map" resultMap="MyMessageResultMapWithBLOBs">
+        select * from messages_sheet where (messages_to_loginid = #{userLoginId} and messages_from_loginid = #{friendLoginId})
+        or (messages_to_loginid = #{friendLoginId} and messages_from_loginid = #{userLoginId}) order by messages_time desc
+    </select>
+
 </mapper>

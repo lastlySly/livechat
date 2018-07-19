@@ -49,4 +49,11 @@ public interface CustomMapper {
      */
     List<MessagesSheet> selectLastMessageByFromAndTo(Map<String,String> map);
 
+    /**
+     * 获取两个用户之间的聊天记录
+     * @param map
+     * @return
+     */
+    List<MessagesSheet> listMessageByUserloginidOrFriendLoginid(Map<String,String> map);
+
 }

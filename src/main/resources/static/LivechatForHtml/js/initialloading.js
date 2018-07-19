@@ -98,7 +98,7 @@ function friend_application_init(){
             }
         },
         error:function (err) {
-            alert("连接错误friend_application_init：" + err);
+            console.log("连接错误friend_application_init：" + err);
         }
     });
 }

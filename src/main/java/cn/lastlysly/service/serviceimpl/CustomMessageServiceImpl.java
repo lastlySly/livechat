@@ -167,4 +167,23 @@ public class CustomMessageServiceImpl implements CustomMessageService {
         }
         return false;
     }
+
+    /**
+     * 获取两个用户之间的聊天记录（分页）
+     * @param loginId_1 用户1
+     * @param loginId_2 用户2
+     * @return
+     */
+    @Override
+    public List<MessagesSheet> listMessageByUserloginIdandFriendLoginId(String loginId_1,String loginId_2,int page) {
+        Map<String,String> map = new HashMap<String,String>(16);
+        map.put("userLoginId",loginId_1);
+        map.put("friendLoginId",loginId_2);
+        PageHelper.startPage(page,20);
+        List<MessagesSheet> messagesSheetList = customMapper.listMessageByUserloginidOrFriendLoginid(map);
+        if(messagesSheetList.size() > 0 ){
+            return messagesSheetList;
+        }
+        return null;
+    }
 }

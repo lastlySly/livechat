@@ -21,18 +21,22 @@ function friends_card_sendbtn() {
         // $("#custom-linkman-list-id").css("display","none");
         // $("#custom-chat-list-id").css("display","block");
 
+        var unreadNum = 0;
         /*删除已存在的该项*/
         var chatting_num = $(".custom-chat-friend-item").length;
         for (var i = 0;i < chatting_num; i++){
             var data_id = $(".custom-chat-friend-item").eq(i).attr("data-id");
-            console.log(data_id + "===" + socketaddress);
 
             if(data_id == socketaddress){
-                console.log("存在，删除")
+                unreadNum = $(".custom-chat-friend-item").eq(i).find(".custom-num-tip").text();
                 $(".custom-chat-friend-item").eq(i).remove();
                 break;
             }
         }
+        if(chatting_num == 0){
+            unreadNum="";
+        }
+
         /*将该项添加至列表，最顶*/
         $("#chatting-list").prepend(
             '<li data-id="'+ socketaddress +'" class="row custom-chat-friend-item">\n' +
@@ -40,8 +44,8 @@ function friends_card_sendbtn() {
             '                                <dl class="col-md-9 custom-friend-item-info">\n' +
             '                                    <dt class="list-remarks">'+ remarks +'</dt>\n' +
             '                                    <dd class="list-motto">'+ motto +'</dd>\n' +
-            '                                    <span class="badge custom-num-tip">4</span>\n' +
-            '                                    <span class="badge custom-time">3:15</span>\n' +
+            '                                    <span class="badge custom-num-tip">'+ unreadNum +'</span>\n' +
+            '                                    <span class="badge custom-time"> </span>\n' +
             '                                    <button class="custom-del glyphicon glyphicon-remove-sign"></button>\n' +
             '                                </dl>\n' +
             '                            </li>'
@@ -195,7 +199,7 @@ function reply_friend_application() {
                 }
             },
             error:function (err) {
-                alert("连接失败："+err);
+                console.log("连接失败："+err);
             }
                 
         });
@@ -242,7 +246,7 @@ function reply_friend_application() {
                 }
             },
             error:function (err) {
-                alert("连接失败："+err);
+                console.log("连接失败："+err);
             }
 
         });

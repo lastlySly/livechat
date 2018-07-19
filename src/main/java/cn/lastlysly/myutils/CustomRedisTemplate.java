@@ -83,4 +83,14 @@ public class CustomRedisTemplate {
         stringRedisTemplate.boundValueOps(key).increment(1);
     }
 
+    /**
+     * 根据key删除
+     * @param key
+     * @return
+     */
+    public boolean redisDelByKey(String key){
+        boolean isDel =  stringRedisTemplate.delete(key);
+        return isDel;
+    }
+
 }

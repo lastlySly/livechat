@@ -39,4 +39,12 @@ public interface CustomMessageService {
      * @return
      */
     boolean saveChatMessage(MessagesSheet messagesSheet);
+
+    /**
+     * 获取两个用户之间的聊天记录（分页）
+     * @param loginId_1 用户1
+     * @param loginId_2 用户2
+     * @return
+     */
+    List<MessagesSheet> listMessageByUserloginIdandFriendLoginId(String loginId_1,String loginId_2,int page);
 }

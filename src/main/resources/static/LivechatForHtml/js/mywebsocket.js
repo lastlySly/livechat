@@ -17,12 +17,13 @@ function websocket_connect() {
         });
         //订阅系统发来的个人消息地址(好友上下线通知等)
         stompClient.subscribe('/mysystem/adminpushto/' + mysocket_address, function (result) {
-            console.log(JSON.parse(result.body));
+            showFriendOnlineOrOffline(JSON.parse(result.body));
+            // console.log(JSON.parse(result.body));
         });
         //订阅未读消息
         stompClient.subscribe('/mysystem/unread/' + mysocket_address, function (result) {
             showUnreadMessage(JSON.parse(result.body));
-            console.log(JSON.parse(result.body));
+            // console.log(JSON.parse(result.body));
         });
 
 
@@ -64,6 +65,18 @@ function sendMessageBtn() {
             '                                        </dd>\n' +
             '                                    </dl>');
 
+        //将发送的信息与时间简单修改入正在聊天列表项
+        var chatting_num = $(".custom-chat-friend-item").length;
+        for (var i = 0;i < chatting_num; i++){
+            var data_id = $(".custom-chat-friend-item").eq(i).attr("data-id");
+            if(data_id == socketaddress){
+                $(".custom-chat-friend-item").eq(i).find(".list-motto").text(myMessage);
+                var sendNowTime = sendTime.substring(11,16);
+                $(".custom-chat-friend-item").eq(i).find(".custom-time").text(sendNowTime);
+                break;
+            }
+        }
+
         //清空输入框
         $("#edit").froalaEditor('html.set', '');
 
@@ -87,7 +100,6 @@ function showMessage(result) {
     //如果消息为刚申请成为好友的好友发来的消息（消息状态为2）则先刷新分组列表和好友列表
     if(result.messagesTypeid == 2){
 
-
         //刷新分组列表和好友列表
         getGroupFun();
         //刷新好友申请信息
@@ -107,6 +119,7 @@ function showMessage(result) {
             '                                        </dd>\n' +
             '                                    </dl>');
         $(".chat-content-div").animate({scrollTop:$(".chat-content-div")[0].scrollHeight},50);
+
     }else{
         var formData = new FormData();
         formData.append("loginIdOrNickname",result.messagesFromLoginid);
@@ -123,55 +136,52 @@ function showMessage(result) {
 
                     var remark = null;
                     var friendsNum = $(".custom-friend-item").length;
-                    console.log(friendsNum+"====")
                     for(var i=0; i< friendsNum ;i++){
                         var loginId = $(".custom-friend-item").eq(i).attr("socketaddress");
                         if(loginId == result.messagesFromLoginid){
                             remark = $(".custom-friend-item").eq(i).find(".list-remarks").text();
-                            console.log("===="+remark);
                             break;
                         }
-                        console.log("===="+remark);
                     }
                     if(remark == null){
                         remark = data.data[0].userNickname + "(陌生人)";
                     }
 
-
-
-                    /*删除已存在的该项*/
+                    /*删除已存在的该项,获取未读消息条数并加上一条*/
+                    var unreadMessageNum = 0;
                     var chatting_num = $(".custom-chat-friend-item").length;
                     for (var i = 0;i < chatting_num; i++){
                         var data_id = $(".custom-chat-friend-item").eq(i).attr("data-id");
 
                         if(data_id == data.data[0].userLoginId){
+                            unreadMessageNum = $(".custom-chat-friend-item").eq(i).find(".custom-num-tip").text();
                             $(".custom-chat-friend-item").eq(i).remove();
                             break;
                         }
                     }
-
+                    unreadMessageNum = parseInt(unreadMessageNum) + 1;
                     var messageTime = result.messagesTime.substring(11,16);
+
+                    var messageDate = new Date(result.messagesTime.substring(0,10));
+                    var nowDate = new Date(custom_getdate().substring(0,10));
+                    var dateDiffer = (nowDate - messageDate) / (1000 * 60 * 60 * 24);
+                    if(dateDiffer > 0){
+                        messageTime = result.messagesTime.substring(0,10);
+                    }
                     /*将该项添加至列表，最顶*/
                     $("#chatting-list").prepend(
                         '<li data-id="'+ data.data[0].userLoginId +'" class="row custom-chat-friend-item">\n' +
                         '                                <img class="col-md-3 img-responsive img-circle list-headportrait" src="'+data.data[0].userHeadportrait+'">\n' +
                         '                                <dl class="col-md-9 custom-friend-item-info">\n' +
                         '                                    <dt class="list-remarks">'+ remark +'</dt>\n' +
-                        '                                    <dd class="list-motto">'+ data.data[0].userMotto +'</dd>\n' +
-                        '                                    <span class="badge custom-num-tip">1</span>\n' +
+                        '                                    <dd class="list-motto">'+ result.messagesPostmessages +'</dd>\n' +
+                        '                                    <span class="badge custom-num-tip">'+ unreadMessageNum +'</span>\n' +
                         '                                    <span class="badge custom-time">'+ messageTime +'</span>\n' +
                         '                                    <button class="custom-del glyphicon glyphicon-remove-sign"></button>\n' +
                         '                                </dl>\n' +
                         '                            </li>'
                     );
                     del_chat_item_btn();
-                    // var flag =  $("#right-chat-friend-container-id").css('display');
-                    // if ( flag == "none" ) {
-                    //     $("#right-chat-friend-container-id").slideToggle("fast");
-                    // }
-                    // $("#send-to-btn").attr("socketaddress",data.data.customFriendsLoginId);
-                    // $("#chatting-friend-remarks").text(data.data.customFriendsRemark);
-                    // $("#chatting-friend-remarks").attr("data-img",data.data.customFriendsHeadportrait);
 
                     change_chatting_friend();
 
@@ -180,14 +190,13 @@ function showMessage(result) {
                 }
             },
             error:function (err) {
-                alert("连接错误："+err);
+                console.log("连接错误："+err);
             }
 
         });
 
     }
 
-    
 }
 
 //显示接收到的好友申请或申请回复
@@ -240,6 +249,7 @@ function showFriendApplication(result) {
 
 }
 
+//显示未读消息
 function showUnreadMessage(result){
 
     var formData = new FormData();
@@ -288,7 +298,7 @@ function showUnreadMessage(result){
                     '                                <img class="col-md-3 img-responsive img-circle list-headportrait" src="'+data.data[0].userHeadportrait+'">\n' +
                     '                                <dl class="col-md-9 custom-friend-item-info">\n' +
                     '                                    <dt class="list-remarks">'+ remark +'</dt>\n' +
-                    '                                    <dd class="list-motto">'+ data.data[0].userMotto +'</dd>\n' +
+                    '                                    <dd class="list-motto">'+ result.messagesSheet.messagesPostmessages +'</dd>\n' +
                     '                                    <span class="badge custom-num-tip">'+ result.unreadNum +'</span>\n' +
                     '                                    <span class="badge custom-time">'+ messageTime +'</span>\n' +
                     '                                    <button class="custom-del glyphicon glyphicon-remove-sign"></button>\n' +
@@ -304,9 +314,18 @@ function showUnreadMessage(result){
             }
         },
         error:function (err) {
-            alert("连接错误："+err);
+            console.log("显示未读消息，连接错误："+err);
         }
 
     });
 
+}
+
+//显示用户上线下线
+function showFriendOnlineOrOffline(result) {
+    setTimeout(function () {
+        $("#friend_online_offline_advice").text(result.messagesPostmessages);
+        $("#friend_online_offline_advice").hide(1000);
+    },1000);
+    $("#friend_online_offline_advice").show(3000);
 }

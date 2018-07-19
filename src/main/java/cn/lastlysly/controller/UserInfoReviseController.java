@@ -128,6 +128,50 @@ public class UserInfoReviseController {
     }
 
 
+    /**
+     * 查询两个用户之间的聊天记录
+     * @param loginId_2
+     * @param page
+     * @return
+     */
+    @CrossOrigin
+    @RequestMapping(value = "/listmessagebetweenusers",method = RequestMethod.POST)
+    @ResponseBody
+    public MyResult listMessageBetweenUsers(@RequestParam(value = "userLoginId",required = false) String loginId_1,
+                                            @RequestParam(value = "friendLoginId",required = false) String loginId_2,
+                                            @RequestParam(value = "page",required = false) Integer page){
+        String loginId = SecurityUtils.getSubject().getPrincipal().toString();
+        if(page == null){
+            page = 1;
+        }
+        if(loginId_1.equals(loginId)){
+            List<MessagesSheet> messagesSheetList =
+                    customMessageService.listMessageByUserloginIdandFriendLoginId(loginId,loginId_2,page);
+            return new MyResult(1,"查询聊天记录成功",messagesSheetList);
+        }else{
+            return new MyResult(0,"您的身份可能已过期，查询聊天记录失败",null);
+        }
+
+    }
+
+
+    @CrossOrigin
+    @RequestMapping(value = "/delunreadnum",method = RequestMethod.POST)
+    @ResponseBody
+    public MyResult removeUnreadInRedis(@RequestParam(value = "userLoginId") String userLoginId,
+                                        @RequestParam(value = "friendLoginId") String friendLoginId){
+
+        String redisKey = "unreadnumber:" + userLoginId + ":"+friendLoginId;
+        boolean isDel = customRedisTemplate.redisDelByKey(redisKey);
+        if (isDel){
+            return new MyResult(1,"移除未读消息成功",null);
+        }else{
+            return new MyResult(0,"出错了，移除未读消息失败",null);
+        }
+
+    }
+
+
 
     /**
      * 查询国家列表
