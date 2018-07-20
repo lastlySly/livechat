@@ -107,7 +107,7 @@ function system_message_div() {
             $("#right-chat-friend-container-id").css({'display':"none"});
         }
         $("#system_message_top_name").text("好友请求");
-
+        $("#custom_system_message_div").animate({scrollTop:$(".custom_system_message_div")[0].scrollHeight},50);
     });
 
 

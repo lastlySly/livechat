@@ -26,8 +26,6 @@ function websocket_connect() {
             // console.log(JSON.parse(result.body));
         });
 
-
-
     });
 
 }
@@ -280,8 +278,6 @@ function showFriendApplication(result) {
         }
     }
     $(".custom_system_message_div").animate({scrollTop:$(".custom_system_message_div")[0].scrollHeight},50);
-    alert($(".custom_system_message_div")[0].scrollHeight)
-
 
 
 }

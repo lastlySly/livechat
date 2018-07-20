@@ -93,4 +93,14 @@ public class CustomRedisTemplate {
         return isDel;
     }
 
+    /**
+     * 根据key查看redis中是否存在该key
+     * @param key
+     * @return
+     */
+    public boolean redisHasKey(String key){
+        boolean isExist = stringRedisTemplate.hasKey(key);
+        return isExist;
+    }
+
 }

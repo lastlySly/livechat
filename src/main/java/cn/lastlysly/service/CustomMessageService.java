@@ -1,6 +1,7 @@
 package cn.lastlysly.service;
 
 import cn.lastlysly.pojo.FriendApplicationSheet;
+import cn.lastlysly.pojo.FriendsSheet;
 import cn.lastlysly.pojo.MessagesSheet;
 
 import java.util.List;
@@ -47,4 +48,12 @@ public interface CustomMessageService {
      * @return
      */
     List<MessagesSheet> listMessageByUserloginIdandFriendLoginId(String loginId_1,String loginId_2,int page);
+
+    /**
+     * 根据用户登陆Id获取其好友并判断是否在线
+     * @param userLoginId
+     * @return
+     */
+    List<FriendsSheet> listOnlineFriendsByUserId(String userLoginId);
+
 }

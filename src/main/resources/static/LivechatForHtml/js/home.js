@@ -45,7 +45,8 @@ function getGroupFun() {
                     $(".custom-friends-group-list").append('<li class="custom-group-item">\n' +
                         '                                    <h5 class="custom-group">\n' +
                         '                                        <span class="glyphicon glyphicon-play"></span>\n' +
-                        '                                        <span groupId="'+data.data[i].friendgroupsId+'" class="group_name">'+data.data[i].friendgroupsName+'</span>&nbsp;0/4\n' +
+                        '                                        <span groupId="'+data.data[i].friendgroupsId+'" class="group_name">'+
+                        data.data[i].friendgroupsName+'</span>&nbsp;<span class="online_num">0</span>/<span class="group_all_num">0</span>\n' +
                         '                                    </h5>\n' +
                         '                                    <!--该组下的好友列表-->\n' +
                         '                                    <ul class="custom-friends-list">\n' +
@@ -95,13 +96,19 @@ function listFriend() {
                                 '                                                <dt class="list-remarks">'+data.data[i].customFriendsRemark+'<span>('+data.data[i].customFriendsLoginId+')</span></dt>\n' +
                                 '                                                <dd class="list-motto">'+data.data[i].customFriendsMotto+'</dd>\n' +
                                 '                                                <!--<span class="badge custom-num-tip">5</span>-->\n' +
-                                '                                                <span class="badge custom-online-tip">在线</span>\n' +
+                                '                                                <span class="badge custom-online-tip">离线</span>\n' +
                                 '                                            </dl>\n' +
                                 '                                        </li>');
+
+                            var group_all_num =  $(".group_name").eq(j).parent().find(".group_all_num").text();
+                            $(".group_name").eq(j).parent().find(".group_all_num").text(parseInt(group_all_num)+1);
+
                         }
                     }
-
                 }
+
+                //查询在线好友
+
             }
             //调用好友名片卡
             friend_card();
@@ -297,6 +304,7 @@ function change_friend_chatting_fun(socketaddress,remarks,chatHeadportrait) {
                                     '                                                <span class="message-text-contain-me pull-right">' + data.data[i].messagesPostmessages + '</span>\n' +
                                     '                                            </dd>\n' +
                                     '                                        </dl>');
+                                $(".chat-content-div").animate({scrollTop:$(".chat-content-div")[0].scrollHeight},50);
                                 break;
                         }
                     }

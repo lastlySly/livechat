@@ -155,6 +155,12 @@ public class UserInfoReviseController {
     }
 
 
+    /**
+     * 移除未读消息
+     * @param userLoginId
+     * @param friendLoginId
+     * @return
+     */
     @CrossOrigin
     @RequestMapping(value = "/delunreadnum",method = RequestMethod.POST)
     @ResponseBody

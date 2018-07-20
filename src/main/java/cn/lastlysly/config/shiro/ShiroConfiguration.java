@@ -72,11 +72,11 @@ public class ShiroConfiguration {
         bean.setSecurityManager( manager);
         //设置登录页面
 //        //可以写路由也可以写jsp页面的访问路径
-        bean.setLoginUrl("/userdeal/nologin");
+        bean.setLoginUrl("/LivechatForHtml/login/login.html");
 //        //设置登录成功跳转的页面
 //        bean.setSuccessUrl("/pages/index.jsp");
 //        //设置未授权跳转的页面
-        bean.setUnauthorizedUrl("/userdeal/nologin");
+        bean.setUnauthorizedUrl("/LivechatForHtml/login/login.html");
         //定义过滤器
         LinkedHashMap<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
         filterChainDefinitionMap.put("/**/hello","anon");
@@ -84,9 +84,8 @@ public class ShiroConfiguration {
         filterChainDefinitionMap.put("/**/loginidisuse","anon");
         filterChainDefinitionMap.put("/**/login","anon");
         filterChainDefinitionMap.put("/**/gt/register1","anon");
-
-        filterChainDefinitionMap.put("/**//LivechatForHtml/login/**","anon");
-        filterChainDefinitionMap.put("/**/logout","logout");
+        filterChainDefinitionMap.put("/**/LivechatForHtml/login/**","anon");
+//        filterChainDefinitionMap.put("/**/logout","logout");
         //需要登录访问的资源 , 一般将/**放在最下边
 //        filterChainDefinitionMap.put("/**", "anon");
         filterChainDefinitionMap.put("/**", "authc");

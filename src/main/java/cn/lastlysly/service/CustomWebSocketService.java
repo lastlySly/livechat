@@ -2,6 +2,7 @@ package cn.lastlysly.service;
 
 import cn.lastlysly.pojo.CustomMessageSheetExtend;
 import cn.lastlysly.pojo.FriendApplicationSheet;
+import cn.lastlysly.pojo.FriendsSheet;
 import cn.lastlysly.pojo.MessagesSheet;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
@@ -48,6 +49,10 @@ public interface CustomWebSocketService {
      */
     void pushUnreadMessage(CustomMessageSheetExtend customMessageSheetExtend);
 
-
+    /**
+     * 推送在线好友（登陆时已经在线的好友）
+     * @param friendsSheet
+     */
+    void pushOnlineFriend(FriendsSheet friendsSheet);
 
 }

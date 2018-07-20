@@ -6,7 +6,9 @@ import cn.lastlysly.myutils.CustomRedisTemplate;
 import cn.lastlysly.myutils.MyResult;
 import cn.lastlysly.pojo.CustomFriendsInfo;
 import cn.lastlysly.pojo.FriendgroupsSheet;
+import cn.lastlysly.pojo.FriendsSheet;
 import cn.lastlysly.pojo.UserinfoSheet;
+import cn.lastlysly.service.CustomMessageService;
 import cn.lastlysly.service.UserinfoService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.shiro.SecurityUtils;
@@ -46,6 +48,9 @@ public class UserInfoController {
 
     @Autowired
     private CustomRedisTemplate customRedisTemplate;
+
+    @Autowired
+    private CustomMessageService customMessageService;
 
 
     @CrossOrigin
@@ -152,7 +157,7 @@ public class UserInfoController {
 
             session.setAttribute("userInfo",resUser);
             //设置session超时时间
-            session.setTimeout(3000000);
+//            session.setTimeout(3000000);
             //访问时间(创建session的时间和最后访问session的时间)
 //            logger.info("session获取主机号：{}，session获取sessionID：{}，创建session时间,最后访问session的时间：{}，更新会话时间：{}",
 //                    session.getHost(),session.getId(),session.getLastAccessTime(),session.getStartTimestamp());
@@ -161,12 +166,12 @@ public class UserInfoController {
             String redisVal = session.getId() + "";
 //            session.stop();销毁session
             //上线用户保存于redis,
-            customRedisTemplate.redisSave(redisKey,redisVal,session.getTimeout());
+            customRedisTemplate.redisSave(redisKey,redisVal);
 
             //用户信息保存于redis(代替session)
             String userInfoKey = "userinfo:"+subject.getPrincipal().toString();
             String userInfoVal = objectMapper.writeValueAsString(resUser);
-            customRedisTemplate.redisSave(userInfoKey,userInfoVal,session.getTimeout());
+            customRedisTemplate.redisSave(userInfoKey,userInfoVal);
 
             return new MyResult(1,"登录成功",resUser);
 
@@ -174,6 +179,26 @@ public class UserInfoController {
             throw new MyCustomLoginException("登陆失败，用户名或密码错误");
         }
     }
+
+
+    /**
+     * 重写注销接口
+     * @return
+     */
+    @CrossOrigin
+    @RequestMapping(value = "/logout",method = RequestMethod.POST)
+    @ResponseBody
+    public MyResult logout(){
+        Subject subject = SecurityUtils.getSubject();
+        String redisKey = "online:"+subject.getPrincipal().toString();
+        boolean isDel =  customRedisTemplate.redisDelByKey(redisKey);
+        if(isDel){
+            subject.logout();
+            return new MyResult(1,"注销成功",null);
+        }
+        return new MyResult(0,"注销失败",null);
+    }
+
 
     /**
      * 获取登陆用户的信息(从redis缓存中)
@@ -241,6 +266,21 @@ public class UserInfoController {
     }
 
     /**
+     * 获取在线好友
+     * @return
+     */
+    @CrossOrigin
+    @RequestMapping(value = "/listonlinefriend",method = RequestMethod.POST)
+    @ResponseBody
+    public MyResult listOnlineFriends(){
+        String loginId = SecurityUtils.getSubject().getPrincipal().toString();
+        List<FriendsSheet> friendsSheetList = customMessageService.listOnlineFriendsByUserId(loginId);
+        return new MyResult(1,"获取在线好友成功",friendsSheetList);
+    }
+
+
+
+    /**
      * 通过当前登陆用户登陆ID和其好友登陆ID查询该好友信息（由于其在不同好友下的不同备注）
      * @param request
      * @return
@@ -274,7 +314,5 @@ public class UserInfoController {
         List<UserinfoSheet> userinfoSheetList = userinfoService.selectUserInfoByLoginIdOrNickname(loginIdOrNickname);
         return new MyResult(1,"查找成功",userinfoSheetList);
     }
-
-
 
 }

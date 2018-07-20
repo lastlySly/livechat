@@ -45,7 +45,7 @@ public class CustomDisconnectEventListener implements ApplicationListener<Sessio
         StompHeaderAccessor stompHeaderAccessor = StompHeaderAccessor.wrap(sessionDisconnectEvent.getMessage());
         Principal principal = stompHeaderAccessor.getUser();
         String loginId = principal.toString();
-        //推送上线通知
+        //推送下线通知
         pushOnlineOrOffline(loginId,"下线");
     }
 
@@ -82,6 +82,7 @@ public class CustomDisconnectEventListener implements ApplicationListener<Sessio
                     messagesSheet.setMessagesTime(cTime);
                     //推送
                     customWebSocketService.adminPushTo(messagesSheet);
+
                 }
 
             }

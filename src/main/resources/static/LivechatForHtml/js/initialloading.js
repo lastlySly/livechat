@@ -1,5 +1,6 @@
 friend_application_init();
-
+logoutBtn();
+//获取好友申请信息
 function friend_application_init(){
     $("#custom_system_message_div").empty();
     $.ajax({
@@ -46,6 +47,7 @@ function friend_application_init(){
                                     '                                </div>');
                             }
                         }
+
                         //如果发送方是他人
                         if(data.data[i].friendApplicationTo == myLoginId){
 
@@ -88,9 +90,8 @@ function friend_application_init(){
                         }
 
                     }
-                    $(".custom_system_message_div").animate({scrollTop:$(".custom_system_message_div")[0].scrollHeight},50);
-                    // alert($(".custom_system_message_div")[0].scrollHeight+"===")
 
+                    $("#custom_system_message_div").animate({scrollTop:$(".custom_system_message_div")[0].scrollHeight},50);
                     //设置未处理的好友请求条数
                     $("#friend_application_num").text(unDealFriendApplicationMessage);
                     //添加 同意 拒绝 忽略 按钮的点击事件
@@ -104,3 +105,16 @@ function friend_application_init(){
         }
     });
 }
+
+//登出
+function logoutBtn() {
+
+    $("#logout_btn").on("click",function () {
+        $.post(serverUrl+"/userdeal/logout",{},function (data) {
+        });
+        location.reload();
+    })
+}
+
+
+

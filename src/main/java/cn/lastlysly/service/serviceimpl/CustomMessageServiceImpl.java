@@ -4,10 +4,8 @@ import cn.lastlysly.mapper.CustomMapper;
 import cn.lastlysly.mapper.FriendApplicationSheetMapper;
 import cn.lastlysly.mapper.FriendsSheetMapper;
 import cn.lastlysly.mapper.MessagesSheetMapper;
-import cn.lastlysly.pojo.FriendApplicationSheet;
-import cn.lastlysly.pojo.FriendApplicationSheetExample;
-import cn.lastlysly.pojo.FriendsSheet;
-import cn.lastlysly.pojo.MessagesSheet;
+import cn.lastlysly.myutils.CustomRedisTemplate;
+import cn.lastlysly.pojo.*;
 import cn.lastlysly.service.CustomMessageService;
 import cn.lastlysly.service.CustomWebSocketService;
 import com.github.pagehelper.PageHelper;
@@ -16,10 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author lastlySly
@@ -43,6 +38,9 @@ public class CustomMessageServiceImpl implements CustomMessageService {
 
     @Autowired
     private MessagesSheetMapper messagesSheetMapper;
+
+    @Autowired
+    private CustomRedisTemplate customRedisTemplate;
 
     /**
      * 保存好友申请消息( 查询数据库有没有该用户向该好友发送的好友申请，如果有则仅修改这条申请记录)
@@ -183,6 +181,34 @@ public class CustomMessageServiceImpl implements CustomMessageService {
         List<MessagesSheet> messagesSheetList = customMapper.listMessageByUserloginidOrFriendLoginid(map);
         if(messagesSheetList.size() > 0 ){
             return messagesSheetList;
+        }
+        return null;
+    }
+
+
+    /**
+     * 据用户登陆Id获取其好友并判断是否在线
+     * @param userLoginId
+     * @return
+     */
+    @Override
+    public List<FriendsSheet> listOnlineFriendsByUserId(String userLoginId) {
+
+        List<FriendsSheet> olineFriendsSheetList = new ArrayList<>(16);
+        FriendsSheetExample friendsSheetExample = new FriendsSheetExample();
+        FriendsSheetExample.Criteria criteria = friendsSheetExample.createCriteria();
+        criteria.andFriendsUserLoginidEqualTo(userLoginId);
+        List<FriendsSheet> friendsSheetList = friendsSheetMapper.selectByExample(friendsSheetExample);
+        if(friendsSheetList.size() > 0){
+            for(FriendsSheet friendsSheet : friendsSheetList){
+                String redisKey ="online:" + friendsSheet.getFriendsUserLoginid();
+                boolean isExist = customRedisTemplate.redisHasKey(redisKey);
+                if(isExist){
+                    olineFriendsSheetList.add(friendsSheet);
+                }
+            }
+
+            return olineFriendsSheetList;
         }
         return null;
     }

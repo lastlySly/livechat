@@ -3,6 +3,7 @@ package cn.lastlysly.service.serviceimpl;
 import cn.lastlysly.myutils.CustomRedisTemplate;
 import cn.lastlysly.pojo.CustomMessageSheetExtend;
 import cn.lastlysly.pojo.FriendApplicationSheet;
+import cn.lastlysly.pojo.FriendsSheet;
 import cn.lastlysly.pojo.MessagesSheet;
 import cn.lastlysly.service.CustomMessageService;
 import cn.lastlysly.service.CustomWebSocketService;
@@ -109,6 +110,16 @@ public class CustomWebSocketServiceImpl implements CustomWebSocketService {
     @Override
     public void pushUnreadMessage(CustomMessageSheetExtend customMessageSheetExtend) {
         simpMessagingTemplate.convertAndSend("/mysystem/unread/"+customMessageSheetExtend.getMessagesSheet().getMessagesToLoginid(),customMessageSheetExtend);
+    }
+
+
+    /**
+     * 推送在线好友（登陆时已经在线的好友）
+     * @param friendsSheet
+     */
+    @Override
+    public void pushOnlineFriend(FriendsSheet friendsSheet) {
+        simpMessagingTemplate.convertAndSend("/mysystem/online/" + friendsSheet.getFriendsUserLoginid(),friendsSheet);
     }
 
 
