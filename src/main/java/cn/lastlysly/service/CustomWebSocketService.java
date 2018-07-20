@@ -49,10 +49,10 @@ public interface CustomWebSocketService {
      */
     void pushUnreadMessage(CustomMessageSheetExtend customMessageSheetExtend);
 
-    /**
-     * 推送在线好友（登陆时已经在线的好友）
-     * @param friendsSheet
-     */
-    void pushOnlineFriend(FriendsSheet friendsSheet);
+//    /**
+//     * 推送在线好友（登陆时已经在线的好友）
+//     * @param friendsSheet
+//     */
+//    void pushOnlineFriend(FriendsSheet friendsSheet);
 
 }

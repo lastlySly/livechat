@@ -168,13 +168,12 @@ public class UserInfoReviseController {
                                         @RequestParam(value = "friendLoginId") String friendLoginId){
 
         String redisKey = "unreadnumber:" + userLoginId + ":"+friendLoginId;
-        boolean isDel = customRedisTemplate.redisDelByKey(redisKey);
-        if (isDel){
-            return new MyResult(1,"移除未读消息成功",null);
-        }else{
-            return new MyResult(0,"出错了，移除未读消息失败",null);
-        }
 
+        boolean isExist = customRedisTemplate.redisHasKey(redisKey);
+        if(isExist){
+            boolean isDel = customRedisTemplate.redisDelByKey(redisKey);
+        }
+        return new MyResult(1,"移除未读消息成功",null);
     }
 
 

@@ -25,12 +25,12 @@ public class CustomHttpHandShakeInterceptor implements HandshakeInterceptor {
 
     @Override
     public boolean beforeHandshake(ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse, WebSocketHandler webSocketHandler, Map<String, Object> map) throws Exception {
-       logger.info("握手拦截器【beforeHandshake】");
+//       logger.info("握手拦截器【beforeHandshake】");
        if (serverHttpRequest instanceof ServerHttpRequest){
            ServletServerHttpRequest servletServerHttpRequest = (ServletServerHttpRequest) serverHttpRequest;
            HttpSession session = servletServerHttpRequest.getServletRequest().getSession();
            String sessionId = session.getId();
-           logger.info("握手拦截器【beforeHandshake】。sessionId = {}",sessionId);
+//           logger.info("握手拦截器【beforeHandshake】。sessionId = {}",sessionId);
            map.put("sessionId",sessionId);
        }
         return true;
@@ -43,7 +43,7 @@ public class CustomHttpHandShakeInterceptor implements HandshakeInterceptor {
             ServletServerHttpRequest servletServerHttpRequest = (ServletServerHttpRequest) serverHttpRequest;
             HttpSession session = servletServerHttpRequest.getServletRequest().getSession();
             String sessionId = session.getId();
-            logger.info("【握手拦截器】afterHandshake sessionId = {}",sessionId);
+//            logger.info("【握手拦截器】afterHandshake sessionId = {}",sessionId);
         }
     }
 }

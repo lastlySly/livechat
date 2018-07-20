@@ -1,12 +1,14 @@
 package cn.lastlysly.myutils.listener;
 
 import cn.lastlysly.mapper.FriendsSheetMapper;
+import cn.lastlysly.myutils.CustomRedisTemplate;
 import cn.lastlysly.pojo.CustomFriendsInfo;
 import cn.lastlysly.pojo.FriendsSheet;
 import cn.lastlysly.pojo.FriendsSheetExample;
 import cn.lastlysly.pojo.MessagesSheet;
 import cn.lastlysly.service.CustomWebSocketService;
 import cn.lastlysly.service.UserinfoService;
+import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +39,9 @@ public class CustomDisconnectEventListener implements ApplicationListener<Sessio
     @Autowired
     private UserinfoService userinfoService;
 
+    @Autowired
+    private CustomRedisTemplate customRedisTemplate;
+
 
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -45,8 +50,15 @@ public class CustomDisconnectEventListener implements ApplicationListener<Sessio
         StompHeaderAccessor stompHeaderAccessor = StompHeaderAccessor.wrap(sessionDisconnectEvent.getMessage());
         Principal principal = stompHeaderAccessor.getUser();
         String loginId = principal.toString();
+        String redisKey ="online:" + loginId;
+        boolean isExist = customRedisTemplate.redisHasKey(redisKey);
+        if(isExist){
+            customRedisTemplate.redisDelByKey(redisKey);
+        }
         //推送下线通知
         pushOnlineOrOffline(loginId,"下线");
+//        SecurityUtils.getSubject().logout();
+
     }
 
     /**
@@ -71,7 +83,8 @@ public class CustomDisconnectEventListener implements ApplicationListener<Sessio
                 if(getCustomFriendsInfo != null){
                     MessagesSheet messagesSheet = new MessagesSheet();
                     messagesSheet.setMessagesToLoginid(friendsSheet.getFriendsUserLoginid());
-
+                    messagesSheet.setMessagesFromLoginid(friendsSheet.getFriendsFriendLoginid());
+                    messagesSheet.setMessagesTypeid(6);
                     String messageStr = getCustomFriendsInfo.getCustomFriendsRemark() + "("+loginId +
                             ")" + onLineOrOffLine + "了。";
                     messagesSheet.setMessagesPostmessages(messageStr);

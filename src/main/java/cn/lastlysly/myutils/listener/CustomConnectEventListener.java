@@ -1,6 +1,7 @@
 package cn.lastlysly.myutils.listener;
 
 import cn.lastlysly.mapper.FriendsSheetMapper;
+import cn.lastlysly.myutils.CustomRedisTemplate;
 import cn.lastlysly.pojo.CustomFriendsInfo;
 import cn.lastlysly.pojo.FriendsSheet;
 import cn.lastlysly.pojo.FriendsSheetExample;
@@ -39,6 +40,9 @@ public class CustomConnectEventListener implements ApplicationListener<SessionCo
     @Autowired
     private UserinfoService userinfoService;
 
+    @Autowired
+    private CustomRedisTemplate customRedisTemplate;
+
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Override
@@ -47,8 +51,13 @@ public class CustomConnectEventListener implements ApplicationListener<SessionCo
 //        logger.info("CustomConnectEventListener监听器事件 类型={},StompHeaderAccessor={}",
 //                stompHeaderAccessor.getCommand().getMessageType(),stompHeaderAccessor.toString());
         Principal principal = stompHeaderAccessor.getUser();
+        String sessionId = stompHeaderAccessor.getSessionAttributes().get("sessionId").toString();
         String loginId = principal.toString();
-
+        String redisKey ="online:" + loginId;
+        boolean isExist = customRedisTemplate.redisHasKey(redisKey);
+        if(!isExist){
+            customRedisTemplate.redisSave(redisKey,sessionId);
+        }
         //推送上线通知
         pushOnlineOrOffline(loginId,"上线");
 
@@ -81,6 +90,8 @@ public class CustomConnectEventListener implements ApplicationListener<SessionCo
                     String messageStr = getCustomFriendsInfo.getCustomFriendsRemark() + "("+loginId +
                             ")" + onLineOrOffLine + "了。";
                     messagesSheet.setMessagesPostmessages(messageStr);
+                    messagesSheet.setMessagesFromLoginid(friendsSheet.getFriendsFriendLoginid());
+                    messagesSheet.setMessagesTypeid(5);
 
                     Date date = new Date();//获得系统时间.
                     String nowTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);//将时间格式转换成符合Timestamp要求的格式.

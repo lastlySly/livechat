@@ -69,53 +69,93 @@ function getGroupFun() {
     });
 }
 
-//获取好友列表
+//获取好友列表，在线离线分类，该方法必须在获取完分组后调用
 function listFriend() {
-    $.ajax({
-        url:serverUrl+"/userdeal/listfriends",
-        type:"POST",
-        data:{},
-        async:true,
-        // cache: false,缓存，get请求有效，true缓存
-        contentType: false,
-        processData: false,
-        success:function (data) {
-            if(data.code == 1){
-                var grouplist_count =  $(".group_name").length;
-                if (data.data == null){
-                    return;
+    //查询在线好友
+    $.post(serverUrl+"/userdeal/listonlinefriend",{},function (data) {
+        if(data.code == 1){
+            var onlineArray = new Array();
+            if(data.data != null){
+                var onlineLength = data.data.length;
+                for (var i = 0; i<onlineLength; i++){
+                    // console.log("在线好友==" + data.data[i].friendsFriendLoginid);
+                    onlineArray.push(data.data[i].friendsFriendLoginid);
                 }
-                var dataLength = data.data.length;
-                for(var i=0;i<dataLength;i++){
-                    for (var j=0;j<grouplist_count;j++){
-                        if (data.data[i].customFriendsGroupName == $(".group_name").eq(j).text()){
-                            $(".group_name").eq(j).parent().parent().find(".custom-friends-list").append('<li socketaddress="'+data.data[i].customFriendsLoginId+'" class="row custom-friend-item">\n' +
-                                '                                            <img class="col-md-3 img-responsive img-circle list-headportrait" src="'+data.data[i].customFriendsHeadportrait+'">\n' +
-                                '\n' +
-                                '                                            <dl class="col-md-9 custom-friend-item-info">\n' +
-                                '                                                <dt class="list-remarks">'+data.data[i].customFriendsRemark+'<span>('+data.data[i].customFriendsLoginId+')</span></dt>\n' +
-                                '                                                <dd class="list-motto">'+data.data[i].customFriendsMotto+'</dd>\n' +
-                                '                                                <!--<span class="badge custom-num-tip">5</span>-->\n' +
-                                '                                                <span class="badge custom-online-tip">离线</span>\n' +
-                                '                                            </dl>\n' +
-                                '                                        </li>');
+            }
+            //查询全部好友
+            $.ajax({
+                url:serverUrl+"/userdeal/listfriends",
+                type:"POST",
+                data:{},
+                async:true,
+                // cache: false,缓存，get请求有效，true缓存
+                contentType: false,
+                processData: false,
+                success:function (data) {
 
-                            var group_all_num =  $(".group_name").eq(j).parent().find(".group_all_num").text();
-                            $(".group_name").eq(j).parent().find(".group_all_num").text(parseInt(group_all_num)+1);
+                    if(data.code == 1){
+                        $(".custom-friends-list").empty();
+                        $(".custom-group-item").find(".group_all_num").text("0");
+                        $(".custom-group-item").find(".online_num").text("0");
+                        var grouplist_count =  $(".group_name").length;
+                        if (data.data == null){
+                            return;
+                        }
+                        var dataLength = data.data.length;
+                            for (var j=0;j<grouplist_count;j++){
+                                for(var i=0;i<dataLength;i++){
+                                    if (data.data[i].customFriendsGroupName == $(".group_name").eq(j).text()){
+                                        //判断好友是否在线
+                                        var isOnline =$.inArray(data.data[i].customFriendsLoginId,onlineArray);
+                                        switch (isOnline){
+                                            case -1:
+                                                $(".group_name").eq(j).parent().parent().find(".custom-friends-list").append('<li socketaddress="'+data.data[i].customFriendsLoginId+'" class="row custom-friend-item">\n' +
+                                                    '                                            <img class="col-md-3 img-responsive img-circle list-headportrait" src="'+data.data[i].customFriendsHeadportrait+'">\n' +
+                                                    '\n' +
+                                                    '                                            <dl class="col-md-9 custom-friend-item-info">\n' +
+                                                    '                                                <dt class="list-remarks">'+data.data[i].customFriendsRemark+'<span>('+data.data[i].customFriendsLoginId+')</span></dt>\n' +
+                                                    '                                                <dd class="list-motto">'+data.data[i].customFriendsMotto+'</dd>\n' +
+                                                    '                                                <!--<span class="badge custom-num-tip">5</span>-->\n' +
+                                                    '                                                <span class="badge custom-online-tip">离线</span>\n' +
+                                                    '                                            </dl>\n' +
+                                                    '                                        </li>');
+                                                break;
+                                            default:
+                                                $(".group_name").eq(j).parent().parent().find(".custom-friends-list").prepend('<li socketaddress="'+data.data[i].customFriendsLoginId+'" class="row custom-friend-item">\n' +
+                                                    '                                            <img class="col-md-3 img-responsive img-circle list-headportrait" src="'+data.data[i].customFriendsHeadportrait+'">\n' +
+                                                    '\n' +
+                                                    '                                            <dl class="col-md-9 custom-friend-item-info">\n' +
+                                                    '                                                <dt class="list-remarks">'+data.data[i].customFriendsRemark+'<span>('+data.data[i].customFriendsLoginId+')</span></dt>\n' +
+                                                    '                                                <dd class="list-motto">'+data.data[i].customFriendsMotto+'</dd>\n' +
+                                                    '                                                <!--<span class="badge custom-num-tip">5</span>-->\n' +
+                                                    '                                                <span class="badge custom-online-tip">在线</span>\n' +
+                                                    '                                            </dl>\n' +
+                                                    '                                        </li>');
+                                                    var group_online_num =  $(".group_name").eq(j).parent().find(".online_num").text();
+                                                    $(".group_name").eq(j).parent().find(".online_num").text(parseInt(group_online_num)+1);
+                                                break;
+                                        }
 
+                                        var group_all_num =  $(".group_name").eq(j).parent().find(".group_all_num").text();
+                                        $(".group_name").eq(j).parent().find(".group_all_num").text(parseInt(group_all_num)+1);
+
+                                }
+                            }
                         }
                     }
+                    //调用好友名片卡
+                    friend_card();
+
+                },
+                error:function (err) {
+                    console.log("访问错误："+err);
                 }
+            });
 
-                //查询在线好友
 
-            }
-            //调用好友名片卡
-            friend_card();
 
-        },
-        error:function (err) {
-            console.log("访问错误："+err);
+
+
         }
     });
 }
@@ -290,7 +330,7 @@ function change_friend_chatting_fun(socketaddress,remarks,chatHeadportrait) {
                                     '                                            <span class="message-text-contain-friends">'+ data.data[i].messagesPostmessages +'</span>\n' +
                                     '                                        </dd>\n' +
                                     '                                    </dl>');
-                                $(".chat-content-div").animate({scrollTop:$(".chat-content-div")[0].scrollHeight},50);
+                                $(".chat-content-div").animate({scrollTop:$(".chat-content-div")[0].scrollHeight},0);
                                 break;
                             //  自己发送给好友（即接收方为对方）
                             case socketaddress:
@@ -304,13 +344,12 @@ function change_friend_chatting_fun(socketaddress,remarks,chatHeadportrait) {
                                     '                                                <span class="message-text-contain-me pull-right">' + data.data[i].messagesPostmessages + '</span>\n' +
                                     '                                            </dd>\n' +
                                     '                                        </dl>');
-                                $(".chat-content-div").animate({scrollTop:$(".chat-content-div")[0].scrollHeight},50);
+                                $(".chat-content-div").animate({scrollTop:$(".chat-content-div")[0].scrollHeight},0);
                                 break;
                         }
                     }
 
                 }
-
                 //获取聊天记录成功后清空redis未读信息记录
                 removeUnreadInRedis(userLoginId,socketaddress);
 
@@ -329,15 +368,13 @@ function change_friend_chatting_fun(socketaddress,remarks,chatHeadportrait) {
             if (data.code == 1){
 
             }else{
-                alert(data.tip());
+                console.log(data.tip);
             }
         })
         
         }
 
 }
-
-
 
 
 /*调出菜单*/

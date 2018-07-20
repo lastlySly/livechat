@@ -201,7 +201,7 @@ public class CustomMessageServiceImpl implements CustomMessageService {
         List<FriendsSheet> friendsSheetList = friendsSheetMapper.selectByExample(friendsSheetExample);
         if(friendsSheetList.size() > 0){
             for(FriendsSheet friendsSheet : friendsSheetList){
-                String redisKey ="online:" + friendsSheet.getFriendsUserLoginid();
+                String redisKey ="online:" + friendsSheet.getFriendsFriendLoginid();
                 boolean isExist = customRedisTemplate.redisHasKey(redisKey);
                 if(isExist){
                     olineFriendsSheetList.add(friendsSheet);

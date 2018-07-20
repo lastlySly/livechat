@@ -102,16 +102,6 @@ function showMessage(result) {
             showMess(result);
         },3000);
 
-        // new Promise((resolve,reject)=>{
-        //     //刷新分组列表和好友列表
-        //     getGroupFun();
-        //     //刷新好友申请信息
-        //     friend_application_init();
-        //     resolve(1);
-        // }).then(res =>{
-        //     console.log("这是返回值:"+res);
-        //     showMess(result);
-        // });
 
     }else{
         showMess(result);
@@ -184,6 +174,9 @@ function showMessage(result) {
 
                             if(data_id == data.data[0].userLoginId){
                                 unreadMessageNum = $(".custom-chat-friend-item").eq(i).find(".custom-num-tip").text();
+                                if(unreadMessageNum == ""){
+                                    unreadMessageNum = 0;
+                                }
                                 $(".custom-chat-friend-item").eq(i).remove();
                                 break;
                             }
@@ -356,9 +349,16 @@ function showUnreadMessage(result){
 
 //显示用户上线下线
 function showFriendOnlineOrOffline(result) {
+    $("#friend_online_offline_advice").text(result.messagesPostmessages);
     $("#friend_online_offline_advice").show(1000);
-    setTimeout(function () {
-        $("#friend_online_offline_advice").text(result.messagesPostmessages);
-        $("#friend_online_offline_advice").hide(1000);
-    },3000);
+    $("#friend_online_offline_advice").hide(1000);
+
+    // setTimeout(function () {
+    //
+    // },3000);
+
+    listFriend();
+
+
+
 }

@@ -54,10 +54,10 @@ public class CustomSocketChannelInterceptor implements ChannelInterceptor {
      */
     @Override
     public void postSend(Message<?> message, MessageChannel channel, boolean sent) {
-        logger.info("CustomSocketChannelInterceptor - postSend");
+//        logger.info("CustomSocketChannelInterceptor - postSend");
         StompHeaderAccessor stompHeaderAccessor = StompHeaderAccessor.wrap(message);
         if (stompHeaderAccessor.getCommand() == null) return;// 避免非stomp消息类型，例如心跳检测
-        logger.info("CustomSocketChannelInterceptor - postSend:StompHeaderAccessor={}",stompHeaderAccessor.toString());
+//        logger.info("CustomSocketChannelInterceptor - postSend:StompHeaderAccessor={}",stompHeaderAccessor.toString());
 
         String sessionId = stompHeaderAccessor.getSessionAttributes().get("sessionId").toString();
         //获取连接用户

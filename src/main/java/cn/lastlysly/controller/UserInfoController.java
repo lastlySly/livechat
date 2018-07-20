@@ -211,7 +211,6 @@ public class UserInfoController {
         Subject subject = SecurityUtils.getSubject();
         String redisKey = "userinfo:"+subject.getPrincipal().toString();
 
-
         String val = customRedisTemplate.redisGet(redisKey);
         try {
             UserinfoSheet userinfoSheet = objectMapper.readValue(val,UserinfoSheet.class);
@@ -291,7 +290,7 @@ public class UserInfoController {
     @ResponseBody
     public MyResult infoFriend(HttpServletRequest request) throws MyCustomException {
         String friendUserId = request.getParameter("friendUserId");
-        logger.info("controller,friendUserId:{}",friendUserId);
+//        logger.info("controller,friendUserId:{}",friendUserId);
 
         Subject subject = SecurityUtils.getSubject();
         String userLoginId = subject.getPrincipal().toString();

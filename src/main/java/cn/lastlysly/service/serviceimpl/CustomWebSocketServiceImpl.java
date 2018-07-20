@@ -113,14 +113,14 @@ public class CustomWebSocketServiceImpl implements CustomWebSocketService {
     }
 
 
-    /**
-     * 推送在线好友（登陆时已经在线的好友）
-     * @param friendsSheet
-     */
-    @Override
-    public void pushOnlineFriend(FriendsSheet friendsSheet) {
-        simpMessagingTemplate.convertAndSend("/mysystem/online/" + friendsSheet.getFriendsUserLoginid(),friendsSheet);
-    }
+//    /**
+//     * 推送在线好友（登陆时已经在线的好友）
+//     * @param friendsSheet
+//     */
+//    @Override
+//    public void pushOnlineFriend(FriendsSheet friendsSheet) {
+//        simpMessagingTemplate.convertAndSend("/mysystem/online/" + friendsSheet.getFriendsUserLoginid(),friendsSheet);
+//    }
 
 
 }
