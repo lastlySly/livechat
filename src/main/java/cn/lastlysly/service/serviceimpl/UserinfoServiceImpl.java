@@ -138,9 +138,11 @@ public class UserinfoServiceImpl implements UserinfoService {
                 //创建用户默认好友分组
                 FriendgroupsSheet friendgroupsSheet = new FriendgroupsSheet();
                 friendgroupsSheet.setFriendgroupsName("好友");
+                friendgroupsSheet.setFriendgroupsGrade(1);
                 friendgroupsSheet.setFriendgroupsUserLoginid(userinfoSheet.getUserLoginId());
                 friendgroupsSheetMapper.insert(friendgroupsSheet);
                 friendgroupsSheet.setFriendgroupsName("家人");
+                friendgroupsSheet.setFriendgroupsGrade(1);
                 friendgroupsSheetMapper.insert(friendgroupsSheet);
                 return true;
             }

@@ -5,6 +5,7 @@
     <result column="friendgroups_id" jdbcType="INTEGER" property="friendgroupsId" />
     <result column="friendgroups_name" jdbcType="VARCHAR" property="friendgroupsName" />
     <result column="friendgroups_user_loginid" jdbcType="VARCHAR" property="friendgroupsUserLoginid" />
+    <result column="friendgroups_grade" jdbcType="INTEGER" property="friendgroupsGrade" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -65,7 +66,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    friendgroups_id, friendgroups_name, friendgroups_user_loginid
+    friendgroups_id, friendgroups_name, friendgroups_user_loginid, friendgroups_grade
   </sql>
   <select id="selectByExample" parameterType="cn.lastlysly.pojo.FriendgroupsSheetExample" resultMap="BaseResultMap">
     select
@@ -89,9 +90,11 @@
   </delete>
   <insert id="insert" parameterType="cn.lastlysly.pojo.FriendgroupsSheet">
     insert into friendgroups_sheet (friendgroups_id, friendgroups_name, 
-      friendgroups_user_loginid)
+      friendgroups_user_loginid, friendgroups_grade
+      )
     values (#{friendgroupsId,jdbcType=INTEGER}, #{friendgroupsName,jdbcType=VARCHAR}, 
-      #{friendgroupsUserLoginid,jdbcType=VARCHAR})
+      #{friendgroupsUserLoginid,jdbcType=VARCHAR}, #{friendgroupsGrade,jdbcType=INTEGER}
+      )
   </insert>
   <insert id="insertSelective" parameterType="cn.lastlysly.pojo.FriendgroupsSheet">
     insert into friendgroups_sheet
@@ -105,6 +108,9 @@
       <if test="friendgroupsUserLoginid != null">
         friendgroups_user_loginid,
       </if>
+      <if test="friendgroupsGrade != null">
+        friendgroups_grade,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="friendgroupsId != null">
@@ -115,6 +121,9 @@
       </if>
       <if test="friendgroupsUserLoginid != null">
         #{friendgroupsUserLoginid,jdbcType=VARCHAR},
+      </if>
+      <if test="friendgroupsGrade != null">
+        #{friendgroupsGrade,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -136,6 +145,9 @@
       <if test="record.friendgroupsUserLoginid != null">
         friendgroups_user_loginid = #{record.friendgroupsUserLoginid,jdbcType=VARCHAR},
       </if>
+      <if test="record.friendgroupsGrade != null">
+        friendgroups_grade = #{record.friendgroupsGrade,jdbcType=INTEGER},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -145,7 +157,8 @@
     update friendgroups_sheet
     set friendgroups_id = #{record.friendgroupsId,jdbcType=INTEGER},
       friendgroups_name = #{record.friendgroupsName,jdbcType=VARCHAR},
-      friendgroups_user_loginid = #{record.friendgroupsUserLoginid,jdbcType=VARCHAR}
+      friendgroups_user_loginid = #{record.friendgroupsUserLoginid,jdbcType=VARCHAR},
+      friendgroups_grade = #{record.friendgroupsGrade,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>

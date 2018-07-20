@@ -7,6 +7,8 @@ public class FriendgroupsSheet {
 
     private String friendgroupsUserLoginid;
 
+    private Integer friendgroupsGrade;
+
     public Integer getFriendgroupsId() {
         return friendgroupsId;
     }
@@ -29,5 +31,13 @@ public class FriendgroupsSheet {
 
     public void setFriendgroupsUserLoginid(String friendgroupsUserLoginid) {
         this.friendgroupsUserLoginid = friendgroupsUserLoginid == null ? null : friendgroupsUserLoginid.trim();
+    }
+
+    public Integer getFriendgroupsGrade() {
+        return friendgroupsGrade;
+    }
+
+    public void setFriendgroupsGrade(Integer friendgroupsGrade) {
+        this.friendgroupsGrade = friendgroupsGrade;
     }
 }

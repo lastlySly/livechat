@@ -3,7 +3,7 @@ $(function () {
     pop_modal();
     userinfo_modal();
     address_deal();
-
+    group_manage();
 });
 
 //添加好友，添加修改分组模态
@@ -242,7 +242,7 @@ function apply_friend() {
         //获取自己的登陆ID
         var fromLoginId = $("#userinfo_loginId").text();
 
-        var someoneNickname = ($(".apply_btn_custom").parent().parent().find(".friends-nickname-and-username")).text();
+        var someoneNickname = $("#apply_title").text();
 
         // stompClient.send("/app/applyfriend", {}, JSON.stringify({'friendApplicationTo': tologinId,
         //     'friendApplicationRemark':applyRemark, 'friendApplicationGroup':applyGroupId,
@@ -284,4 +284,20 @@ function apply_friend() {
         $(".apply_div").slideToggle("fast");
     })
 
+}
+
+
+//分组管理
+function group_manage() {
+    //单击可修改
+    $(".group_input_rename").on("click",function () {
+        $(this).css({"background":"rgba(255,255,255,1)","border":"1px solid rgba(0,0,0,1)","text-align":"center"});
+        $(this).removeAttr("readonly");
+        $(this).parent().find(".ok_group_icon").css({"display":"inline-block"});
+    });
+    $(".group_input_rename").on("blur",function () {
+        $(this).css({"background":"rgba(255,255,255,0)","border":"1px solid rgba(0,0,0,0)","text-align":"left"});
+        $(this).attr("readonly","readonly");
+        $(this).parent().find(".ok_group_icon").css({"display":"none"});
+    })
 }

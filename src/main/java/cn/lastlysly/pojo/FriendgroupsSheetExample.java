@@ -303,6 +303,66 @@ public class FriendgroupsSheetExample {
             addCriterion("friendgroups_user_loginid not between", value1, value2, "friendgroupsUserLoginid");
             return (Criteria) this;
         }
+
+        public Criteria andFriendgroupsGradeIsNull() {
+            addCriterion("friendgroups_grade is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFriendgroupsGradeIsNotNull() {
+            addCriterion("friendgroups_grade is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFriendgroupsGradeEqualTo(Integer value) {
+            addCriterion("friendgroups_grade =", value, "friendgroupsGrade");
+            return (Criteria) this;
+        }
+
+        public Criteria andFriendgroupsGradeNotEqualTo(Integer value) {
+            addCriterion("friendgroups_grade <>", value, "friendgroupsGrade");
+            return (Criteria) this;
+        }
+
+        public Criteria andFriendgroupsGradeGreaterThan(Integer value) {
+            addCriterion("friendgroups_grade >", value, "friendgroupsGrade");
+            return (Criteria) this;
+        }
+
+        public Criteria andFriendgroupsGradeGreaterThanOrEqualTo(Integer value) {
+            addCriterion("friendgroups_grade >=", value, "friendgroupsGrade");
+            return (Criteria) this;
+        }
+
+        public Criteria andFriendgroupsGradeLessThan(Integer value) {
+            addCriterion("friendgroups_grade <", value, "friendgroupsGrade");
+            return (Criteria) this;
+        }
+
+        public Criteria andFriendgroupsGradeLessThanOrEqualTo(Integer value) {
+            addCriterion("friendgroups_grade <=", value, "friendgroupsGrade");
+            return (Criteria) this;
+        }
+
+        public Criteria andFriendgroupsGradeIn(List<Integer> values) {
+            addCriterion("friendgroups_grade in", values, "friendgroupsGrade");
+            return (Criteria) this;
+        }
+
+        public Criteria andFriendgroupsGradeNotIn(List<Integer> values) {
+            addCriterion("friendgroups_grade not in", values, "friendgroupsGrade");
+            return (Criteria) this;
+        }
+
+        public Criteria andFriendgroupsGradeBetween(Integer value1, Integer value2) {
+            addCriterion("friendgroups_grade between", value1, value2, "friendgroupsGrade");
+            return (Criteria) this;
+        }
+
+        public Criteria andFriendgroupsGradeNotBetween(Integer value1, Integer value2) {
+            addCriterion("friendgroups_grade not between", value1, value2, "friendgroupsGrade");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {
