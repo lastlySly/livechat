@@ -533,21 +533,23 @@
     <!--分组管理模态框-->
     <div class="groups_modal_div">
         <div class="groups-modal">
+            <button type="button" class="btn btn-default remove_groups_modal_div_btn"><span class="glyphicon glyphicon-remove"></span> </button>
             <h4>分组管理</h4>
             <ul class="groups_modal_groups_list">
                 <h5 class="add_group_btn"><img class="my_icon add_group_icon" src="img/add_icon.png">添加分组</h5>
-                <li><img class="my_icon del_group_icon" src="img/del_2.png">
-                    <input class="group_input_rename" type="text" value="未闻花名" readonly="readonly" />
-                    <img class="my_icon ok_group_icon" src="img/ok_1.png">
+                <li><img groupId="" class="my_icon del_group_icon" src="img/del_2.png">
+                    <div class="group_rename_div">
+                        <input class="group_input_rename" groupId =""  type="text" value="汐" readonly="readonly" />
+                        <img class="my_icon ok_group_icon" src="img/ok_1.png">
+                    </div>
                 </li>
-                <li><img class="my_icon del_group_icon" src="img/del_2.png">
-                    <input class="group_input_rename" type="text" value="篝" readonly="readonly" />
-                    <img class="my_icon ok_group_icon" src="img/ok_1.png">
+                <li><img groupId="" class="my_icon not_group_icon" src="img/icon_not_1.png">
+                    <div class="group_rename_div">
+                        <input class="group_input_rename" groupId ="" placeholder="请输入分组名称"  type="text" value="汐" readonly="readonly" />
+                        <img class="my_icon ok_group_icon" src="img/ok_1.png">
+                    </div>
                 </li>
-                <li><img class="my_icon del_group_icon" src="img/del_2.png">
-                    <input class="group_input_rename" type="text" value="汐" readonly="readonly" />
-                    <img class="my_icon ok_group_icon" src="img/ok_1.png">
-                </li>
+
             </ul>
 
         </div>

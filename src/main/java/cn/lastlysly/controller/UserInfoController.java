@@ -235,19 +235,6 @@ public class UserInfoController {
         return new MyResult(1,"查询成功",resUser);
     }
 
-    /**
-     * 获取好友分组()
-     * @return
-     */
-    @CrossOrigin
-    @RequestMapping(value = "/listgroup",method = RequestMethod.POST)
-    @ResponseBody
-    public MyResult listGroup() throws MyCustomException {
-        Subject subject = SecurityUtils.getSubject();
-        List<FriendgroupsSheet> friendgroupsSheetList =  userinfoService.listFriendsGroup(subject.getPrincipal().toString());
-        return new MyResult(1,"获取用户列表成功",friendgroupsSheetList);
-
-    }
 
     /**
      * 通过用户登陆ID获取其好友列表(带详细信息)

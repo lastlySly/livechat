@@ -170,34 +170,6 @@ public class UserinfoServiceImpl implements UserinfoService {
         return null;
     }
 
-    /**
-     * 用户添加好友分组
-     * @param friendgroupsSheet
-     * @return
-     */
-    @Override
-    public boolean saveFriendsGroup(FriendgroupsSheet friendgroupsSheet) {
-
-        int row = friendgroupsSheetMapper.insert(friendgroupsSheet);
-        if (row > 0){
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * 获取用户的分组
-     * @param userLoginId 用户登陆ID
-     * @return
-     */
-    @Override
-    public List<FriendgroupsSheet> listFriendsGroup(String userLoginId) {
-        FriendgroupsSheetExample friendgroupsSheetExample = new FriendgroupsSheetExample();
-        FriendgroupsSheetExample.Criteria criteria = friendgroupsSheetExample.createCriteria();
-        criteria.andFriendgroupsUserLoginidEqualTo(userLoginId);
-        List<FriendgroupsSheet> friendgroupsSheetList = friendgroupsSheetMapper.selectByExample(friendgroupsSheetExample);
-        return friendgroupsSheetList;
-    }
 
     /**
      * 根据用户账号或者用户ID查询用户

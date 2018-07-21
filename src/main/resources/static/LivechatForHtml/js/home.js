@@ -31,7 +31,7 @@ $(function () {
 /*获取分组并渲染*/
 function getGroupFun() {
     $.ajax({
-        url:serverUrl+"/userdeal/listgroup",
+        url:serverUrl+"/groupingdeal/listgroup",
         type:"POST",
         data:{},
         async:true,

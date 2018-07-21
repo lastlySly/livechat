@@ -14,7 +14,6 @@ function friend_application_init(){
             if(data.code == 1){
                 if(data.data != null){
                     var myLoginId = $.cookie('_userLoginId');
-                    console.log("测试cookie:"+myLoginId);
                     var dataLength = data.data.length;
                     var unDealFriendApplicationMessage = 0;
                     for(var i=0; i<dataLength; i++){

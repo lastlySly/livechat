@@ -4,7 +4,10 @@ $(function () {
     userinfo_modal();
     address_deal();
     group_manage();
+
 });
+
+
 
 //添加好友，添加修改分组模态
 function pop_modal() {
@@ -289,15 +292,149 @@ function apply_friend() {
 
 //分组管理
 function group_manage() {
-    //单击可修改
-    $(".group_input_rename").on("click",function () {
-        $(this).css({"background":"rgba(255,255,255,1)","border":"1px solid rgba(0,0,0,1)","text-align":"center"});
-        $(this).removeAttr("readonly");
-        $(this).parent().find(".ok_group_icon").css({"display":"inline-block"});
+/*      无连接服务器开启
+        listGroup();
+        group_effect();
+        add_group_btn();*/
+
+    //打开分组管理模态框
+    $("#group_manage_btn").on("click",function () {
+        /*关闭添加按钮组*/
+        $(".custom-add-meau").slideToggle("fast");
+        /*打开模态框*/
+        $(".groups_modal_div").slideToggle("fast");
+        listGroup();
+
     });
-    $(".group_input_rename").on("blur",function () {
-        $(this).css({"background":"rgba(255,255,255,0)","border":"1px solid rgba(0,0,0,0)","text-align":"left"});
-        $(this).attr("readonly","readonly");
-        $(this).parent().find(".ok_group_icon").css({"display":"none"});
-    })
+    //关闭分组管理模态框
+    $(".remove_groups_modal_div_btn").on("click",function () {
+        /*关闭分组管理模态框*/
+        $(".groups_modal_div").slideToggle("fast");
+    });
+
+    //效果，事件
+    function group_effect() {
+        //单击可修改
+        $(".group_input_rename").off("click");
+        $(".group_input_rename").off("blur");
+        $(".group_rename_div").off("click");
+        $(".groups_modal_div").off("click");
+        $(".ok_group_icon").off("click");
+        $(".del_group_icon").off("click");
+        //输入框样式
+        $(".group_input_rename").on("click",function () {
+            $(this).css({"background":"rgba(255,255,255,1)","border":"1px solid rgba(0,0,0,0)","text-align":"center"});
+            $(this).removeAttr("readonly");
+            $(this).parent().find(".ok_group_icon").css({"display":"inline-block"});
+        });
+        $(".group_input_rename").on("blur",function () {
+            $(this).css({"background":"rgba(255,255,255,0)","border":"1px solid rgba(0,0,0,0)","text-align":"left"});
+            $(this).attr("readonly","readonly");
+            // $(this).parent().find(".ok_group_icon").css({"display":"none"});
+        });
+
+        $(".group_rename_div").on("click",function () {
+            // var renameDivLength = $(".group_rename_div").length;
+            $(".group_rename_div").find(".ok_group_icon").css({"display":"none"});
+            $(this).find(".ok_group_icon").css({"display":"inline-block"});
+            //阻止事件起泡（冒泡问题，点击子布局事件不触发父布局事件）
+            event.stopPropagation();
+
+        })
+        $(".groups_modal_div").on("click",function () {
+            $(".group_rename_div").find(".ok_group_icon").css({"display":"none"});
+        })
+        //提交修改
+        $(".ok_group_icon").on("click",function () {
+            var group_input_rename = $(this).parent().find(".group_input_rename");
+            var groupId = group_input_rename.attr("groupId");
+            var groupName = group_input_rename.val();
+            $.post(serverUrl+"/groupingdeal/listgroup",{},function (data) {
+                
+            })
+
+
+            alert("修改成功");
+        });
+
+        $(".del_group_icon").on("click",function () {
+            alert("删除成功");
+        })
+    }
+    //新建
+    function add_group_btn() {
+        $(".add_group_btn").off("click");
+        $(".group_back_icon_btn").off("click");
+        //添加分组
+        $(".add_group_btn").on("click",function () {
+
+            if($("#add_new_group_div").length>0){
+                alert("请先完成以下新建操作");
+                return;
+            }
+            $(this).after(' <li>\n' +
+                '                    <div id="add_new_group_div" class="group_rename_div">\n' +
+                '                        <input class="new_group_input" type="text" placeholder="请输入分组名称" value="" />\n' +
+                '                        <img class="my_icon" src="img/icon_ok_02.png">\n' +
+                '                        <img class="my_icon group_back_icon_btn" src="img/icon_back_02.png">\n' +
+                '                    </div>\n' +
+                '                </li>');
+            group_effect();
+
+            //撤销新建操作
+            $(".group_back_icon_btn").on("click",function () {
+                $("#add_new_group_div").parent().remove();
+            });
+
+        });
+
+
+    }
+
+
+    //获取分组
+    function listGroup() {
+        var loginId = $.cookie("_userLoginId");
+        $.post(serverUrl+"/groupingdeal/listgroup",{"loginId":loginId},function (data) {
+            if(data.code == 1){
+                $(".groups_modal_groups_list").empty();
+                $(".groups_modal_groups_list").append('<h5 class="add_group_btn">' +
+                    '<img class="my_icon add_group_icon" src="img/add_icon.png">添加分组</h5>');
+                if(data.data == null){
+                    return;
+                }
+                var dataLength = data.data.length;
+                for(var i= 0; i<dataLength; i++){
+                    var friendgroupsGrade = data.data[i].friendgroupsGrade;
+                    switch (friendgroupsGrade){
+                        case 1:
+                            $(".groups_modal_groups_list").append('<li><img groupId="'+ data.data[i].friendgroupsId +'" class="my_icon not_group_icon" src="img/icon_not_1.png">\n' +
+                                '                    <div class="group_rename_div">\n' +
+                                '                        <input class="group_input_rename" groupId ="'+ data.data[i].friendgroupsId +'" ' +
+                                ' type="text" value="'+ data.data[i].friendgroupsName +'" readonly="readonly" />\n' +
+                                '                        <img class="my_icon ok_group_icon" src="img/ok_1.png">\n' +
+                                '                    </div>\n' +
+                                '                </li>');
+
+                            break;
+                        default:
+                            $(".groups_modal_groups_list").append('<li><img groupId="'+ data.data[i].friendgroupsId +'" class="my_icon del_group_icon" src="img/del_2.png">\n' +
+                                '                    <div class="group_rename_div">\n' +
+                                '                        <input class="group_input_rename" groupId ="'+ data.data[i].friendgroupsId +'"' +
+                                '  type="text" value="'+ data.data[i].friendgroupsName +'" readonly="readonly" />\n' +
+                                '                        <img class="my_icon ok_group_icon" src="img/ok_1.png">\n' +
+                                '                    </div>\n' +
+                                '                </li>');
+                            break;
+                    }
+                    //添加事件
+                    group_effect();
+                    add_group_btn();
+                }
+
+            }
+        })
+    }
+
+
 }

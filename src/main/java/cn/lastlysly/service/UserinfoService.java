@@ -35,20 +35,6 @@ public interface UserinfoService {
     UserinfoSheet getUserinfo(String loginId);
 
     /**
-     * 添加好友分组
-     * @param friendgroupsSheet
-     * @return
-     */
-    boolean saveFriendsGroup(FriendgroupsSheet friendgroupsSheet);
-
-    /**
-     * 获取用户好友分组
-     * @param userId 用户ID
-     * @return
-     */
-    List<FriendgroupsSheet> listFriendsGroup(String userId);
-
-    /**
      * 通过用户账号或者用户ID查询用户信息
      * @param userinfoSheet
      * @return

@@ -121,7 +121,7 @@
 .groups_modal_groups_list{
     margin-top: 20px;
     width: 100%;
-    /*height: 400px;*/
+    height: 400px;
     /*max-height: 400px;*/
     overflow-y: auto;
     background-color: #F7F7F7;
@@ -138,12 +138,19 @@
     transition:all 0.5s;
 }
 .my_icon:hover{
-
     transform: scale(1.2,1.2);
 }
+.not_group_icon:hover{
+    transform: none;
+}
+.group_rename_div{
+    display: inline-block;
+}
+
 /*确定图标*/
 .ok_group_icon{
     display: none;
+    /*z-index: 100;*/
 }
 
 .groups_modal_groups_list > li{
@@ -153,8 +160,19 @@
 .group_input_rename{
     border: 0;
     background-color: #F7F7F7;
-    padding: 5px 0px;
+    padding: 5px 5px;
+}
+.new_group_input{
+    border: 1px solid RGB(16,222,224);
+    background-color: #F7F7F7;
+    padding: 5px 5px;
+}
 
+/*关闭模态框*/
+.remove_groups_modal_div_btn{
+    position: absolute;
+    top: 10px;
+    right: 10px;
 }
 
 
