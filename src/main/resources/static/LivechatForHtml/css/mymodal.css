@@ -168,6 +168,28 @@
     padding: 5px 5px;
 }
 
+/*删除分组确认框*/
+.del_group_tip{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 100;
+    top: 0px;
+    left: 0px;
+    border-radius: 20px;
+    display: none;
+}
+.del_group_tip_div{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background-color: #F7F7F7;
+    height: 100px;
+    width: 100%;
+    border-radius: 20px;
+}
+
 /*关闭模态框*/
 .remove_groups_modal_div_btn{
     position: absolute;

@@ -292,10 +292,10 @@ function apply_friend() {
 
 //分组管理
 function group_manage() {
-/*      无连接服务器开启
-        listGroup();
-        group_effect();
-        add_group_btn();*/
+      // // 无连接服务器开启
+      //   listGroup();
+      //   group_effect();
+      //   add_group_btn();
 
     //打开分组管理模态框
     $("#group_manage_btn").on("click",function () {
@@ -349,25 +349,59 @@ function group_manage() {
             var group_input_rename = $(this).parent().find(".group_input_rename");
             var groupId = group_input_rename.attr("groupId");
             var groupName = group_input_rename.val();
-            $.post(serverUrl+"/groupingdeal/listgroup",{},function (data) {
-                
+            var loginId = $.cookie("_userLoginId");
+            $.post(serverUrl+"/groupingdeal/renamegroup",{"groupId":groupId,"groupName":groupName,"loginId":loginId},function (data) {
+                if(data.code == 1){
+                    listGroup();
+                    var groupLength = $(".group_name").length;
+                    for (var i = 0; i<groupLength; i++){
+                        var mainDivGroupId = $(".group_name").eq(i).attr("groupId");
+                        if(mainDivGroupId == groupId){
+                            $(".group_name").eq(i).text(groupName);
+                        }
+                    }
+                    alert(data.tip);
+                }else{
+                    alert(data.tip);
+                }
             })
-
-
-            alert("修改成功");
         });
 
+        //删除分组
         $(".del_group_icon").on("click",function () {
-            alert("删除成功");
+            var groupId = $(this).attr("groupId");
+            $("#del_group_tip").slideToggle("fast");
+            $("#confirm_del_group_btn").attr("groupId",groupId);
+            $("#un_del_group_btn").off("click");
+            $("#confirm_del_group_btn").off("click");
+            //取消删除
+            $("#un_del_group_btn").on("click",function () {
+                $("#del_group_tip").slideToggle("fast");
+            });
+            //确认删除
+            $("#confirm_del_group_btn").on("click",function () {
+                var groupId = $(this).attr("groupId");
+                var loginId = $.cookie("_userLoginId");
+                $.post(serverUrl+"/groupingdeal/delgroup",{"loginId":loginId,"groupId":groupId},function (data) {
+                    if(data.code == 1){
+                        listGroup();
+                        getGroupFun();
+                        $("#del_group_tip").slideToggle("fast");
+                    }else{
+                        alert(data.tip);
+                    }
+                });
+            })
+
         })
     }
-    //新建
+
+    //新建分组
     function add_group_btn() {
         $(".add_group_btn").off("click");
         $(".group_back_icon_btn").off("click");
         //添加分组
         $(".add_group_btn").on("click",function () {
-
             if($("#add_new_group_div").length>0){
                 alert("请先完成以下新建操作");
                 return;
@@ -375,16 +409,36 @@ function group_manage() {
             $(this).after(' <li>\n' +
                 '                    <div id="add_new_group_div" class="group_rename_div">\n' +
                 '                        <input class="new_group_input" type="text" placeholder="请输入分组名称" value="" />\n' +
-                '                        <img class="my_icon" src="img/icon_ok_02.png">\n' +
+                '                        <img class="my_icon group_add_submit_btn" src="img/icon_ok_02.png">\n' +
                 '                        <img class="my_icon group_back_icon_btn" src="img/icon_back_02.png">\n' +
                 '                    </div>\n' +
                 '                </li>');
+            //重新调用绑定事件
             group_effect();
 
+            $(".group_back_icon_btn").off("click");
+            $(".group_add_submit_btn").off("click");
             //撤销新建操作
             $(".group_back_icon_btn").on("click",function () {
                 $("#add_new_group_div").parent().remove();
             });
+
+            //提交新建分组
+            $(".group_add_submit_btn").on("click",function () {
+                var loginId = $.cookie("_userLoginId");
+                var groupName = $(".new_group_input").val();
+                $.post(serverUrl+"/groupingdeal/addnewgroup",{"loginId":loginId,"groupName":groupName},function (data) {
+                    if(data.code == 1){
+                        listGroup();
+                        getGroupFun();
+
+                    }else{
+                        alert(data.tip);
+                    }
+                })
+            })
+
+
 
         });
 
