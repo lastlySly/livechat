@@ -2,6 +2,7 @@ package cn.lastlysly.service;
 
 import cn.lastlysly.pojo.CustomFriendsInfo;
 import cn.lastlysly.pojo.FriendgroupsSheet;
+import cn.lastlysly.pojo.FriendsSheet;
 import cn.lastlysly.pojo.UserinfoSheet;
 
 import java.util.List;
@@ -68,5 +69,12 @@ public interface UserinfoService {
      * @return
      */
     boolean updateUserinfo(UserinfoSheet userinfoSheet);
+
+    /**
+     * 修改好友信息（备注，分组）
+     * @param friendsSheet
+     * @return
+     */
+    boolean reviseFriendInfo(FriendsSheet friendsSheet);
 
 }

@@ -25,13 +25,13 @@
     </resultMap>
 
     <resultMap id="CustomFriendsResultMap" type="cn.lastlysly.pojo.CustomFriendsInfo">
-       <result column="friends_user_login_id" property="customFriendsUserId" /><!--好友归属用户ID-->
+       <result column="friends_user_loginid" property="customFriendsUserId" /><!--好友归属用户ID-->
        <result column="user_id" property="customFriendsFriendsId" /><!--好友的ID-->
        <result column="user_login_id" property="customFriendsLoginId" /><!--好友的登陆账号-->
 
        <result column="user_nickname" property="customFriendsNickName" /><!--好友昵称-->
        <result column="friends_remarks" property="customFriendsRemark" /><!--给好友的备注-->
-       <result column="friendgroups_name" property="customFriendsGroupName" /><!--好友所在分组的组名-->
+       <result column="friends_friendgroupsid" property="customFriendsGroupId" /><!--好友所在分组的组Id-->
        <result column="user_email" property="customFriendsEmail" /><!--好友的邮箱-->
        <result column="user_telephone" property="customFriendsTel" /><!--好友电话号码-->
        <result column="user_motto" property="customFriendsMotto" /><!--好友座右铭-->

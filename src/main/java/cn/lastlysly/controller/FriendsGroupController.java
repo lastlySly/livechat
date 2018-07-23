@@ -70,7 +70,7 @@ public class FriendsGroupController {
     }
 
     /**
-     * 新建分组
+     * 新建分组（该接口可简化，其中返回的数据已经不使用）
      * @return
      */
     @CrossOrigin

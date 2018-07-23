@@ -206,7 +206,7 @@ public class UserinfoServiceImpl implements UserinfoService {
     public List<CustomFriendsInfo> listFriends(UserinfoSheet userinfoSheet) {
         Map<String,String> map = new HashMap<String,String>(16);
         map.put("userId",userinfoSheet.getUserLoginId());
-        System.out.println(userinfoSheet.getUserLoginId());
+//        System.out.println(userinfoSheet.getUserLoginId());
         List<CustomFriendsInfo> customFriendsInfoList = customMapper.selectCustomFriendsInfoByUserId(map);
         if (customFriendsInfoList.size() > 0){
             return customFriendsInfoList;
@@ -267,6 +267,25 @@ public class UserinfoServiceImpl implements UserinfoService {
 
             return true;
         }
+        return false;
+    }
+
+    /**
+     * 修改好友信息（备注，分组）
+     * @param friendsSheet
+     * @return
+     */
+    @Override
+    public boolean reviseFriendInfo(FriendsSheet friendsSheet) {
+
+        Integer groupId = friendsSheet.getFriendsFriendgroupsid();
+        //判断用户提交的修改
+        if(groupId != null && groupId != 0){
+            //判断该组Id是否正确
+            return true;
+        }
+
+
         return false;
     }
 

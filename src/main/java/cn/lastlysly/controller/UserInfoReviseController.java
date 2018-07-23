@@ -177,43 +177,31 @@ public class UserInfoReviseController {
     }
 
 
-
     /**
-     * 查询国家列表
-     * @returne
-     */
-    @CrossOrigin
-    @RequestMapping(value="/listnation",method = RequestMethod.POST)
-    @ResponseBody
-    public MyResult listNation(){
-        List<NationSheet> nationSheetList = addressService.listNation();
-        return new MyResult(1,"查询国家列表成功",nationSheetList);
-    }
-
-    /**
-     * 根据国家ID获取省份
-     * @param nationId
+     * 修改好友信息，（备注，分组）
      * @return
      */
     @CrossOrigin
-    @RequestMapping(value = "/listprovince",method = RequestMethod.POST)
+    @RequestMapping(value = "revisefriendinfo",method = RequestMethod.POST)
     @ResponseBody
-    public MyResult listProvince(@RequestParam(value = "nationID",required = false) Integer nationId){
-        List<ProvinceSheet> provinceSheetList = addressService.listProvince(nationId);
-        return new MyResult(1,"根据国家ID查询省份列表成功",provinceSheetList);
-    }
+    public MyResult reviseFriendInfo(@RequestParam(value = "groupId",required = false) Integer groupId,
+                                     @RequestParam(value = "remark",required = false) String remark,
+                                     @RequestParam(value = "friendLoginId") String friendLoginId){
 
-    /**
-     * 根据省份ID查询城市
-     * @param provinceId
-     * @return
-     */
-    @CrossOrigin
-    @RequestMapping(value = "/listcity",method = RequestMethod.POST)
-    @ResponseBody
-    public MyResult listCity(@RequestParam(value = "provinceId",required = false) Integer provinceId){
-        List<CitySheet> citySheetList = addressService.listCity(provinceId);
-        return new MyResult(1,"根据省份ID查询城市列表成功",citySheetList);
+        FriendsSheet friendsSheet = new FriendsSheet();
+        friendsSheet.setFriendsUserLoginid(SecurityUtils.getSubject().getPrincipal().toString());
+        friendsSheet.setFriendsFriendLoginid(friendLoginId);
+        if(groupId != null && groupId != 0){
+            friendsSheet.setFriendsFriendgroupsid(groupId);
+        }
+        if (remark != null){
+            friendsSheet.setFriendsRemarks(remark);
+        }
+        boolean isRevise = userinfoService.reviseFriendInfo(friendsSheet);
+//        if (isRevise){
+//            return new MyResult(1,"修改成功",null);
+//        }
+        return new MyResult(1,"修改成功",null);
     }
 
 }

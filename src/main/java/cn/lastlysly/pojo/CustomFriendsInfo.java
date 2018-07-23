@@ -11,7 +11,7 @@ public class CustomFriendsInfo {
     private String customFriendsLoginId;//好友的登录账号
     private String customFriendsNickName;//好友的昵称
     private String customFriendsRemark;//给好友的备注
-    private String customFriendsGroupName;//好友所在分组的组名
+    private Integer customFriendsGroupId;//好友所在分组的组Id
     private String customFriendsEmail;//好友的邮箱
     private String customFriendsTel;//好友电话号码
     private String customFriendsMotto;//好友座右铭
@@ -62,12 +62,12 @@ public class CustomFriendsInfo {
         this.customFriendsRemark = customFriendsRemark;
     }
 
-    public String getCustomFriendsGroupName() {
-        return customFriendsGroupName;
+    public Integer getCustomFriendsGroupId() {
+        return customFriendsGroupId;
     }
 
-    public void setCustomFriendsGroupName(String customFriendsGroupName) {
-        this.customFriendsGroupName = customFriendsGroupName;
+    public void setCustomFriendsGroupId(Integer customFriendsGroupId) {
+        this.customFriendsGroupId = customFriendsGroupId;
     }
 
     public String getCustomFriendsEmail() {

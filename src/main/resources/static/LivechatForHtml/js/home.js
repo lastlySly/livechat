@@ -41,6 +41,7 @@ function getGroupFun() {
         success:function (data) {
             if (data.code == 1){
                 $(".custom-friends-group-list").empty();
+                $("#friend_info_card_group").empty();
                 for (var i=0;i<data.data.length;i++){
                     $(".custom-friends-group-list").append('<li class="custom-group-item">\n' +
                         '                                    <h5 class="custom-group">\n' +
@@ -52,6 +53,9 @@ function getGroupFun() {
                         '                                    <ul class="custom-friends-list">\n' +
                         '                                    </ul>\n' +
                         '                                </li>');
+
+                    //好友信息卡分组
+                    $("#friend_info_card_group").append('<option value="'+ data.data[i].friendgroupsId +'">'+ data.data[i].friendgroupsName +'</option>');
 
                 }
 
@@ -104,7 +108,7 @@ function listFriend() {
                         var dataLength = data.data.length;
                             for (var j=0;j<grouplist_count;j++){
                                 for(var i=0;i<dataLength;i++){
-                                    if (data.data[i].customFriendsGroupName == $(".group_name").eq(j).text()){
+                                    if (data.data[i].customFriendsGroupId == $(".group_name").eq(j).attr("groupId")){
                                         //判断好友是否在线
                                         var isOnline =$.inArray(data.data[i].customFriendsLoginId,onlineArray);
                                         switch (isOnline){
@@ -210,7 +214,10 @@ function friend_card() {
                     $("#motto").text(data.data.customFriendsMotto);
                     $("#custom-send-message-btn").attr("socketaddress",socketaddress);
                     $("#nickname").text(data.data.customFriendsNickName);
-                    $("#group").text(data.data.customFriendsGroupName);
+
+                    // $("#friend_info_card_group").find("option[value="+data.data.customFriendsGroupId+"]").attr("selected",true);
+                    $("#friend_info_card_group").val(data.data.customFriendsGroupId);
+
                     $("#e-mail").text(data.data.customFriendsEmail);
                     $("#username").text(data.data.customFriendsLoginId);
                 }else{
@@ -224,7 +231,31 @@ function friend_card() {
         });
 
 
-    })
+    });
+
+    nickname_revise();
+    function nickname_revise() {
+        $("#friend_card_icon_revise").off("click");
+        $("#friend_card_icon_revise").on("click",function () {
+            $("#remarks_input").val($("#remarks").text());
+            $("#remarks_input").css({"display":"inline-block"});
+            $("#remarks").css({"display":"none"});
+            $("#friend_card_icon_revise").css({"display":"none"});
+
+            $("#remarks_input").focus();
+        });
+
+        $("#remarks_input").on("blur",function () {
+            $("#remarks").css({"display":"inline-block"});
+            $("#remarks_input").css({"display":"none"});
+            $("#friend_card_icon_revise").css({"display":"inline-block"});
+
+
+        })
+
+    }
+
+
 }
 
 /*删除正在聊天列表的某项*/
@@ -419,14 +450,17 @@ function getUserInfo(){
                 $("#userinfo_synopsis").text(data.data.userSynopsis);
                 $("#userinfo_revise_btn").attr("dataId",data.data.userLoginId);//通信地址为登陆名
                 $("#gender_select").find("option[value="+data.data.userGender+"]").attr("selected",true);
-                $("#province_select").find("option[value="+data.data.userProvinceId+"]").attr("selected",true);
+                // $("#gender_select").val(data.data.userGender);
+                // $("#province_select").find("option[value="+data.data.userProvinceId+"]").attr("selected",true);
+                $("#province_select").val(data.data.userProvinceId);
                 var shi=$("#province_select").val();
                 $.each(citys,function (index,item) {
                     if(item.ProID==shi){
                         $("#city_select").append("<option value='"+ item.CityID +"'>"+item.name+"</option>");
                     }
                 });
-                $("#city_select").find("option[value="+data.data.userCityId+"]").attr("selected",true);
+                // $("#city_select").find("option[value="+data.data.userCityId+"]").attr("selected",true);
+                $("#city_select").val(data.data.userCityId);
 
                 // websocket连接
                 websocket_connect(stompClient);
