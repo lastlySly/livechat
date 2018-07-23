@@ -50,6 +50,7 @@ public class UserinfoServiceImpl implements UserinfoService {
     @Autowired
     private CustomMapper customMapper;
 
+
     /**
      * 通过 账号（用户名） 获取用户信息
      * @param loginId 登陆账号，即username用户名
@@ -275,6 +276,7 @@ public class UserinfoServiceImpl implements UserinfoService {
      * @param friendsSheet
      * @return
      */
+    @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public boolean reviseFriendInfo(FriendsSheet friendsSheet) {
         Integer groupId = friendsSheet.getFriendsFriendgroupsid();
@@ -307,6 +309,26 @@ public class UserinfoServiceImpl implements UserinfoService {
         if(remark != null){
             reviseParms.setFriendsRemarks(remark);
             int reviseRemarkRow = friendsSheetMapper.updateByExampleSelective(reviseParms,reviseCondition);
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 删除好友（同时删除聊天记录）
+     * @param friendLoginId
+     * @param userLoginId
+     * @return
+     */
+    @Transactional(propagation = Propagation.REQUIRED)
+    @Override
+    public boolean delFriend(String friendLoginId, String userLoginId) {
+        Map<String,String> map = new HashMap<>(16);
+        map.put("userLoginId",userLoginId);
+        map.put("friendLoginId",friendLoginId);
+        int delMessageRow = customMapper.delMessagesByUserloginidAndFriendLoginid(map);
+        int delFriendRow = customMapper.delFriendByUserloginidAndFriendLoginid(map);
+        if(delFriendRow > 0){
             return true;
         }
         return false;

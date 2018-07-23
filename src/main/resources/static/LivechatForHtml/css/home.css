@@ -386,11 +386,25 @@ body,html {
 }
 /*好友卡发消息按钮*/
 .custom-send-message-btn{
+    width: 40px;
+    height:40px;
     position: absolute;
     right: 10px;
     top: 10px;
     color: #0F74D3;
+    cursor: pointer;
 }
+/*删除好友按钮*/
+.custom_del_friend_btn{
+    width: 35px;
+    height:34px;
+    position: absolute;
+    right: 11px;
+    top: 55px;
+    /*color: #0F74D3;*/
+    cursor: pointer;
+}
+
 .friend-info-card-item{
     font-size: 1.3rem;
     padding: 5px 0px;

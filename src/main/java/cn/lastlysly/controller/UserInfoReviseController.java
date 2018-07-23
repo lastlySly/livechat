@@ -187,7 +187,6 @@ public class UserInfoReviseController {
     public MyResult reviseFriendInfo(@RequestParam(value = "groupId",required = false) Integer groupId,
                                      @RequestParam(value = "remark",required = false) String remark,
                                      @RequestParam(value = "friendLoginId") String friendLoginId){
-
         FriendsSheet friendsSheet = new FriendsSheet();
         friendsSheet.setFriendsUserLoginid(SecurityUtils.getSubject().getPrincipal().toString());
         friendsSheet.setFriendsFriendLoginid(friendLoginId);
@@ -199,6 +198,30 @@ public class UserInfoReviseController {
         }
         boolean isRevise = userinfoService.reviseFriendInfo(friendsSheet);
         return new MyResult(1,"修改成功",null);
+    }
+
+
+    /**
+     * 删除好友
+     * @param friendLoginId
+     * @param userLoginId
+     * @return
+     */
+    @CrossOrigin
+    @RequestMapping(value = "delfriend",method = RequestMethod.POST)
+    @ResponseBody
+    public MyResult delFriend(@RequestParam(value = "friendLoginId") String friendLoginId,
+                              @RequestParam(value = "userLoginId") String userLoginId){
+
+        String username = SecurityUtils.getSubject().getPrincipal().toString();
+        if(username.equals(userLoginId)){
+            boolean isDel = userinfoService.delFriend(friendLoginId,userLoginId);
+            if(isDel){
+                return new MyResult(1,"删除成功",null);
+            }
+        }
+
+        return new MyResult(0,"删除失败",null);
     }
 
 }

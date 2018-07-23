@@ -4,7 +4,7 @@ $(function () {
     userinfo_modal();
     address_deal();
     group_manage();
-
+    del_friend();
 });
 
 
@@ -289,7 +289,6 @@ function apply_friend() {
 
 }
 
-
 //分组管理
 function group_manage() {
       // // 无连接服务器开启
@@ -492,3 +491,37 @@ function group_manage() {
 
 
 }
+
+//删除好友操作
+function del_friend() {
+    $("#custom_del_friend_btn").off("click");
+    $("#custom_del_friend_btn").on("click",function () {
+        /*打开模态框*/
+        $(".is_del_friend_modal_div").slideToggle("fast");
+        var friendId = $(this).attr("socketaddress");
+        $("#confirm_del_friend_btn").attr("friendId",friendId);
+    });
+    //取消删除
+    $("#un_del_friend_btn").off("click");
+    $("#un_del_friend_btn").on("click",function () {
+        $(".is_del_friend_modal_div").slideToggle("fast");
+    });
+    //确认删除
+    $("#confirm_del_friend_btn").off("click");
+    $("#confirm_del_friend_btn").on("click",function () {
+        var friendId = $(this).attr("friendId");
+        var userLoginId = $.cookie("_userLoginId");
+        $.post(serverUrl+"/userinforevise/delfriend",{"friendLoginId":friendId,"userLoginId":userLoginId},function (data) {
+            if(data.code == 1){
+                listFriend();
+                $(".is_del_friend_modal_div").slideToggle("fast");
+                //关闭信息卡
+                $(".right-main-container").slideToggle("fast");
+            }else{
+                alert(data.tip);
+            }
+        })
+    });
+
+}
+

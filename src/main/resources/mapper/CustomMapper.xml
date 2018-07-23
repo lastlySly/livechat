@@ -104,10 +104,22 @@
           where messages_from_loginid = #{fromLoginId} and messages_to_loginid = #{toLoginId})
         order by messages_time desc
     </select>
-
+    <!--查询用户之间的消息记录-->
     <select id="listMessageByUserloginidOrFriendLoginid" parameterType="java.util.Map" resultMap="MyMessageResultMapWithBLOBs">
         select * from messages_sheet where (messages_to_loginid = #{userLoginId} and messages_from_loginid = #{friendLoginId})
         or (messages_to_loginid = #{friendLoginId} and messages_from_loginid = #{userLoginId}) order by messages_time desc
     </select>
+
+    <!--删除好友-->
+    <delete id="delFriendByUserloginidAndFriendLoginid" parameterType="java.util.Map">
+        DELETE from friends_sheet where (friends_friend_loginid = #{friendLoginId} and friends_user_loginid = #{userLoginId}) or
+        (friends_friend_loginid = #{userLoginId} and friends_user_loginid = #{friendLoginId});
+    </delete>
+    <!--删除聊天记录-->
+    <delete id="delMessagesByUserloginidAndFriendLoginid" parameterType="java.util.Map">
+        DELETE from messages_sheet where (messages_from_loginid = #{userLoginId} and messages_to_loginid = #{friendLoginId}) or
+        (messages_from_loginid = #{friendLoginId} and messages_to_loginid = #{userLoginId});
+    </delete>
+
 
 </mapper>

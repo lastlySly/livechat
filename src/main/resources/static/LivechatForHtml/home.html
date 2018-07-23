@@ -167,9 +167,11 @@
                                     <img class="img-responsive"  id="headportrait" src="img/headportrait.jpg">
                                     <div class="row friend-info-card-div">
 
-                                        <button socketaddress="123" type="button" title="发消息" id="custom-send-message-btn" class="btn btn-default custom-send-message-btn">
-                                            <span class="glyphicon glyphicon-comment"></span>
-                                        </button>
+                                        <!--<button socketaddress="123" type="button" title="发消息" id="custom-send-message-btn" class="btn btn-default custom-send-message-btn">-->
+                                            <!--<span class="glyphicon glyphicon-comment"></span>-->
+                                        <!--</button>-->
+                                        <img title="发消息" socketaddress="123" id="custom-send-message-btn" class="custom-send-message-btn" src="img/icon_chat.png">
+                                        <img title="删除好友" socketaddress="123" id="custom_del_friend_btn" class="custom_del_friend_btn" src="img/icon_del_3.png">
 
                                         <div class="col-md-8 col-md-offset-2">
                                             <dl class="friend-info-card-dl">
@@ -573,6 +575,17 @@
 
     </div>
 
+    <!--删除好友确认模态框-->
+    <div class="is_del_friend_modal_div">
+        <div class="is_del_friend_modal">
+            <h4>删除好友</h4>
+            <h5 style="padding: 20px 10px 15px 10px">同时会从对方的好友列表里移除您，并删除你们聊天记录</h5>
+            <h5 style="text-align: center">
+                <button type="button" friendId="" id="confirm_del_friend_btn" class="btn btn-default">确认删除</button>
+                <button type="button" id="un_del_friend_btn" class="btn btn-default">取消删除</button>
+            </h5>
+        </div>
+    </div>
 
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/jquery.cookie.js"></script>

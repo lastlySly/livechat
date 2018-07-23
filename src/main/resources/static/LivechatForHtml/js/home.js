@@ -203,6 +203,7 @@ function friend_card() {
                     $("#remarks").text(data.data.customFriendsRemark);
                     $("#motto").text(data.data.customFriendsMotto);
                     $("#custom-send-message-btn").attr("socketaddress",socketaddress);
+                    $("#custom_del_friend_btn").attr("socketaddress",socketaddress);
                     $("#nickname").text(data.data.customFriendsNickName);
 
                     // $("#friend_info_card_group").find("option[value="+data.data.customFriendsGroupId+"]").attr("selected",true);

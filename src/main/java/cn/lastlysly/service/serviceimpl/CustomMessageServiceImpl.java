@@ -47,6 +47,7 @@ public class CustomMessageServiceImpl implements CustomMessageService {
      * @param friendApplicationSheet
      * @return
      */
+    @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public boolean saveFriendApplication(FriendApplicationSheet friendApplicationSheet) {
         FriendApplicationSheetExample friendApplicationSheetExample = new FriendApplicationSheetExample();

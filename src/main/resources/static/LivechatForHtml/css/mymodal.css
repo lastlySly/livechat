@@ -384,3 +384,28 @@
     background-color: white;
     display: none;
 }
+/*=====================================================*/
+/*删除好友确认模态框*/
+
+.is_del_friend_modal_div{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    position: fixed;
+    z-index: 100;
+    top: 0px;
+    display: none;
+}
+.is_del_friend_modal{
+    position: relative;
+    width: 400px;
+    height: 200px;
+    background-color: RGB(240,236,236);
+    top: 10vh;
+    border-radius: 20px;
+    text-align: center;
+    padding: 20px 10px;
+    margin: 0 auto;
+    cursor: pointer;
+}
+

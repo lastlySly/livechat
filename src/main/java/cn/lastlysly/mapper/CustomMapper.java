@@ -56,4 +56,18 @@ public interface CustomMapper {
      */
     List<MessagesSheet> listMessageByUserloginidOrFriendLoginid(Map<String,String> map);
 
+    /**
+     * 删除好友
+     * @param map
+     * @return
+     */
+    int delFriendByUserloginidAndFriendLoginid(Map<String,String> map);
+
+    /**
+     * 删除消息记录
+     * @param map
+     * @return
+     */
+    int delMessagesByUserloginidAndFriendLoginid(Map<String,String> map);
+
 }

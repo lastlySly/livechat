@@ -7,6 +7,8 @@ import cn.lastlysly.pojo.*;
 import cn.lastlysly.service.FriendsGroupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -31,6 +33,7 @@ public class FriendsGroupServiceImpl implements FriendsGroupService {
      * @param friendgroupsSheet
      * @return
      */
+    @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public FriendgroupsSheet saveFriendsGroup(FriendgroupsSheet friendgroupsSheet) {
         friendgroupsSheet.setFriendgroupsGrade(2);
@@ -98,6 +101,7 @@ public class FriendsGroupServiceImpl implements FriendsGroupService {
      * @param friendgroupsSheet
      * @return
      */
+    @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public boolean delGroup(FriendgroupsSheet friendgroupsSheet) {
 

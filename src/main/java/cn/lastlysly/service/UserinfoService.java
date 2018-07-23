@@ -77,4 +77,12 @@ public interface UserinfoService {
      */
     boolean reviseFriendInfo(FriendsSheet friendsSheet);
 
+    /**
+     * 删除好友
+     * @param friendLoginId
+     * @param userLoginId
+     * @return
+     */
+    boolean delFriend(String friendLoginId,String userLoginId);
+
 }
