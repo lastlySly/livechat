@@ -282,9 +282,6 @@ function friend_card() {
         });
     })
 
-
-
-
 }
 
 /*删除正在聊天列表的某项*/
@@ -334,7 +331,7 @@ function change_chatting_friend() {
     });
 }
 
-//封装正在聊天页的切换
+//封装正在聊天页的切换（查出聊天记录）
 function change_friend_chatting_fun(socketaddress,remarks,chatHeadportrait) {
 
     var flag =  $("#right-chat-friend-container-id").css('display');
@@ -353,73 +350,79 @@ function change_friend_chatting_fun(socketaddress,remarks,chatHeadportrait) {
     $("#chatting-friend-remarks").attr("data-img",chatHeadportrait);
 
     //请求历史信息
+    var page = 1;
     //获取自己的登陆ID
     var userLoginId =  $.cookie("_userLoginId");
     //获取自己的头像
-    var myHeadimg = $("#head-img").attr("src")
-    var formData = new FormData();
-    formData.append("friendLoginId",socketaddress);
-    formData.append("userLoginId",userLoginId);
-    formData.append("page",1);
-    $.ajax({
-        url:serverUrl+"/userinforevise/listmessagebetweenusers",
-        type:"POST",
-        data:formData,
-        async:true,
-        // cache: false,缓存，get请求有效，true缓存
-        contentType: false,
-        processData: false,
-        success:function (data) {
-            if(data.code == 1){
-                //清空聊天框
-                $("#custom-messages-ul").empty();
-                if(data.data != null){
-                    var dataLength = data.data.length;
-                    for (var i=0; i<dataLength; i++){
-                        //将消息填充入聊天框
-                        switch (data.data[i].messagesToLoginid){
-                            //好友发送来的（即自己为接收方）
-                            case userLoginId:
-                                $("#custom-messages-ul").prepend('<dl class="row message-contain-item">\n' +
-                                    '                                        <div class="message-contain-item-time">'+ data.data[i].messagesTime +'</div>\n' +
-                                    '                                        <dt class="col-md-1">\n' +
-                                    '                                            <img class="img-responsive img-circle message-headportrait" src="'+chatHeadportrait+'">\n' +
-                                    '                                        </dt>\n' +
-                                    '                                        <dd class="col-md-8">\n' +
-                                    '                                            <div class="custom-triangle"></div>\n' +
-                                    '                                            <span class="message-text-contain-friends">'+ data.data[i].messagesPostmessages +'</span>\n' +
-                                    '                                        </dd>\n' +
-                                    '                                    </dl>');
-                                $(".chat-content-div").animate({scrollTop:$(".chat-content-div")[0].scrollHeight},0);
-                                break;
-                            //  自己发送给好友（即接收方为对方）
-                            case socketaddress:
-                                $("#custom-messages-ul").prepend('<dl class="row message-contain-item">\n' +
-                                    '                                            <div class="message-contain-item-time">' + data.data[i].messagesTime + '</div>\n' +
-                                    '                                            <dt class="col-md-1 col-md-push-11">\n' +
-                                    '                                                <img class="img-responsive img-circle message-headportrait" src="'+ myHeadimg +'">\n' +
-                                    '                                            </dt>\n' +
-                                    '                                            <dd class="col-md-8 col-md-push-2">\n' +
-                                    '                                                <div class="custom-triangle-right"></div>\n' +
-                                    '                                                <span class="message-text-contain-me pull-right">' + data.data[i].messagesPostmessages + '</span>\n' +
-                                    '                                            </dd>\n' +
-                                    '                                        </dl>');
-                                $(".chat-content-div").animate({scrollTop:$(".chat-content-div")[0].scrollHeight},0);
-                                break;
+    var myHeadimg = $("#head-img").attr("src");
+    listMessageBetweenUser(userLoginId,socketaddress,myHeadimg,page,0);
+    var isFirst = true;
+    function listMessageBetweenUser(userLoginId,socketaddress,myHeadimg,page,scrollPosition) {
+
+        var formData = new FormData();
+        formData.append("friendLoginId",socketaddress);
+        formData.append("userLoginId",userLoginId);
+        formData.append("page",page);
+        $.ajax({
+            url:serverUrl+"/userinforevise/listmessagebetweenusers",
+            type:"POST",
+            data:formData,
+            async:true,
+            contentType: false,
+            processData: false,
+            success:function (data) {
+                if(data.code == 1){
+                    //清空聊天框
+                    // $("#custom-messages-ul").empty();
+                    if(data.data != null){
+                        var dataLength = data.data.length;
+                        for (var i=0; i<dataLength; i++){
+                            //将消息填充入聊天框
+                            switch (data.data[i].messagesToLoginid){
+                                //好友发送来的（即自己为接收方）
+                                case userLoginId:
+                                    $("#custom-messages-ul").prepend('<dl class="row message-contain-item">\n' +
+                                        '                                        <div class="message-contain-item-time">'+ data.data[i].messagesTime +'</div>\n' +
+                                        '                                        <dt class="col-md-1">\n' +
+                                        '                                            <img class="img-responsive img-circle message-headportrait" src="'+chatHeadportrait+'">\n' +
+                                        '                                        </dt>\n' +
+                                        '                                        <dd class="col-md-8">\n' +
+                                        '                                            <div class="custom-triangle"></div>\n' +
+                                        '                                            <span class="message-text-contain-friends">'+ data.data[i].messagesPostmessages +'</span>\n' +
+                                        '                                        </dd>\n' +
+                                        '                                    </dl>');
+                                    // $(".chat-content-div").animate({scrollTop:$(".chat-content-div")[0].scrollHeight},0);
+                                    break;
+                                //  自己发送给好友（即接收方为对方）
+                                case socketaddress:
+                                    $("#custom-messages-ul").prepend('<dl class="row message-contain-item">\n' +
+                                        '                                            <div class="message-contain-item-time">' + data.data[i].messagesTime + '</div>\n' +
+                                        '                                            <dt class="col-md-1 col-md-push-11">\n' +
+                                        '                                                <img class="img-responsive img-circle message-headportrait" src="'+ myHeadimg +'">\n' +
+                                        '                                            </dt>\n' +
+                                        '                                            <dd class="col-md-8 col-md-push-2">\n' +
+                                        '                                                <div class="custom-triangle-right"></div>\n' +
+                                        '                                                <span class="message-text-contain-me pull-right">' + data.data[i].messagesPostmessages + '</span>\n' +
+                                        '                                            </dd>\n' +
+                                        '                                        </dl>');
+                                    // $(".chat-content-div").animate({scrollTop:$(".chat-content-div")[0].scrollHeight},0);
+                                    break;
+                            }
                         }
+                        console.log(page+"=====");
+                        $(".chat-content-div").animate({scrollTop:$(".chat-content-div")[0].scrollHeight - scrollPosition},0);
+
                     }
-
+                    //获取聊天记录成功后清空redis未读信息记录
+                    removeUnreadInRedis(userLoginId,socketaddress);
+                    isFirst = false;
                 }
-                //获取聊天记录成功后清空redis未读信息记录
-                removeUnreadInRedis(userLoginId,socketaddress);
-
+            },
+            error:function (err) {
+                console.log("获取聊天记录连接错误："+err);
             }
-        },
-        error:function (err) {
-            console.log("获取聊天记录连接错误："+err);
-        }
-    });
-
+        });
+    }
 
     //移除与该好友的未读消息
     function removeUnreadInRedis(userLoginId,friendLoginId) {
@@ -433,7 +436,20 @@ function change_friend_chatting_fun(socketaddress,remarks,chatHeadportrait) {
         })
         
         }
-
+    //滚动事件（加载更多信息）
+    $(".chat-content-div").off("scroll");
+    $(".chat-content-div").on("scroll",function () {
+        if($(this)[0].scrollTop == 0 && !isFirst){
+            page++;
+            $("#custom-messages-ul").prepend('<h5 style="text-align: center;padding-top: 20px" class="loding_sign">正在加载...</h5>');
+            var signNum = $(this)[0].scrollHeight;
+            console.log(signNum)
+            setTimeout(function(){
+                $("#custom-messages-ul").find(".loding_sign").remove();
+                listMessageBetweenUser(userLoginId,socketaddress,myHeadimg,page,signNum);
+            },2000);
+        }
+    });
 }
 
 

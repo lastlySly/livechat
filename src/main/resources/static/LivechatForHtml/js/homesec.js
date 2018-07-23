@@ -10,7 +10,7 @@ $(function () {
 function friends_card_sendbtn() {
     $("#custom-send-message-btn").on("click",function () {
         var socketaddress = $(this).attr("socketaddress");
-        var remarks = $("#remarks-top").text();
+        var remarks = $("#remarks-top").text()+"("+socketaddress+")";
         var motto = $("#motto").text();
         var headportrait = $("#headportrait").attr("src");
         /*切换到正在聊天界面*/
