@@ -166,7 +166,7 @@ function reply_friend_application() {
         //获取对方登陆ID
         var applyLoginIdReply = $(this).attr("applyId");
         //获取备注
-        var applyNickNameReply = $("#apply_remark_reply").val();
+        var applyRemarkReply = $("#apply_remark_reply").val();
         //获取自己的登陆ID
         var myLoginIdReply =  $("#userinfo_loginId").text();
         //设置状态
@@ -176,7 +176,7 @@ function reply_friend_application() {
         formData.append("friendApplicationGroup",applyGroupIdReply);
         formData.append("friendApplicationFrom",applyLoginIdReply);
         formData.append("friendApplicationTo",myLoginIdReply);
-        formData.append("friendApplicationRemark",applyNickNameReply);
+        formData.append("friendApplicationRemark",applyRemarkReply);
         formData.append("friendApplicationStatus",applyStatus);
         $.ajax({
             url:serverUrl+"/userinforevise/dealfriendapplication",
@@ -193,7 +193,33 @@ function reply_friend_application() {
                     friend_application_init();
                     sendMessage(applyLoginIdReply,"我们已经是好友了，快来一起聊天吧",sendTime,2);
                     //刷新分组列表和好友列表
-                    getGroupFun();
+                    // getGroupFun();
+                    listFriend();
+                    setTimeout(function(){
+                        var myFriendsLength = $(".custom-friend-item").length;
+                        var headImg = "";
+                        var sendNowTime = sendTime.substring(11,16);
+                        for(var j=0; j<myFriendsLength; j++){
+                            if($(".custom-friend-item").eq(j).attr("socketaddress") == applyLoginIdReply){
+                                headImg = $(".custom-friend-item").eq(j).find(".list-headportrait").attr("src");
+                            }
+                        }
+                        $("#chatting-list").prepend(
+                            '<li data-id="'+ applyLoginIdReply +'" class="row custom-chat-friend-item">\n' +
+                            '                                <img class="col-md-3 img-responsive img-circle list-headportrait" src="'+headImg+'">\n' +
+                            '                                <dl class="col-md-9 custom-friend-item-info">\n' +
+                            '                                    <dt class="list-remarks">'+ applyRemarkReply +'</dt>\n' +
+                            '                                    <dd class="list-motto">'+ "我们已经是好友了，快来一起聊天吧" +'</dd>\n' +
+                            '                                    <span class="badge custom-num-tip"></span>\n' +
+                            '                                    <span class="badge custom-time">'+ sendNowTime +'</span>\n' +
+                            '                                    <button class="custom-del glyphicon glyphicon-remove-sign"></button>\n' +
+                            '                                </dl>\n' +
+                            '                            </li>'
+                        );
+                        del_chat_item_btn();
+                        change_chatting_friend();
+                    },2000);
+
                 }else{
                     alert(data.tip);
                 }

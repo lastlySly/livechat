@@ -17,16 +17,32 @@ function pop_modal() {
         /*打开模态框*/
         $(".add-friends-modal-div").slideToggle("fast");
 
-    })
+    });
 
     $(".remove-add-friends-modal-btn").on("click",function () {
         /*关闭添加好友模态框*/
         $(".add-friends-modal-div").slideToggle("fast");
-    })
 
+        if($(".apply_div").css("display") != "none"){
+            $(".apply_div").slideToggle("fast");
+        }
+    })
 
     //寻找新好友
     $("#findNewFriendBtn").on("click",function () {
+
+        //先查询自己的好友列表，如果存在，则不渲染添加按钮，防止重复添加
+
+        var myFriendsArray = new Array();
+        var myFriendsLength = $(".custom-friend-item").length;
+        //将自己添加为第一项，方便判断是否为自己
+        var myLoginId = $.cookie("_userLoginId");
+        myFriendsArray.push(myLoginId);
+        for(var j=0; j<myFriendsLength; j++){
+            myFriendsArray.push($(".custom-friend-item").eq(j).attr("socketaddress"));
+        }
+
+        //根据账号获取昵称查询
         var loginIdOrNickname = $("#loginIdOrNickname").val();
         var formData = new FormData();
         formData.append("loginIdOrNickname",loginIdOrNickname);
@@ -46,6 +62,7 @@ function pop_modal() {
                     var friendSize = data.data.length;
                     $(".find-friends-result-div").empty();
                     for (var i =0; i<friendSize; i++){
+
                         var userGender = "保密";
                         var userProvince = "保密";
                         var userCity = "保密";
@@ -66,21 +83,43 @@ function pop_modal() {
                             }
                         });
 
+                        var isFriend = $.inArray(data.data[i].userLoginId,myFriendsArray);
+                        switch (isFriend){
+                            case -1:
+                                $(".find-friends-result-div").append(' <dl class="find-friends-item">\n' +
+                                    '                    <dt class="find-friends-head"><img class="img-responsive img-circle" src="'+ data.data[i].userHeadportrait +'"></dt>\n' +
+                                    '                    <dd class="friends-nickname-and-username">'+ data.data[i].userNickname + '(' + data.data[i].userLoginId + ')</dd>\n' +
+                                    '                    <dd class="friends-address">'+ userGender +' '+ userProvince + ' ' + userCity + '</dd>\n' +
+                                    '                    <dd class="friends-add-btn-send"><button type="button" dataId="'+ data.data[i].userLoginId +'"  class="apply_btn_custom btn btn-default">加好友</button></dd>\n' +
+                                    '                </dl>');
 
-                        $(".find-friends-result-div").append(' <dl class="find-friends-item">\n' +
-                            '                    <dt class="find-friends-head"><img class="img-responsive img-circle" src="'+ data.data[i].userHeadportrait +'"></dt>\n' +
-                            '                    <dd class="friends-nickname-and-username">'+ data.data[i].userNickname + '(' + data.data[i].userLoginId + ')</dd>\n' +
-                            '                    <dd class="friends-address">'+ userGender +' '+ userProvince + ' ' + userCity + '</dd>\n' +
-                            '                    <dd class="friends-add-btn-send"><button type="button" dataId="'+ data.data[i].userLoginId +'"  class="apply_btn_custom btn btn-default">加好友</button></dd>\n' +
-                            '                </dl>');
+                                break;
+                            case 0:
+                                $(".find-friends-result-div").append(' <dl class="find-friends-item">\n' +
+                                    '                    <dt class="find-friends-head"><img class="img-responsive img-circle" src="'+ data.data[i].userHeadportrait +'"></dt>\n' +
+                                    '                    <dd class="friends-nickname-and-username">'+ data.data[i].userNickname + '(' + data.data[i].userLoginId + ')</dd>\n' +
+                                    '                    <dd class="friends-address">'+ userGender +' '+ userProvince + ' ' + userCity + '</dd>\n' +
+                                    '                    <dd class="friends-add-btn-send"><button type="button" dataId="'+ data.data[i].userLoginId +'" disabled="disabled" class="apply_btn_custom btn btn-default">我的账号</button></dd>\n' +
+                                    '                </dl>');
+                                break;
+                            default:
+                                $(".find-friends-result-div").append(' <dl class="find-friends-item">\n' +
+                                    '                    <dt class="find-friends-head"><img class="img-responsive img-circle" src="'+ data.data[i].userHeadportrait +'"></dt>\n' +
+                                    '                    <dd class="friends-nickname-and-username">'+ data.data[i].userNickname + '(' + data.data[i].userLoginId + ')</dd>\n' +
+                                    '                    <dd class="friends-address">'+ userGender +' '+ userProvince + ' ' + userCity + '</dd>\n' +
+                                    '                    <dd class="friends-add-btn-send"><button type="button" dataId="'+ data.data[i].userLoginId +'" disabled="disabled" class="apply_btn_custom btn btn-default">已是好友</button></dd>\n' +
+                                    '                </dl>');
+
+                                break;
+                        }
+
+
                     }
 
                     apply_friend();
                 }else{
                     alert(data.tip)
                 }
-
-
 
             },
             error:function (err) {
@@ -89,7 +128,6 @@ function pop_modal() {
         });
 
     })
-
 
 }
 
@@ -214,6 +252,7 @@ function apply_friend() {
         $("#apply_title").text("申请 【"+ someoneNickname +"】为好友");
         $("#send_apply_btn").attr("fromData",someoneloginId);
         $("#findNewFriendBtn").attr("disabled","true");
+
         //填充分组信息
         $("#apply_group").empty();
         var groupLength = $(".custom-group-item").length;
@@ -285,6 +324,7 @@ function apply_friend() {
         });
 
         $(".apply_div").slideToggle("fast");
+        $("#findNewFriendBtn").removeAttr("disabled");
     })
 
 }

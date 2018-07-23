@@ -331,7 +331,7 @@ function change_chatting_friend() {
         var chatHeadportrait = $(this).find(".list-headportrait").attr("src");
         change_friend_chatting_fun(socketaddress,remarks,chatHeadportrait);
 
-    })
+    });
 }
 
 //封装正在聊天页的切换
