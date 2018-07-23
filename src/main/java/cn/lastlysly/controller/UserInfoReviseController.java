@@ -198,9 +198,6 @@ public class UserInfoReviseController {
             friendsSheet.setFriendsRemarks(remark);
         }
         boolean isRevise = userinfoService.reviseFriendInfo(friendsSheet);
-//        if (isRevise){
-//            return new MyResult(1,"修改成功",null);
-//        }
         return new MyResult(1,"修改成功",null);
     }
 

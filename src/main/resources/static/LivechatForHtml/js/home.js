@@ -155,11 +155,7 @@ function listFriend() {
                     console.log("访问错误："+err);
                 }
             });
-
-
-
-
-
+            
         }
     });
 }
@@ -186,14 +182,9 @@ function grouplist() {
 }
 //好友信息卡
 function friend_card() {
-    $(".custom-friend-item").on("click",function () {
-        var flag =  $(".right-main-container").css('display');
-        if ( flag == "none" ) {
-            $(".right-main-container").slideToggle("fast");
-        }
 
-        var socketaddress = $(this).attr("socketaddress");
-
+    //获取好友信息
+    function getfriendCardInfo(socketaddress) {
 
         var formData = new FormData();
         formData.append("friendUserId",socketaddress);
@@ -207,7 +198,6 @@ function friend_card() {
             processData: false,
             success:function (data) {
                 if (data.code == 1){
-                    console.log(data);
                     $("#headportrait").attr("src",data.data.customFriendsHeadportrait);
                     $("#remarks-top").text(data.data.customFriendsRemark);
                     $("#remarks").text(data.data.customFriendsRemark);
@@ -230,9 +220,21 @@ function friend_card() {
 
         });
 
+    }
+
+    //好友列表点击事件
+    $(".custom-friend-item").off("click");
+    $(".custom-friend-item").on("click",function () {
+        var flag =  $(".right-main-container").css('display');
+        if ( flag == "none" ) {
+            $(".right-main-container").slideToggle("fast");
+        }
+        var socketaddress = $(this).attr("socketaddress");
+        getfriendCardInfo(socketaddress);
 
     });
 
+    //备注修改
     nickname_revise();
     function nickname_revise() {
         $("#friend_card_icon_revise").off("click");
@@ -244,16 +246,42 @@ function friend_card() {
 
             $("#remarks_input").focus();
         });
-
+        //输入框焦点离开事件（提交备注修改）
+        $("#remarks_input").off("blur")
         $("#remarks_input").on("blur",function () {
+            var friendLoginId = $("#custom-send-message-btn").attr("socketaddress");
+            var newRemark = $(this).val();
             $("#remarks").css({"display":"inline-block"});
             $("#remarks_input").css({"display":"none"});
             $("#friend_card_icon_revise").css({"display":"inline-block"});
-
-
-        })
+            $.post(serverUrl+"/userinforevise/revisefriendinfo",{"friendLoginId":friendLoginId,"remark":newRemark},function (data) {
+                if(data.code == 1){
+                    getfriendCardInfo(friendLoginId);
+                    listFriend();
+                }else{
+                    alert("修改失败");
+                }
+            });
+        });
 
     }
+
+    $("#friend_info_card_group").off("change");
+    //修改分组
+    $("#friend_info_card_group").on("change",function () {
+        var groupId =  $(this).val();
+        var friendLoginId = $("#custom-send-message-btn").attr("socketaddress");
+        $.post(serverUrl+"/userinforevise/revisefriendinfo",{"groupId":groupId,"friendLoginId":friendLoginId},function (data) {
+            if(data.code == 1){
+                getfriendCardInfo(friendLoginId);
+                listFriend();
+            }else{
+                alert("修改失败");
+            }
+        });
+    })
+
+
 
 
 }

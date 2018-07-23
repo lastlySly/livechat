@@ -277,15 +277,38 @@ public class UserinfoServiceImpl implements UserinfoService {
      */
     @Override
     public boolean reviseFriendInfo(FriendsSheet friendsSheet) {
-
         Integer groupId = friendsSheet.getFriendsFriendgroupsid();
+        String remark = friendsSheet.getFriendsRemarks();
+        //参数
+        FriendsSheet reviseParms = new FriendsSheet();
+        FriendsSheetExample reviseCondition = new FriendsSheetExample();
+        FriendsSheetExample.Criteria friendsSheetExampleCriteria = reviseCondition.createCriteria();
+        //修改条件
+        friendsSheetExampleCriteria.andFriendsUserLoginidEqualTo(friendsSheet.getFriendsUserLoginid());
+        friendsSheetExampleCriteria.andFriendsFriendLoginidEqualTo(friendsSheet.getFriendsFriendLoginid());
         //判断用户提交的修改
+        //修改分组时
         if(groupId != null && groupId != 0){
-            //判断该组Id是否正确
-            return true;
+            //判断组Id是否正确（防止认为修改）
+            FriendgroupsSheetExample friendgroupsSheetExample = new FriendgroupsSheetExample();
+            FriendgroupsSheetExample.Criteria friendgroupsSheetExampleCriteria = friendgroupsSheetExample.createCriteria();
+            friendgroupsSheetExampleCriteria.andFriendgroupsUserLoginidEqualTo(friendsSheet.getFriendsUserLoginid());
+            friendgroupsSheetExampleCriteria.andFriendgroupsIdEqualTo(friendsSheet.getFriendsFriendgroupsid());
+            List<FriendgroupsSheet> friendgroupsSheetList = friendgroupsSheetMapper.selectByExample(friendgroupsSheetExample);
+            if(friendgroupsSheetList.size() > 0){
+                //修改参数
+                reviseParms.setFriendsFriendgroupsid(groupId);
+                int reviseGroupIdRow = friendsSheetMapper.updateByExampleSelective(reviseParms,reviseCondition);
+                return true;
+            }
         }
 
-
+        //修改备注时
+        if(remark != null){
+            reviseParms.setFriendsRemarks(remark);
+            int reviseRemarkRow = friendsSheetMapper.updateByExampleSelective(reviseParms,reviseCondition);
+            return true;
+        }
         return false;
     }
 
