@@ -5,7 +5,7 @@ $(function () {
     friend_card();
     del_chat_item_btn();
     change_tab();
-    change_chatting_friend();
+    // change_chatting_friend();
     change_meau();
     //登陆成功渲染用户信息
     getUserInfo();
@@ -160,10 +160,10 @@ function listFriend() {
     });
 }
 
-
 //分组下拉
 function grouplist() {
     var grouplist_num =  $(".custom-group-item").length;
+    $(".custom-group").off("click");
     $(".custom-group").on("click",function () {
 
         $(this).parent().find(".custom-friends-list").slideToggle("fast");
@@ -226,6 +226,11 @@ function friend_card() {
     //好友列表点击事件
     $(".custom-friend-item").off("click");
     $(".custom-friend-item").on("click",function () {
+        var friendListLength = $(".custom-friend-item").length;
+        for(var i=0; i<friendListLength; i++){
+            $(".custom-friend-item").eq(i).css({"background-color":"#FAFAFA"});
+        }
+        $(this).css({"background-color":"#E5E7EC"});
         var flag =  $(".right-main-container").css('display');
         if ( flag == "none" ) {
             $(".right-main-container").slideToggle("fast");
@@ -286,6 +291,7 @@ function friend_card() {
 
 /*删除正在聊天列表的某项*/
 function del_chat_item_btn() {
+    $(".custom-del").off("click");
     $(".custom-del").on("click",function () {
         $(this).parent().parent().remove();
     })
@@ -294,7 +300,7 @@ function del_chat_item_btn() {
 //切换底部页面
 function change_tab() {
 
-
+    $("#custom-chat-btn").off("click");
     $("#custom-chat-btn").on("click",function () {
         //默认 color: #C3C3C3;
         $(this).css("color","#FFFFFF");
@@ -305,7 +311,7 @@ function change_tab() {
         $("#custom-linkman-list-id").hide(500);
         $("#custom-chat-list-id").show(500);
     });
-
+    $("#custom-linkman-btn").off("click");
     $("#custom-linkman-btn").on("click",function () {
         $(this).css("color","#FFFFFF");
         $("#custom-chat-btn").css("color","#C3C3C3");
@@ -317,162 +323,17 @@ function change_tab() {
 }
 
 
-//正在聊天切换
-function change_chatting_friend() {
-    $(".custom-chat-friend-item").on("click",function () {
-
-        // $(this).css({"background-color":"red"});
-        $(this).find(".custom-num-tip").text("");
-        var remarks = $(this).find(".list-remarks").text();
-        var socketaddress = $(this).attr("data-id");
-        var chatHeadportrait = $(this).find(".list-headportrait").attr("src");
-        change_friend_chatting_fun(socketaddress,remarks,chatHeadportrait);
-
-    });
-}
-
-//封装正在聊天页的切换（查出聊天记录）
-function change_friend_chatting_fun(socketaddress,remarks,chatHeadportrait) {
-    var flag =  $("#right-chat-friend-container-id").css('display');
-    if ( flag == "none" ) {
-        $("#right-chat-friend-container-id").slideToggle("fast");
-        $("#system_message_div").css({'display':"none"});
-    }
-    //清空聊天框
-    $("#custom-messages-ul").empty();
-    //清空输入框
-    $("#edit").froalaEditor('html.set', '');
-
-    $("#send-to-btn").attr("socketaddress",socketaddress);
-    $("#chatting-friend-remarks").text(remarks);
-    $("#chatting-friend-remarks").attr("data-img",chatHeadportrait);
-
-    //请求历史信息
-    var page = 1;
-    var allPage = 1;
-    //获取自己的登陆ID
-    var userLoginId =  $.cookie("_userLoginId");
-
-    //获取信息页数
-    $.post(serverUrl+"/userinforevise/pagecount",{"userLoginId":userLoginId,"friendLoginId":socketaddress},function (data) {
-        if(data.code == 1){
-            allPage = data.data;
-        }
-    });
-
-    //获取自己的头像
-    var myHeadimg = $("#head-img").attr("src");
-    listMessageBetweenUser(userLoginId,socketaddress,myHeadimg,page,0);
-    var isFirst = true;
-    function listMessageBetweenUser(userLoginId,socketaddress,myHeadimg,page,scrollPosition) {
-
-        var formData = new FormData();
-        formData.append("friendLoginId",socketaddress);
-        formData.append("userLoginId",userLoginId);
-        formData.append("page",page);
-        $.ajax({
-            url:serverUrl+"/userinforevise/listmessagebetweenusers",
-            type:"POST",
-            data:formData,
-            async:true,
-            contentType: false,
-            processData: false,
-            success:function (data) {
-                if(data.code == 1){
-                    //清空聊天框
-                    // $("#custom-messages-ul").empty();
-                    if(data.data != null){
-                        var dataLength = data.data.length;
-                        for (var i=0; i<dataLength; i++){
-                            //将消息填充入聊天框
-                            switch (data.data[i].messagesToLoginid){
-                                //好友发送来的（即自己为接收方）
-                                case userLoginId:
-                                    $("#custom-messages-ul").prepend('<dl class="row message-contain-item">\n' +
-                                        '                                        <div class="message-contain-item-time">'+ data.data[i].messagesTime +'</div>\n' +
-                                        '                                        <dt class="col-md-1">\n' +
-                                        '                                            <img class="img-responsive img-circle message-headportrait" src="'+chatHeadportrait+'">\n' +
-                                        '                                        </dt>\n' +
-                                        '                                        <dd class="col-md-8">\n' +
-                                        '                                            <div class="custom-triangle"></div>\n' +
-                                        '                                            <span class="message-text-contain-friends">'+ data.data[i].messagesPostmessages +'</span>\n' +
-                                        '                                        </dd>\n' +
-                                        '                                    </dl>');
-                                    // $(".chat-content-div").animate({scrollTop:$(".chat-content-div")[0].scrollHeight},0);
-                                    break;
-                                //  自己发送给好友（即接收方为对方）
-                                case socketaddress:
-                                    $("#custom-messages-ul").prepend('<dl class="row message-contain-item">\n' +
-                                        '                                            <div class="message-contain-item-time">' + data.data[i].messagesTime + '</div>\n' +
-                                        '                                            <dt class="col-md-1 col-md-push-11">\n' +
-                                        '                                                <img class="img-responsive img-circle message-headportrait" src="'+ myHeadimg +'">\n' +
-                                        '                                            </dt>\n' +
-                                        '                                            <dd class="col-md-8 col-md-push-2">\n' +
-                                        '                                                <div class="custom-triangle-right"></div>\n' +
-                                        '                                                <span class="message-text-contain-me pull-right">' + data.data[i].messagesPostmessages + '</span>\n' +
-                                        '                                            </dd>\n' +
-                                        '                                        </dl>');
-                                    // $(".chat-content-div").animate({scrollTop:$(".chat-content-div")[0].scrollHeight},0);
-                                    break;
-                            }
-                        }
-                        $(".chat-content-div").animate({scrollTop:$(".chat-content-div")[0].scrollHeight - scrollPosition},0);
-
-                    }
-                    //获取聊天记录成功后清空redis未读信息记录
-                    removeUnreadInRedis(userLoginId,socketaddress);
-                    isFirst = false;
-                }
-            },
-            error:function (err) {
-                console.log("获取聊天记录连接错误："+err);
-            }
-        });
-    }
-
-    //移除与该好友的未读消息
-    function removeUnreadInRedis(userLoginId,friendLoginId) {
-
-        $.post(serverUrl+"/userinforevise/delunreadnum",{"friendLoginId":friendLoginId,"userLoginId":userLoginId},function (data) {
-            if (data.code == 1){
-
-            }else{
-                console.log(data.tip);
-            }
-        })
-        
-        }
-    //滚动事件（加载更多信息）
-    $(".chat-content-div").off("scroll");
-    $(".chat-content-div").on("scroll",function () {
-        if($(this)[0].scrollTop == 0 && !isFirst){
-            page++;
-            if(page > allPage){
-                if($("#loding_sign").length > 0){
-                    return;
-                }
-                $("#custom-messages-ul").prepend('<h5 style="text-align: center;padding-top: 20px" id="loding_sign" class="loding_sign">没有更多了</h5>');
-                return;
-            }
-            $("#custom-messages-ul").prepend('<h5 style="text-align: center;padding-top: 20px" class="loding_sign">正在加载...</h5>');
-            var signNum = $(this)[0].scrollHeight;
-            // console.log(signNum)
-            setTimeout(function(){
-                $("#custom-messages-ul").find(".loding_sign").remove();
-                listMessageBetweenUser(userLoginId,socketaddress,myHeadimg,page,signNum);
-            },2000);
-        }
-    });
-}
 
 
 /*调出菜单*/
 function change_meau() {
     /*头像菜单*/
+    $("#head-nav").off("click");
     $("#head-nav").on("click",function () {
         $(".custom-head-meau").slideToggle("fast");
     })
     /*添加好友菜单*/
+    $("#custom-add-btn").off("click");
     $("#custom-add-btn").on("click",function () {
         $(".custom-add-meau").slideToggle("fast");
     })

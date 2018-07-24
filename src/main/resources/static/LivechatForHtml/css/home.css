@@ -512,7 +512,7 @@ body,html {
 }
 
 .custom-chat-friend-item:hover{
-    background-color: #E5E7EC;
+    background-color: #E5E7EC !important;
     cursor: pointer;
 }
 .custom-chat-friend-item:hover .custom-del{
