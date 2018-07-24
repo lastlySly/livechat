@@ -272,6 +272,24 @@ public class UserinfoServiceImpl implements UserinfoService {
     }
 
     /**
+     * 头像上传
+     * @param userinfoSheet
+     * @return
+     */
+    @Override
+    public boolean uploadHeadPortrait(UserinfoSheet userinfoSheet) {
+        UserinfoSheetExample userinfoSheetExample = new UserinfoSheetExample();
+        UserinfoSheetExample.Criteria criteria = userinfoSheetExample.createCriteria();
+        criteria.andUserLoginIdEqualTo(userinfoSheet.getUserLoginId());
+        int row = userinfoSheetMapper.updateByExampleSelective(userinfoSheet,userinfoSheetExample);
+        if (row > 0){
+
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * 修改好友信息（备注，分组）
      * @param friendsSheet
      * @return

@@ -70,6 +70,7 @@ pagehelper:
 # 自定义目录路径
 cn:
   lastlysly:
-    windows-path: f:/myproject
-    linux-path: /myproject
+    custom:
+      windows-path: f:/myuploadpicfolder
+      linux-path: /myuploadpicfolder
 

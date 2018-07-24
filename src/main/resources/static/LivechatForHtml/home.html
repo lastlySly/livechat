@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+    <meta name="referrer" content="no-referrer">
     <title>Title</title>
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -10,6 +11,9 @@
     <link rel="stylesheet" href="css/home.css">
     <link rel="stylesheet" href="css/mymodal.css">
     <script src="js/server-url.js"></script>
+    <link rel="stylesheet" href="css/cropper.min.css">
+    <link rel="stylesheet" href="css/ImgCropping.css">
+
 
 
 </head>
@@ -587,6 +591,42 @@
         </div>
     </div>
 
+
+    <!--头像裁剪上传模态框-->
+    <div class="head_portrait_modal_div">
+        <!--图片裁剪框 start-->
+        <div style="display: block" class="tailoring-container">
+            <div class="black-cloth" onclick="closeTailor(this)"></div>
+            <div class="tailoring-content">
+                <div class="tailoring-content-one">
+                    <label title="上传图片" for="chooseImg" class="l-btn choose-btn">
+                        <input type="file" accept="image/jpg,image/jpeg,image/png" name="file" id="chooseImg" class="hidden" onchange="selectImg(this)">
+                        选择图片
+                    </label>
+                    <div class="close-tailoring"  onclick="closeTailor(this)">×</div>
+                </div>
+                <div class="tailoring-content-two">
+                    <div class="tailoring-box-parcel">
+                        <img id="tailoringImg">
+                    </div>
+                    <div class="preview-box-parcel">
+                        <p>图片预览：</p>
+                        <div class="square previewImg"></div>
+                        <div class="circular previewImg"></div>
+                    </div>
+                </div>
+                <div class="tailoring-content-three">
+                    <button class="l-btn cropper-reset-btn">复位</button>
+                    <button class="l-btn cropper-rotate-btn">旋转</button>
+                    <button class="l-btn cropper-scaleX-btn">换向</button>
+                    <button class="l-btn sureCut" id="sureCut">确定</button>
+                </div>
+            </div>
+        </div>
+        <!--图片裁剪框 end-->
+
+    </div>
+
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/jquery.cookie.js"></script>
     <script src="js/bootstrap.min.js"></script>
@@ -597,7 +637,8 @@
     <script src="js/mymodal.js"></script>
     <script src="js/china_area_data.js"></script>
     <script src="js/mywebsocket.js"></script>
-    <script src="js/initialloading.js"></script>
+    <script src="js/cropper.min.js"></script>
+    <script src="js/homethr.js"></script>
     <!--<script src="js/jquery1.11.0.min.js"></script>-->
     <script src="froala_editor_2.7.0/codemirror.min.js"></script>
     <script src="froala_editor_2.7.0/xml.min.js"></script>

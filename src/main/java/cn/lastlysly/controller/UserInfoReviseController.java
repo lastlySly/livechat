@@ -1,6 +1,7 @@
 package cn.lastlysly.controller;
 
 import cn.lastlysly.handler.MyCustomException;
+import cn.lastlysly.myutils.CommonUtil;
 import cn.lastlysly.myutils.CustomRedisTemplate;
 import cn.lastlysly.myutils.MyResult;
 import cn.lastlysly.pojo.*;
@@ -16,7 +17,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.FileOutputStream;
+import java.util.Base64;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @author lastlySly
@@ -70,6 +75,73 @@ public class UserInfoReviseController {
 
         }
         return new MyResult(0,"修改失败",null);
+    }
+
+    /**
+     * 头像上传
+     * @param file
+     * @param request
+     * @return
+     */
+    @CrossOrigin
+    @RequestMapping(value = "/upload",method = RequestMethod.POST)
+    @ResponseBody
+    public MyResult uploadHeadPortrait(@RequestParam(value = "file",required = false) String file,
+                                       HttpServletRequest request){
+        Base64.Decoder decoder = Base64.getDecoder();
+//        System.out.println("file==="+file);
+        // 去掉base64编码的头部 如："data:image/png;base64," ,根据前端控制png还是jpg
+        file = file.substring(22);
+        //解码
+        byte[] imgByte = decoder.decode(file);
+
+            /*//在tomcat目录下创建picture文件夹保存图片
+            String path = request.getSession().getServletContext()
+                    .getRealPath("");
+            String contextPath = request.getContextPath();
+            path = path.replace(contextPath.substring(1), "")  + "picture";
+            File dir = new File(path);
+            if (!dir.exists()) {// 判断文件目录是否存在
+                dir.mkdirs();
+            }
+                    //因为windows和linux路径不同，window：D:\dir   linux:opt/java
+            //System.getProperty("file.separator")能根据系统的不同获取文件路径的分隔符
+            String fileName = getFileName();
+            path = path + System.getProperty("file.separator") + fileName;
+                    */
+        String filePathAndName = "";
+        String filePath = "/uploadpic/";
+        try {
+            String fileName = UUID.randomUUID().toString() + ".png";
+            filePathAndName = CommonUtil.getUploadFilePath() + "/" + fileName;
+            filePath += fileName;
+            FileOutputStream out = new FileOutputStream(filePathAndName); // 输出文件路径
+            out.write(imgByte);
+            out.close();
+            String loginId = SecurityUtils.getSubject().getPrincipal().toString();
+            UserinfoSheet userinfoSheet = new UserinfoSheet();
+            userinfoSheet.setUserLoginId(loginId);
+//            userinfoSheet.setUserId(userId);
+            userinfoSheet.setUserHeadportrait(filePath);
+            boolean isSuccess = userinfoService.uploadHeadPortrait(userinfoSheet);
+            if(isSuccess){
+                //从数据库重新获取用户信息，更新redis里的用户信息
+                UserinfoSheet resUser = userinfoService.getUserinfo(userinfoSheet.getUserLoginId());
+                String userInfoKey = "userinfo:"+loginId;
+                String userInfoVal = objectMapper.writeValueAsString(resUser);
+                customRedisTemplate.redisSave(userInfoKey,userInfoVal);
+                return new MyResult(1,CommonUtil.getIpAddr(request)+"上传成功",filePath);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+            /*String url = request.getScheme() + "://" + request.getServerName()
+                    + ":" + request.getServerPort() + "/picture/" + fileName;
+            return url; */
+
+        return new MyResult(0,CommonUtil.getIpAddr(request)+"上传失败",null);
+
     }
 
 

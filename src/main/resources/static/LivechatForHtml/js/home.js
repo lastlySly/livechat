@@ -11,7 +11,7 @@ $(function () {
     getUserInfo();
     //获取分组并渲染
     getGroupFun();
-
+    imgerror();
 
     $('#edit').froalaEditor({
         toolbarButtons: [
@@ -357,6 +357,7 @@ function getUserInfo(){
 
                 //将个人信息填充个人模态框
                 $("#userinfo_head_img").attr("src",data.data.userHeadportrait);
+                // $("#userinfo_head_img").prop("src",data.data.userHeadportrait);
                 $("#userinfo_nickname").val(data.data.userNickname);
                 $("#userinfo_motto").text(data.data.userMotto);
                 $("#userinfo_loginId").text(data.data.userLoginId);
@@ -394,4 +395,14 @@ function getUserInfo(){
 
 
 
+}
+
+/*头像加载失败触发*/
+function imgerror(){
+    $("#head-img").error(function(){
+        $(this).attr('src',"img/default_head.png");
+    });
+    $("#userinfo_head_img").error(function(){
+        $(this).attr('src',"img/default_head.png");
+    });
 }

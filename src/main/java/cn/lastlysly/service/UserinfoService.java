@@ -71,6 +71,13 @@ public interface UserinfoService {
     boolean updateUserinfo(UserinfoSheet userinfoSheet);
 
     /**
+     * 上传头像
+     * @param userinfoSheet
+     * @return
+     */
+    boolean uploadHeadPortrait(UserinfoSheet userinfoSheet);
+
+    /**
      * 修改好友信息（备注，分组）
      * @param friendsSheet
      * @return
