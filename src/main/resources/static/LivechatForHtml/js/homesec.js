@@ -11,6 +11,7 @@ $(function () {
 function change_chatting_friend() {
     $(".custom-chat-friend-item").off("click");
     $(".custom-chat-friend-item").on("click",function () {
+
         // $(this).css({"background-color":"red"});
         $(this).find(".custom-num-tip").text("");
         var remarks = $(this).find(".list-remarks").text();
@@ -32,13 +33,15 @@ function change_friend_chatting_fun(socketaddress,remarks,chatHeadportrait) {
     $("#custom-messages-ul").empty();
     //清空输入框
     $("#edit").froalaEditor('html.set', '');
+
     $("#send-to-btn").attr("socketaddress",socketaddress);
     $("#chatting-friend-remarks").text(remarks);
     $("#chatting-friend-remarks").attr("data-img",chatHeadportrait);
-    var chattingItemListLength = $(".custom-chat-friend-item").length;
-    for(var i=0; i<chattingItemListLength; i++){
-        var dataId = $(".custom-chat-friend-item").eq(i).attr("data-id");
+
+    var chattingListLength = $(".custom-chat-friend-item").length;
+    for(var i=0; i<chattingListLength; i++){
         $(".custom-chat-friend-item").eq(i).css({"background-color":"#FAFAFA"});
+        var dataId =  $(".custom-chat-friend-item").eq(i).attr("data-id");
         if(dataId == $("#send-to-btn").attr("socketaddress")){
             $(".custom-chat-friend-item").eq(i).css({"background-color":"#E5E7EC"});
         }
@@ -118,7 +121,6 @@ function change_friend_chatting_fun(socketaddress,remarks,chatHeadportrait) {
                     }
                     //获取聊天记录成功后清空redis未读信息记录
                     removeUnreadInRedis(userLoginId,socketaddress);
-                    // console.log(page + "==");
                     isFirst = false;
                 }
             },

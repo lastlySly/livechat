@@ -275,7 +275,7 @@ body,html {
     margin-left: 0px;
 }
 .custom-friend-item:hover{
-    background-color: #E5E7EC;
+    background-color: #E5E7EC !important;
     cursor: pointer;
 }
 

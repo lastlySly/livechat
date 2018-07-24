@@ -160,6 +160,7 @@ function listFriend() {
     });
 }
 
+
 //分组下拉
 function grouplist() {
     var grouplist_num =  $(".custom-group-item").length;
@@ -226,11 +227,13 @@ function friend_card() {
     //好友列表点击事件
     $(".custom-friend-item").off("click");
     $(".custom-friend-item").on("click",function () {
+
         var friendListLength = $(".custom-friend-item").length;
         for(var i=0; i<friendListLength; i++){
             $(".custom-friend-item").eq(i).css({"background-color":"#FAFAFA"});
         }
         $(this).css({"background-color":"#E5E7EC"});
+
         var flag =  $(".right-main-container").css('display');
         if ( flag == "none" ) {
             $(".right-main-container").slideToggle("fast");
@@ -321,9 +324,6 @@ function change_tab() {
         $("#custom-chat-list-id").hide(500);
     });
 }
-
-
-
 
 /*调出菜单*/
 function change_meau() {
