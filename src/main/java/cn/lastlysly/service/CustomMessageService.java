@@ -56,4 +56,11 @@ public interface CustomMessageService {
      */
     List<FriendsSheet> listOnlineFriendsByUserId(String userLoginId);
 
+    /**
+     * 计算用户之间的消息页数
+     * @param loginId_1
+     * @param loginId_2
+     * @return
+     */
+    long pageCount(String loginId_1,String loginId_2);
 }

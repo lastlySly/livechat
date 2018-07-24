@@ -333,13 +333,11 @@ function change_chatting_friend() {
 
 //封装正在聊天页的切换（查出聊天记录）
 function change_friend_chatting_fun(socketaddress,remarks,chatHeadportrait) {
-
     var flag =  $("#right-chat-friend-container-id").css('display');
     if ( flag == "none" ) {
         $("#right-chat-friend-container-id").slideToggle("fast");
         $("#system_message_div").css({'display':"none"});
     }
-
     //清空聊天框
     $("#custom-messages-ul").empty();
     //清空输入框
@@ -351,8 +349,17 @@ function change_friend_chatting_fun(socketaddress,remarks,chatHeadportrait) {
 
     //请求历史信息
     var page = 1;
+    var allPage = 1;
     //获取自己的登陆ID
     var userLoginId =  $.cookie("_userLoginId");
+
+    //获取信息页数
+    $.post(serverUrl+"/userinforevise/pagecount",{"userLoginId":userLoginId,"friendLoginId":socketaddress},function (data) {
+        if(data.code == 1){
+            allPage = data.data;
+        }
+    });
+
     //获取自己的头像
     var myHeadimg = $("#head-img").attr("src");
     listMessageBetweenUser(userLoginId,socketaddress,myHeadimg,page,0);
@@ -409,7 +416,6 @@ function change_friend_chatting_fun(socketaddress,remarks,chatHeadportrait) {
                                     break;
                             }
                         }
-                        console.log(page+"=====");
                         $(".chat-content-div").animate({scrollTop:$(".chat-content-div")[0].scrollHeight - scrollPosition},0);
 
                     }
@@ -441,9 +447,16 @@ function change_friend_chatting_fun(socketaddress,remarks,chatHeadportrait) {
     $(".chat-content-div").on("scroll",function () {
         if($(this)[0].scrollTop == 0 && !isFirst){
             page++;
+            if(page > allPage){
+                if($("#loding_sign").length > 0){
+                    return;
+                }
+                $("#custom-messages-ul").prepend('<h5 style="text-align: center;padding-top: 20px" id="loding_sign" class="loding_sign">没有更多了</h5>');
+                return;
+            }
             $("#custom-messages-ul").prepend('<h5 style="text-align: center;padding-top: 20px" class="loding_sign">正在加载...</h5>');
             var signNum = $(this)[0].scrollHeight;
-            console.log(signNum)
+            // console.log(signNum)
             setTimeout(function(){
                 $("#custom-messages-ul").find(".loding_sign").remove();
                 listMessageBetweenUser(userLoginId,socketaddress,myHeadimg,page,signNum);

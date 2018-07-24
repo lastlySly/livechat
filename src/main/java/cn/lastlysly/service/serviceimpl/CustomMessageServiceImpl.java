@@ -213,4 +213,22 @@ public class CustomMessageServiceImpl implements CustomMessageService {
         }
         return null;
     }
+
+
+    /**
+     * 计算用户之间的消息页数
+     * @param loginId_1
+     * @param loginId_2
+     * @return
+     */
+    @Override
+    public long pageCount(String loginId_1, String loginId_2) {
+
+        Map<String,String> map = new HashMap<>(16);
+        map.put("userLoginId",loginId_1);
+        map.put("friendLoginId",loginId_2);
+        long row = customMapper.messagesPageCountBrtweenUsers(map);
+        long page = (long) Math.ceil( (double)row / (double)20);
+        return page;
+    }
 }

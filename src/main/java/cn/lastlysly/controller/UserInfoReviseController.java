@@ -154,6 +154,17 @@ public class UserInfoReviseController {
 
     }
 
+    @CrossOrigin
+    @RequestMapping(value = "/pagecount",method = RequestMethod.POST)
+    @ResponseBody
+    public MyResult messagesPageCountBetweenUsers(@RequestParam(value = "userLoginId",required = false) String loginId_1,
+                                                  @RequestParam(value = "friendLoginId",required = false) String loginId_2){
+
+        long page = customMessageService.pageCount(loginId_1,loginId_2);
+        return new MyResult(1,"获取消息页数成功",page);
+
+    }
+
 
     /**
      * 移除未读消息

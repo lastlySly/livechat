@@ -21,7 +21,7 @@ function friends_card_sendbtn() {
         // $("#custom-linkman-list-id").css("display","none");
         // $("#custom-chat-list-id").css("display","block");
 
-        var unreadNum = 0;
+        var unreadNum = "";
         /*删除已存在的该项*/
         var chatting_num = $(".custom-chat-friend-item").length;
         for (var i = 0;i < chatting_num; i++){
@@ -33,10 +33,10 @@ function friends_card_sendbtn() {
                 break;
             }
         }
+
         if(chatting_num == 0){
             unreadNum="";
         }
-
         /*将该项添加至列表，最顶*/
         $("#chatting-list").prepend(
             '<li data-id="'+ socketaddress +'" class="row custom-chat-friend-item">\n' +

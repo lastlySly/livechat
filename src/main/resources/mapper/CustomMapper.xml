@@ -121,5 +121,11 @@
         (messages_from_loginid = #{friendLoginId} and messages_to_loginid = #{userLoginId});
     </delete>
 
+    <!--查询用户之间聊天记录条数-->
+    <select id="messagesPageCountBrtweenUsers" parameterType="java.util.Map" resultType="java.lang.Long">
+        select count(*) from messages_sheet where (messages_from_loginid = #{userLoginId}
+         and messages_to_loginid = #{friendLoginId}) or (messages_to_loginid=#{userLoginId}
+          and messages_from_loginid = #{friendLoginId});
+    </select>
 
 </mapper>

@@ -70,4 +70,11 @@ public interface CustomMapper {
      */
     int delMessagesByUserloginidAndFriendLoginid(Map<String,String> map);
 
+    /**
+     * 获取用户之间的用户信息数量
+     * @param map
+     * @return
+     */
+    Long messagesPageCountBrtweenUsers(Map<String,String> map);
+
 }
