@@ -148,7 +148,7 @@ function userinfo_modal() {
     })
 
     //双击可修改
-    $(".userinfo_div_input").on("dblclick",function () {
+    $(".userinfo_div_input").on("click",function () {
         $(this).css({"background":"rgba(255,255,255,1)","border":"1px solid rgba(0,0,0,1)"});
         $(this).removeAttr("readonly");
     });

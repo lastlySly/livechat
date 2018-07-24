@@ -107,7 +107,7 @@ function friend_application_init(){
 
 //登出
 function logoutBtn() {
-
+    $("#logout_btn").off("click");
     $("#logout_btn").on("click",function () {
         $.post(serverUrl+"/userdeal/logout",{},function (data) {
         });
