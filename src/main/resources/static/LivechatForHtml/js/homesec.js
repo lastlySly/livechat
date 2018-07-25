@@ -90,10 +90,10 @@ function change_friend_chatting_fun(socketaddress,remarks,chatHeadportrait) {
                                 case userLoginId:
                                     $("#custom-messages-ul").prepend('<dl class="row message-contain-item">\n' +
                                         '                                        <div class="message-contain-item-time">'+ data.data[i].messagesTime +'</div>\n' +
-                                        '                                        <dt class="col-md-1">\n' +
+                                        '                                        <dt class="col-xs-1">\n' +
                                         '                                            <img class="img-responsive img-circle message-headportrait" src="'+chatHeadportrait+'">\n' +
                                         '                                        </dt>\n' +
-                                        '                                        <dd class="col-md-8">\n' +
+                                        '                                        <dd class="col-xs-8">\n' +
                                         '                                            <div class="custom-triangle"></div>\n' +
                                         '                                            <span class="message-text-contain-friends">'+ data.data[i].messagesPostmessages +'</span>\n' +
                                         '                                        </dd>\n' +
@@ -104,10 +104,10 @@ function change_friend_chatting_fun(socketaddress,remarks,chatHeadportrait) {
                                 case socketaddress:
                                     $("#custom-messages-ul").prepend('<dl class="row message-contain-item">\n' +
                                         '                                            <div class="message-contain-item-time">' + data.data[i].messagesTime + '</div>\n' +
-                                        '                                            <dt class="col-md-1 col-md-push-11">\n' +
+                                        '                                            <dt class="col-xs-1 col-xs-push-11">\n' +
                                         '                                                <img class="img-responsive img-circle message-headportrait" src="'+ myHeadimg +'">\n' +
                                         '                                            </dt>\n' +
-                                        '                                            <dd class="col-md-8 col-md-push-2">\n' +
+                                        '                                            <dd class="col-xs-8 col-xs-push-2">\n' +
                                         '                                                <div class="custom-triangle-right"></div>\n' +
                                         '                                                <span class="message-text-contain-me pull-right">' + data.data[i].messagesPostmessages + '</span>\n' +
                                         '                                            </dd>\n' +
@@ -203,8 +203,8 @@ function friends_card_sendbtn() {
         /*将该项添加至列表，最顶*/
         $("#chatting-list").prepend(
             '<li data-id="'+ socketaddress +'" class="row custom-chat-friend-item">\n' +
-            '                                <img class="col-md-3 img-responsive img-circle list-headportrait" src="'+headportrait+'">\n' +
-            '                                <dl class="col-md-9 custom-friend-item-info">\n' +
+            '                                <img class="col-xs-3 img-responsive img-circle list-headportrait" src="'+headportrait+'">\n' +
+            '                                <dl class="col-xs-9 custom-friend-item-info">\n' +
             '                                    <dt class="list-remarks">'+ remarks +'</dt>\n' +
             '                                    <dd class="list-motto">'+ motto +'</dd>\n' +
             '                                    <span class="badge custom-num-tip">'+ unreadNum +'</span>\n' +
@@ -370,8 +370,8 @@ function reply_friend_application() {
                         }
                         $("#chatting-list").prepend(
                             '<li data-id="'+ applyLoginIdReply +'" class="row custom-chat-friend-item">\n' +
-                            '                                <img class="col-md-3 img-responsive img-circle list-headportrait" src="'+headImg+'">\n' +
-                            '                                <dl class="col-md-9 custom-friend-item-info">\n' +
+                            '                                <img class="col-xs-3 img-responsive img-circle list-headportrait" src="'+headImg+'">\n' +
+                            '                                <dl class="col-xs-9 custom-friend-item-info">\n' +
                             '                                    <dt class="list-remarks">'+ applyRemarkReply +'</dt>\n' +
                             '                                    <dd class="list-motto">'+ "我们已经是好友了，快来一起聊天吧" +'</dd>\n' +
                             '                                    <span class="badge custom-num-tip"></span>\n' +

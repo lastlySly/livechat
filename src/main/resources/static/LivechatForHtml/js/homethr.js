@@ -222,6 +222,7 @@ function uploadFile(file) {
     // formData.append("userId",userId);
     // formData.append("file",file);
     //"file=" + file
+    // console.log(file);
     $.ajax({
         url :serverUrl+ '/userinforevise/upload',
         type : 'POST',

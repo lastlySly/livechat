@@ -11,7 +11,6 @@ $(function () {
     getUserInfo();
     //获取分组并渲染
     getGroupFun();
-    imgerror();
 
     $('#edit').froalaEditor({
         toolbarButtons: [
@@ -114,9 +113,9 @@ function listFriend() {
                                         switch (isOnline){
                                             case -1:
                                                 $(".group_name").eq(j).parent().parent().find(".custom-friends-list").append('<li socketaddress="'+data.data[i].customFriendsLoginId+'" class="row custom-friend-item">\n' +
-                                                    '                                            <img class="col-md-3 img-responsive img-circle list-headportrait" src="'+data.data[i].customFriendsHeadportrait+'">\n' +
+                                                    '                                            <img class="col-xs-3 img-responsive img-circle list-headportrait" src="'+data.data[i].customFriendsHeadportrait+'">\n' +
                                                     '\n' +
-                                                    '                                            <dl class="col-md-9 custom-friend-item-info">\n' +
+                                                    '                                            <dl class="col-xs-9 custom-friend-item-info">\n' +
                                                     '                                                <dt class="list-remarks">'+data.data[i].customFriendsRemark+'<span>('+data.data[i].customFriendsLoginId+')</span></dt>\n' +
                                                     '                                                <dd class="list-motto">'+data.data[i].customFriendsMotto+'</dd>\n' +
                                                     '                                                <!--<span class="badge custom-num-tip">5</span>-->\n' +
@@ -126,9 +125,9 @@ function listFriend() {
                                                 break;
                                             default:
                                                 $(".group_name").eq(j).parent().parent().find(".custom-friends-list").prepend('<li socketaddress="'+data.data[i].customFriendsLoginId+'" class="row custom-friend-item">\n' +
-                                                    '                                            <img class="col-md-3 img-responsive img-circle list-headportrait" src="'+data.data[i].customFriendsHeadportrait+'">\n' +
+                                                    '                                            <img class="col-xs-3 img-responsive img-circle list-headportrait" src="'+data.data[i].customFriendsHeadportrait+'">\n' +
                                                     '\n' +
-                                                    '                                            <dl class="col-md-9 custom-friend-item-info">\n' +
+                                                    '                                            <dl class="col-xs-9 custom-friend-item-info">\n' +
                                                     '                                                <dt class="list-remarks">'+data.data[i].customFriendsRemark+'<span>('+data.data[i].customFriendsLoginId+')</span></dt>\n' +
                                                     '                                                <dd class="list-motto">'+data.data[i].customFriendsMotto+'</dd>\n' +
                                                     '                                                <!--<span class="badge custom-num-tip">5</span>-->\n' +
@@ -397,12 +396,12 @@ function getUserInfo(){
 
 }
 
-/*头像加载失败触发*/
-function imgerror(){
-    $("#head-img").error(function(){
-        $(this).attr('src',"img/default_head.png");
-    });
-    $("#userinfo_head_img").error(function(){
-        $(this).attr('src',"img/default_head.png");
-    });
-}
+// /*头像加载失败触发*/
+// function imgerror(){
+//     $("#head-img").error(function(){
+//         $(this).attr('src',"img/default_head.png");
+//     });
+//     $("#userinfo_head_img").error(function(){
+//         $(this).attr('src',"img/default_head.png");
+//     });
+// }

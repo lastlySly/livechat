@@ -54,10 +54,10 @@ function sendMessageBtn() {
         sendMessage(socketaddress,myMessage,sendTime,3);
         $("#custom-messages-ul").append('<dl class="row message-contain-item">\n' +
             '                                        <div class="message-contain-item-time">' + sendTime + '</div>\n' +
-            '                                        <dt class="col-md-1 col-md-push-11">\n' +
+            '                                        <dt class="col-xs-1 col-xs-push-11">\n' +
             '                                            <img class="img-responsive img-circle message-headportrait" src="' + head_img + '">\n' +
             '                                        </dt>\n' +
-            '                                        <dd class="col-md-8 col-md-push-2">\n' +
+            '                                        <dd class="col-xs-8 col-xs-push-2">\n' +
             '                                            <div class="custom-triangle-right"></div>\n' +
             '                                            <span class="message-text-contain-me pull-right">' + myMessage + '</span>\n' +
             '                                        </dd>\n' +
@@ -114,10 +114,10 @@ function showMessage(result) {
             var friendsHeadImg =  $("#chatting-friend-remarks").attr("data-img");
             $("#custom-messages-ul").append('<dl class="row message-contain-item">\n' +
                 '                                        <div class="message-contain-item-time">'+ result.messagesTime +'</div>\n' +
-                '                                        <dt class="col-md-1">\n' +
+                '                                        <dt class="col-xs-1">\n' +
                 '                                            <img class="img-responsive img-circle message-headportrait" src="'+friendsHeadImg+'">\n' +
                 '                                        </dt>\n' +
-                '                                        <dd class="col-md-8">\n' +
+                '                                        <dd class="col-xs-8">\n' +
                 '                                            <div class="custom-triangle"></div>\n' +
                 '                                            <span class="message-text-contain-friends">'+ result.messagesPostmessages +'</span>\n' +
                 '                                        </dd>\n' +
@@ -193,8 +193,8 @@ function showMessage(result) {
                         /*将该项添加至列表，最顶*/
                         $("#chatting-list").prepend(
                             '<li data-id="'+ data.data[0].userLoginId +'" class="row custom-chat-friend-item">\n' +
-                            '                                <img class="col-md-3 img-responsive img-circle list-headportrait" src="'+data.data[0].userHeadportrait+'">\n' +
-                            '                                <dl class="col-md-9 custom-friend-item-info">\n' +
+                            '                                <img class="col-xs-3 img-responsive img-circle list-headportrait" src="'+data.data[0].userHeadportrait+'">\n' +
+                            '                                <dl class="col-xs-9 custom-friend-item-info">\n' +
                             '                                    <dt class="list-remarks">'+ remark +'</dt>\n' +
                             '                                    <dd class="list-motto">'+ result.messagesPostmessages +'</dd>\n' +
                             '                                    <span class="badge custom-num-tip">'+ unreadMessageNum +'</span>\n' +
@@ -321,8 +321,8 @@ function showUnreadMessage(result){
                 /*将该项添加至列表，最顶*/
                 $("#chatting-list").prepend(
                     '<li data-id="'+ data.data[0].userLoginId +'" class="row custom-chat-friend-item">\n' +
-                    '                                <img class="col-md-3 img-responsive img-circle list-headportrait" src="'+data.data[0].userHeadportrait+'">\n' +
-                    '                                <dl class="col-md-9 custom-friend-item-info">\n' +
+                    '                                <img class="col-xs-3 img-responsive img-circle list-headportrait" src="'+data.data[0].userHeadportrait+'">\n' +
+                    '                                <dl class="col-xs-9 custom-friend-item-info">\n' +
                     '                                    <dt class="list-remarks">'+ remark +'</dt>\n' +
                     '                                    <dd class="list-motto">'+ result.messagesSheet.messagesPostmessages +'</dd>\n' +
                     '                                    <span class="badge custom-num-tip">'+ result.unreadNum +'</span>\n' +

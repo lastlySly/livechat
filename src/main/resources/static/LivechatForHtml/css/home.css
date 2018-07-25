@@ -2,23 +2,32 @@
 
 @media (min-width: 1200px) {
     .container{
-        width: 992px;
+        width: 962px;
     }
 }
 @media (max-width: 992px) {
     .container{
-        width: 992px;
+        /*width: 992px;*/
+        width: 962px;
     }
 }
 
-body,html {
+/*body,html {*/
+/*padding: 0;*/
+/*margin: 0;*/
+/*height: 100% !important;*/
+/*background-size: 100%;*/
+/*background-image: url(../img/Starry.jpg);*/
+/*overflow-y: auto;*/
+/*overflow-x: auto;*/
+/*}*/
+body,html{
+    height:98%;
+    background-size: 100%;
     padding: 0;
     margin: 0;
-    height: 100% !important;
-    background-size: 100%;
-    background-image: url(../img/Starry.jpg);
-    overflow-y: auto;
-    overflow-x: hidden;
+    /*background-image: url(../img/Starry.jpg);*/
+    background: url(../img/Starry.jpg) center no-repeat;
 }
 
 .all_container{
@@ -241,6 +250,8 @@ body,html {
     margin-top: 2px;
     height: 45px;
     width: 45px;
+    padding: 2px;
+    /*padding: 0px 0px;*/
     border-radius: 50%;
 }
 .custom-friends-group-list>.custom-group-item{
@@ -267,9 +278,9 @@ body,html {
     height: 50px;
     padding: 5px;
 }
-.custom-friends-list>.row>.col-md-9,
-.custom-friends-list>.row>.col-md-3{
-    padding: 5px;
+.custom-friends-list>.row>.col-xs-9,
+.custom-friends-list>.row>.col-xs-3{
+    padding: 2px;
 }
 .custom-friend-item{
     margin-left: 0px;
@@ -485,12 +496,12 @@ body,html {
 
 .custom-chat-friend-item{
     height: 50px;
-    padding: 5px;
+    padding: 0px 5px;
     position: relative;
 }
-.custom-chat-list>.row>.col-md-9,
-.custom-chat-list>.row>.col-md-3{
-    padding: 5px;
+.custom-chat-list>.row>.col-xs-9,
+.custom-chat-list>.row>.col-xs-3{
+    padding: 2px;
 }
 .custom-chat-friend-item{
     margin-left: 0px;
@@ -502,7 +513,7 @@ body,html {
     width: 15px;
     height: 15px;
     /*background-color: red;*/
-    top: 15px;
+    top: 20px;
     right: 20px;
     border-radius: 50%;
     border: none;
@@ -635,9 +646,11 @@ body,html {
     overflow-y: auto;
     position: relative;
 }
-.chat-content-div > .col-md-12{
+.chat-content-div > .col-xs-12{
     position: relative;
 }
+
+
 .message-headportrait{
     /*margin-top: 2px;*/
     height: 35px;
@@ -648,8 +661,8 @@ body,html {
     /*padding-left: 20px;*/
     /*padding-right: 20px;*/
 }
-.message-contain-item .col-md-1,
-.message-contain-item .col-md-8{
+.message-contain-item .col-xs-1,
+.message-contain-item .col-xs-8{
     padding: 10px;
     position: relative;
 }
