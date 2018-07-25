@@ -58,6 +58,12 @@ spring:
     servlet:
       content-type: text/html
 
+#    文件上传限制
+  servlet:
+    multipart:
+      max-file-size: 10Mb
+      max-request-size: 30Mb
+
 
 # 分页配置
 pagehelper:
@@ -65,6 +71,7 @@ pagehelper:
   reasonable: true
   support-methods-arguments: true
   params: count=countSql
+
 
 
 # 自定义目录路径

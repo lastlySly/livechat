@@ -70,7 +70,13 @@ function sendMessageBtn() {
             if(data_id == socketaddress){
                 // $(".custom-chat-friend-item").eq(i).find(".list-motto").text(myMessage);
                 $(".custom-chat-friend-item").eq(i).find(".list-motto").empty();
-                $(".custom-chat-friend-item").eq(i).find(".list-motto").append(myMessage);
+                var isImg = myMessage;
+                if(myMessage.search("<img") != -1){
+                    isImg = "[图片]";
+                }
+                // $(".custom-chat-friend-item").eq(i).find(".list-motto").append(myMessage);
+                $(".custom-chat-friend-item").eq(i).find(".list-motto").append(isImg);
+
                 var sendNowTime = sendTime.substring(11,16);
                 $(".custom-chat-friend-item").eq(i).find(".custom-time").text(sendNowTime);
                 break;
@@ -131,7 +137,12 @@ function showMessage(result) {
                 if(data_id == result.messagesFromLoginid){
                     // $(".custom-chat-friend-item").eq(i).find(".list-motto").text(result.messagesPostmessages);
                     $(".custom-chat-friend-item").eq(i).find(".list-motto").empty();
-                    $(".custom-chat-friend-item").eq(i).find(".list-motto").append(result.messagesPostmessages);
+                    var isImg = result.messagesPostmessages;
+                    if((result.messagesPostmessages).search("<img") != -1){
+                        isImg = "[图片]";
+                    }
+
+                    $(".custom-chat-friend-item").eq(i).find(".list-motto").append(isImg);
                     var sendNowTime = result.messagesTime.substring(11,16);
                     $(".custom-chat-friend-item").eq(i).find(".custom-time").text(sendNowTime);
                     break;
@@ -190,13 +201,19 @@ function showMessage(result) {
                         if(dateDiffer > 0){
                             messageTime = result.messagesTime.substring(0,10);
                         }
+
+                        var isImg = result.messagesPostmessages;
+                        if(result.messagesPostmessages.search("<img") != -1){
+                            isImg = "[图片]";
+                        }
+
                         /*将该项添加至列表，最顶*/
                         $("#chatting-list").prepend(
                             '<li data-id="'+ data.data[0].userLoginId +'" class="row custom-chat-friend-item">\n' +
                             '                                <img class="col-xs-3 img-responsive img-circle list-headportrait" src="'+data.data[0].userHeadportrait+'">\n' +
                             '                                <dl class="col-xs-9 custom-friend-item-info">\n' +
                             '                                    <dt class="list-remarks">'+ remark +'</dt>\n' +
-                            '                                    <dd class="list-motto">'+ result.messagesPostmessages +'</dd>\n' +
+                            '                                    <dd class="list-motto">'+ isImg +'</dd>\n' +
                             '                                    <span class="badge custom-num-tip">'+ unreadMessageNum +'</span>\n' +
                             '                                    <span class="badge custom-time">'+ messageTime +'</span>\n' +
                             '                                    <button class="custom-del glyphicon glyphicon-remove-sign"></button>\n' +
@@ -318,13 +335,19 @@ function showUnreadMessage(result){
                     }
                 }
                 var messageTime = result.messagesSheet.messagesTime.substring(11,16);
+
+                var isImg = result.messagesSheet.messagesPostmessages;
+                if(result.messagesSheet.messagesPostmessages.search("<img") != -1){
+                    isImg = "[图片]";
+                }
+
                 /*将该项添加至列表，最顶*/
                 $("#chatting-list").prepend(
                     '<li data-id="'+ data.data[0].userLoginId +'" class="row custom-chat-friend-item">\n' +
                     '                                <img class="col-xs-3 img-responsive img-circle list-headportrait" src="'+data.data[0].userHeadportrait+'">\n' +
                     '                                <dl class="col-xs-9 custom-friend-item-info">\n' +
                     '                                    <dt class="list-remarks">'+ remark +'</dt>\n' +
-                    '                                    <dd class="list-motto">'+ result.messagesSheet.messagesPostmessages +'</dd>\n' +
+                    '                                    <dd class="list-motto">'+ isImg +'</dd>\n' +
                     '                                    <span class="badge custom-num-tip">'+ result.unreadNum +'</span>\n' +
                     '                                    <span class="badge custom-time">'+ messageTime +'</span>\n' +
                     '                                    <button class="custom-del glyphicon glyphicon-remove-sign"></button>\n' +

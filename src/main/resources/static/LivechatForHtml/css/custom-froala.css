@@ -26,6 +26,22 @@
     padding: 0px 5px;
     vertical-align: middle;
 }
+.list-motto span.fr-emoticon.fr-emoticon-img {
+    background-repeat: no-repeat !important;
+    font-size: inherit;
+    height: 1em;
+    width: 1em;
+    min-height: 20px !important;
+    min-width: 20px !important;
+    display: inline-block;
+    /*margin: -0.1em 0.1em 0.1em;*/
+    /*line-height: 1;*/
+    /*padding-top: 12px;*/
+    padding: 0px 5px;
+    vertical-align: middle;
+}
+
+
 .fr-view span.fr-emoticon.fr-emoticon-img {
     background-repeat: no-repeat !important;
     font-size: inherit;

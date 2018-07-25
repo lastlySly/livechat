@@ -20,7 +20,7 @@ $(function () {
         height: 105,
         imageUpload: true,
         imageUploadMethod :'POST',
-        imageUploadURL :'/lastlySly/adminController/uploadImgEditor.action',
+        imageUploadURL :serverUrl+'/messagedeal/uploadImgEditor',
         imageManagerDeleteURL :'/lastlySly/adminController/deleteImg.action'
     });
 
