@@ -279,13 +279,9 @@ function system_message_div() {
 
 //好友申请回复模态框
 function reply_friend_application() {
-    $(".agree_friend_apply").off("click");
-    $(".refuse_friend_apply").off("click");
-    $(".ignore_friend_apply").off("click");
-    $("#back_btn_reply").off("click");
-    $("#send_apply_btn_reply").off("click");
 
     //同意
+    $(".agree_friend_apply").off("click");
     $(".agree_friend_apply").on("click",function () {
         //获取请求人的登陆ID
         var applyLoginId =  $(this).attr("applyId");
@@ -305,10 +301,12 @@ function reply_friend_application() {
 
     });
     //忽略
+    $(".refuse_friend_apply").off("click");
     $(".ignore_friend_apply").on("click",function () {
         alert("忽略了（正在施工）");
     });
     //拒绝
+    $(".ignore_friend_apply").off("click");
     $(".refuse_friend_apply").on("click",function () {
 
         var applyLoginId =  $(this).attr("applyId");
@@ -319,10 +317,12 @@ function reply_friend_application() {
     });
 
     //同意弹出模态框的返回按钮
+    $("#back_btn_reply").off("click");
     $("#back_btn_reply").on("click",function () {
         $(".friend_application_reply_div_modal").slideToggle("fast");
     });
     //同意弹出模态框的加为好友按钮
+    $("#send_apply_btn_reply").off("click");
     $("#send_apply_btn_reply").on("click",function () {
 
         //获取分组ID
@@ -399,11 +399,13 @@ function reply_friend_application() {
 
 
     //拒绝弹出模态框的返回按钮
+    $("#refuse_back_btn").off("click");
     $("#refuse_back_btn").on("click",function () {
         $(".refuse_friend_application_reply_modal").slideToggle("fast");
     });
 
-    //拒绝弹出模态框的加为好友按钮
+    //拒绝弹出模态框的拒绝按钮
+    $("#refuse_btn").off("click");
     $("#refuse_btn").on("click",function () {
         //获取对方登陆ID
         var applyLoginIdReply = $(this).attr("applyId");

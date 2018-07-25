@@ -231,8 +231,13 @@ function uploadFile(file) {
         success : function(data) {
             // console.log(data)
             // getUserInfo();
-            $("#head-img").attr("src",data.data);
-            $("#userinfo_head_img").attr("src",data.data);
+            if(data.tip == 1){
+                $("#head-img").attr("src",data.data);
+                $("#userinfo_head_img").attr("src",data.data);
+            }else{
+                alert(data.tip);
+            }
+
         }
     });
 }

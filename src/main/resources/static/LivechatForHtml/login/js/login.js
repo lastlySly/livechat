@@ -194,7 +194,7 @@ function login(captchaObj) {
             var formData = new FormData();
             formData.append("userLoginId",login_login_id);
             formData.append("userPassword",login_password);
-
+            $("#login_btn").text("正在登陆");
             $.ajax({
                 url:serverUrl+"/userdeal/login",
                 type:"POST",
@@ -205,12 +205,14 @@ function login(captchaObj) {
                 processData: false,
                 success:function (data) {
                     if (data.code == 1){
-                        alert(data.tip);
+                        // alert(data.tip);
                         // console.log(data);
                         $.cookie('_userLoginId', login_login_id, {path: '/' });
+                        $("#login_btn").text("登陆");
                         window.location.href = "../home.html";
                     }else{
                         alert(data.tip)
+                        $("#login_btn").text("登陆");
                     }
                 },
                 error: function (err) {

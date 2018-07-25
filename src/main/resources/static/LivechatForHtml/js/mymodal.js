@@ -11,6 +11,7 @@ $(function () {
 
 //添加好友，添加修改分组模态
 function pop_modal() {
+    $("#add-friends-btn").off("click");
     $("#add-friends-btn").on("click",function () {
         /*关闭添加按钮组*/
         $(".custom-add-meau").slideToggle("fast");
@@ -18,7 +19,7 @@ function pop_modal() {
         $(".add-friends-modal-div").slideToggle("fast");
 
     });
-
+    $(".remove-add-friends-modal-btn").off("click");
     $(".remove-add-friends-modal-btn").on("click",function () {
         /*关闭添加好友模态框*/
         $(".add-friends-modal-div").slideToggle("fast");
@@ -29,6 +30,7 @@ function pop_modal() {
     })
 
     //寻找新好友
+    $("#findNewFriendBtn").off("click");
     $("#findNewFriendBtn").on("click",function () {
 
         //先查询自己的好友列表，如果存在，则不渲染添加按钮，防止重复添加
@@ -139,7 +141,6 @@ function userinfo_modal() {
         $(".custom-head-meau").slideToggle("fast");
         /*打开模态框*/
         $(".userinfo-modal-div").slideToggle("fast");
-
     });
 
     $(".remove-userinfo-modal-btn").on("click",function () {
@@ -377,7 +378,8 @@ function group_manage() {
             $(".group_rename_div").find(".ok_group_icon").css({"display":"none"});
             $(this).find(".ok_group_icon").css({"display":"inline-block"});
             //阻止事件起泡（冒泡问题，点击子布局事件不触发父布局事件）
-            event.stopPropagation();
+            // event.stopPropagation();
+            stopPropagations()
 
         })
         $(".groups_modal_div").on("click",function () {

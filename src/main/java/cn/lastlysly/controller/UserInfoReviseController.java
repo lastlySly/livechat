@@ -87,7 +87,7 @@ public class UserInfoReviseController {
     @RequestMapping(value = "/upload",method = RequestMethod.POST)
     @ResponseBody
     public MyResult uploadHeadPortrait(@RequestParam(value = "file",required = false) String file,
-                                       HttpServletRequest request){
+                                       HttpServletRequest request) throws MyCustomException {
         Base64.Decoder decoder = Base64.getDecoder();
 //        System.out.println("file==="+file);
         // 去掉base64编码的头部 如："data:image/png;base64," ,根据前端控制png还是jpg
@@ -135,6 +135,7 @@ public class UserInfoReviseController {
 
         } catch (Exception e) {
             e.printStackTrace();
+            throw new MyCustomException("上传失败，请稍后刷新重试");
         }
             /*String url = request.getScheme() + "://" + request.getServerName()
                     + ":" + request.getServerPort() + "/picture/" + fileName;
