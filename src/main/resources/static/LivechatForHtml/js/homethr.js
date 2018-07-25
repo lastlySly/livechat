@@ -112,8 +112,16 @@ function logoutBtn() {
         $.post(serverUrl+"/userdeal/logout",{},function (data) {
         });
         location.reload();
-    })
+    });
+    // $(window).on("unload",function(){
+    //     //响应事件
+    //     alert("获取到了页面要关闭的事件了！");
+    // });
+
+
 }
+
+
 
 
 
@@ -166,7 +174,7 @@ $('#tailoringImg').cropper({
     dragCrop: true,  //是否允许移除当前的剪裁框，并通过拖动来新建一个剪裁框区域
     movable: true,  //是否允许移动剪裁框
     resizable: true,  //是否允许改变裁剪框的大小
-    zoomable: false,  //是否允许缩放图片大小
+    zoomable: true,  //是否允许缩放图片大小
     mouseWheelZoom: false,  //是否允许通过鼠标滚轮来缩放图片
     touchDragZoom: true,  //是否允许通过触摸移动来缩放图片
     rotatable: true,  //是否允许旋转图片
@@ -201,12 +209,14 @@ $("#sureCut").on("click",function () {
         return false;
     }else{
         var cas = $('#tailoringImg').cropper('getCroppedCanvas');//获取被裁剪后的canvas
-        var base64url = cas.toDataURL('image/png'); //转换为base64地址形式
-        $("#userinfo_head_img").prop("src",base64url);//显示为图片的形式
+        // var base64url = cas.toDataURL('image/png'); //转换为base64地址形式
+        var base64url = cas.toDataURL('image/jpeg'); //转换为base64地址形式,png太大
+        // $("#userinfo_head_img").prop("src",base64url);//显示为图片的形式
+        // //关闭裁剪框
+        // closeTailor();
         //调用ajax上传
-        uploadFile(encodeURIComponent(base64url));
-        //关闭裁剪框
-        closeTailor();
+        uploadFile(encodeURIComponent(base64url),base64url);
+
     }
 
 });
@@ -216,7 +226,7 @@ function closeTailor() {
     $(".head_portrait_modal_div").slideToggle();
 }
 //ajax请求上传
-function uploadFile(file) {
+function uploadFile(file,base64url) {
     var userId = $("#userinfo_loginId").attr("userId");
     // var formData = new FormData();
     // formData.append("userId",userId);
@@ -231,9 +241,12 @@ function uploadFile(file) {
         success : function(data) {
             // console.log(data)
             // getUserInfo();
-            if(data.tip == 1){
+            if(data.code == 1){
                 $("#head-img").attr("src",data.data);
                 $("#userinfo_head_img").attr("src",data.data);
+                $("#userinfo_head_img").prop("src",base64url);//显示为图片的形式
+                //关闭裁剪框
+                closeTailor();
             }else{
                 alert(data.tip);
             }
