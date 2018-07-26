@@ -179,9 +179,9 @@ body,html{
     position: absolute;
     height: 40px;
     width: 40px;
-    bottom: 20px;
-    right: 20px;
-    background-color: #0181EF;
+    bottom: 40px;
+    right: 25px;
+    /*background-color: #0181EF;*/
     border: none;
     border-radius: 50%;
     font-size: 3.0rem;

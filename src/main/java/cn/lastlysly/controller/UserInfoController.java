@@ -60,12 +60,6 @@ public class UserInfoController {
         return new MyResult(0,"没有登录，请先登录",null);
     }
 
-//    @CrossOrigin
-//    @RequestMapping("/defeatedSerialization")
-//    @ResponseBody
-//    public MyResult defeatedSerialization(){
-//        return new MyResult(0,"用户信息序列化失败",null);
-//    }
 
     /**
      * 用户注册
@@ -162,11 +156,12 @@ public class UserInfoController {
 //            logger.info("session获取主机号：{}，session获取sessionID：{}，创建session时间,最后访问session的时间：{}，更新会话时间：{}",
 //                    session.getHost(),session.getId(),session.getLastAccessTime(),session.getStartTimestamp());
 
-            String redisKey = "online:"+subject.getPrincipal().toString();
-            String redisVal = session.getId() + "";
-//            session.stop();销毁session
-            //上线用户保存于redis,
-            customRedisTemplate.redisSave(redisKey,redisVal);
+
+//            String redisKey = "online:"+subject.getPrincipal().toString();
+//            String redisVal = session.getId() + "";
+////            session.stop();销毁session
+//            //上线用户保存于redis,
+//            customRedisTemplate.redisSave(redisKey,redisVal);
 
             //用户信息保存于redis(代替session)
             String userInfoKey = "userinfo:"+subject.getPrincipal().toString();
