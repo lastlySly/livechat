@@ -1,5 +1,5 @@
 
-
+var imgReg=/<img[^<>]+>/g;
 function websocket_connect() {
 
     var mysocket_address = $("#userinfo_revise_btn").attr("dataId");
@@ -70,12 +70,12 @@ function sendMessageBtn() {
             if(data_id == socketaddress){
                 // $(".custom-chat-friend-item").eq(i).find(".list-motto").text(myMessage);
                 $(".custom-chat-friend-item").eq(i).find(".list-motto").empty();
-                var isImg = myMessage;
-                if(myMessage.search("<img") != -1){
-                    isImg = "[图片]";
-                }
+
+                //正则替换消息中的图片
+                var newMessage = myMessage.replace(imgReg,"[图片]");
+
                 // $(".custom-chat-friend-item").eq(i).find(".list-motto").append(myMessage);
-                $(".custom-chat-friend-item").eq(i).find(".list-motto").append(isImg);
+                $(".custom-chat-friend-item").eq(i).find(".list-motto").append(newMessage);
 
                 var sendNowTime = sendTime.substring(11,16);
                 $(".custom-chat-friend-item").eq(i).find(".custom-time").text(sendNowTime);
@@ -137,12 +137,11 @@ function showMessage(result) {
                 if(data_id == result.messagesFromLoginid){
                     // $(".custom-chat-friend-item").eq(i).find(".list-motto").text(result.messagesPostmessages);
                     $(".custom-chat-friend-item").eq(i).find(".list-motto").empty();
-                    var isImg = result.messagesPostmessages;
-                    if((result.messagesPostmessages).search("<img") != -1){
-                        isImg = "[图片]";
-                    }
 
-                    $(".custom-chat-friend-item").eq(i).find(".list-motto").append(isImg);
+                    //正则替换消息中的图片
+                    var newMessage = (result.messagesPostmessages).replace(imgReg,"[图片]");
+
+                    $(".custom-chat-friend-item").eq(i).find(".list-motto").append(newMessage);
                     var sendNowTime = result.messagesTime.substring(11,16);
                     $(".custom-chat-friend-item").eq(i).find(".custom-time").text(sendNowTime);
                     break;
@@ -202,10 +201,8 @@ function showMessage(result) {
                             messageTime = result.messagesTime.substring(0,10);
                         }
 
-                        var isImg = result.messagesPostmessages;
-                        if(result.messagesPostmessages.search("<img") != -1){
-                            isImg = "[图片]";
-                        }
+                        //正则替换消息中的图片
+                        var newMessage = (result.messagesPostmessages).replace(imgReg,"[图片]");
 
                         /*将该项添加至列表，最顶*/
                         $("#chatting-list").prepend(
@@ -213,7 +210,7 @@ function showMessage(result) {
                             '                                <img class="col-xs-3 img-responsive img-circle list-headportrait" src="'+data.data[0].userHeadportrait+'">\n' +
                             '                                <dl class="col-xs-9 custom-friend-item-info">\n' +
                             '                                    <dt class="list-remarks">'+ remark +'</dt>\n' +
-                            '                                    <dd class="list-motto">'+ isImg +'</dd>\n' +
+                            '                                    <dd class="list-motto">'+ newMessage +'</dd>\n' +
                             '                                    <span class="badge custom-num-tip">'+ unreadMessageNum +'</span>\n' +
                             '                                    <span class="badge custom-time">'+ messageTime +'</span>\n' +
                             '                                    <button class="custom-del glyphicon glyphicon-remove-sign"></button>\n' +
@@ -336,10 +333,9 @@ function showUnreadMessage(result){
                 }
                 var messageTime = result.messagesSheet.messagesTime.substring(11,16);
 
-                var isImg = result.messagesSheet.messagesPostmessages;
-                if(result.messagesSheet.messagesPostmessages.search("<img") != -1){
-                    isImg = "[图片]";
-                }
+
+                //正则替换消息中的图片
+                var newMessage = (result.messagesSheet.messagesPostmessages).replace(imgReg,"[图片]");
 
                 /*将该项添加至列表，最顶*/
                 $("#chatting-list").prepend(
@@ -347,7 +343,7 @@ function showUnreadMessage(result){
                     '                                <img class="col-xs-3 img-responsive img-circle list-headportrait" src="'+data.data[0].userHeadportrait+'">\n' +
                     '                                <dl class="col-xs-9 custom-friend-item-info">\n' +
                     '                                    <dt class="list-remarks">'+ remark +'</dt>\n' +
-                    '                                    <dd class="list-motto">'+ isImg +'</dd>\n' +
+                    '                                    <dd class="list-motto">'+ newMessage +'</dd>\n' +
                     '                                    <span class="badge custom-num-tip">'+ result.unreadNum +'</span>\n' +
                     '                                    <span class="badge custom-time">'+ messageTime +'</span>\n' +
                     '                                    <button class="custom-del glyphicon glyphicon-remove-sign"></button>\n' +
