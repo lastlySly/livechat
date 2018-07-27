@@ -6,6 +6,7 @@ import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -24,6 +25,7 @@ import java.util.HashMap;
 @RequestMapping("/gt")
 public class verificationcontroller {
 
+    @CrossOrigin
     @RequestMapping(value = "/ajax-validate1",method = RequestMethod.POST)
     public void loginServlet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         GeetestLib gtSdk = new GeetestLib(GeetestConfig.getGeetest_id(), GeetestConfig.getGeetest_key(),
@@ -88,6 +90,7 @@ public class verificationcontroller {
     }
 
 
+    @CrossOrigin
     @RequestMapping(value = "/register1",method = RequestMethod.GET)
     public void startCaptchaServlet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         GeetestLib gtSdk = new GeetestLib(GeetestConfig.getGeetest_id(), GeetestConfig.getGeetest_key(),

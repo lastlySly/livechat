@@ -27,7 +27,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
@@ -139,7 +141,7 @@ public class UserInfoController {
     @CrossOrigin
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     @ResponseBody
-    public MyResult userLogin(UserinfoSheet userinfoSheet,HttpServletRequest request) throws MyCustomLoginException {
+    public MyResult userLogin(UserinfoSheet userinfoSheet,HttpServletResponse response) throws MyCustomLoginException {
         Subject subject = SecurityUtils.getSubject();
         UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(userinfoSheet.getUserLoginId(),userinfoSheet.getUserPassword());
 
@@ -161,8 +163,12 @@ public class UserInfoController {
             String userInfoKey = "userinfo:"+subject.getPrincipal().toString();
             String userInfoVal = objectMapper.writeValueAsString(resUser);
             customRedisTemplate.redisSave(userInfoKey,userInfoVal);
+//
+//            Cookie cookie = new Cookie("token",session.getId().toString());
+//            cookie.setPath("/");
+//            response.addCookie(cookie);
 
-            return new MyResult(1,"登录成功",resUser);
+            return new MyResult(1,"登录成功",session.getId().toString());
 
         }catch (Exception e){
             throw new MyCustomLoginException("登陆失败，用户名或密码错误");
