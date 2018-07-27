@@ -15,18 +15,21 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.session.Session;
+import org.apache.shiro.session.mgt.SessionManager;
+import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.security.Principal;
 import java.util.List;
 import java.util.UUID;
 
@@ -139,27 +142,18 @@ public class UserInfoController {
     public MyResult userLogin(UserinfoSheet userinfoSheet,HttpServletRequest request) throws MyCustomLoginException {
         Subject subject = SecurityUtils.getSubject();
         UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(userinfoSheet.getUserLoginId(),userinfoSheet.getUserPassword());
+
         try{
             subject.login(usernamePasswordToken);
             UserinfoSheet resUser = userinfoService.getUserinfo(userinfoSheet.getUserLoginId());
 
-            //用户密码，盐值置空
-            resUser.setUserPassword("");
-            resUser.setUserPasswordSalt("");
             //获取用户session(如果当前用户没有常见session的话,true则创建一个并返回,false为返回null)
             Session session = subject.getSession();
-
             session.setAttribute("userInfo",resUser);
-            //设置session超时时间
-//            session.setTimeout(3000000);
-            //访问时间(创建session的时间和最后访问session的时间)
-//            logger.info("session获取主机号：{}，session获取sessionID：{}，创建session时间,最后访问session的时间：{}，更新会话时间：{}",
-//                    session.getHost(),session.getId(),session.getLastAccessTime(),session.getStartTimestamp());
 
 
 //            String redisKey = "online:"+subject.getPrincipal().toString();
 //            String redisVal = session.getId() + "";
-////            session.stop();销毁session
 //            //上线用户保存于redis,
 //            customRedisTemplate.redisSave(redisKey,redisVal);
 

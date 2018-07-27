@@ -42,7 +42,7 @@ public class ShiroConfiguration {
 
     @Bean("customRealm")
     @DependsOn("lifecycleBeanPostProcessor")//可选
-    public CustomRealm authRealm(@Qualifier("hashedCredentialsMatcher") HashedCredentialsMatcher matcher) {
+    public CustomRealm customRealm(@Qualifier("hashedCredentialsMatcher") HashedCredentialsMatcher matcher) {
         CustomRealm customRealm = new CustomRealm();
         customRealm.setAuthorizationCachingEnabled(false);
         customRealm.setCredentialsMatcher(matcher);
@@ -95,6 +95,7 @@ public class ShiroConfiguration {
 
     /**
      * Spring的一个bean , 由Advisor决定对哪些类的方法进行AOP代理 .
+     * 启用shrio授权注解拦截方式，AOP式方法级权限检查
      * @return
      */
     @Bean
