@@ -230,6 +230,21 @@ public class UserInfoReviseController {
 
     }
 
+    /**
+     * 与该用户相关的好友申请页数
+     * @param loginId
+     * @return
+     */
+    @CrossOrigin
+    @RequestMapping(value = "/friendapplicationpagecount",method = RequestMethod.POST)
+    @ResponseBody
+    public MyResult friendApplicationPageCountByUsers(@RequestParam(value = "userLoginId",required = false) String loginId){
+
+        long page = customMessageService.friendApplicationPageCount(loginId);
+        return new MyResult(1,"获取好友申请页数成功",page);
+
+    }
+
 
     /**
      * 移除未读消息

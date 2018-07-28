@@ -161,18 +161,18 @@ function commit_register() {
             processData: false,
             success:function (data) {
                 if (data.code == "1"){
-                    alert(data.tip);
+                    alert("提示：" + data.tip);
                     $(".find_password-container").hide(animateTime);
                     $(".register-container").hide(animateTime);
                     $(".login-container").show(animateTime);
                     $("#login_id_input").val(reg_loginid_input);
 
                 }else{
-                    alert(data.tip);
+                    alert("提示：" + data.tip);
                 }
             },
             error: function (err) {
-                alert(err);
+                alert("提示：" + err);
             }
 
         });
@@ -211,12 +211,12 @@ function login(captchaObj) {
                         $("#login_btn").val("登陆");
                         window.location.href = "../home.html";
                     }else{
-                        alert(data.tip)
+                        alert("登录提示：" + data.tip)
                         $("#login_btn").val("登陆");
                     }
                 },
                 error: function (err) {
-                    alert(err);
+                    alert("提示：" + err);
                 }
 
             });

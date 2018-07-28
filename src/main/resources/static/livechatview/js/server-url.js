@@ -1,1 +1,1 @@
-var serverUrl = 'http://localhost:8080/demo';
+var serverUrl = 'http://localhost:8080/livechat';

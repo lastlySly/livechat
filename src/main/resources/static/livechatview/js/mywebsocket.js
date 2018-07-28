@@ -9,19 +9,23 @@ function websocket_connect() {
         console.log('Connected: ' + frame);
         //订阅单聊地址
         stompClient.subscribe('/chat/single/' + mysocket_address, function (result) {
+            $("#myaudio").get(0).play();
             showMessage(JSON.parse(result.body));
         });
         //订阅好友申请地址
         stompClient.subscribe('/mysystem/applyfriend/' + mysocket_address, function (result) {
+            $("#myaudio").get(0).play();
             showFriendApplication(JSON.parse(result.body));
         });
         //订阅系统发来的个人消息地址(好友上下线通知等)
         stompClient.subscribe('/mysystem/adminpushto/' + mysocket_address, function (result) {
+            $("#myaudio").get(0).play();
             showFriendOnlineOrOffline(JSON.parse(result.body));
             // console.log(JSON.parse(result.body));
         });
         //订阅未读消息
         stompClient.subscribe('/mysystem/unread/' + mysocket_address, function (result) {
+            $("#myaudio").get(0).play();
             showUnreadMessage(JSON.parse(result.body));
             // console.log(JSON.parse(result.body));
         });
@@ -368,6 +372,14 @@ function showUnreadMessage(result){
 
 //显示用户上线下线
 function showFriendOnlineOrOffline(result) {
+
+    if(result.messagesTypeid == 7){
+        $("#logout_btn").click();
+
+        alert("异常提示：" + result.messagesPostmessages);
+        return;
+    }
+
     $("#friend_online_offline_advice").text(result.messagesPostmessages);
     $("#friend_online_offline_advice").show(1000);
     $("#friend_online_offline_advice").hide(1000);

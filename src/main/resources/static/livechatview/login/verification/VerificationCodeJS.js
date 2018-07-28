@@ -16,7 +16,7 @@ function initVerification() {
     //验证码--------------------------------------------------
     $.ajax({
         // 获取id，challenge，success（是否启用failback）
-        url: "/demo/gt/register1?t=" + (new Date()).getTime(), // 加随机数防止缓存
+        url: serverUrl + "/gt/register1?t=" + (new Date()).getTime(), // 加随机数防止缓存
         type: "get",
         dataType: "json",
         success: function (data) {

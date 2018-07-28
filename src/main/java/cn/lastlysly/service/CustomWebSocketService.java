@@ -50,6 +50,13 @@ public interface CustomWebSocketService {
     void pushUnreadMessage(CustomMessageSheetExtend customMessageSheetExtend);
 
 //    /**
+//     * 推送在其他机器被登录
+//     * @param messagesSheet
+//     */
+//    void pushRepeatLogin(MessagesSheet messagesSheet);
+//
+
+//    /**
 //     * 推送在线好友（登陆时已经在线的好友）
 //     * @param friendsSheet
 //     */

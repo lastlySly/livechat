@@ -77,4 +77,11 @@ public interface CustomMapper {
      */
     Long messagesPageCountBrtweenUsers(Map<String,String> map);
 
+    /**
+     * 计算与该用户相关的好友申请数量
+     * @param map
+     * @return
+     */
+    Long friendApplicationCountByUser(Map<String,String> map);
+
 }

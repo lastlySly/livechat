@@ -134,7 +134,7 @@ public class UserInfoController {
     /**
      * 登陆
      * @param userinfoSheet
-     * @param request
+     * @param
      * @return
      * @throws MyCustomLoginException
      */
@@ -142,6 +142,9 @@ public class UserInfoController {
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     @ResponseBody
     public MyResult userLogin(UserinfoSheet userinfoSheet,HttpServletResponse response) throws MyCustomLoginException {
+
+
+
         Subject subject = SecurityUtils.getSubject();
         UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(userinfoSheet.getUserLoginId(),userinfoSheet.getUserPassword());
 

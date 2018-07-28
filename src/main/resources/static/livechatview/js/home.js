@@ -212,11 +212,11 @@ function friend_card() {
                     $("#e-mail").text(data.data.customFriendsEmail);
                     $("#username").text(data.data.customFriendsLoginId);
                 }else{
-                    alert(data.tip);
+                    alert("提示：" +data.tip);
                 }
             },
             error:function (err) {
-                alert("连接错误："+err);
+                alert("提示：" +err);
             }
 
         });
@@ -393,7 +393,7 @@ function getUserInfo(){
                 // websocket连接
                 websocket_connect(stompClient);
             } else{
-                alert(data.tip);
+                alert("提示1：" + data.tip);
             }
         },
         error:function (err) {

@@ -42,6 +42,8 @@ public class CustomMessageServiceImpl implements CustomMessageService {
     @Autowired
     private CustomRedisTemplate customRedisTemplate;
 
+    private final int pageSize = 20;
+
     /**
      * 保存好友申请消息( 查询数据库有没有该用户向该好友发送的好友申请，如果有则仅修改这条申请记录)
      * @param friendApplicationSheet
@@ -144,7 +146,7 @@ public class CustomMessageServiceImpl implements CustomMessageService {
 
         Map<String,String> map = new HashMap<String,String>();
         map.put("loginId",loginId);
-        PageHelper.startPage(page,20);
+        PageHelper.startPage(page,pageSize);
         List<FriendApplicationSheet> friendApplicationSheetList = customMapper.listApplicationByLoginId(map);
         if (friendApplicationSheetList.size() > 0 ){
             return friendApplicationSheetList;
@@ -178,7 +180,7 @@ public class CustomMessageServiceImpl implements CustomMessageService {
         Map<String,String> map = new HashMap<String,String>(16);
         map.put("userLoginId",loginId_1);
         map.put("friendLoginId",loginId_2);
-        PageHelper.startPage(page,20);
+        PageHelper.startPage(page,pageSize);
         List<MessagesSheet> messagesSheetList = customMapper.listMessageByUserloginidOrFriendLoginid(map);
         if(messagesSheetList.size() > 0 ){
             return messagesSheetList;
@@ -228,7 +230,21 @@ public class CustomMessageServiceImpl implements CustomMessageService {
         map.put("userLoginId",loginId_1);
         map.put("friendLoginId",loginId_2);
         long row = customMapper.messagesPageCountBrtweenUsers(map);
-        long page = (long) Math.ceil( (double)row / (double)20);
+        long page = (long) Math.ceil( (double)row / (double)pageSize);
+        return page;
+    }
+
+    /**
+     * 计算与该用户相关的好友申请页数
+     * @param loginId
+     * @return
+     */
+    @Override
+    public long friendApplicationPageCount(String loginId) {
+        Map<String,String> map = new HashMap<>(16);
+        map.put("userLoginId",loginId);
+        long row = customMapper.friendApplicationCountByUser(map);
+        long page = (long) Math.ceil( (double)row / (double)pageSize);
         return page;
     }
 }

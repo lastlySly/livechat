@@ -128,4 +128,11 @@
           and messages_from_loginid = #{friendLoginId});
     </select>
 
+    <!--查询与该用户相关的好友申请条数-->
+    <select id="friendApplicationCountByUser" parameterType="java.util.Map" resultType="java.lang.Long">
+       select count(*) from friend_application_sheet where friend_application_to = #{userLoginId}
+        or friend_application_from = #{userLoginId};
+    </select>
+
+
 </mapper>

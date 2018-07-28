@@ -3,9 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="css/layer.css">
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/sockjs.js"></script>
     <script src="js/stomp.js"></script>
+    <script src="js/layer.js"></script>
+    <link rel="stylesheet" href="layui/css/layui.css">
+    <script src="layui/layui.js"></script>
+
+
 </head>
 <body>
 
@@ -16,7 +22,10 @@
 
 
 <script type="text/javascript">
+    layui.use('layer', function () {
 
+        layer.alert("2222");
+    });
     $(".btt").on("click",function () {
         $(".sss").append('<button class="btt2">测试按钮2</button>')
     });

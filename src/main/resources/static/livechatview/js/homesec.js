@@ -160,7 +160,7 @@ function change_friend_chatting_fun(socketaddress,remarks,chatHeadportrait) {
             setTimeout(function(){
                 $("#custom-messages-ul").find(".loding_sign").remove();
                 listMessageBetweenUser(userLoginId,socketaddress,myHeadimg,page,signNum);
-            },2000);
+            },1000);
         }
     });
 }

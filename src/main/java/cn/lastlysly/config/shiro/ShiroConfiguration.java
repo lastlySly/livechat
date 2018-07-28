@@ -2,10 +2,15 @@ package cn.lastlysly.config.shiro;
 
 import cn.lastlysly.myutils.shiro.CustomRealm;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
+import org.apache.shiro.cache.MemoryConstrainedCacheManager;
+import org.apache.shiro.session.mgt.eis.MemorySessionDAO;
+import org.apache.shiro.session.mgt.eis.SessionDAO;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.apache.shiro.web.servlet.SimpleCookie;
+import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -54,11 +59,66 @@ public class ShiroConfiguration {
      * @return
      */
     @Bean("securityManager")
-    public DefaultWebSecurityManager securityManager(@Qualifier("customRealm") CustomRealm customRealm) {
+    public DefaultWebSecurityManager securityManager(@Qualifier("customRealm") CustomRealm customRealm,
+                                                     @Qualifier("shiroCacheManager") MemoryConstrainedCacheManager shiroCacheManager,
+                                                     @Qualifier("sessionManager") DefaultWebSessionManager sessionManager) {
         DefaultWebSecurityManager manager = new DefaultWebSecurityManager();
         manager.setRealm(customRealm);
+
+
+        //shiro缓存管理器
+        manager.setCacheManager(shiroCacheManager);
+        //shiro session管理器
+        manager.setSessionManager(sessionManager);
+
         return manager;
     }
+
+
+/*=======================================================================================================*/
+    /**
+     * 配置sessionDAO
+     * @return
+     */
+    @Bean("sessionDAO")
+    public SessionDAO sessionDAO(){
+        MemorySessionDAO memorySessionDAO = new MemorySessionDAO();
+        return memorySessionDAO;
+    }
+    /**
+     * sessionManager
+     * @return
+     */
+    @Bean("sessionManager")
+    public DefaultWebSessionManager sessionManager(@Qualifier("sessionDAO") SessionDAO sessionDAO,
+                                                   @Qualifier("sessionIdCookie") SimpleCookie sessionIdCookie){
+        DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
+        sessionManager.setSessionDAO(sessionDAO);
+        sessionManager.setSessionIdCookieEnabled(true);
+        sessionManager.setSessionIdCookie(sessionIdCookie);
+        return sessionManager;
+    }
+
+    /**
+     * 配置cookie(防止多个项目session被覆盖问题)
+     * @return
+     */
+    @Bean("sessionIdCookie")
+    public SimpleCookie sessionIdCookie(){
+        SimpleCookie simpleCookie = new SimpleCookie("SHRIOSESSIONID");
+        return simpleCookie;
+    }
+
+    /**
+     * 配置shiro 缓存的一个管理器
+     * @return
+     */
+    @Bean("shiroCacheManager")
+    public MemoryConstrainedCacheManager shiroCacheManager(){
+        return new MemoryConstrainedCacheManager();
+    }
+/*=================================================================================================*/
+
 
     /**
      * 定义shiroFilter过滤器并注入securityManager

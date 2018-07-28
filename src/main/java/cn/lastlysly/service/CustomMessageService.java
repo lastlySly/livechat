@@ -63,4 +63,11 @@ public interface CustomMessageService {
      * @return
      */
     long pageCount(String loginId_1,String loginId_2);
+
+    /**
+     * 计算与该用户相关的好友申请页数
+     * @param loginId
+     * @return
+     */
+    long friendApplicationPageCount(String loginId);
 }

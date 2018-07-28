@@ -1,7 +1,7 @@
 server:
   port: 8080
   servlet:
-    context-path: /demo
+    context-path: /livechat
 
 #使用外部tomcat服务器运行时，server下的配置优先级低于外部tomcat的配置，
 #即：使用外部tomcat服务器运行时，以server为跟这个配置下的几个配置将不起作用，如port: 8080
