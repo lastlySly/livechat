@@ -2,6 +2,8 @@ package cn.lastlysly.controller;
 
 import cn.lastlysly.handler.MyCustomException;
 import cn.lastlysly.myutils.CommonUtil;
+import cn.lastlysly.myutils.MyCustomUtils;
+import cn.lastlysly.myutils.MyResult;
 import cn.lastlysly.myutils.UploadAndDelUtils;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
@@ -27,6 +29,17 @@ import java.util.*;
 @Controller
 @RequestMapping("/messagedeal")
 public class MessageController {
+
+    @CrossOrigin
+    @RequestMapping(value = "/beijingtime")
+    @ResponseBody
+    public MyResult getBeiJingTime(){
+        //淘宝标准时间
+        String myTime = MyCustomUtils.getNetworkTime("http://www.taobao.com");
+        return new MyResult(1,"获取时间成功",myTime);
+
+    }
+
 
     /**
      * froalaEditor富文本编辑器里，图片上传

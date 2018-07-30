@@ -222,30 +222,45 @@ function friends_card_sendbtn() {
 
 /*获取系统当前时间*/
 function custom_getdate() {
-    var date1 = new Date();
-    var y = date1.getFullYear();
-    var m = date1.getMonth()+1;
-    var d = date1.getDate();
-    var h = date1.getHours();
-    var f = date1.getMinutes();
-    var s = date1.getSeconds();
+    // var date1 = new Date();
+    // var y = date1.getFullYear();
+    // var m = date1.getMonth()+1;
+    // var d = date1.getDate();
+    // var h = date1.getHours();
+    // var f = date1.getMinutes();
+    // var s = date1.getSeconds();
+    //
+    // if (m<10) {
+    //     m = ""+"0"+m;
+    // }
+    // if (d<10) {
+    //     d = ""+"0"+d;
+    // }
+    // if (h<10) {
+    //     h = ""+"0"+h;
+    // }
+    // if (f<10) {
+    //     f = ""+"0"+f;
+    // }
+    // if (s<10) {
+    //     s = ""+"0"+s;
+    // }
+    // var datetime = y + "-" + m + "-" + d + " "+ h + ":" + f + ":" + s;
+    var datetime = "";
+    $.ajax({
+        url:serverUrl+"/messagedeal/beijingtime",
+        type:"POST",
+        data:{},
+        async:false,//同步
+        // cache: false,缓存，get请求有效，true缓存
+        contentType: false,
+        processData: false,
+        success:function (data) {
+            // console.log(data)
+            datetime = data.data;
+        }
+    });
 
-    if (m<10) {
-        m = ""+"0"+m;
-    }
-    if (d<10) {
-        d = ""+"0"+d;
-    }
-    if (h<10) {
-        h = ""+"0"+h;
-    }
-    if (f<10) {
-        f = ""+"0"+f;
-    }
-    if (s<10) {
-        s = ""+"0"+s;
-    }
-    var datetime = y + "-" + m + "-" + d + " "+ h + ":" + f + ":" + s;
     return datetime;
 
 }

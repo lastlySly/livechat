@@ -3,13 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="css/layer.css">
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/sockjs.js"></script>
     <script src="js/stomp.js"></script>
-    <script src="js/layer.js"></script>
-    <link rel="stylesheet" href="layui/css/layui.css">
-    <script src="layui/layui.js"></script>
 
 
 </head>
@@ -22,13 +18,20 @@
 
 
 <script type="text/javascript">
-    layui.use('layer', function () {
+    dateTimeFormate();
+   function dateTimeFormate() {
+//       $.ajax({
+//           type:"OPTIONS",
+//           url:"/",
+//           complete:function(x){
+//               alert(x.getResponseHeader("Date"))
+//           }
+//       });
+       $.get("http://api.k780.com:88/?app=life.time&appkey=10003&sign=b59bc3ef6191eb9f747dd4e83c99f2a4&format=json",{},function (data) {
+           alert(data);
+       })
 
-        layer.alert("2222");
-    });
-    $(".btt").on("click",function () {
-        $(".sss").append('<button class="btt2">测试按钮2</button>')
-    });
+   }
 
 //    var stompClient = null;
 //    var socket = new SockJS('http://localhost:8080/demo/endpoint-websocket');

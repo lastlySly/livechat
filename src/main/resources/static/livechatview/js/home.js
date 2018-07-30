@@ -1,4 +1,9 @@
 var stompClient = null;
+
+// $("p").bind("selectstart",function () {
+//     return false;
+// });
+
 $(function () {
 
     grouplist();
@@ -322,6 +327,11 @@ function change_tab() {
         $("#custom-linkman-list-id").show(500);
         $("#custom-chat-list-id").hide(500);
     });
+
+    $("#custom-papers-btn").off("click");
+    $("#custom-papers-btn").on("click",function () {
+        alert("该功能正在施工...");
+    })
 }
 
 /*调出菜单*/
