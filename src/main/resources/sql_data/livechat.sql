@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : localhost_3306
+ Source Server         : aliyun
  Source Server Type    : MySQL
- Source Server Version : 50717
- Source Host           : localhost:3306
+ Source Server Version : 50722
+ Source Host           : 47.106.202.5:3306
  Source Schema         : livechat
 
  Target Server Type    : MySQL
- Target Server Version : 50717
+ Target Server Version : 50722
  File Encoding         : 65001
 
- Date: 25/07/2018 10:32:26
+ Date: 01/08/2018 10:09:38
 */
 
 SET NAMES utf8mb4;
@@ -44,7 +44,7 @@ CREATE TABLE `friend_application_sheet`  (
   `friend_application_status` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '申请状态(通过，拒绝，未处理)',
   `friend_application_refuse_message` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '被拒绝的原因',
   PRIMARY KEY (`friend_application_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for friendgroups_sheet
@@ -56,7 +56,7 @@ CREATE TABLE `friendgroups_sheet`  (
   `friendgroups_user_loginid` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '用户登陆ID，分组所属（外键）',
   `friendgroups_grade` int(255) NULL DEFAULT NULL COMMENT '分组等级（1为系统级别（不可删除），2为为用户级别（可删除））',
   PRIMARY KEY (`friendgroups_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 47 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for friends_sheet
@@ -69,7 +69,7 @@ CREATE TABLE `friends_sheet`  (
   `friends_remarks` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备注昵称',
   `friends_friendgroupsid` int(11) NULL DEFAULT NULL COMMENT '所属分组（外键）',
   PRIMARY KEY (`friends_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 66 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for messages_sheet
@@ -84,7 +84,7 @@ CREATE TABLE `messages_sheet`  (
   `messages_from_loginid` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '发送者登陆ID（指向用户表user_sheet，外键）',
   `messages_to_loginid` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '接收者登陆ID（指向用户表user_sheet，外键）',
   PRIMARY KEY (`messages_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 101 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for messagestype_sheet
@@ -95,6 +95,16 @@ CREATE TABLE `messagestype_sheet`  (
   `mesagestype_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '消息类型名称(1系统消息,2好友请求,3普通消息,4系统消息上下线通知,5上线,6下线)',
   PRIMARY KEY (`messagestype_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of messagestype_sheet
+-- ----------------------------
+INSERT INTO `messagestype_sheet` VALUES (1, '系统消息');
+INSERT INTO `messagestype_sheet` VALUES (2, '好友请求');
+INSERT INTO `messagestype_sheet` VALUES (3, '普通消息');
+INSERT INTO `messagestype_sheet` VALUES (4, '系统消息上下线通知');
+INSERT INTO `messagestype_sheet` VALUES (5, '上线');
+INSERT INTO `messagestype_sheet` VALUES (6, '下线');
 
 -- ----------------------------
 -- Table structure for nation_sheet
@@ -138,7 +148,7 @@ CREATE TABLE `roles_sheet`  (
   `roles_username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `roles_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`roles_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 30 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for userinfo_sheet
